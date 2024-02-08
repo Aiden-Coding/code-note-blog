@@ -24,10 +24,10 @@ const config: Config = {
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
-  i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
-  },
+  // i18n: {
+  //   defaultLocale: 'zh-Hans',
+  //   locales: ['zh-Hans'],
+  // },
   presets: [
     [
       'classic',
@@ -65,9 +65,21 @@ const config: Config = {
       items: [
         {
           type: 'docSidebar',
+          sidebarId: 'java',
+          position: 'left',
+          label: 'java',
+        },
+        {
+          type: 'docSidebar',
           sidebarId: 'test',
           position: 'left',
           label: 'test',
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'mianshi',
+          position: 'left',
+          label: '面试',
         },
         // {to: '/blog', label: 'Blog', position: 'left'},
         // {

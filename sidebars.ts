@@ -1,4 +1,4 @@
-import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
+import type { SidebarsConfig } from "@docusaurus/plugin-content-docs";
 
 /**
  * Creating a sidebar enables you to:
@@ -26,14 +26,72 @@ const sidebars: SidebarsConfig = {
     },
   ],
    */
+  java: [
+    {
+      type: "category",
+      label: "基础",
+      items: [
+        "Java/basic/抽象类和接口",
+        "Java/basic/序列化和反序列化",
+        "Java/basic/代码块和代码执行顺序",
+        "Java/basic/多线程",
+        "Java/basic/反射",
+        "Java/basic/泛型",
+        "Java/basic/继承、封装、多态的实现原理",
+        "Java/basic/解读Java中的回调",
+        "Java/basic/枚举类",
+        "Java/basic/面向对象基础",
+        "Java/basic/深入理解内部类",
+        "Java/basic/final关键字特性",
+        "Java/basic/Java8新特性终极指南",
+        "Java/basic/Java基本数据类型",
+        "Java/basic/Java集合框架梳理",
+        "Java/basic/Java类和包",
+        "Java/basic/Java异常",
+        "Java/basic/Java中的Class类和Object类",
+        "Java/basic/Java注解和最佳实践",
+        "Java/basic/Java自动拆箱装箱里隐藏的秘密",
+        "Java/basic/javac和javap",
+        "Java/basic/JavaIO流",
+        "Java/basic/string和包装类",
+      ],
+    },
+    {
+      type: "category",
+      label: "b",
+      items: ["test/b"],
+    },
+  ],
   test: [
     "test/a",
     {
-      type: 'category',
-      label: 'b',
-      items: ['test/b'],
+      type: "category",
+      label: "b",
+      items: ["test/b"],
     },
-  ]
+  ],
+  mianshi: [
+    "mianshi/collection",
+    "mianshi/fenbushi",
+    "mianshi/javabasic",
+    "mianshi/javase",
+    "mianshi/javathread",
+    "mianshi/jvm",
+    "mianshi/mybatis",
+    "mianshi/mysql",
+    "mianshi/network",
+    "mianshi/nixi",
+    "mianshi/os",
+    "mianshi/redis",
+    "mianshi/rocketmq",
+    "mianshi/spring",
+    "mianshi/weifuwu",
+    {
+      type: "category",
+      label: "b",
+      items: ["test/b"],
+    },
+  ],
 };
 
 export default sidebars;
