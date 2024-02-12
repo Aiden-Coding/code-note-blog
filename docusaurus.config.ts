@@ -71,9 +71,39 @@ const config: Config = {
         },
         {
           type: 'docSidebar',
-          sidebarId: 'test',
+          sidebarId: 'javaweb',
           position: 'left',
-          label: 'test',
+          label: 'javaweb',
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'cache',
+          position: 'left',
+          label: 'cache',
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'backend',
+          position: 'left',
+          label: 'backend',
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'cs',
+          position: 'left',
+          label: 'cs',
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'database',
+          position: 'left',
+          label: 'database',
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'distributed',
+          position: 'left',
+          label: 'distributed',
         },
         {
           type: 'docSidebar',
