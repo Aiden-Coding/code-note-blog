@@ -107,6 +107,24 @@ const config: Config = {
         },
         {
           type: 'docSidebar',
+          sidebarId: 'interview',
+          position: 'left',
+          label: 'interview',
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'mq',
+          position: 'left',
+          label: 'mq',
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'spring',
+          position: 'left',
+          label: 'spring',
+        },
+        {
+          type: 'docSidebar',
           sidebarId: 'mianshi',
           position: 'left',
           label: '面试',
