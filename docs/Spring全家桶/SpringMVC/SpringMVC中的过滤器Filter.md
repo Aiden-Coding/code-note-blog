@@ -1,13 +1,13 @@
-����Filter
+集成Filter
 
-��Spring MVC�У�DispatcherServletֻ��Ҫ�̶����õ�web.xml�У�ʣ�µĹ�����Ҫ��רע�ڱ�дController��
+在Spring MVC中，DispatcherServlet只需要固定配置到web.xml中，剩下的工作主要是专注于编写Controller。
 
-���ǣ���Servlet�淶�У����ǻ�����ʹ��Filter�����Ҫ��Spring MVC��ʹ��Filter��Ӧ����ô����
+但是，在Servlet规范中，我们还可以使用Filter。如果要在Spring MVC中使用Filter，应该怎么做？
 
-�е�ͯЬ����һ�ڵ�WebӦ���п��ܷ����ˣ����ע��ʱ�������Ļᵼ�����룬��ΪServletĬ�ϰ���UTF-8�����ȡ������Ϊ���޸���һ���⣬���ǿ��Լ򵥵�ʹ��һ��EncodingFilter����ȫ�ַ�Χ���HttpServletRequest��HttpServletResponseǿ������ΪUTF-8���롣
+有的童鞋在上一节的Web应用中可能发现了，如果注册时输入中文会导致乱码，因为Servlet默认按非UTF-8编码读取参数。为了修复这一问题，我们可以简单地使用一个EncodingFilter，在全局范围类给HttpServletRequest和HttpServletResponse强制设置为UTF-8编码。
 
-�����Լ���дһ��EncodingFilter��Ҳ����ֱ��ʹ��Spring MVC�Դ���һ��CharacterEncodingFilter������Filterʱ��ֻ����web.xml���������ɣ�
-```
+可以自己编写一个EncodingFilter，也可以直接使用Spring MVC自带的一个CharacterEncodingFilter。配置Filter时，只需在web.xml中声明即可：
+````
 <web-app>
     <filter>
         <filter-name>encodingFilter</filter-name>
@@ -28,13 +28,13 @@
     </filter-mapping>
     ...
 </web-app>
-```
-��Ϊ����Filter������ҵ���ϵ����ע�⵽CharacterEncodingFilter��ʵ��Spring��IoC����û���κι�ϵ�����߾�����֪���Է��Ĵ��ڣ���ˣ���������Filterʮ�ּ򵥡�
+````
+因为这种Filter和我们业务关系不大，注意到CharacterEncodingFilter其实和Spring的IoC容器没有任何关系，两者均互不知晓对方的存在，因此，配置这种Filter十分简单。
 
-�����ٿ�������һ�����⣺��������û�ʹ��Basicģʽ�����û���֤������HTTP����������ͷAuthorization: Basic email:password������������ʵ�֣�
+我们再考虑这样一个问题：如果允许用户使用Basic模式进行用户验证，即在HTTP请求中添加头Authorization: Basic email:password，这个需求如何实现？
 
-��дһ��AuthFilter����򵥵�ʵ�ַ�ʽ��
-```
+编写一个AuthFilter是最简单的实现方式：
+````
 @Component
 public class AuthFilter implements Filter {
 @Autowired
@@ -43,28 +43,28 @@ UserService userService;
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
-        // ��ȡAuthorizationͷ:
+        // 获取Authorization头:
         String authHeader = req.getHeader("Authorization");
         if (authHeader != null && authHeader.startsWith("Basic ")) {
-            // ��Header����ȡemail��password:
+            // 从Header中提取email和password:
             String email = prefixFrom(authHeader);
             String password = suffixFrom(authHeader);
-            // ��¼:
+            // 登录:
             User user = userService.signin(email, password);
-            // ����Session:
+            // 放入Session:
             req.getSession().setAttribute(UserController.KEY_USER, user);
         }
-        // ������������:
+        // 继续处理请求:
         chain.doFilter(request, response);
     }
 }
-```
-�����������ˣ���Spring�д��������AuthFilter��һ����ͨBean��Servlet��������֪�������������������á�
+````
+现在问题来了：在Spring中创建的这个AuthFilter是一个普通Bean，Servlet容器并不知道，所以它不会起作用。
 
-�������ֱ����web.xml���������AuthFilter��ע�⵽AuthFilter��ʵ������Servlet����������Spring������ʼ������ˣ�@Autowire��������Ч�����ڵ�¼��UserService��Ա������Զ��null��
+如果我们直接在web.xml中声明这个AuthFilter，注意到AuthFilter的实例将由Servlet容器而不是Spring容器初始化，因此，@Autowire根本不生效，用于登录的UserService成员变量永远是null。
 
-���ԣ���ͨ��һ�ַ�ʽ����Servlet����ʵ������Filter���������Spring����ʵ������AuthFilter��Spring MVC�ṩ��һ��DelegatingFilterProxy��ר������������飺
-```
+所以，得通过一种方式，让Servlet容器实例化的Filter，间接引用Spring容器实例化的AuthFilter。Spring MVC提供了一个DelegatingFilterProxy，专门来干这个事情：
+````
 <web-app>
     <filter>
         <filter-name>authFilter</filter-name>
@@ -77,15 +77,15 @@ UserService userService;
     </filter-mapping>
     ...
 </web-app>
-```
-��������ʵ��ԭ����
+````
+我们来看实现原理：
 
-Servlet������web.xml�ж�ȡ���ã�ʵ����DelegatingFilterProxy��ע��������authFilter��
-Spring����ͨ��ɨ��@Componentʵ����AuthFilter��
-��DelegatingFilterProxy��Ч�������Զ�����ע����ServletContext�ϵ�Spring����������ͼ�������в�����ΪauthFilter��Bean��Ҳ����������@Component������AuthFilter��
+Servlet容器从web.xml中读取配置，实例化DelegatingFilterProxy，注意命名是authFilter；
+Spring容器通过扫描@Component实例化AuthFilter。
+当DelegatingFilterProxy生效后，它会自动查找注册在ServletContext上的Spring容器，再试图从容器中查找名为authFilter的Bean，也就是我们用@Component声明的AuthFilter。
 
-DelegatingFilterProxy�����������AuthFilter�����Ĵ������£�
-```
+DelegatingFilterProxy将请求代理给AuthFilter，核心代码如下：
+````
 public class DelegatingFilterProxy implements Filter {
     private Filter delegate;
     public void doFilter(...) throws ... {
@@ -95,42 +95,42 @@ public class DelegatingFilterProxy implements Filter {
         delegate.doFilter(req, resp, chain);
     }
 }
-```
-�����һ������ģʽ�ļ�Ӧ�á����ǻ���ͼ��ʾ����֮������ù�ϵ���£�
-```
-�� �� �� �� �� �� �� �� �� �� �� �� �� �� �� �� �� �� �� �� �� �� �� �� ��
-����������������������������������������������        ��������������������������   ��
-�� ��DelegatingFilterProxy������������ ��>��AuthFilter ��
-����������������������������������������������        ��������������������������   ��
-�� ���������������������������������������������� �� ��    ��������������������������
-��  DispatcherServlet  ���� �� �� ��>��Controllers��   ��
-�� ���������������������������������������������� �� ��    ��������������������������
-��
-��    Servlet Container    �� ��  Spring Container
-�� �� �� �� �� �� �� �� �� �� �� �� ��   �� �� �� �� �� �� �� �� �� �� ��
-```
-�����web.xml�����õ�Filter���ֺ�Spring������Bean�����ֲ�һ�£���ô��Ҫָ��Bean�����֣�
-```
+````
+这就是一个代理模式的简单应用。我们画个图表示它们之间的引用关系如下：
+````
+┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┐ ┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─
+┌─────────────────────┐        ┌───────────┐   │
+│ │DelegatingFilterProxy│─│─│─ ─>│AuthFilter │
+└─────────────────────┘        └───────────┘   │
+│ ┌─────────────────────┐ │ │    ┌───────────┐
+│  DispatcherServlet  │─ ─ ─ ─>│Controllers│   │
+│ └─────────────────────┘ │ │    └───────────┘
+│
+│    Servlet Container    │ │  Spring Container
+─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┘
+````
+如果在web.xml中配置的Filter名字和Spring容器的Bean的名字不一致，那么需要指定Bean的名字：
+````
 <filter>
     <filter-name>basicAuthFilter</filter-name>
     <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-    <!-- ָ��Bean������ -->
+    <!-- 指定Bean的名字 -->
     <init-param>
         <param-name>targetBeanName</param-name>
         <param-value>authFilter</param-value>
     </init-param>
 </filter>
-```
-ʵ��Ӧ��ʱ��������������һ�£��Լ��ٲ���Ҫ�����á�
+````
+实际应用时，尽量保持名字一致，以减少不必要的配置。
 
-Ҫʹ��Basicģʽ���û���֤�����ǿ���ʹ��curl������ԡ����磬�û���¼����tom@example.com��������tomcat����ô�ȹ���һ��ʹ��URL������û���:������ַ�����
+要使用Basic模式的用户认证，我们可以使用curl命令测试。例如，用户登录名是tom@example.com，口令是tomcat，那么先构造一个使用URL编码的用户名:口令的字符串：
 
 tom%40example.com:tomcat
-�������Base64���룬���չ������Header���£�
+对其进行Base64编码，最终构造出的Header如下：
 
 Authorization: Basic dG9tJTQwZXhhbXBsZS5jb206dG9tY2F0
-ʹ�����µ�curl��������Ӧ���£�
-```
+使用如下的curl命令并获得响应如下：
+````
 $ curl -v -H 'Authorization: Basic dG9tJTQwZXhhbXBsZS5jb206dG9tY2F0' http://localhost:8080/profile
 > GET /profile HTTP/1.1
 > Host: localhost:8080
@@ -146,6 +146,6 @@ $ curl -v -H 'Authorization: Basic dG9tJTQwZXhhbXBsZS5jb206dG9tY2F0' http://loca
 < Date: Wed, 29 Apr 2020 00:15:50 GMT
 <
 <!doctype html>
-```
-...HTML���...
-������Ӧ˵��AuthFilter����Ч��
+````
+...HTML输出...
+上述响应说明AuthFilter已生效。
