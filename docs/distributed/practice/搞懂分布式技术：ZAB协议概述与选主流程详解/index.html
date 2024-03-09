@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-distributed/practice/搞懂分布式技术：ZAB协议概述与选主流程详解" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.1.0">
+<title data-rh="true">搞懂分布式技术：ZAB协议概述与选主流程详解 | Tommy</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://aiden-coding.github.io/code-note-blog/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://aiden-coding.github.io/code-note-blog/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://aiden-coding.github.io/code-note-blog/docs/distributed/practice/搞懂分布式技术：ZAB协议概述与选主流程详解"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="搞懂分布式技术：ZAB协议概述与选主流程详解 | Tommy"><meta data-rh="true" name="description" content="本文内容参考网络，侵删"><meta data-rh="true" property="og:description" content="本文内容参考网络，侵删"><link data-rh="true" rel="icon" href="/code-note-blog/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://aiden-coding.github.io/code-note-blog/docs/distributed/practice/搞懂分布式技术：ZAB协议概述与选主流程详解"><link data-rh="true" rel="alternate" href="https://aiden-coding.github.io/code-note-blog/docs/distributed/practice/搞懂分布式技术：ZAB协议概述与选主流程详解" hreflang="en"><link data-rh="true" rel="alternate" href="https://aiden-coding.github.io/code-note-blog/docs/distributed/practice/搞懂分布式技术：ZAB协议概述与选主流程详解" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/code-note-blog/blog/rss.xml" title="Tommy RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/code-note-blog/blog/atom.xml" title="Tommy Atom Feed"><link rel="stylesheet" href="/code-note-blog/assets/css/styles.dd5372db.css">
+<script src="/code-note-blog/assets/js/runtime~main.f999fb27.js" defer="defer"></script>
+<script src="/code-note-blog/assets/js/main.a0bfbaed.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_XYiV" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/code-note-blog/"><b class="navbar__title text--truncate">Tommy</b></a><a class="navbar__item navbar__link" href="/code-note-blog/docs/Java/basic/抽象类和接口">java</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/JavaWeb/走进JavaWeb技术世界：JavaWeb的由来和基础知识">javaweb</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/cache/探索Redis设计与实现：连接底层与表面的数据结构robj">cache</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/backend/后端技术杂谈：白话虚拟化技术">backend</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/cs/algorithms/剑指offer">cs</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/database/重新学习MySQL数据库：『浅入浅出』MySQL和InnoDB">database</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/code-note-blog/docs/distributed/basic/分布式系统理论基础 ：CAP">distributed</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/interview/BATJ-Experience/面阿里,终获offer">interview</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/mq/kafka/消息队列kafka详解：如何实现死信队列">mq</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/Spring全家桶/Spring/第一个Spring应用">spring</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/mianshi/collection">面试</a><a href="https://aiden-coding.github.io/code-note-blog/SpringCloud%E7%AC%AC3%E5%AD%A32024.html" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Blog<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></div><div class="navbar__items navbar__items--right"><div class="toggle_XbAW colorModeToggle_r5NY"><button class="clean-btn toggleButton_Jx0n toggleButtonDisabled_zYO7" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_FjAw"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_qmEt"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_wJfS"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_LABv"><div class="docsWrapper_pdvB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_Jioa" type="button"></button><div class="docRoot_qx_v"><aside class="theme-doc-sidebar-container docSidebarContainer_NHKT"><div class="sidebarViewport_uyYB"><div class="sidebar_SZG4"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_VP_k"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/code-note-blog/docs/distributed/basic/分布式系统理论基础 ：CAP">基础</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" aria-expanded="true" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式session解决方案与一致性hash">案例</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式session解决方案与一致性hash">搞懂分布式技术：分布式session解决方案与一致性hash</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：初探分布式协调服务zookeeper">搞懂分布式技术：初探分布式协调服务zookeeper</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式事务常用解决方案">搞懂分布式技术：分布式事务常用解决方案</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式系统的一些基本概念">搞懂分布式技术：分布式系统的一些基本概念</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式一致性协议与Paxos，Raft算法">搞懂分布式技术：分布式一致性协议与Paxos，Raft算法</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式ID生成方案">搞懂分布式技术：分布式ID生成方案</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：缓存的那些事">搞懂分布式技术：缓存的那些事</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：缓存更新的套路">搞懂分布式技术：缓存更新的套路</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：浅谈分布式锁的几种方案">搞懂分布式技术：浅谈分布式锁的几种方案</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：浅谈分布式消息技术Kafka">搞懂分布式技术：浅谈分布式消息技术Kafka</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：浅析分布式事务">搞懂分布式技术：浅析分布式事务</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：使用RocketMQ事务消息解决分布式事务">搞懂分布式技术：使用RocketMQ事务消息解决分布式事务</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：消息队列因何而生">搞懂分布式技术：消息队列因何而生</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：LVS实现负载均衡的原理与实践">搞懂分布式技术：LVS实现负载均衡的原理与实践</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：SpringBoot使用注解集成Redis缓存">搞懂分布式技术：SpringBoot使用注解集成Redis缓存</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：ZAB协议概述与选主流程详解">搞懂分布式技术：ZAB协议概述与选主流程详解</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：Zookeeper的配置与集群管理实战">搞懂分布式技术：Zookeeper的配置与集群管理实战</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：Zookeeper典型应用场景及实践">搞懂分布式技术：Zookeeper典型应用场景及实践</a></li></ul></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/distributed/分布式技术实践总结">分布式技术实践总结</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/distributed/分布式理论总结">分布式理论总结</a></li></ul></nav></div></div></aside><main class="docMainContainer_SejT"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_j3Yw"><div class="docItemContainer_XOSC"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_F6gm" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/code-note-blog/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YCxa"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">案例</span><meta itemprop="position" content="1"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">搞懂分布式技术：ZAB协议概述与选主流程详解</span><meta itemprop="position" content="2"></li></ul></nav><div class="tocCollapsible_ToOY theme-doc-toc-mobile tocMobile_suYB"><button type="button" class="clean-btn tocCollapsibleButton_VzP_">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>搞懂分布式技术：ZAB协议概述与选主流程详解</h1></header><p>本文内容参考网络，侵删</p>
+<p>本系列文章将整理到我在GitHub上的《Java面试指南》仓库，更多精彩内容请到我的仓库里查看</p>
+<blockquote>
+<p><a href="https://github.com/h2pl/Java-Tutorial" target="_blank" rel="noopener noreferrer">https://github.com/h2pl/Java-Tutorial</a></p>
+</blockquote>
+<p>喜欢的话麻烦点下Star哈</p>
+<p>本文也将同步到我的个人博客：</p>
+<blockquote>
+<p><a href="http://www.how2playlife.com" target="_blank" rel="noopener noreferrer">www.how2playlife.com</a></p>
+</blockquote>
+<p>更多Java技术文章将陆续在微信公众号【Java技术江湖】更新，敬请关注。</p>
+<p>该系列博文会告诉你什么是分布式系统，这对后端工程师来说是很重要的一门学问，我们会逐步了解常见的分布式技术、以及一些较为常见的分布式系统概念，同时也需要进一步 了解zookeeper、分布式事务、分布式锁、负载均衡等技术，以便让你更完整地了解分布式技术的具体实战方法，为真正应用分布式技术做好准备。</p>
+<p>如果对本系列文章有什么建议，或者是有什么疑问的话，也可以关注公众号【Java技术江湖】联系作者，欢迎你参与本系列博文的创作和修订。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="zab协议">ZAB协议<a href="#zab协议" class="hash-link" aria-label="Direct link to ZAB协议" title="Direct link to ZAB协议">​</a></h2>
+<ol>
+<li>ZAB协议是专门为zookeeper实现分布式协调功能而设计。zookeeper主要是根据ZAB协议是实现分布式系统数据一致性。</li>
+<li>zookeeper根据ZAB协议建立了主备模型完成zookeeper集群中数据的同步。这里所说的主备系统架构模型是指，在zookeeper集群中，只有一台leader负责处理外部客户端的事物请求(或写操作)，然后leader服务器将客户端的写操作数据同步到所有的follower节点中。<br>
+<img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/20230407210824.png" alt="" class="img_kGBN"></li>
+<li>ZAB的协议核心是在整个zookeeper集群中只有一个节点即Leader将客户端的写操作转化为事物(或提议proposal)。Leader节点再数据写完之后，将向所有的follower节点发送数据广播请求(或数据复制)，等待所有的follower节点反馈。在ZAB协议中，只要超过半数follower节点反馈OK，Leader节点就会向所有的follower服务器发送commit消息。即将leader节点上的数据同步到follower节点之上。<br>
+<img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/20230407210834.png" alt="" class="img_kGBN"></li>
+<li>ZAB协议中主要有两种模式，第一是消息广播模式；第二是崩溃恢复模式</li>
+</ol>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="消息广播模式">消息广播模式<a href="#消息广播模式" class="hash-link" aria-label="Direct link to 消息广播模式" title="Direct link to 消息广播模式">​</a></h2>
+<ol>
+<li>在zookeeper集群中数据副本的传递策略就是采用消息广播模式。zookeeper中数据副本的同步方式与二阶段提交相似但是却又不同。二阶段提交的要求协调者必须等到所有的参与者全部反馈ACK确认消息后，再发送commit消息。要求所有的参与者要么全部成功要么全部失败。二阶段提交会产生严重阻塞问题。</li>
+<li>ZAB协议中Leader等待follower的ACK反馈是指”只要半数以上的follower成功反馈即可，不需要收到全部follower反馈”</li>
+<li>图中展示了消息广播的具体流程图<br>
+<img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/20230407210854.png" alt="" class="img_kGBN"></li>
+<li>zookeeper中消息广播的具体步骤如下：<br>
+<!-- -->4.1. 客户端发起一个写操作请求<br>
+<!-- -->4.2. Leader服务器将客户端的request请求转化为事物proposql提案，同时为每个proposal分配一个全局唯一的ID，即ZXID。<br>
+<!-- -->4.3. leader服务器与每个follower之间都有一个队列，leader将消息发送到该队列<br>
+<!-- -->4.4. follower机器从队列中取出消息处理完(写入本地事物日志中)毕后，向leader服务器发送ACK确认。<br>
+<!-- -->4.5. leader服务器收到半数以上的follower的ACK后，即认为可以发送commit<br>
+<!-- -->4.6. leader向所有的follower服务器发送commit消息。</li>
+<li>zookeeper采用ZAB协议的核心就是只要有一台服务器提交了proposal，就要确保所有的服务器最终都能正确提交proposal。这也是CAP/BASE最终实现一致性的一个体现。</li>
+<li>leader服务器与每个follower之间都有一个单独的队列进行收发消息，使用队列消息可以做到异步解耦。leader和follower之间只要往队列中发送了消息即可。如果使用同步方式容易引起阻塞。性能上要下降很多。</li>
+</ol>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="崩溃恢复">崩溃恢复<a href="#崩溃恢复" class="hash-link" aria-label="Direct link to 崩溃恢复" title="Direct link to 崩溃恢复">​</a></h2>
+<ol>
+<li>zookeeper集群中为保证任何所有进程能够有序的顺序执行，只能是leader服务器接受写请求，即使是follower服务器接受到客户端的请求，也会转发到leader服务器进行处理。</li>
+<li>如果leader服务器发生崩溃，则zab协议要求zookeeper集群进行崩溃恢复和leader服务器选举。</li>
+<li>ZAB协议崩溃恢复要求满足如下2个要求：<br>
+<!-- -->3.1.确保已经被leader提交的proposal必须最终被所有的follower服务器提交。<br>
+<!-- -->3.2.确保丢弃已经被leader出的但是没有被提交的proposal。</li>
+<li>根据上述要求，新选举出来的leader不能包含未提交的proposal，即新选举的leader必须都是已经提交了的proposal的follower服务器节点。同时，新选举的leader节点中含有最高的ZXID。这样做的好处就是可以避免了leader服务器检查proposal的提交和丢弃工作。</li>
+<li>leader服务器发生崩溃时分为如下场景：<br>
+<!-- -->5.1. leader在提出proposal时未提交之前崩溃，则经过崩溃恢复之后，新选举的leader一定不能是刚才的leader。因为这个leader存在未提交的proposal。<br>
+<!-- -->5.2 leader在发送commit消息之后，崩溃。即消息已经发送到队列中。经过崩溃恢复之后，参与选举的follower服务器(刚才崩溃的leader有可能已经恢复运行，也属于follower节点范畴)中有的节点已经是消费了队列中所有的commit消息。即该follower节点将会被选举为最新的leader。剩下动作就是数据同步过程。</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="数据同步">数据同步<a href="#数据同步" class="hash-link" aria-label="Direct link to 数据同步" title="Direct link to 数据同步">​</a></h3>
+<ol>
+<li>在zookeeper集群中新的leader选举成功之后，leader会将自身的提交的最大proposal的事物ZXID发送给其他的follower节点。follower节点会根据leader的消息进行回退或者是数据同步操作。最终目的要保证集群中所有节点的数据副本保持一致。</li>
+<li>数据同步完之后，zookeeper集群如何保证新选举的leader分配的ZXID是全局唯一呢？这个就要从ZXID的设计谈起。<br>
+<!-- -->2.1 ZXID是一个长度64位的数字，其中低32位是按照数字递增，即每次客户端发起一个proposal,低32位的数字简单加1。高32位是leader周期的epoch编号，至于这个编号如何产生(我也没有搞明白)，每当选举出一个新的leader时，新的leader就从本地事物日志中取出ZXID,然后解析出高32位的epoch编号，进行加1，再将低32位的全部设置为0。这样就保证了每次新选举的leader后，保证了ZXID的唯一性而且是保证递增的。<br>
+<img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/20230407210906.png" alt="" class="img_kGBN"></li>
+</ol>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="zab协议原理">ZAB协议原理<a href="#zab协议原理" class="hash-link" aria-label="Direct link to ZAB协议原理" title="Direct link to ZAB协议原理">​</a></h2>
+<ol>
+<li>ZAB协议要求每个leader都要经历三个阶段，即发现，同步，广播。</li>
+<li>发现：即要求zookeeper集群必须选择出一个leader进程，同时leader会维护一个follower可用列表。将来客户端可以这follower中的节点进行通信。</li>
+<li>同步：leader要负责将本身的数据与follower完成同步，做到多副本存储。这样也是体现了CAP中高可用和分区容错。follower将队列中未处理完的请求消费完成后，写入本地事物日志中。</li>
+<li>广播：leader可以接受客户端新的proposal请求，将新的proposal请求广播给所有的follower。</li>
+</ol>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="zookeeper设计目标">Zookeeper设计目标<a href="#zookeeper设计目标" class="hash-link" aria-label="Direct link to Zookeeper设计目标" title="Direct link to Zookeeper设计目标">​</a></h2>
+<ol>
+<li>zookeeper作为当今最流行的分布式系统应用协调框架，采用zab协议的最大目标就是建立一个高可用可扩展的分布式数据主备系统。即在任何时刻只要leader发生宕机，都能保证分布式系统数据的可靠性和最终一致性。</li>
+<li>深刻理解ZAB协议，才能更好的理解zookeeper对于分布式系统建设的重要性。以及为什么采用zookeeper就能保证分布式系统中数据最终一致性，服务的高可用性。</li>
+</ol>
+<p>Zab与Paxos<br>
+<!-- -->Zab的作者认为Zab与paxos并不相同，只所以没有采用Paxos是因为Paxos保证不了全序顺序：<br>
+<!-- -->Because multiple leaders can propose a value for a given instance two problems arise.<br>
+<!-- -->First, proposals can conflict. Paxos uses ballots to detect and resolve conflicting proposals.<br>
+<!-- -->Second, it is not enough to know that a given instance number has been committed, processes must also be able to fi gure out which value has been committed.<br>
+<!-- -->Paxos算法的确是不关心请求之间的逻辑顺序，而只考虑数据之间的全序，但很少有人直接使用paxos算法，都会经过一定的简化、优化。</p>
+<p>Paxos算法优化<br>
+<!-- -->Paxos算法在出现竞争的情况下，其收敛速度很慢，甚至可能出现活锁的情况，例如当有三个及三个以上的proposer在发送prepare请求后，很难有一个proposer收到半数以上的回复而不断地执行第一阶段的协议。因此，为了避免竞争，加快收敛的速度，在算法中引入了一个Leader这个角色，在正常情况下同时应该最多只能有一个参与者扮演Leader角色，而其它的参与者则扮演Acceptor的角色。<br>
+<!-- -->在这种优化算法中，只有Leader可以提出议案，从而避免了竞争使得算法能够快速地收敛而趋于一致；而为了保证Leader的健壮性，又引入了Leader选举，再考虑到同步的阶段，渐渐的你会发现对Paxos算法的简化和优化已经和上面介绍的ZAB协议很相似了。</p>
+<p>总结<br>
+<!-- -->Google的粗粒度锁服务Chubby的设计开发者Burrows曾经说过：“所有一致性协议本质上要么是Paxos要么是其变体”。这句话还是有一定道理的，ZAB本质上就是Paxos的一种简化形式。</p>
+<h1>ZAB与FastLeaderElection选主算法流程详解</h1>
+<p>这篇主要分析leader的选主机制，zookeeper提供了三种方式：</p>
+<ul>
+<li>LeaderElection</li>
+<li>AuthFastLeaderElection</li>
+<li>FastLeaderElection</li>
+</ul>
+<p>默认的算法是FastLeaderElection，所以这篇主要分析它的选举机制。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="选择机制中的概念">选择机制中的概念<a href="#选择机制中的概念" class="hash-link" aria-label="Direct link to 选择机制中的概念" title="Direct link to 选择机制中的概念">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="服务器id">服务器ID<a href="#服务器id" class="hash-link" aria-label="Direct link to 服务器ID" title="Direct link to 服务器ID">​</a></h3>
+<p>比如有三台服务器，编号分别是1,2,3。</p>
+<blockquote>
+<p>编号越大在选择算法中的权重越大。</p>
+</blockquote>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="数据id">数据ID<a href="#数据id" class="hash-link" aria-label="Direct link to 数据ID" title="Direct link to 数据ID">​</a></h3>
+<p>服务器中存放的最大数据ID.</p>
+<blockquote>
+<p>值越大说明数据越新，在选举算法中数据越新权重越大。</p>
+</blockquote>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="逻辑时钟">逻辑时钟<a href="#逻辑时钟" class="hash-link" aria-label="Direct link to 逻辑时钟" title="Direct link to 逻辑时钟">​</a></h3>
+<p>或者叫投票的次数，同一轮投 票过程中的逻辑时钟值是相同的。每投完一次票这个数据就会增加，然后与接收到的其它服务器返回的投票信息中的数值相比，根据不同的值做出不同的判断。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="选举状态">选举状态<a href="#选举状态" class="hash-link" aria-label="Direct link to 选举状态" title="Direct link to 选举状态">​</a></h3>
+<ul>
+<li>LOOKING，竞选状态。</li>
+<li>FOLLOWING，随从状态，同步leader状态，参与投票。</li>
+<li>OBSERVING，观察状态,同步leader状态，不参与投票。</li>
+<li>LEADING，领导者状态。</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="选举消息内容">选举消息内容<a href="#选举消息内容" class="hash-link" aria-label="Direct link to 选举消息内容" title="Direct link to 选举消息内容">​</a></h2>
+<p>在投票完成后，需要将投票信息发送给集群中的所有服务器，它包含如下内容。</p>
+<ul>
+<li>服务器ID</li>
+<li>数据ID</li>
+<li>逻辑时钟</li>
+<li>选举状态</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="选举流程图">选举流程图<a href="#选举流程图" class="hash-link" aria-label="Direct link to 选举流程图" title="Direct link to 选举流程图">​</a></h2>
+<p>因为每个服务器都是独立的，在启动时均从初始状态开始参与选举，下面是简易流程图。</p>
+<p><img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/17071-20170220211539679-433574967.jpg" alt="" class="img_kGBN"></p>
+<p>下面详细解释一下这个流程：</p>
+<p>首先给出几个名词定义：</p>
+<p>（1）Serverid：在配置server时，给定的服务器的标示id。</p>
+<p>（2）Zxid:服务器在运行时产生的数据id，zxid越大，表示数据越新。</p>
+<p>（3）Epoch：选举的轮数，即逻辑时钟。随着选举的轮数++</p>
+<p>（4）Server状态：LOOKING,FOLLOWING,OBSERVING,LEADING</p>
+<p>步骤：</p>
+<p>一、Server刚启动（宕机恢复或者刚启动）准备加入集群，此时读取自身的zxid等信息。</p>
+<p>二、所有Server加入集群时都会推荐自己为leader，然后将（leader id 、 zixd 、 epoch）作为广播信息，广播到集群中所有的服务器(Server)。然后等待集群中的服务器返回信息。</p>
+<p>三、收到集群中其他服务器返回的信息，此时要分为两类：该服务器处于looking状态，或者其他状态。</p>
+<p>（1）服务器处于looking状态</p>
+<p>首先判断逻辑时钟 Epoch:<br>
+<!-- -->a)如果接收到Epoch大于自己目前的逻辑时钟（说明自己所保存的逻辑时钟落伍了）。更新本机逻辑时钟Epoch，同时 Clear其他服务发送来的选举数据（这些数据已经OUT了）。然后判断是否需要更新当前自己的选举情况（一开始选择的leader id 是自己）</p>
+<p>判断规则rules judging：保存的zxid最大值和leader Serverid来进行判断的。先看数据zxid,数据zxid大者胜出;其次再判断leaderServerid, leader Serverid大者胜出；然后再将自身最新的选举结果(也就是上面提到的三种数据（leader Serverid，Zxid，Epoch）广播给其他server)</p>
+<p>b)如果接收到的Epoch小于目前的逻辑时钟。说明对方处于一个比较OUT的选举轮数，这时只需要将自己的 （leader Serverid，Zxid，Epoch）发送给他即可。</p>
+<p>c)如果接收到的Epoch等于目前的逻辑时钟。再根据a)中的判断规则，将自身的最新选举结果广播给其他 server。</p>
+<p>同时Server还要处理2种情况：</p>
+<p>a)如果Server接收到了其他所有服务器的选举信息，那么则根据这些选举信息确定自己的状态（Following,Leading），结束Looking，退出选举。</p>
+<p>b)即使没有收到所有服务器的选举信息，也可以判断一下根据以上过程之后最新的选举leader是不是得到了超过半数以上服务器的支持，如果是则尝试接受最新数据，倘若没有最新的数据到来  ，说明大家都已经默认了这个结果,同样也设置角色退出选举过程。</p>
+<p>（2）服务器处于其他状态（Following, Leading）</p>
+<p>a)如果逻辑时钟Epoch相同,将该数据保存到recvset,如果所接收服务器宣称自己是leader,那么将判断是不是有半数以上的服务器选举它,如果是则设置选举状态退出选举过程</p>
+<p>b)否则这是一条与当前逻辑时钟不符合的消息，那么说明在另一个选举过程中已经有了选举结果，于是将该选举结果加入到outofelection集合中，再根据outofelection来判断是否可以结束选举,如果可以也是保存逻辑时钟，设置选举状态，退出选举过程。</p>
+<p>以上就是FAST选举过程。</p>
+<p>Zookeeper具体的启动日志如下图所示：</p>
+<p><img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/20230407210921.png" alt="" class="img_kGBN"><img loading="lazy" src="https://img-blog.csdn.net/20161028191618720?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="" class="img_kGBN"></p>
+<p>以上就是我自己配置的Zookeeper选主日志，从一开始LOOKING,然后new election, my id = 1, proposedzxid=0x0 也就是选自己为Leader,之后广播选举并重复之前Fast选主算法，最终确定Leader。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="判断是否已经胜出">判断是否已经胜出<a href="#判断是否已经胜出" class="hash-link" aria-label="Direct link to 判断是否已经胜出" title="Direct link to 判断是否已经胜出">​</a></h3>
+<p>默认是采用投票数大于半数则胜出的逻辑。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="选举流程简述">选举流程简述<a href="#选举流程简述" class="hash-link" aria-label="Direct link to 选举流程简述" title="Direct link to 选举流程简述">​</a></h2>
+<p>目前有5台服务器，每台服务器均没有数据，它们的编号分别是1,2,3,4,5,按编号依次启动，它们的选择举过程如下：</p>
+<ul>
+<li>服务器1启动，给自己投票，然后发投票信息，由于其它机器还没有启动所以它收不到反馈信息，服务器1的状态一直属于Looking。</li>
+<li>服务器2启动，给自己投票，同时与之前启动的服务器1交换结果，由于服务器2的编号大所以服务器2胜出，但此时投票数没有大于半数，所以两个服务器的状态依然是LOOKING。</li>
+<li>服务器3启动，给自己投票，同时与之前启动的服务器1,2交换信息，由于服务器3的编号最大所以服务器3胜出，此时投票数正好大于半数，所以服务器3成为领导者，服务器1,2成为小弟。</li>
+<li>服务器4启动，给自己投票，同时与之前启动的服务器1,2,3交换信息，尽管服务器4的编号大，但之前服务器3已经胜出，所以服务器4只能成为小弟。</li>
+<li>服务器5启动，后面的逻辑同服务器4成为小弟。</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="几种领导选举场景">几种领导选举场景<a href="#几种领导选举场景" class="hash-link" aria-label="Direct link to 几种领导选举场景" title="Direct link to 几种领导选举场景">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="集群启动领导选举">集群启动领导选举<a href="#集群启动领导选举" class="hash-link" aria-label="Direct link to 集群启动领导选举" title="Direct link to 集群启动领导选举">​</a></h3>
+<p><strong><em>初始投票给自己</em></strong></p>
+<p>集群刚启动时，所有服务器的logicClock都为1，zxid都为0。</p>
+<p>各服务器初始化后，都投票给自己，并将自己的一票存入自己的票箱，如下图所示。</p>
+<p><img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/start_election_1.png" alt="fsdfsdfsdsdfsdfsfsdf" class="img_kGBN"></p>
+<p>在上图中，(1, 1, 0)第一位数代表投出该选票的服务器的logicClock， 第二位数代表被推荐的服务器的myid，第三位代表被推荐的服务器的最大的zxid。由于该步骤中所有选票都投给自己，所以第二位的myid即是自己的myid，第三位的zxid即是自己的zxid。</p>
+<p>此时各自的票箱中只有自己投给自己的一票。</p>
+<p><strong><em>更新选票</em></strong><br>
+<!-- -->服务器收到外部投票后，进行选票PK，相应更新自己的选票并广播出去，并将合适的选票存入自己的票箱，如下图所示。</p>
+<p><img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/20230407211056.png" alt="" class="img_kGBN"></p>
+<p>服务器1收到服务器2的选票（1, 2, 0）和服务器3的选票（1, 3, 0）后，由于所有的logicClock都相等，所有的zxid都相等，因此根据myid判断应该将自己的选票按照服务器3的选票更新为（1, 3, 0），并将自己的票箱全部清空，再将服务器3的选票与自己的选票存入自己的票箱，接着将自己更新后的选票广播出去。此时服务器1票箱内的选票为(1, 3)，(3, 3)。</p>
+<p>同理，服务器2收到服务器3的选票后也将自己的选票更新为（1, 3, 0）并存入票箱然后广播。此时服务器2票箱内的选票为(2, 3)，(3, ,3)。</p>
+<p>服务器3根据上述规则，无须更新选票，自身的票箱内选票仍为（3, 3）。</p>
+<p>服务器1与服务器2更新后的选票广播出去后，由于三个服务器最新选票都相同，最后三者的票箱内都包含三张投给服务器3的选票。</p>
+<p><strong><em>根据选票确定角色</em></strong><br>
+<!-- -->根据上述选票，三个服务器一致认为此时服务器3应该是Leader。因此服务器1和2都进入FOLLOWING状态，而服务器3进入LEADING状态。之后Leader发起并维护与Follower间的心跳。</p>
+<p><img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/start_election_3.png" alt="Cluster start election step 3" class="img_kGBN"></p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="follower重启">Follower重启<a href="#follower重启" class="hash-link" aria-label="Direct link to Follower重启" title="Direct link to Follower重启">​</a></h3>
+<p><strong><em>Follower重启投票给自己</em></strong><br>
+<!-- -->Follower重启，或者发生网络分区后找不到Leader，会进入LOOKING状态并发起新的一轮投票。</p>
+<p><img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/follower_restart_election_1.png" alt="Follower restart election step 1" class="img_kGBN"></p>
+<p><strong><em>发现已有Leader后成为Follower</em></strong><br>
+<!-- -->服务器3收到服务器1的投票后，将自己的状态LEADING以及选票返回给服务器1。服务器2收到服务器1的投票后，将自己的状态FOLLOWING及选票返回给服务器1。此时服务器1知道服务器3是Leader，并且通过服务器2与服务器3的选票可以确定服务器3确实得到了超过半数的选票。因此服务器1进入FOLLOWING状态。</p>
+<p><img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/follower_restart_election_2.png" alt="Follower restart election step 2" class="img_kGBN"></p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="leader重启">Leader重启<a href="#leader重启" class="hash-link" aria-label="Direct link to Leader重启" title="Direct link to Leader重启">​</a></h3>
+<p><strong><em>Follower发起新投票</em></strong><br>
+<!-- -->Leader（服务器3）宕机后，Follower（服务器1和2）发现Leader不工作了，因此进入LOOKING状态并发起新的一轮投票，并且都将票投给自己。</p>
+<p><img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/leader_restart_election_1.png" alt="Leader restart election step 1" class="img_kGBN"></p>
+<p><strong><em>广播更新选票</em></strong><br>
+<!-- -->服务器1和2根据外部投票确定是否要更新自身的选票。这里有两种情况</p>
+<ul>
+<li>服务器1和2的zxid相同。例如在服务 器3宕机前服务器1与2完全与之同步。此时选票的更新主要取决于myid的大小</li>
+<li>服务器1和2的zxid不同。在旧Leader宕机之前，其所主导的写操作，只需过半服务器确认即可，而不需所有服务器确认。换句话说，服务器1和2可能一个与旧Leader同步（即zxid与之相同）另一个不同步（即zxid比之小）。此时选票的更新主要取决于谁的zxid较大</li>
+</ul>
+<p>在上图中，服务器1的zxid为11，而服务器2的zxid为10，因此服务器2将自身选票更新为（3, 1, 11），如下图所示。</p>
+<p><img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/leader_restart_election_2.png" alt="Leader restart election step 2" class="img_kGBN"></p>
+<p><strong><em>选出新Leader</em></strong><br>
+<!-- -->经过上一步选票更新后，服务器1与服务器2均将选票投给服务器1，因此服务器2成为Follower，而服务器1成为新的Leader并维护与服务器2的心跳。</p>
+<p><img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/leader_restart_election_3.png" alt="Leader restart election step 3" class="img_kGBN"></p>
+<p><strong><em>旧Leader恢复后发起选举</em></strong><br>
+<!-- -->旧的Leader恢复后，进入LOOKING状态并发起新一轮领导选举，并将选票投给自己。此时服务器1会将自己的LEADING状态及选票（3, 1, 11）返回给服务器3，而服务器2将自己的FOLLOWING状态及选票（3, 1, 11）返回给服务器3。如下图所示。</p>
+<p><img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/leader_restart_election_4.png" alt="Leader restart election step 4" class="img_kGBN"></p>
+<p><strong><em>旧Leader成为Follower</em></strong><br>
+<!-- -->服务器3了解到Leader为服务器1，且根据选票了解到服务器1确实得到过半服务器的选票，因此自己进入FOLLOWING状态。</p>
+<p><img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/leader_restart_election_5.png" alt="Leader restart election step 5" class="img_kGBN"></p>
+<h1>一致性保证</h1>
+<p>ZAB协议保证了在Leader选举的过程中，已经被Commit的数据不会丢失，未被Commit的数据对客户端不可见。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="commit过的数据不丢失">Commit过的数据不丢失<a href="#commit过的数据不丢失" class="hash-link" aria-label="Direct link to Commit过的数据不丢失" title="Direct link to Commit过的数据不丢失">​</a></h2>
+<p><strong><em>Failover前状态</em></strong>
+为更好演示Leader Failover过程，本例中共使用5个Zookeeper服务器。A作为Leader，共收到P1、P2、P3三条消息，并且Commit了1和2，且总体顺序为P1、P2、C1、P3、C2。根据顺序性原则，其它Follower收到的消息的顺序肯定与之相同。其中B与A完全同步，C收到P1、P2、C1，D收到P1、P2，E收到P1，如下图所示。</p>
+<p><img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/recovery_1.png" alt="Leader Failover step 1" class="img_kGBN"></p>
+<p>这里要注意</p>
+<ul>
+<li>由于A没有C3，意味着收到P3的服务器的总个数不会超过一半，也即包含A在内最多只有两台服务器收到P3。在这里A和B收到P3，其它服务器均未收到P3</li>
+<li>由于A已写入C1、C2，说明它已经Commit了P1、P2，因此整个集群有超过一半的服务器，即最少三个服务器收到P1、P2。在这里所有服务器都收到了P1，除E外其它服务器也都收到了P2</li>
+</ul>
+<p><strong><em>选出新Leader</em></strong><br>
+<!-- -->旧Leader也即A宕机后，其它服务器根据上述FastLeaderElection算法选出B作为新的Leader。C、D和E成为Follower且以B为Leader后，会主动将自己最大的zxid发送给B，B会将Follower的zxid与自身zxid间的所有被Commit过的消息同步给Follower，如下图所示。</p>
+<p><img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/recovery_2.png" alt="Leader Failover step 2" class="img_kGBN"></p>
+<p>在上图中</p>
+<ul>
+<li>P1和P2都被A Commit，因此B会通过同步保证P1、P2、C1与C2都存在于C、D和E中</li>
+<li>P3由于未被A Commit，同时幸存的所有服务器中P3未存在于大多数据服务器中，因此它不会被同步到其它Follower</li>
+</ul>
+<p><strong><em>通知Follower可对外服务</em></strong><br>
+<!-- -->同步完数据后，B会向D、C和E发送NEWLEADER命令并等待大多数服务器的ACK（下图中D和E已返回ACK，加上B自身，已经占集群的大多数），然后向所有服务器广播UPTODATE命令。收到该命令后的服务器即可对外提供服务。</p>
+<p><img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/recovery_3.png" alt="Leader Failover step 3" class="img_kGBN"></p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="未commit过的消息对客户端不可见未commit过的消息对客户端不可见">未Commit过的消息对客户端不可见&quot;)未Commit过的消息对客户端不可见<a href="#未commit过的消息对客户端不可见未commit过的消息对客户端不可见" class="hash-link" aria-label="Direct link to 未Commit过的消息对客户端不可见&quot;)未Commit过的消息对客户端不可见" title="Direct link to 未Commit过的消息对客户端不可见&quot;)未Commit过的消息对客户端不可见">​</a></h2>
+<p>在上例中，P3未被A Commit过，同时因为没有过半的服务器收到P3，因此B也未Commit P3（如果有过半服务器收到P3，即使A未Commit P3，B会主动Commit P3，即C3），所以它不会将P3广播出去。</p>
+<p>具体做法是，B在成为Leader后，先判断自身未Commit的消息（本例中即P3）是否存在于大多数服务器中从而决定是否要将其Commit。然后B可得出自身所包含的被Commit过的消息中的最小zxid（记为min_zxid）与最大zxid（记为max_zxid）。C、D和E向B发送自身Commit过的最大消息zxid（记为max_zxid）以及未被Commit过的 所有消息（记为zxid_set）。B根据这些信息作出如下操作</p>
+<ul>
+<li>如果Follower的max_zxid与Leader的max_zxid相等，说明该Follower与Leader完全同步，无须同步任何数据</li>
+<li>如果Follower的max_zxid在Leader的(min_zxid，max_zxid)范围内，Leader会通过TRUNC命令通知Follower将其zxid_set中大于Follower的max_zxid（如果有）的所有消息全部删除</li>
+</ul>
+<p>上述操作保证了未被Commit过的消息不会被Commit从而对外不可见。</p>
+<p>上述例子中Follower上并不存在未被Commit的消息。但可考虑这种情况，如果将上述例子中的服务器数量从五增加到七，服务器F包含P1、P2、C1、P3，服务器G包含P1、P2。此时服务器F、A和B都包含P3，但是因为票数未过半，因此B作为Leader不会Commit P3，而会通过TRUNC命令通知F删除P3。如下图所示。</p>
+<p><img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/recovery_4.png" alt="Leader Failover step 4" class="img_kGBN"></p>
+<h1>总结</h1>
+<ul>
+<li>由于使用主从复制模式，所有的写操作都要由Leader主导完成，而读操作可通过任意节点完成，因此Zookeeper读性能远好于写性能，更适合读多写少的场景</li>
+<li>虽然使用主从复制模式，同一时间只有一个Leader，但是Failover机制保证了集群不存在单点失败（SPOF）的问题</li>
+<li>ZAB协议保证了Failover过程中的数据一致性</li>
+<li>服务器收到数据后先写本地文件再进行处理，保证了数据的持久性</li>
+</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="theme-doc-footer-edit-meta-row row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/distributed/practice/搞懂分布式技术：ZAB协议概述与选主流程详解.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_EYjg" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_eevz"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：SpringBoot使用注解集成Redis缓存"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">搞懂分布式技术：SpringBoot使用注解集成Redis缓存</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：Zookeeper的配置与集群管理实战"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">搞懂分布式技术：Zookeeper的配置与集群管理实战</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_lc2k thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#zab协议" class="table-of-contents__link toc-highlight">ZAB协议</a></li><li><a href="#消息广播模式" class="table-of-contents__link toc-highlight">消息广播模式</a></li><li><a href="#崩溃恢复" class="table-of-contents__link toc-highlight">崩溃恢复</a><ul><li><a href="#数据同步" class="table-of-contents__link toc-highlight">数据同步</a></li></ul></li><li><a href="#zab协议原理" class="table-of-contents__link toc-highlight">ZAB协议原理</a></li><li><a href="#zookeeper设计目标" class="table-of-contents__link toc-highlight">Zookeeper设计目标</a></li><li><a href="#选择机制中的概念" class="table-of-contents__link toc-highlight">选择机制中的概念</a><ul><li><a href="#服务器id" class="table-of-contents__link toc-highlight">服务器ID</a></li><li><a href="#数据id" class="table-of-contents__link toc-highlight">数据ID</a></li><li><a href="#逻辑时钟" class="table-of-contents__link toc-highlight">逻辑时钟</a></li><li><a href="#选举状态" class="table-of-contents__link toc-highlight">选举状态</a></li></ul></li><li><a href="#选举消息内容" class="table-of-contents__link toc-highlight">选举消息内容</a></li><li><a href="#选举流程图" class="table-of-contents__link toc-highlight">选举流程图</a><ul><li><a href="#判断是否已经胜出" class="table-of-contents__link toc-highlight">判断是否已经胜出</a></li></ul></li><li><a href="#选举流程简述" class="table-of-contents__link toc-highlight">选举流程简述</a></li><li><a href="#几种领导选举场景" class="table-of-contents__link toc-highlight">几种领导选举场景</a><ul><li><a href="#集群启动领导选举" class="table-of-contents__link toc-highlight">集群启动领导选举</a></li><li><a href="#follower重启" class="table-of-contents__link toc-highlight">Follower重启</a></li><li><a href="#leader重启" class="table-of-contents__link toc-highlight">Leader重启</a></li></ul></li><li><a href="#commit过的数据不丢失" class="table-of-contents__link toc-highlight">Commit过的数据不丢失</a></li><li><a href="#未commit过的消息对客户端不可见未commit过的消息对客户端不可见" class="table-of-contents__link toc-highlight">未Commit过的消息对客户端不可见&quot;)未Commit过的消息对客户端不可见</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/code-note-blog/docs/intro">Tutorial</a></li></ul></div><div class="col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://stackoverflow.com/questions/tagged/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Stack Overflow<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://discordapp.com/invite/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Discord<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://twitter.com/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Twitter<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/code-note-blog/blog">Blog</a></li><li class="footer__item"><a href="https://github.com/facebook/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 My Project, Inc. Built with Docusaurus.</div></div></div></footer></div>
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-distributed/practice/搞懂分布式技术：分布式一致性协议与Paxos，Raft算法" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.1.0">
+<title data-rh="true">搞懂分布式技术：分布式一致性协议与Paxos，Raft算法 | Tommy</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://aiden-coding.github.io/code-note-blog/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://aiden-coding.github.io/code-note-blog/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://aiden-coding.github.io/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式一致性协议与Paxos，Raft算法"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="搞懂分布式技术：分布式一致性协议与Paxos，Raft算法 | Tommy"><meta data-rh="true" name="description" content="本文内容参考网络，侵删"><meta data-rh="true" property="og:description" content="本文内容参考网络，侵删"><link data-rh="true" rel="icon" href="/code-note-blog/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://aiden-coding.github.io/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式一致性协议与Paxos，Raft算法"><link data-rh="true" rel="alternate" href="https://aiden-coding.github.io/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式一致性协议与Paxos，Raft算法" hreflang="en"><link data-rh="true" rel="alternate" href="https://aiden-coding.github.io/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式一致性协议与Paxos，Raft算法" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/code-note-blog/blog/rss.xml" title="Tommy RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/code-note-blog/blog/atom.xml" title="Tommy Atom Feed"><link rel="stylesheet" href="/code-note-blog/assets/css/styles.dd5372db.css">
+<script src="/code-note-blog/assets/js/runtime~main.f999fb27.js" defer="defer"></script>
+<script src="/code-note-blog/assets/js/main.a0bfbaed.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_XYiV" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/code-note-blog/"><b class="navbar__title text--truncate">Tommy</b></a><a class="navbar__item navbar__link" href="/code-note-blog/docs/Java/basic/抽象类和接口">java</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/JavaWeb/走进JavaWeb技术世界：JavaWeb的由来和基础知识">javaweb</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/cache/探索Redis设计与实现：连接底层与表面的数据结构robj">cache</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/backend/后端技术杂谈：白话虚拟化技术">backend</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/cs/algorithms/剑指offer">cs</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/database/重新学习MySQL数据库：『浅入浅出』MySQL和InnoDB">database</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/code-note-blog/docs/distributed/basic/分布式系统理论基础 ：CAP">distributed</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/interview/BATJ-Experience/面阿里,终获offer">interview</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/mq/kafka/消息队列kafka详解：如何实现死信队列">mq</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/Spring全家桶/Spring/第一个Spring应用">spring</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/mianshi/collection">面试</a><a href="https://aiden-coding.github.io/code-note-blog/SpringCloud%E7%AC%AC3%E5%AD%A32024.html" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Blog<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></div><div class="navbar__items navbar__items--right"><div class="toggle_XbAW colorModeToggle_r5NY"><button class="clean-btn toggleButton_Jx0n toggleButtonDisabled_zYO7" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_FjAw"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_qmEt"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_wJfS"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_LABv"><div class="docsWrapper_pdvB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_Jioa" type="button"></button><div class="docRoot_qx_v"><aside class="theme-doc-sidebar-container docSidebarContainer_NHKT"><div class="sidebarViewport_uyYB"><div class="sidebar_SZG4"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_VP_k"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/code-note-blog/docs/distributed/basic/分布式系统理论基础 ：CAP">基础</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" aria-expanded="true" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式session解决方案与一致性hash">案例</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式session解决方案与一致性hash">搞懂分布式技术：分布式session解决方案与一致性hash</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：初探分布式协调服务zookeeper">搞懂分布式技术：初探分布式协调服务zookeeper</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式事务常用解决方案">搞懂分布式技术：分布式事务常用解决方案</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式系统的一些基本概念">搞懂分布式技术：分布式系统的一些基本概念</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式一致性协议与Paxos，Raft算法">搞懂分布式技术：分布式一致性协议与Paxos，Raft算法</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式ID生成方案">搞懂分布式技术：分布式ID生成方案</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：缓存的那些事">搞懂分布式技术：缓存的那些事</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：缓存更新的套路">搞懂分布式技术：缓存更新的套路</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：浅谈分布式锁的几种方案">搞懂分布式技术：浅谈分布式锁的几种方案</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：浅谈分布式消息技术Kafka">搞懂分布式技术：浅谈分布式消息技术Kafka</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：浅析分布式事务">搞懂分布式技术：浅析分布式事务</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：使用RocketMQ事务消息解决分布式事务">搞懂分布式技术：使用RocketMQ事务消息解决分布式事务</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：消息队列因何而生">搞懂分布式技术：消息队列因何而生</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：LVS实现负载均衡的原理与实践">搞懂分布式技术：LVS实现负载均  衡的原理与实践</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：SpringBoot使用注解集成Redis缓存">搞懂分布式技术：SpringBoot使用注解集成Redis缓存</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：ZAB协议概述与选主流程详解">搞懂分布式技术：ZAB协议概述与选主流程详解</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：Zookeeper的配置与集群管理实战">搞懂分布式技术：Zookeeper的配置与集群管理实战</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：Zookeeper典型应用场景及实践">搞懂分布式技术：Zookeeper典型应用场景及实践</a></li></ul></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/distributed/分布式技术实践总结">分布式技术实践总结</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/distributed/分布式理论总结">分布式理论总结</a></li></ul></nav></div></div></aside><main class="docMainContainer_SejT"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_j3Yw"><div class="docItemContainer_XOSC"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_F6gm" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/code-note-blog/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YCxa"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">案例</span><meta itemprop="position" content="1"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">搞懂分布式技术：分布式一致性协议与Paxos，Raft算法</span><meta itemprop="position" content="2"></li></ul></nav><div class="tocCollapsible_ToOY theme-doc-toc-mobile tocMobile_suYB"><button type="button" class="clean-btn tocCollapsibleButton_VzP_">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>搞懂分布式技术：分布式一致性协议与Paxos，Raft算法</h1></header><p>本文内容参考网络，侵删</p>
+<p>本系列文章将整理到我在GitHub上的《Java面试指南》仓库，更多精彩内容请到我的仓库里查看</p>
+<blockquote>
+<p><a href="https://github.com/h2pl/Java-Tutorial" target="_blank" rel="noopener noreferrer">https://github.com/h2pl/Java-Tutorial</a></p>
+</blockquote>
+<p>喜欢的话麻烦点下Star哈</p>
+<p>本文也将同步到我的个人博客：</p>
+<blockquote>
+<p><a href="http://www.how2playlife.com" target="_blank" rel="noopener noreferrer">www.how2playlife.com</a></p>
+</blockquote>
+<p>更多Java技术文章将陆续在微信公众号【Java技术江湖】更新，敬请关注。</p>
+<p>该系列博文会告诉你什么是分布式系统，这对后端工程师来说是很重要的一门学问，我们会逐步了解常见的分布式技术、以及一些较为常见的分布式系统概念，同  时也需要进一步了解zookeeper、分布式事务、分布式锁、负载均衡等技术，以便让你更完整地了解分布式技术的具体实战方法，为真正应用分布式技术做好准备。</p>
+<p>如果对本系列文章有什么建议，或者是有什么疑问的话，也可以关注公众号【Java技术江湖】联系作者，欢迎你参与本系列博文的创作和修订。</p>
+<p>本文较为粗略地讲述了一致性协议与两种一致性算法，更加系统的理论可以参考后面的分布式系统理论专题文章。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="2pc">2PC<a href="#2pc" class="hash-link" aria-label="Direct link to 2PC" title="Direct link to 2PC">​</a></h2>
+<p>由于BASE理论需要在一致性和可用性方面做出权衡，因此涌现了很多关于一致性的算法和协议。其中比较著名的有二阶提交协议（2 Phase Commitment Protocol），三阶提交协议（3 Phase Commitment Protocol）和Paxos算法。
+本文要介绍的2PC协议，分为两个阶段提交一个事务。并通过协调者和各个参与者的配合，实现分布式一致性。</p>
+<p>两个阶段事务提交协议，由协调者和参与者共同完成。</p>
+<p>角色	XA概念	作用
+协调者	事务管理器	协调各个参与者，对分布式事务进行提交或回滚
+参与者	资源管理器	分布式集群中的节点</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="1-分布式事务">1. 分布式事务<a href="#1-分布式事务" class="hash-link" aria-label="Direct link to 1. 分布式事务" title="Direct link to 1. 分布式事务">​</a></h3>
+<p>分布式事务是指会涉及到操作多个数据库的事务，其实就是将对同一库事务的概念扩大到了对多个库的事务。目的是为了保证分布式系统中的数据一致性。</p>
+<p>分布式事务处理的关键是：</p>
+<p>需要记录事务在任何节点所做的所有动作；
+事务进行的所有操作要么全部提交，要么全部回滚。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="2-xa规范">2. XA规范<a href="#2-xa规范" class="hash-link" aria-label="Direct link to 2. XA规范" title="Direct link to 2. XA规范">​</a></h3>
+<p>2.1. XA规范的组成
+XA规范是由 X/Open组织（即现在的 Open Group ）定义的分布式事务处理模型。 X/Open DTP 模型（ 1994 ）包括：</p>
+<p>应用程序（ AP ）
+事务管理器（ TM ）：交易中间件等
+资源管理器（ RM ）：关系型数据库等
+通信资源管理器（ CRM ）：消息中间件等
+2.2. XA规范的定义
+XA规范定义了交易中间件与数据库之间的接口规范（即接口函数），交易中间件用它来通知数据库事务的开始、结束以及提交、回滚等。而XA接口函数由数据库厂商提供。</p>
+<p>二阶提交协议和三阶提交协议就是基于XA规范提出的其中，二阶段提交就是实现XA分布式事务的关键。</p>
+<p>2.3. XA规范编程规范
+配置TM，给TM注册RM作为数据源。其中，一个TM可以注册多个RM。</p>
+<p>AP向TM发起一个全局事务。这时，TM会发送一个XID（全局事务ID）通知各个RM。</p>
+<p>AP从TM获取资源管理器的代理（例如：使用JTA接口，从TM管理的上下文中，获取出这个TM所管理的RM的JDBC连接或JMS连接）。</p>
+<p>AP通过从TM中获取的连接，间接操作RM进行业务操作。TM在每次AP操作时把XID传递给RM，RM正是通过这个XID关联来操作和事务的关系的。</p>
+<p>AP结束全局事务时，TM会通知RM全局事务结束。开始二段提交，也就是prepare - commit的过程。</p>
+<p>XA规范的流程，大致如图所示：</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="3-二阶段提交2pc">3. 二阶段提交（2PC）<a href="#3-二阶段提交2pc" class="hash-link" aria-label="Direct link to 3. 二阶段提交（2PC）" title="Direct link to 3. 二阶段提交（2PC）">​</a></h3>
+<p>3.1. 二阶段提交的定义
+二阶段提交的算法思路可以概括为：每个参与者将操作 成败通知协调者，再由协调者根据所有参与者的反馈情报，决定各参与者是否要提交操作还是中止操作。</p>
+<p>所谓的两个阶段分别是：</p>
+<p>第一阶段：准备阶段（投票阶段）
+第二阶段：提交阶段（执行阶段）
+3.1.1. 准备阶段
+准备阶段分为三个步骤：</p>
+<p>a. 事务询问</p>
+<p>协调者向所有的参与者询问，是否准备好了执行事务，并开始等待各参与者的响应。</p>
+<p>b. 执行事务</p>
+<p>各参与者节点执行事务操作。如果本地事务成功，将Undo和Redo信息记入事务日志中，但不提交；否则，直接返回失败，退出执行。</p>
+<p>c. 各参与者向协调者反馈事务询问的响应</p>
+<p>如果参与者成功执行了事务操作，那么就反馈给协调者 Yes响应，表示事务可以执行提交；如果参与者没有成功执行事务，就返回No给协调者，表示事务不可以执行提交。</p>
+<p>3.1.2. 提交阶段
+在提交阶段中，会根据准备阶段的投票结果执行2种操作：执行事务提交，中断事务。</p>
+<p>提交事务过程如下：</p>
+<p>a. 发送提交请求</p>
+<p>协调者向所有参与者发出commit请求。</p>
+<p>b. 事务提交</p>
+<p>参与者收到commit请求后，会正式执行事务提交操作，并在完成提交之后，释放整个事务执行期间占用的事务资源。</p>
+<p>c. 反馈事务提交结果</p>
+<p>参与者在完成事务提交之后，向协调者发送Ack信息。</p>
+<p>d. 事务提交确认</p>
+<p>协调者接收到所有参与者反馈的Ack信息后，完成事务。</p>
+<p>中断事务过程如下：</p>
+<p>a. 发送回滚请求</p>
+<p>协调者向所有参与者发出Rollback请求。</p>
+<p>b. 事务回滚</p>
+<p>参与者接收到Rollback请求后，会利用其在提交阶段种记录的Undo信息，来执行事务回滚操作。在完成回滚之后，释放在整个事务执行期间占用的资源。</p>
+<p>c. 反馈事务回滚结果</p>
+<p>参与者在完成事务回 滚之后，想协调者发送Ack信息。</p>
+<p>d. 事务中断确认</p>
+<p>协调者接收到所有参与者反馈的Ack信息后，完成事务中断。</p>
+<p>3.1. 二阶段提交的优缺点
+优点：原理简单，实现方便。
+缺点：同步阻塞，单点问题，数据不一致，容错性不好。
+同步阻塞
+在二阶段提交的过程中，所有的节点都在等待其他节点的响应，无法进行其他操作。这种同步阻塞极大的限制了分布式系统的性能。</p>
+<p>单点问题
+协调者在整个二阶段提交过程中很重要，如果协调者在提交阶段出现问题，那么整个流程将无法运转。更重要的是，其他参与者将会处于一直锁定事务资源的状态中，而无法继续完成事务操作。</p>
+<p>数据不一致
+假设当协调者向所有的参与者发送commit请求之后，发生了局部网络异常，或者是协调者在尚未发送完所有 commit请求之前自身发生了崩溃，导致最终只有部分参与者收到了commit请求。这将导致严重的数据不一致问题。</p>
+<p>容错性不好
+如果在二阶段提交的提交询问阶段中，参与者出现故障，导致协调者始终无法获取到所有参与者的确认信息，这时协调者只能依靠其自身的超时机制，判断是否需要中断事务。显然，这种策略过于保守。换句话说，二阶段提交协议没有设计较为完善的容错机制，任意一个节点是失败都会导致整个事务的失败。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="小结">小结<a href="#小结" class="hash-link" aria-label="Direct link to 小结" title="Direct link to 小结">​</a></h3>
+<p>对于2PC协议存在的同步阻塞、单点问题，将在下一篇文章的3PC协议中引入解决方案。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="3pc">3PC<a href="#3pc" class="hash-link" aria-label="Direct link to 3PC" title="Direct link to 3PC">​</a></h2>
+<p>由于二阶段提交存在着诸如同步阻塞、单点问  题、脑裂等缺陷。所以，研究者们在二阶段提交的基础上做了改进，提出了三阶段提交。</p>
+<p>与两阶段提交不同的是，三阶段提交有两个改动点。</p>
+<p>引入超时机制 - 同时在协调者和参与者中都引入超时机制。
+在第一阶段和第二阶段中插入一个准备阶段，保证了在最后提交阶段之前各参与节点的状态是一致的。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="1-三阶段提交的定义">1. 三阶段提交的定义<a href="#1-三阶段提交的定义" class="hash-link" aria-label="Direct link to 1. 三阶段提交的定义" title="Direct link to 1. 三阶段提交的定义">​</a></h3>
+<p>三阶段提交（Three-phase commit），也叫三阶段提交协议（Three-phase commit protocol），是二阶段提交（2PC）的改进版本。</p>
+<p>所谓的三个阶段分别是：询问，然后再锁资源，最后真正提交。</p>
+<p>第一阶段：CanCommit
+第二阶段：PreCommit
+第三阶段：Do Commit</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="2-三阶段提交的过程">2. 三阶段提交的过程<a href="#2-三阶段提交的过程" class="hash-link" aria-label="Direct link to 2. 三阶段提交的过程" title="Direct link to 2. 三阶段提交的过程">​</a></h3>
+<p>2.1. 阶段一：CanCommit
+3PC的CanCommit阶段其实和2PC的准备阶段很像。协调者向参与者发送commit请求，参与者如果可以提交就返回Yes响应，否则返回No响应。</p>
+<p>a. 事务询问</p>
+<p>协调者向参与者发送CanCommit请求。询问是否可以执行事务提交操作。然后开始等待参与者的响应。</p>
+<p>b. 响应反馈</p>
+<p>参与者接到CanCommit请求之后，正常情况下，如果其自身认为可以顺利执行事务，则返回Yes响应，并进入预备状态；否则反馈No。</p>
+<p>2.2. 阶段二：PreCommit
+协调者在得到所有参与者的响应之后，会根据结果执行2种操作：执行事务预提交，或者中断事务。</p>
+<p>2.2.1. 执行事务预提交
+a. 发送预提交请求</p>
+<p>协调者向所有参与者节点发出 preCommit 的请求，并进入 prepared 状态。</p>
+<p>b. 事务预提交</p>
+<p>参与者受到 preCommit 请求后，会执行事务操作，对应 2PC 准备阶段中的 “执行事务”，也会 Undo 和 Redo 信息记录到事务日志中。</p>
+<p>c. 各参与者响应反馈</p>
+<p>如果参与者成功执行了事务，就反馈 ACK 响应，同时等待指令：提交（commit） 或终止（abort）。</p>
+<p>2.2.2. 中断事务
+a. 发送中断请求</p>
+<p>协调者向所有参与者节点发出 abort 请求 。</p>
+<p>b. 中断事务</p>
+<p>参与者如果收到 abort 请求或者超时了，都会中断事务。</p>
+<p>2.3. 阶段三：Do Commit
+该阶段进行真正的事务提交，也可以分为以下两种情况。</p>
+<p>2.3.1. 执行提交
+a. 发送提交请求</p>
+<p>协调者接收到各参与者发送的ACK响应，那么他将从预提交状态进入到提交状态。并向所有参与者发送 doCommit 请求。</p>
+<p>b. 事务提交</p>
+<p>参与者接收到 doCommit 请求之后，执行正式的事务提交。并在完成事务提交之后释放所有事务资源。</p>
+<p>c. 响应反馈</p>
+<p>事务提交完之后，向协调者发送 ACK 响应。</p>
+<p>d. 完成事务</p>
+<p>协调者接收到所有参与者的 ACK 响应之后，完成事务。</p>
+<p>2.3.2. 中断事务
+协调者没有接收到参与者发送的 ACK 响应（可能是接受者发送的不是ACK响应，也可能响应超时），那么就会执行中断事务。</p>
+<p>a. 发送中断请求</p>
+<p>协调者向所有参与者发送 abort 请求。</p>
+<p>b. 事务回滚</p>
+<p>参与者接收到 abort 请求之后，利用其在阶段二记录的 undo 信息来执行事务的回滚操作，并在完成回滚之后释放所有的事务资源。</p>
+<p>c. 反馈结果</p>
+<p>参与者完成事务回滚之后，向协调者发送 ACK 消息。</p>
+<p>d. 中断事务</p>
+<p>协调者接收到参与者反馈的 ACK 消息之后，完成事务的中断。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="3-小结">3. 小结<a href="#3-小结" class="hash-link" aria-label="Direct link to 3. 小结" title="Direct link to 3. 小结">​</a></h3>
+<p>3.1. 三阶段提交的优点
+相对于二阶段提交，三阶段提交主要解决的单点故障问题，并减少了阻塞的时间。</p>
+<p>因为一旦参与者无法及时收到来自协调者的信息之后，他会默认执行 commit。而不会一直持有事务资源并处于阻塞状态。</p>
+<p>3.2. 三阶段提交的缺点
+三阶段提交也会导致数据一致性问题。由于网络原因，协调者发送的 abort 响应没有及时被参与者接收到，那么参与者在等待超时之后执行了 commit 操作。</p>
+<p>这样就和其他接到 abort 命令并执行回滚的参与者之间存在数据不一致的情况。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="四paxos">四、Paxos<a href="#四paxos" class="hash-link" aria-label="Direct link to 四、Paxos" title="Direct link to 四、Paxos">​</a></h2>
+<p>用于达成共识性问题，即对多个节点产生的值，该算法能保证只选出唯一一个值。</p>
+<p>主要有三类节点：</p>
+<p>提议者（Proposer）：提议一个值；
+接受者（Acceptor）：对每个提议进行投票；
+告知者（Learner）：被告知投票的结果，不参与投票过程。</p>
+<p>执行过程
+规定一个提议包含两个字段：[n, v]，其中 n 为序号（具有唯一性），v 为提议值。</p>
+<p>下图演示了两个 Proposer 和三个 Acceptor 的系统中运行该算法的初始过程，每个 Proposer 都会向所有 Acceptor 发送提议请求。</p>
+<p>当 Acceptor 接收到一个提议请求，包含的提议为 [n1, v1]，并且之前还未接收过提议请求，那么发送一个提议响应，设置当前接收到的提议为 [n1, v1]，并且保证以后不会再接受序号小于 n1 的提议。</p>
+<p>如下图，Acceptor X 在收到 [n=2, v=8] 的提议请  求时，由于之前没有接收过提议，因此就发送一个 [no previous] 的提议响应，设置当前接收到的提议为 [n=2, v=8]，并且保证以后不会再接受序号小于 2 的提议。其它的 Acceptor 类似。</p>
+<p>如果 Acceptor 接收到一个提议请求，包含的提议为 [n2, v2]，并且之前已经接收过提议 [n1, v1]。如果 n1 &gt; n2，那么就丢弃该提议请求；否则，发送提议响应，该提议响应包含之前已经接收过的提议 [n1, v1]，设置当前接收到的提议为 [n2, v2]，并且保证以后不会再接受序号小于 n2 的提议。</p>
+<p><code>如下图，Acceptor Z 收到 Proposer A 发来的 [n=2, v=8] 的提议请求，由于之前已经接收过 [n=4, v=5] 的提议，并且 n &gt; 2，因此就抛弃该提议请求；Acceptor X 收到 Proposer B 发来的 [n=4, v=5] 的提议请求，因为之前接收到的提议为 [n=2, v=8]，并且 2 &lt;= 4，因此就发送 [n=2, v=8] 的提议响应，设置当前接收到的提议为 [n=4, v=5]，并且保证以后不会再接受序号小于 4 的提议。Acceptor Y 类似。</code></p>
+<p>当一个 Proposer 接收到超过一半 Acceptor 的提议响应时，就可以发送接受请求。</p>
+<p>Proposer A 接收到两个提议响应之后，就发送 [n=2, v=8] 接受请求。该接受请求会被所有 Acceptor 丢弃，因为此时所有 Acceptor 都保证不接受序号小于 4 的提议。</p>
+<p>Proposer B 过后也收到了两个提议响应，因此也开始发送接受请求。需要注意的是，接受请求的 v 需要取它收到的最大 v 值，也就是 8。因此它发送 [n=4, v=8] 的接受请求。</p>
+<p>Acceptor 接收到接受请求时，如果序号大于等于该 Acceptor 承诺的最小序号，那么就发送通知给所有的 Learner。当 Learner 发现有大多数的 Acceptor 接收了某个提议，那么该提议的提议值就被 Paxos 选择出来。</p>
+<p>约束条件</p>
+<ol>
+<li>正确性
+指只有一个提议值会生效。</li>
+</ol>
+<p>因为 Paxos 协议要求每个生效的提议被多数 Acceptor 接收，并且 Acceptor 不会接受两个不同的提议，因此可以保证正确性。</p>
+<ol start="2">
+<li>可终止性
+指最后总会有一个提议生效。</li>
+</ol>
+<p>Paxos 协议能够让 Proposer 发送的提议朝着能被大多数 Acceptor 接受的那个提议靠拢，因此能够保证可终止性。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="basicpaxos与fastpaxos">BasicPaxos与FastPaxos<a href="#basicpaxos与fastpaxos" class="hash-link" aria-label="Direct link to BasicPaxos与FastPaxos" title="Direct link to BasicPaxos与FastPaxos">​</a></h2>
+<p>1Paxos算法
+1.1基本定义
+算法中的参与者主要分为三个角色，同时每个参与者又可兼领多个角色:</p>
+<p>⑴proposer提出提案，提案信息包括提案编号和提议的value;</p>
+<p>⑵acceptor收到提案后可以接受(accept)提案;</p>
+<p>⑶learner只能&quot;学习&quot;被批准的提案;</p>
+<p>算法保重一致性的基本语义:</p>
+<p>⑴决议(value)只有在被proposers提出后才能被批准(未经批准的决议称为&quot;提案(proposal)&quot;);</p>
+<p>⑵在一次Paxos算法的执行实例中，只批准(chosen)一个value;</p>
+<p>⑶learners只能获得被批准(chosen)的value;</p>
+<p>有上面的三个语义可演化为四个约束:</p>
+<p>⑴P1:一个acceptor必须接受(accept)第一次收到的提案;</p>
+<p>⑵P2a:一旦一个具有valuev的提案被批准(chosen)，那么之后任何acceptor再次接受(accept)的提案必须具有valuev;</p>
+<p>⑶P2b:一旦一个具有valuev的提案被批准(chosen)，那么以后任何proposer提出的提案必须具有valuev;</p>
+<p>⑷P2c:如果一个编号为n的提案具有valuev，那么存在一个多数派，要么他们中所有人都没有接受(accept)编号小于n的任何提案，要么他们已经接受(accpet)的所有编号小于n的提案中编号最大的那个提案具有valuev;</p>
+<p>1.2基本算法(basicpaxos)
+算法(决议的提出与批准)主要分为两个阶段:</p>
+<p>1.prepare阶段：</p>
+<p>(1).当Porposer希望提出方案V1，首先发出prepare请求至大多数Acceptor。Prepare请求内容为序列号<code>&lt;SN1&gt;</code>;</p>
+<p>(2).当Acceptor接收到prepare请求<code>&lt;SN1&gt;</code>时，检查自身上次回复过的prepare请求<code>&lt;SN2&gt;</code></p>
+<p>a).如果SN2&gt;SN1，则忽略此请求，直接结束本次批准过程;</p>
+<p>b).否则检查上次批准的accept请求<code>&lt;SNx，Vx&gt;</code>，并且回复<code>&lt;SNx，Vx&gt;</code>；如果之前没有进行过批准，则简单回复<code>&lt;OK&gt;</code>;</p>
+<p>2.accept批准阶段：</p>
+<p>(1a).经过一段时间，收到一些Acceptor回复，回复可分为以下几种:</p>
+<p>a).回复数量满足多数派，并且所有的回复都是<code>&lt;OK&gt;</code>，则Porposer发出accept请求，请求内容为议案<code>&lt;SN1，V1&gt;</code>;</p>
+<p>b).回复数量满足多数派，但有的回复为：<code>&lt;SN2，V2&gt;，&lt;SN3，V3&gt;</code>……则Porposer找到所有回复中超过半数的那个，假设为<code>&lt;SNx，Vx&gt;</code>，则发出accept请求，请求内容为议案<code>&lt;SN1，Vx&gt;</code>;</p>
+<p>c).回复数量不满足多数派，Proposer尝试增加序列号为SN1+，转1继续执行;</p>
+<p>(1b).经过一段时间，收到一些Acceptor回复，回复可分为以下几种:</p>
+<p>a).回复数量满足多数派，则确认V1被接受;</p>
+<p>b).回复数量不满足多数派，V1未被接受，Proposer增加序列号为SN1+，转1继续执行;</p>
+<p>(2).在不违背自己向其他proposer的承诺的前提下，acceptor收到accept请求后即接受并回复这个请求。</p>
+<p>1.3算法优化(fastpaxos)
+Paxos算法在出现竞争的情况下，其收敛速度很慢，甚至可能出现活锁的情况，例如当有三个及三个以上的proposer在发送prepare请求后，很难有一个proposer收到半数以上的回复而不断地执行第一阶段的协议。因此，为了避免竞争，加快收敛的速度，在算法中引入了一个Leader这个角色，在正常情况下同时应该最多只能有一个参与者扮演Leader角色，而其它的参与者则扮演Acceptor的角色，同时所有的人又都扮演Learner的角色。</p>
+<p>在这种优化算法中，只有Leader可以提出议案，从而避免了竞争使得算法能够快速地收敛而趋于一致，此时的paxos算法在本质上就退变为两阶段提交协议。但在异常情况下，系统可能会出现多Leader的情况，但这并不会破坏算法对一致性的保证，此时多个Leader都可以提出自己的提案，优化的算法就退化成了原始的paxos算法。</p>
+<p>一个Leader的工作流程主要有分为三个阶段：</p>
+<p>(1).学习阶段向其它的参与者学习自己不知道的数据(决议);</p>
+<p>(2).同步阶段让绝大多数参与者保持数据(决议)的一致性;</p>
+<p>(3).服务阶段为客户端服务，提议案;</p>
+<p><img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/20230407205423.png" alt="" class="img_kGBN"></p>
+<p>1.3.1学习阶段
+当一个参与者成为了Leader之后，它应该需要知道绝大多数的paxos实例，因此就会马上启动一个主动学习的过程。假设当前的新Leader早就知道了1-134、138和139的paxos实例，那么它会执行135-137和大于139的paxos实例的第一阶段。如果只检测到135和140的paxos实例有确定的值，那它最后就会知道1-135以及138-140的paxos实例。</p>
+<p>1.3.2同步阶段
+此时的Leader已经知道了1-135、138-140的paxos实例，那么它就会重新执行1-135的paxos实例，以保证绝大多数参与者在1-135的paxos实例上是保持一致的。至于139-140的paxos实例，它并不马上执行138-140的paxos实例，而是等到在服务阶段填充了136、137的paxos实例之后再执行。这里之所以要填充间隔，是为了避免以后的Leader总是要学习这些间隔中的paxos实例，而这些paxos实例又没有对应的确定值。</p>
+<p>1.3.4服务阶段
+Leader将用户的请求转化为对应的paxos实例，当然，它可以并发的执行多个paxos实例，当这个Leader出现异常之后，就很有可能造成paxos实例出现间断。</p>
+<p>1.3.5问题
+(1).Leader的选举原则</p>
+<p>(2).Acceptor如何感知当前Leader的失败，客户如何知道当前的Leader</p>
+<p>(3).当出现多Leader之后，如何kill掉多余的Leader</p>
+<p>(4).如何动态的扩展Acceptor</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="五raft">五、Raft<a href="#五raft" class="hash-link" aria-label="Direct link to 五、Raft" title="Direct link to 五、Raft">​</a></h2>
+<p>Raft 和 Paxos 类似，但是更容易理解，也更容易实现。</p>
+<p>Raft 主要是用来竞选主节点。</p>
+<p>单个 Candidate 的竞选
+有三种节点：Follower、Candidate 和 Leader。Leader 会周期性的发送心跳包给 Follower。每个 Follower 都设置了一个随机的竞选超时时间，一般为 150ms~300ms，如果在这个时间内没有收到 Leader 的心跳包，就会变成 Candidate，进入竞选阶段。</p>
+<p>下图表示一个分布式系统的最初阶段，此时只有 Follower，没有 Leader。Follower A 等待一个随机的竞选超时时间之后，没收到 Leader 发来的心跳包，因此进入竞选阶段。</p>
+<p>此时 A 发送投票请求给其它所有节点。</p>
+<p>其它节点会对请求进行回复，如果超过一半的节点回复了，那么该 Candidate 就会变成 Leader。</p>
+<p>之后 Leader 会周期性地发送心跳包给 Follower，Follower 接收到心跳包，会重新开始计时。</p>
+<p>多个 Candidate 竞选
+如果有多个 Follower 成为 Candidate，并且所获得票数相同，那么就需要重新开始投票，例如下图中 Candidate B 和 Candidate D 都获得两票，因此需要重新开始投票。</p>
+<p>当重新开始投票时，由于每个节点设置的随机竞选超时时间不同，因此能下一次再次出现多个 Candidate 并获得同样票数的概率很低。</p>
+<p>日志复制
+来自客户端的修改都会被传入 Leader。注意该修改还未被提交，只是写入日志中。</p>
+<p>Leader 会把修改复制到所有 Follower。</p>
+<p>Leader 会等待大多数的 Follower 也进行了修改，然后才将修改提交。</p>
+<p>此时 Leader 会通知的所有 Follower 让它们也提交修改，此时所有节点的值达成一致。</p>
+<p>参考资料</p>
+<p>倪超. 从 Paxos 到 ZooKeeper : 分布式一致性原理与实践 [M]. 电子工业出版社, 2015.
+What is CAP theorem in distributed database system?
+NEAT ALGORITHMS - PAXOS
+Raft: Understandable Distributed Consensus
+Paxos By Example</p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="theme-doc-footer-edit-meta-row row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/distributed/practice/搞懂分布式技术：分布式一致性协议与Paxos，Raft算法.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_EYjg" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_eevz"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式系统的一些基本概念"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">搞懂分布式技术：分布式系统的一些基本概念</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式ID生成方案"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">搞懂分  布式技术：分布式ID生成方案</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_lc2k thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#2pc" class="table-of-contents__link toc-highlight">2PC</a><ul><li><a href="#1-分布式事务" class="table-of-contents__link toc-highlight">1. 分布式事务</a></li><li><a href="#2-xa规范" class="table-of-contents__link toc-highlight">2. XA规范</a></li><li><a href="#3-二阶段提交2pc" class="table-of-contents__link toc-highlight">3. 二阶段提交（2PC）</a></li><li><a href="#小结" class="table-of-contents__link toc-highlight">小结</a></li></ul></li><li><a href="#3pc" class="table-of-contents__link toc-highlight">3PC</a><ul><li><a href="#1-三阶段提交的定义" class="table-of-contents__link toc-highlight">1. 三阶段提交的定义</a></li><li><a href="#2-三阶段提交的过程" class="table-of-contents__link toc-highlight">2. 三阶段提交的过程</a></li><li><a href="#3-小结" class="table-of-contents__link toc-highlight">3. 小结</a></li></ul></li><li><a href="#四paxos" class="table-of-contents__link toc-highlight">四、Paxos</a></li><li><a href="#basicpaxos与fastpaxos" class="table-of-contents__link toc-highlight">BasicPaxos与FastPaxos</a></li><li><a href="#五raft" class="table-of-contents__link toc-highlight">五、Raft</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/code-note-blog/docs/intro">Tutorial</a></li></ul></div><div class="col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://stackoverflow.com/questions/tagged/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Stack Overflow<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://discordapp.com/invite/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Discord<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://twitter.com/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Twitter<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/code-note-blog/blog">Blog</a></li><li class="footer__item"><a href="https://github.com/facebook/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 My Project, Inc. Built with Docusaurus.</div></div></div></footer></div>
+</body>
+</html>

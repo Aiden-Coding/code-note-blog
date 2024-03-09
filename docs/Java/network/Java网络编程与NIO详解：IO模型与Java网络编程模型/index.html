@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-Java/network/Java网络编程与NIO详解：IO模型与Java网络编程模型" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.1.0">
+<title data-rh="true">Java网络编程与NIO详解：IO模型与Java网络编程模型 | Tommy</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://aiden-coding.github.io/code-note-blog/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://aiden-coding.github.io/code-note-blog/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://aiden-coding.github.io/code-note-blog/docs/Java/network/Java网络编程与NIO详解：IO模型与Java网络编程模型"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Java网络编程与NIO详解：IO模型与Java网络编程模型 | Tommy"><meta data-rh="true" name="description" content="本系列文章将整理到我在GitHub上的《Java面试指南》仓库，更多精彩内容请到我的仓库里查看"><meta data-rh="true" property="og:description" content="本系列文章将整理到我在GitHub上的《Java面试指南》仓库，更多精彩内容请到我的仓库里查看"><link data-rh="true" rel="icon" href="/code-note-blog/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://aiden-coding.github.io/code-note-blog/docs/Java/network/Java网络编程与NIO详解：IO模型与Java网络编程模型"><link data-rh="true" rel="alternate" href="https://aiden-coding.github.io/code-note-blog/docs/Java/network/Java网络编程与NIO详解：IO模型与Java网络编程模型" hreflang="en"><link data-rh="true" rel="alternate" href="https://aiden-coding.github.io/code-note-blog/docs/Java/network/Java网络编程与NIO详解：IO模型与Java网络编程模型" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/code-note-blog/blog/rss.xml" title="Tommy RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/code-note-blog/blog/atom.xml" title="Tommy Atom Feed"><link rel="stylesheet" href="/code-note-blog/assets/css/styles.dd5372db.css">
+<script src="/code-note-blog/assets/js/runtime~main.f999fb27.js" defer="defer"></script>
+<script src="/code-note-blog/assets/js/main.a0bfbaed.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_XYiV" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/code-note-blog/"><b class="navbar__title text--truncate">Tommy</b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/code-note-blog/docs/Java/basic/抽象类和接口">java</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/JavaWeb/走进JavaWeb技术世界：JavaWeb的由来和基础知识">javaweb</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/cache/探索Redis设计与实现：连接底层与表面的数据结构robj">cache</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/backend/后端技术杂谈：白话虚拟化技术">backend</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/cs/algorithms/剑指offer">cs</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/database/重新学习MySQL数据库：『浅入浅出』MySQL和InnoDB">database</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/distributed/basic/分布式系统理论基础 ：CAP">distributed</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/interview/BATJ-Experience/面阿里,终获offer">interview</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/mq/kafka/消息队列kafka详解：如何实现死信队列">mq</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/Spring全家桶/Spring/第一个Spring应用">spring</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/mianshi/collection">面试</a><a href="https://aiden-coding.github.io/code-note-blog/SpringCloud%E7%AC%AC3%E5%AD%A32024.html" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Blog<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></div><div class="navbar__items navbar__items--right"><div class="toggle_XbAW colorModeToggle_r5NY"><button class="clean-btn toggleButton_Jx0n toggleButtonDisabled_zYO7" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_FjAw"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_qmEt"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_wJfS"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_LABv"><div class="docsWrapper_pdvB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_Jioa" type="button"></button><div class="docRoot_qx_v"><aside class="theme-doc-sidebar-container docSidebarContainer_NHKT"><div class="sidebarViewport_uyYB"><div class="sidebar_SZG4"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_VP_k"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/code-note-blog/docs/Java/basic/抽象类和接口">基础</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/code-note-blog/docs/Java/collection/Java集合类总结">集合</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/code-note-blog/docs/Java/concurrency/Java并发编程学习总结">并发</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/code-note-blog/docs/Java/design-parttern/初探Java设计模式：创建型模式（工厂，单例等）">设计模式</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/code-note-blog/docs/Java/JVM/深入理解JVM虚拟机：垃圾回收器详解">jvm</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" aria-expanded="true" href="/code-note-blog/docs/Java/network/Java网络编程与NIO详解：基于NIO的网络编程框架Netty">网络</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/network/Java网络编程与NIO详解：基于NIO的网络编程框架Netty">Java网络编程与NIO详解：基于NIO的网络编程框架Netty</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/network/Java网络编程与NIO详解：浅谈Linux中Selector的实现原理">Java网络编程与NIO详解：浅谈Linux中Selector的实现原理</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/network/Java网络编程与NIO详解：浅析mmap和DirectBuffer">Java网络编程与NIO详解：浅析mmap和DirectBuffer</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/network/Java网络编程与NIO详解：浅析NIO包中的Buffer、Channel和Selector">Java网络编程与NIO详解：浅析NIO包中的Buffer、Channel和Selector</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/network/Java网络编程与NIO详解：深度解读Tomcat中的NIO模型">Java网络编程与NIO详解：深度解读Tomcat中的NIO模型</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/code-note-blog/docs/Java/network/Java网络编程与NIO详解：IO模型与Java网络编程模型">Java网络编程与NIO详解：IO模型与Java网络编程模型</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/network/Java网络编程与NIO详解：Java非阻塞IO和异步IO">Java网络编程与NIO详解：Java非阻塞IO和异步IO</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/network/Java网络编程与NIO详解：JAVA中原生的socket通信机制">Java网络编程与NIO详解：JAVA中原生的socket通信机制</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/network/Java网络编程与NIO详解：JavaNIO一步步构建IO多路复用的请求模型">Java网络编程与NIO详解：JavaNIO一步步构建IO多路复用的请求模型</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/network/Java网络编程与NIO详解：LinuxEpoll实现原理详解">Java网络编程与NIO详解：LinuxEpoll实现原理详解</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/network/Java网络编程与NIO详解：Tomcat中的Connector源码分析（NIO）">Java网络编程与NIO详解：Tomcat中的Connector源码分析（NIO）</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/network/Java网络与NIO总结">Java网络与NIO总结</a></li></ul></li></ul></nav></div></div></aside><main class="docMainContainer_SejT"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_j3Yw"><div class="docItemContainer_XOSC"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_F6gm" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/code-note-blog/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YCxa"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">网络</span><meta itemprop="position" content="1"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Java网络编程与NIO详解：IO模型与Java网络编程模型</span><meta itemprop="position" content="2"></li></ul></nav><div class="tocCollapsible_ToOY theme-doc-toc-mobile tocMobile_suYB"><button type="button" class="clean-btn tocCollapsibleButton_VzP_">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>Java网络编程与NIO详解：IO模型与Java网络编程模型</h1></header><p>本系列文章将整理到我在GitHub上的《Java面试指南》仓库，更多精彩内容请到我的仓库里查看</p>
+<blockquote>
+<p><a href="https://github.com/h2pl/Java-Tutorial" target="_blank" rel="noopener noreferrer">https://github.com/h2pl/Java-Tutorial</a></p>
+</blockquote>
+<p>喜欢的话麻烦点下Star哈</p>
+<p>文章将同步到我的个人博客：</p>
+<blockquote>
+<p><a href="http://www.how2playlife.com" target="_blank" rel="noopener noreferrer">www.how2playlife.com</a></p>
+</blockquote>
+<p>本文是微信公众号【Java技术江湖】的《不可轻视的Java网络编程》其中一篇，本文部分内容来源于网络，为了把本文主题讲得清晰透彻，也整合了很多我认为不错的技术博客内容，引用其中了一些比较好的博客文章，如有侵权，请联系作者。</p>
+<p>该系列博文会告诉你如何从计算机网络的基础知识入手，一步步地学习Java网络基础，从socket到nio、bio、aio和netty等网络编程知识，并且进行实战，网络编程是每一个Java后端工程师必须要学习和理解的知识点，进一步来说，你还需要掌握Linux中的网络编程原理，包括IO模型、网络编程框架netty的进阶原理，才能更完整地了解整个Java网络编程的知识体系，形成自己的知识框架。</p>
+<p>为了更好地总结和检验你的学习成果，本系列文章也会提供部分知识点对应的面试题以及参考答案。</p>
+<p>如果对本系列文章有什么建议，或者是有什么疑问的话，也可以关注公众号【Java技术江湖】联系作者，欢迎你参与本系列博文的创作和修  订。</p>
+<p>基本概念说明</p>
+<p><strong>用户空间与内核空间</strong></p>
+<p>现在操作系统都是采用虚拟存储器，那么对32位操作系统而言，它的寻址空间（虚拟存储空间）为4G（2的32次方）。操作系统的核心是内核，独立于普通的应用程序，可以访问受保护的内存空间，也有访问底层硬件设备的所有权限。为了保证用户进程不能直接操作内核（kernel），保证内核的安全，操作系统将虚拟空间划分为两部分，一部分为内核空间，一部分为用户空间。针对linux操作系统而言，将最高的1G字节（从虚拟地址0xC0000000到0xFFFFFFFF），供内核使用，称为内核空间，而将较低的3G字节（从虚拟地址0x00000000到0xBFFFFFFF），供各个进程使用，称为用户空间。</p>
+<p><strong>进程切换</strong></p>
+<p>为了控制进程的执行，内核必须有能力挂起正在CPU上运行的进程，并恢复以前挂起的某个进程的执行。这种行为被称为进程切换。因此可以说，任何进程都是在操作系统内核的支持下运行的，是与内核紧密相关的。</p>
+<p>从一个进程的运行转到另一个进程上运行，这个过程中经过下面这些变化：</p>
+<ul>
+<li>保存处理机上下文，包括程序计数器和其他寄存器。</li>
+<li>更新PCB信息。</li>
+<li>把进程的PCB移入相应的队列，如就绪、在某事件阻塞等队列。 选择另一个进程执行，并更新其PCB。</li>
+<li>更新内存管理的数据结构。</li>
+<li>恢复处理机上下文。</li>
+</ul>
+<p><strong>进程的阻塞</strong></p>
+<p>正在执行的进程，由于期待的某些事件未发生，如请求系统资源失败、等待某种操作的完成、新数据尚未到达或无新工作做等，则由系统自动执行阻塞原语(Block)，使自己由运行状态变为阻塞状态。可见，进程的阻塞是进程自身的一种主动行为，也因此只有处于运行态的进程（获得CPU），才可  能将其转为阻塞状态。当进程进入阻塞状态，是不占用CPU资源的。</p>
+<p><strong>文件描述符</strong></p>
+<p>文件描述符（File descriptor）是计算机科学中的一个术语，是一个用于表述指向文件的引用的抽象化概念。</p>
+<p>文件描述符在形式上是一个非负整数。实际上，它是一个索引值，指向内核为每一个进程所维护的该进程打开文件的记录表。当程序打开一个现有文件或者创建一个新文件时，内核向进程返回一个文件描述符。在程序设计中，一些涉及底层的程序编写往往会围绕着文件描述符展开。但是文件描述符这一概念往往只适用于UNIX、Linux这样的操作系统。</p>
+<p><strong>缓存 IO</strong></p>
+<p>缓存 IO 又被称作标准 IO，大多数文件系统的默认 IO 操作都是缓存 IO。在 Linux 的缓存 IO 机制中，操作系统会将 IO 的数据缓存在文件系统的页缓存（ page cache ）中，也就是说，数据会先被拷贝到操作系统内核的缓冲区中，然后才会从操作系统内核的缓冲区拷贝到应用程序的地址空间。</p>
+<p>缓存 IO 的缺点：</p>
+<p>数据在传输过程中需要在应用程序地址空间和内核进行多次数据拷贝操作，这些数据拷贝操作所带来的 CPU 以及内存开销是非常大的。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="io模型介绍">IO模型介绍<a href="#io模型介绍" class="hash-link" aria-label="Direct link to IO模型介绍" title="Direct link to IO模型介绍">​</a></h2>
+<p>作者：cooffeelis
+链接：<a href="https://www.jianshu.com/p/511b9cffbdac" target="_blank" rel="noopener noreferrer">https://www.jianshu.com/p/511b9cffbdac</a>
+來源：简书
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<p>常用的5种IO模型:
+blocking IO
+nonblocking IO
+IO multiplexing
+signal driven IO
+asynchronous IO</p>
+<p>再说一下IO发生时涉及的对象和步骤:</p>
+<p><strong><em>对于一个network IO (这里我们以read举例)，它会涉及到两个系统对象：</em></strong></p>
+<ul>
+<li>一个是调用这个IO的process (or thread)</li>
+<li>一个就是系统内核(kernel)</li>
+</ul>
+<p><strong><em>当一个read操作发生时，它会经历两个阶段：</em></strong></p>
+<ul>
+<li>等待数据准备,比如accept(), recv()等待数据<code>(Waiting for the data to be ready)</code></li>
+<li>将数据从内核拷贝到进程中, 比如 accept()接受到请求,recv()接收连接发送的数据后需要复制到内核,再从内核复制到进程用户空间<code>(Copying the data from the kernel to the process)</code></li>
+</ul>
+<p><strong><em>对于socket流而言,数据的流向经历两个阶段：</em></strong></p>
+<ul>
+<li>第一步通常涉及等待网络上的数据分组到达，然后被复制到内核的某个缓冲区。</li>
+<li>第二步把数据从内核缓冲区复制到应用进程缓冲区。</li>
+</ul>
+<p>记住这两点很重要，因为这些IO Model的区别就是在两个阶段上各有不同的情况。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="阻塞-ioblocking-io">阻塞 I/O（blocking IO）<a href="#阻塞-ioblocking-io" class="hash-link" aria-label="Direct link to 阻塞 I/O（blocking IO）" title="Direct link to 阻塞 I/O（blocking IO）">​</a></h3>
+<hr>
+<p>在linux中，默认情况下所有的socket都是blocking，一个典型的读操作流程大概是这样：</p>
+<p><img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/20230405094447.png" alt="" class="img_kGBN">
+阻塞IO流程</p>
+<p>当用户进程调用了recvfrom这个系统调用，kernel就开始了IO的第一个阶段：准备数据（对于网络IO来说，很多时候数据在一开始还没有到达。比如，还没有收到一个完整的UDP包。这个时候kernel就要等待足够的数据到来）。这个过程需要等待，也就是说数据被拷贝到<strong>操作系统内核的缓冲区</strong>中是需要一个过程的。 而在用户进程这边，整个进程会被阻塞（当然，是进程自己选择的阻塞）。当kernel一直等到数据准备好了，它就会<strong>将数据从kernel中拷贝到用户内存</strong>，然后kernel返回结果，用户进程才解除block的状态，重新运行起来。</p>
+<blockquote>
+<p>所以，blocking IO的特点就是在IO执行的两个阶段都被block了。</p>
+</blockquote>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="非阻塞-iononblocking-io">非阻塞 I/O（nonblocking IO）<a href="#非阻塞-iononblocking-io" class="hash-link" aria-label="Direct link to 非阻塞 I/O（nonblocking IO）" title="Direct link to 非阻塞 I/O（nonblocking IO）">​</a></h3>
+<hr>
+<p>linux下，可以通过设置socket使其变为non-blocking。当对一个non-blocking socket执行读操作时，流程是这个样子：</p>
+<p><img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/20230405094507.png" alt="" class="img_kGBN">
+非阻塞 I/O 流程</p>
+<p>当用户进程发出read操作时，如果kernel中的数据还没有准备好，<strong>那么它并不会block用户进程，而是立刻返回一个error</strong>。从用户进程角度讲 ，它发起一个read操作后，并不需要等待，而是马上就得到了一个结果。用户进程判断结果是一个error时，它就知道数据还没有准备好，于是它可以再次发送read操作。一旦kernel中的数据准备好了，并且又再次收到了用户进程的system call，那么它马上就将数据拷贝到了用户内存，然后返回。</p>
+<blockquote>
+<p>所以，nonblocking IO的特点是用户进程需要不断的主动询问kernel数据好了没有。</p>
+</blockquote>
+<p>***值得注意的是,此时的非阻塞IO只是应用到等待数据上,当真正有数据到达执行recvfrom的时候,还是同步阻塞IO来的, 从图中的copy data from kernel to user可以看出 ***</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="io-多路复用-io-multiplexing">I/O 多路复用（ IO multiplexing）<a href="#io-多路复用-io-multiplexing" class="hash-link" aria-label="Direct link to I/O 多路复用（ IO multiplexing）" title="Direct link to I/O 多路复用（ IO multiplexing）">​</a></h3>
+<hr>
+<p>IO multiplexing就是我们说的select，poll，epoll，有些地方也称这种IO方式为event driven IO。select/epoll的好处就在于单个process就可以同时处理多个网络连接的IO。它的基本原理就是select，poll，epoll这个function会不断的轮询所负责的所有socket，当某个socket有数据到达了，就通知用户进程。</p>
+<p><img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/20230405094539.png" alt="" class="img_kGBN"></p>
+<p>I/O 多路复用流程</p>
+<p>这个图和blocking IO的图其实并没有太大的不同，事实上，还更差一些。因为这里需要使用两个system call (select 和 recvfrom)，而blocking IO只调用了一个system call (recvfrom)。但是，用select的优势在于它可以同时处理多个connection。</p>
+<blockquote>
+<p>所以，如果处理的连接数不是很高的话，使用select/epoll的web server不一定比使用multi-threading + blocking IO的web server性能更好，可能延迟还更大。select/epoll的优势并不是对于单个连接能处理得更快，而是在于能处理更多的连接。）</p>
+</blockquote>
+<p>IO复用的实现方式目前主要有select、poll和epoll。</p>
+<p>select和poll的原理基本相同：</p>
+<ul>
+<li>注册待侦听的fd(这里的fd创建时最好使用非阻塞)</li>
+<li>每次调用都去检查这些fd的状态，当有一个或者多个fd就绪的时候返回</li>
+<li>返回结果中包括已就绪和未就绪的fd</li>
+</ul>
+<p>相比select，poll解决了单个进程能够打开的文件描述符数量有限制这个问题：select受限于FD_SIZE的限制，如果修改则需要修改这个宏重新编译内核；而poll通过一个pollfd数组向内核传递需要关注的事件，避开了文件描述符数量限制。</p>
+<p>此外，select和poll共同具有的一个很大的缺点就是包含大量fd的数组被整体复制于用户态和内核态地址空间之间，开销会随着fd数量增多而线性增大。</p>
+<p>select和poll就类似于上面说的就餐方式。但当你每次都去询问时，老板会把所有你点的饭菜都轮询一遍再告诉你情况，当大量饭菜很长时间都不能准备好的情况下是很低效的。于是，老板有些不耐烦了，就让厨师每做好一个菜就通知他。这样每次你再去问的时候，他会直接把已经准备好的菜告诉你，你再去端。这就是事件驱动IO就绪通知的方式-<strong>epoll</strong>。</p>
+<p>epoll的出现，解决了select、poll的缺点：</p>
+<ul>
+<li>基于事件驱动的方式，避免了每次都要把所有fd都扫描一遍。</li>
+<li>epoll_wait只返回就绪的fd。</li>
+<li>epoll使用nmap内存映射技术避免了内存复制的开销。</li>
+<li>epoll的fd数量上限是操作系统的最大文件句柄数目,这个数目一般和内存有关，通常远大于1024。</li>
+</ul>
+<p>目前，epoll是Linux2.6下最高效的IO复用方式，也是Nginx、Node的IO实现方式。而在freeBSD下，kqueue是另一种类似于epoll的IO复用方式。</p>
+<p>此外，对于IO复用还有一个水平触发和边缘触发的概念：</p>
+<ul>
+<li>水平触发：当就绪的fd未被用户进程处理后，下一次查询依旧会返回，这是select和poll的触发方式。</li>
+<li>边缘触发：无论就绪的fd是否被处理，下一次不再返回。理论上性能更高，但是实现相当复杂，并且任何意外的丢失事件都会造成请求处理错误。epoll默认使用水平触发，通过相应选项可以使用边缘触发。</li>
+</ul>
+<blockquote>
+<p>点评：
+<strong><em>I/O 多路复用的特点是通过一种机制一个进程能同时等待多个文件描述符，</em></strong>而这些文件描述符（套接字描述符）其中的任意一个进入读就绪状态，select()函数  就可以返回。
+<strong><em>所以, IO多路复用，本质上不会有并发的功能，因为任何时候还是只有一个进程或线程进行工作，它之所以能提高效率是因为select\epoll 把进来的socket放到他们的 &#x27;监视&#x27; 列表里面，当任何socket有可读可写数据立马处理，那如果select\epoll 手里同时检测着很多socket， 一有动静马上返回给进程处理，总比一个一个socket过来,阻塞等待,处理高效率。</em></strong>
+当然也可以多线程/多进程方式，一个连接过来开一个进程/线程处理，这样消耗的内存和进程切换页会耗掉更多的系统资源。
+所以我们可以结合IO多路复用和多进程/多线程 来高性能并发，IO复用负责提高接受socket的通知效率，收到请求后，交给进程池/线程池来处理逻辑。</p>
+</blockquote>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="异步-ioasynchronous-io">异步 I/O（asynchronous IO）<a href="#异步-ioasynchronous-io" class="hash-link" aria-label="Direct link to 异步 I/O（asynchronous IO）" title="Direct link to 异步 I/O（asynchronous IO）">​</a></h3>
+<hr>
+<p>linux下的asynchronous IO其实用得很少。先看一下它的流程：</p>
+<p><img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/20230405094934.png" alt="" class="img_kGBN">
+异步IO 流程</p>
+<p>用户进程发起read操作之后，立刻就可以开始去做其它的事。而另一方面，从kernel的角度，当它受到一个asynchronous read之后，首先它会立刻返回，所以不会对用户进程产生任何block。然后，kernel会等待数据准备完成，然后将数据拷贝到用户内存，当这一切都完成之后，kernel会给用户进程发送一个signal，告诉它read操作完成了。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="阻塞io非阻塞io-与-同步io-异步io的区别和联系">阻塞IO,非阻塞IO 与 同步IO, 异步IO的区别和联系<a href="#阻塞io非阻塞io-与-同步io-异步io的区别和联系" class="hash-link" aria-label="Direct link to 阻塞IO,非阻塞IO 与 同步IO, 异步IO的区别和联系" title="Direct link to 阻塞IO,非阻塞IO 与 同步IO, 异步IO的区别和联系">​</a></h2>
+<p>阻塞IO VS 非阻塞IO：</p>
+<p>概念：
+阻塞和非阻塞关注的是<strong>程序在等待调用结果（消息，返回值）时的状态.</strong>
+阻塞调用是指调用结果返回之前，当前线程会被挂起。调用线程只有在得到结果之后才会返回。非阻塞调用指在不能立刻得到结果之前，该调用不会阻塞当前线程。</p>
+<p>例子：你打电话问书店老板有没有《分布式系统》这本书，你如果是阻塞式调用，你会一直把自己“挂起”，直到得到这本书有没有的结果，如果是非阻塞式调用，你不管老板有没有告诉你，你自己先一边去玩了， 当然你也要偶尔过几分钟check一下老板有没有返回结果。在这里阻塞与非阻塞与是否同步异步无关。跟老板通过什么方式回答你结果无关。</p>
+<hr>
+<p>分析：
+阻塞IO会一直block住对应的进程直到操作完成，而非阻塞IO在kernel还准备数据的情况下会立刻返回。</p>
+<p>同步IO VS 异步IO：</p>
+<p>概念：
+同步与异步同步和异步关注的是___消息通信机制___(synchronous communication/ asynchronous communication)所谓同步，就是在发出一个_调用_时，在没有得到结果之前，该_调用_就不返回。但是一旦调用返回，就得到返回值了。换句话说，就是由_调用者_主动等待这个_调用_的结果。而异步则是相反，_调用_在发出之后，这个调用就直接返回了，所以没有返回结果。换句话说，当一个异步过程调用发出后，调用者不会立刻得到结果。而是在_调用_发出后，_被调用者_通过状态、通知来通知调用者，或通过回调函数处理这个调用。</p>
+<p>典型的异步编程模型比如Node.js举个通俗的例子：你打  电话问书店老板有没有《分布式系统》这本书，如果是同步通信机制，书店老板会说，你稍等，”我查一下&quot;，然后开始查啊查，等查好了（可能是5秒，也可能是一天）告诉你结果（返回结果）。而异步通信机制，书店老板直接告诉你我查一下啊，查好了打电话给你，然后直接挂电话了（不返回结果）。然后查好了，他会主动打电话给你。在这里老板通过“回电”这种方式来回调。</p>
+<hr>
+<p>分析：
+在说明同步IO和异步IO的区别之前，需要先给出两者的定义。Stevens给出的定义（其实是POSIX的定义）是这样子的：</p>
+<blockquote>
+<p>A synchronous I/O operation causes the requesting process to be blocked until that I/O operation completes;
+An asynchronous I/O operation does not cause the requesting process to be blocked;</p>
+</blockquote>
+<p>两者的区别就在于同步IO做”IO operation”的时候会将process阻塞。按照这个定义，之前所述的<strong><em>阻塞IO,非阻塞IO ，IO复用都属于同步IO。</em></strong>
+有人可能会说，非阻塞IO 并没有被block啊。这里有个非常“狡猾”的地方，定义中所指的”IO operation”是指真实的IO操作，就是例子中的recvfrom这个system call。非阻塞IO在执行recvfrom这个system call的时候，如果kernel的数据没有准备好，这时候不会block进程。但是，当kernel中数据准备好的时候，recvfrom会将数据从kernel拷贝到用户内存中，这个时候进程是被block了，在这段时间内，进程是被block的。</p>
+<p>而异步IO则不一样，当进程发起IO 操作之后，就直接返回再也不理睬了，直到kernel发送一个信号，告诉进程说IO完成。在这整个过程中，进程完全没有被block。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="io模型的形象举例">IO模型的形象举例<a href="#io模型的形象举例" class="hash-link" aria-label="Direct link to IO模型的形象举例" title="Direct link to IO模型的形象举例">​</a></h3>
+<p>最后，再举几个不是很恰当的例子来说明这四个IO Model:
+有A，B，C，D四个人在钓鱼：
+A用的是最老式的鱼竿，所以呢，得一直守着，等到鱼上钩了再拉杆；
+B的鱼竿有个功能，能够显示是否有鱼上钩，所以呢，B就和旁边的MM聊天，隔会再看看有没有鱼上钩，有的话就迅速拉杆；
+C用的鱼竿和B差不多，但他想了一个好办法，就是同时放好几根鱼竿，然后守在旁边，一旦有显示说鱼上钩了，它就将对应的鱼竿拉起来；
+D是个有钱人，干脆雇了一个人帮他钓鱼，一旦那个人把鱼钓上来了，就给D发个短信。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="selectpollepoll-轮询机制">Select/Poll/Epoll 轮询机制<a href="#selectpollepoll-轮询机制" class="hash-link" aria-label="Direct link to Select/Poll/Epoll 轮询机制" title="Direct link to Select/Poll/Epoll 轮询机制">​</a></h3>
+<p><strong><em>select，poll，epoll本质上都是同步I/O，因为他们都需要在读写事件就绪后自己负责进行读写，也就是说这个读写过程是阻塞的</em></strong>
+Select/Poll/Epoll 都是IO复用的实现方式， 上面说了使用IO复用，会把socket设置成non-blocking，然后放进Select/Poll/Epoll 各自的监视列表里面，那么，他们的对socket是否有数据到达的监视机制分别是怎样的？效率又如何？我们应该使用哪种方式实现IO复用比较好？下面列出他们各自的实现方式，效率，优缺点：</p>
+<p>（1）select，poll实现需要自己不断轮询所有fd集合，直到设备就绪，期间可能要睡眠和唤醒多次交替。而epoll其实也需要调用epoll_wait不断轮询就绪链表，期间也可能多次睡眠和唤醒交替，但是它是设备就绪时，调用回调函数，把就绪fd放入就绪链表中，并唤醒在epoll_wait中进入睡眠的进程。虽然都要睡眠和交替，但是select  和poll在“醒着”的时候要遍历整个fd集合，而epoll在“醒着”的时候只要判断一下就绪链表是否为空就行了，这节省了大量的CPU时间。这就是回调机制带来的性能提升。</p>
+<p>（2）select，poll每次调用都要把fd集合从用户态往内核态拷贝一次，并且要把current往设备等待队列中挂一次，而epoll只要一次拷贝，而且把current往等待队列上挂也只挂一次（在epoll_wait的开始，注意这里的等待队列并不是设备等待队列，只是一个epoll内部定义的等待队列）。这也能节省不少的开销。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="java网络编程模型">Java网络编程模型<a href="#java网络编程模型" class="hash-link" aria-label="Direct link to Java网络编程模型" title="Direct link to Java网络编程模型">​</a></h2>
+<p>上文讲述了UNIX环境的五种IO模型。基于这五种模型，在Java中，随着NIO和NIO2.0(AIO)的引入，一般具有以下几种网络编程模型：</p>
+<ul>
+<li>BIO</li>
+<li>NIO</li>
+<li>AIO</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="bio">BIO<a href="#bio" class="hash-link" aria-label="Direct link to BIO" title="Direct link to BIO">​</a></h3>
+<p>BIO是一个典型的网络编程模型，是通常我们实现一个服务端程序的过程，步骤如下：</p>
+<ul>
+<li>主线程accept请求阻塞</li>
+<li>请求到达，创建新的线程来处理这个套接字，完成对客户端的响应。</li>
+<li>主线程继续accept下一个请求</li>
+</ul>
+<p>这种模型有一个很大的问题是：当客户端连接增多时，服务端创建的线程也会暴涨，系统性能会急剧下降。因此，在此模型的基础上，类似于 tomcat的bio connector，采用的是线程池来避免对于每一个客户端都创建一个线程。有些地方把这种方式叫做伪异步IO(把请求抛到线程池中异步等待处理)。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="nio">NIO<a href="#nio" class="hash-link" aria-label="Direct link to NIO" title="Direct link to NIO">​</a></h3>
+<p>JDK1.4开始引入了NIO类库，这里的NIO指的是New IO，主要是使用Selector多路复用器来实现。Selector在Linux等主流操作系统上是通过epoll实现的。</p>
+<p>NIO的实现流程，类似于select：</p>
+<ul>
+<li>创建ServerSocketChannel监听客户端连接并绑定监听端口，设置为非阻塞模式。</li>
+<li>创建Reactor线程，创建多路复用器(Selector)并启动线程。</li>
+<li>将ServerSocketChannel注册到Reactor线程的Selector上。监听accept事件。</li>
+<li>Selector在线程run方法中无线循环轮询准备就绪的Key。</li>
+<li>Selector监听到新的客户端接入，处理新的请求，完成tcp三次握手，建立物理连接。</li>
+<li>将新的客户端连接注册到Selector上，监听读操作。读取客户端发送的网络消息。</li>
+<li>客户端发送的数据就绪则读取客户端请求，进行处理。</li>
+</ul>
+<p>相比BIO，NIO的编程非常复杂。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="aio">AIO<a href="#aio" class="hash-link" aria-label="Direct link to AIO" title="Direct link to AIO">​</a></h3>
+<p>JDK1.7引入NIO2.0，提供了异步文件通道和异步套接字通道的实现。其底层在windows上是通过IOCP，在Linux上是通过epoll来实现的(LinuxAsynchronousChannelProvider.java,UnixAsynchronousServerSocketChannelImpl.java)。</p>
+<ul>
+<li>创建AsynchronousServerSocketChannel，绑定监听端口</li>
+<li>调用AsynchronousServerSocketChannel的accpet方法，传入自己实现的CompletionHandler。包括上一步，都是非阻塞的</li>
+<li>连接传入，回调CompletionHandler的completed方法，在里面，调用AsynchronousSocketChannel的read方法，传入负责处理数据的CompletionHandler。</li>
+<li>数据就绪，触发负责处理数据的CompletionHandler的completed方法。继续做下一步处理即可。</li>
+<li>写入操作类似，也需要传入CompletionHandler。</li>
+</ul>
+<p>其编程模型相比NIO有了不少的简化。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="对比">对比<a href="#对比" class="hash-link" aria-label="Direct link to 对比" title="Direct link to 对比">​</a></h3>
+<table><thead><tr><th>.</th><th>同步阻塞IO</th><th>伪异步IO</th><th>NIO</th><th>AIO</th></tr></thead><tbody><tr><td>客户端数目 ：IO线程</td><td>1 : 1</td><td>m : n</td><td>m : 1</td><td>m : 0</td></tr><tr><td>IO模型</td><td>同步阻塞IO</td><td>同步阻塞IO</td><td>同步非阻塞IO</td><td>异步非阻塞IO</td></tr><tr><td>吞吐量</td><td>低</td><td>中</td><td>高</td><td>高</td></tr><tr><td>编程复杂度</td><td>简单</td><td>简单</td><td>非常复杂</td><td>复杂</td></tr></tbody></table></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="theme-doc-footer-edit-meta-row row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/Java/network/Java网络编程与NIO详解：IO模型与Java网络编程模型.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_EYjg" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_eevz"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/code-note-blog/docs/Java/network/Java网络编程与NIO详解：深度解读Tomcat中的NIO模型"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Java网络编程与NIO详解：深度解读Tomcat中的NIO模型</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/code-note-blog/docs/Java/network/Java网络编程与NIO详解：Java非阻塞IO和异步IO"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Java网络编程与NIO详解：Java非阻塞IO和异步IO</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_lc2k thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#io模型介绍" class="table-of-contents__link toc-highlight">IO模型介绍</a><ul><li><a href="#阻塞-ioblocking-io" class="table-of-contents__link toc-highlight">阻塞 I/O（blocking IO）</a></li><li><a href="#非阻塞-iononblocking-io" class="table-of-contents__link toc-highlight">非阻塞 I/O（nonblocking IO）</a></li><li><a href="#io-多路复用-io-multiplexing" class="table-of-contents__link toc-highlight">I/O 多路复用（ IO multiplexing）</a></li><li><a href="#异步-ioasynchronous-io" class="table-of-contents__link toc-highlight">异步 I/O（asynchronous IO）</a></li></ul></li><li><a href="#阻塞io非阻塞io-与-同步io-异步io的区别和联系" class="table-of-contents__link toc-highlight">阻塞IO,非阻塞IO 与 同步IO, 异步IO的区别和联系</a><ul><li><a href="#io模型的形象举例" class="table-of-contents__link toc-highlight">IO模型的形象举例</a></li><li><a href="#selectpollepoll-轮询机制" class="table-of-contents__link toc-highlight">Select/Poll/Epoll 轮询机制</a></li></ul></li><li><a href="#java网络编程模型" class="table-of-contents__link toc-highlight">Java网络编程模型</a><ul><li><a href="#bio" class="table-of-contents__link toc-highlight">BIO</a></li><li><a href="#nio" class="table-of-contents__link toc-highlight">NIO</a></li><li><a href="#aio" class="table-of-contents__link toc-highlight">AIO</a></li><li><a href="#对比" class="table-of-contents__link toc-highlight">对比</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/code-note-blog/docs/intro">Tutorial</a></li></ul></div><div class="col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://stackoverflow.com/questions/tagged/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Stack Overflow<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://discordapp.com/invite/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Discord<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://twitter.com/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Twitter<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/code-note-blog/blog">Blog</a></li><li class="footer__item"><a href="https://github.com/facebook/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 My Project, Inc. Built with Docusaurus.</div></div></div></footer></div>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-interview/InterviewQuestions/Java核心技术总结" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.1.0">
+<title data-rh="true">Java核心技术总结 | Tommy</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://aiden-coding.github.io/code-note-blog/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://aiden-coding.github.io/code-note-blog/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://aiden-coding.github.io/code-note-blog/docs/interview/InterviewQuestions/Java核心技术总结"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Java核心技术总结 | Tommy"><meta data-rh="true" name="description" content="---"><meta data-rh="true" property="og:description" content="---"><link data-rh="true" rel="icon" href="/code-note-blog/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://aiden-coding.github.io/code-note-blog/docs/interview/InterviewQuestions/Java核心技术总结"><link data-rh="true" rel="alternate" href="https://aiden-coding.github.io/code-note-blog/docs/interview/InterviewQuestions/Java核心技术总结" hreflang="en"><link data-rh="true" rel="alternate" href="https://aiden-coding.github.io/code-note-blog/docs/interview/InterviewQuestions/Java核心技术总结" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/code-note-blog/blog/rss.xml" title="Tommy RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/code-note-blog/blog/atom.xml" title="Tommy Atom Feed"><link rel="stylesheet" href="/code-note-blog/assets/css/styles.dd5372db.css">
+<script src="/code-note-blog/assets/js/runtime~main.f999fb27.js" defer="defer"></script>
+<script src="/code-note-blog/assets/js/main.a0bfbaed.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_XYiV" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/code-note-blog/"><b class="navbar__title text--truncate">Tommy</b></a><a class="navbar__item navbar__link" href="/code-note-blog/docs/Java/basic/抽象类和接口">java</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/JavaWeb/走进JavaWeb技术世界：JavaWeb的由来和基础知识">javaweb</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/cache/探索Redis设计与实现：连接底层与表面的数据结构robj">cache</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/backend/后端技术杂谈：白话虚拟化技术">backend</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/cs/algorithms/剑指offer">cs</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/database/重新学习MySQL数据库：『浅入浅出』MySQL和InnoDB">database</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/distributed/basic/分布式系统理论基础 ：CAP">distributed</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/code-note-blog/docs/interview/BATJ-Experience/面阿里,终获offer">interview</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/mq/kafka/消息队列kafka详解：如何实现死信队列">mq</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/Spring全家桶/Spring/第一个Spring应用">spring</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/mianshi/collection">面试</a><a href="https://aiden-coding.github.io/code-note-blog/SpringCloud%E7%AC%AC3%E5%AD%A32024.html" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Blog<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></div><div class="navbar__items navbar__items--right"><div class="toggle_XbAW colorModeToggle_r5NY"><button class="clean-btn toggleButton_Jx0n toggleButtonDisabled_zYO7" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_FjAw"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_qmEt"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_wJfS"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_LABv"><div class="docsWrapper_pdvB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_Jioa" type="button"></button><div class="docRoot_qx_v"><aside class="theme-doc-sidebar-container docSidebarContainer_NHKT"><div class="sidebarViewport_uyYB"><div class="sidebar_SZG4"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_VP_k"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/code-note-blog/docs/interview/BATJ-Experience/面阿里,终获offer">BATJ-Experience</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" aria-expanded="true" href="/code-note-blog/docs/interview/InterviewQuestions/Java核心技术总结">InterviewQuestions</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/code-note-blog/docs/interview/InterviewQuestions/Java核心技术总结">Java核心技术总结</a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/code-note-blog/docs/interview/PreparingForInterview/程序员的简历之道">PreparingForInterview</a></div></li></ul></nav></div></div></aside><main class="docMainContainer_SejT"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_j3Yw"><div class="docItemContainer_XOSC"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_F6gm" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/code-note-blog/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YCxa"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">InterviewQuestions</span><meta itemprop="position" content="1"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Java核心技术总结</span><meta itemprop="position" content="2"></li></ul></nav><div class="tocCollapsible_ToOY theme-doc-toc-mobile tocMobile_suYB"><button type="button" class="clean-btn tocCollapsibleButton_VzP_">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>Java核心技术总结</h1></header><hr>
+<p>title: Java核心技术学习总结
+date: 2018-07-10 22:37:47
+tags:</p>
+<ul>
+<li>Java基础
+categories:</li>
+<li>后端</li>
+<li>Java基础</li>
+</ul>
+<hr>
+<p>本文主要是我最近复习Java基础原理过程中写的Java基础学习总结。Java的知识点其实非常多，并且有些知识点比较难以理解，有时候我们自以为理解了某些内容，其实可能只是停留在表面上，没有理解其底层实现原理。</p>
+<p>纸上得来终觉浅，绝知此事要躬行。笔者之前对每部分的内容
+对做了比较深入的学习以及代码实现，基本上比较全面地讲述了每一个Java基础知识点，当然可能有些遗漏和错误，还请读者指正。</p>
+<p><strong>这里先把整体的学习大纲列出来，让大家对知识框架有个基本轮廓，具体每个部分的内容，笔者都对应写了一篇博文来加以讲解和剖析，并且发表在我的个人博客和csdn技术专栏里，下面给出地址</strong></p>
+<p>专栏：深入理解Java原理</p>
+<p><a href="https://blog.csdn.net/column/details/21930.html" target="_blank" rel="noopener noreferrer">https://blog.csdn.net/column/details/21930.html</a></p>
+<p>相关代码实现在我的GitHub里：</p>
+<p><a href="https://github.com/h2pl/MyTech" target="_blank" rel="noopener noreferrer">https://github.com/h2pl/MyTech</a></p>
+<p><strong>喜欢的话麻烦star一下哈</strong></p>
+<p>本系列技术文章首发于我的个人博客：</p>
+<p><a href="https://h2pl.github.io" target="_blank" rel="noopener noreferrer">https://h2pl.github.io</a></p>
+<p>更多关于Java后端学习的内容请到我的CSDN博客上查看：</p>
+<p><a href="https://blog.csdn.net/a724888" target="_blank" rel="noopener noreferrer">https://blog.csdn.net/a724888</a></p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="java基础学习总结">Java基础学习总结<a href="#java基础学习总结" class="hash-link" aria-label="Direct link to Java基础学习总结" title="Direct link to Java基础学习总结">​</a></h2>
+<p>每部分内容会重点写一些常见知识点，方便 复习和记忆，但是并不是全部内容，详细的内容请参见具体的文章地址。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="面向对象三大特性">面向对象三大特性<a href="#面向对象三大特性" class="hash-link" aria-label="Direct link to 面向对象三大特性" title="Direct link to 面向对象三大特性">​</a></h3>
+<p>继承：一般类只能单继承，内部类实现多继承，接口可以多继承</p>
+<p>封装：访问权限控制public &gt; protected &gt; 包 &gt; private 内部类也是一种封装</p>
+<p>多态：编译时多态，体现在向上转型和向下转型，通过引用类型判断调用哪个方法（静态分派）。</p>
+<p>运行时多态，体现在同名函数通过不同参数实现多种方法（动态分派）。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="基本数据类型">基本数据类型<a href="#基本数据类型" class="hash-link" aria-label="Direct link to 基本数据类型" title="Direct link to 基本数据类型">​</a></h3>
+<p>基本类型位数，自动装箱，常量池</p>
+<p>例如byte类型是1byte也就是8位，可以表示的数字是-128到127，因为还有一个0，加起来一共是256，也就是2的八次方。</p>
+<p>32位和64位机器的int是4个字节也就是32位，char是1个字节就是8位，float是4个字节，double是8个字节，long是8个字节。</p>
+<p>所以它们占有字节数是相同的，这样的话两个版本才可以更好地兼容。（应该）</p>
+<p>基本数据类型的包装类只在数字范围-128到127中用到常量池，会自动拆箱装箱，其余数字范围的包装类则会新建实例</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="string及包装类">String及包装类<a href="#string及包装类" class="hash-link" aria-label="Direct link to String及包装类" title="Direct link to String及包装类">​</a></h3>
+<p>String类型是final类型，在堆中分配空间后内存地址不可变。</p>
+<p>底层是final修饰的char[]数组 ，数组的内存地址同样不可变。</p>
+<p>但实际上可以通过修改char[n] = &#x27;a&#x27;来进行修改，不会改变String实例的内存值，不过在jdk中，用户无法直接获取char[]，也没有方法能操作该数组。
+所以String类型的不可变实际上也是理论上的不可变。所以我们在分配String对象以后，如果将其 = &quot;abc&quot;，那也只是改变了引用的指向，实际上没有改变原来的对象。</p>
+<p>StringBuffer和StringBuilder底层是可变的char[]数组，继承父类AbstractStringBuilder的各种成员和方法，实际上的操作都是由父类方法来完成的。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="final关键字">final关键字<a href="#final关键字" class="hash-link" aria-label="Direct link to final关键字" title="Direct link to final关键字">​</a></h3>
+<p>final修饰基本数据类型保证不可变</p>
+<p>final修饰引用保证引用不能指向别的对象，否则会报错。</p>
+<p>final修饰类，类的实例分配空间后地址不可变，子类不能重写所有父类方法。因此在cglib动态代理中，不能为一个类的final修饰的函数做代理，因为cglib要将被代理的类设置为父类，然后再生成字节码。</p>
+<p>final修饰方法，子类不能重写该方法。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="抽象类和接口">抽象类和接口<a href="#抽象类和接口" class="hash-link" aria-label="Direct link to 抽象类和接口" title="Direct link to 抽象类和接口">​</a></h3>
+<p>1 抽象类可以有方法实现。
+抽象类可以有非final成员变量。
+抽象方法要用abstract修饰。
+抽象类可以有构造方法，但是只能由子类进行实例化。</p>
+<p>2 接口可以用extends加多个接口实现多继承。
+接口只能有public final类型的成员变量。
+接口只能有抽象方法，不能有方法体、
+接口不能实例化，但是可以作为引用类型。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="代码块和加载顺序">代码块和加载顺序<a href="#代码块和加载顺序" class="hash-link" aria-label="Direct link to 代码块和加载顺序" title="Direct link to 代码块和加载顺序">​</a></h3>
+<p>假设该类是第一次进行实例化。那么有如下加载顺序
+静态总是比非静态优先，从早到晚的顺序是：
+1 静态代码块 和 静态成员变量的顺序根据代码位置前后来决定。
+2 代码块和成员变量的顺序也根据代码位置来决定
+3 最后才调用构造方法构造方法</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="包内部类外部类">包、内部类、外部类<a href="#包内部类外部类" class="hash-link" aria-label="Direct link to 包、内部类、外部类" title="Direct link to 包、内部类、外部类">​</a></h3>
+<p>1 Java项目一般从src目录开始有com.<em>.</em>.A.java这样的目录结构。这就是包结构。所以一般编译后的结构是跟包结构一模一样的，这样的结构保证了import时能找到正确的class引用包访问权限就是指同包下的类可见。</p>
+<p>import 一般加上全路径，并且使用.*时只包含当前目录的所有类文件，不包括子目录。</p>
+<p>2 外部类只有public和default两种修饰，要么全局可访问，要么包内可访问。</p>
+<p>3 内部类可以有全部访问权限，因为它的概念就是一个成员变量，所以访问权限设置与一般的成员变量相同。</p>
+<p>非静态内部类是外部类的一个成员变量，只跟外部类的实例有关。</p>
+<p>静态内部类是独立于外部类存在的一个类，与外部类实例无关，可以通过外部类.内部类直接获取Class类型。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="异常">异常<a href="#异常" class="hash-link" aria-label="Direct link to 异常" title="Direct link to 异常">​</a></h3>
+<p>1 异常体系的最上层是Throwable类
+子类有Error和Exception
+Exception的子类又有RuntimeException和其他具体的可检查 异常。</p>
+<p>2 Error是jvm完全无法处理的系统错误，只能终止运行。</p>
+<p>运行时异常指的是编译正确但运行错误的异常，如数组越界异常，一般是人为失误导致的，这种异常不用try catch，而是需要程序员自己检查。</p>
+<p>可检查异常一般是jvm处理不了的一些异常，但是又经常会发生，比如Ioexception，Sqlexception等，是外部实现带来的异常。</p>
+<p>3 多线程的异常流程是独立的，互不影响。
+大型模块的子模块异常一般需要重新封装成外部异常再次抛出，否则只能看到最外层异常信息，难以进行调试。</p>
+<p>日志框架是异常报告的最好帮手，log4j，slf4j中，在工作中必不可少。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="泛型">泛型<a href="#泛型" class="hash-link" aria-label="Direct link to 泛型" title="Direct link to 泛型">​</a></h3>
+<p>Java中的泛型是伪泛型，只在编译期生效，运行期自动进行泛型擦除，将泛型替换为实际上传入的类型。</p>
+<p>泛型类用<code>class &lt;T&gt; A {}</code>这样的形式表示，里面的方法和成员变量都可以用T来表示类型。泛型接口也是类似的，不过泛型类实现泛型接口时可以选择注入实际类型或者是继续使用泛型。</p>
+<p>泛型方法可以自带泛型比如<code>void &lt;E&gt; E go()</code>;</p>
+<p>泛型可以使用?通配符进行泛化 <code>Object&lt;?&gt;</code>可以接受任何类型</p>
+<p>也可以使用 <code>&lt;? extends Number&gt; &lt;? super Integer&gt;</code>这种方式进行上下边界的限制。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="class类和object类">Class类和Object类<a href="#class类和object类" class="hash-link" aria-label="Direct link to Class类和Object类" title="Direct link to Class类和Object类">​</a></h3>
+<p>Java反射的基础是Class类，该类封装所有其他类的类型信息，并且在每个类加载后在堆区生成每个类的一个<code>Class&lt;类名&gt;</code>实例，用于该类的实例化。</p>
+<p>Java中可以通过多种方式获取Class类型，比如A.class,new A().getClass()方法以及Class.forName(&quot;com.?.?.A&quot;)方法。</p>
+<p>Object是所有类的父类，有着自己的一些私有方法，以及被所有类继承的9大方法。</p>
+<p>有人讨论Object和Class类型谁先加载谁后加载，因为每个类都要继承Object，但是又得先被加载到堆区，事实上，这个问题在JVM初始化时就解决了，没必要多想。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="javac和java">javac和java<a href="#javac和java" class="hash-link" aria-label="Direct link to javac和java" title="Direct link to javac和java">​</a></h3>
+<p>javac 是编译一个java文件的基本命令，通过不同参数可以完成各种配置，比如导入其他类，指定编译路径等。</p>
+<p>java是执行一个java文件的基本命令，通过参数配置可以以不同方式执行一个java程序或者是一个jar包。</p>
+<p>javap是一个class文件的反编译程序，可以获取class文件的反编译结果，甚至是jvm执行程序的每一步代码实现。</p>
+<p>​</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="反射">反射<a href="#反射" class="hash-link" aria-label="Direct link to 反射" title="Direct link to 反射">​</a></h3>
+<p>Java反射包reflection提供对Class，Method，field，constructor等信息的封装类型。</p>
+<p>通过这些api可以轻易获得一个类的各种信息并且可以进行实例化，方法调用等。</p>
+<p>类中的private参数可以通过setaccessible方法强制获取。</p>
+<p>反射的作用可谓是博大精深，JDK动态代理生成代理类的字节码后，首先把这个类通过defineclass定义成一个类，然后用class.for(name)会把该类加载到jvm，之后我们就可以通过，A.class.GetMethod()获取其方法，然后通过invoke调用其方法，在调用这个方法时，实际上会通过被代理类的引用再去 调用原方法。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="枚举类">枚举类<a href="#枚举类" class="hash-link" aria-label="Direct link to 枚举类" title="Direct link to 枚举类">​</a></h3>
+<p>枚举类继承Enum并且每个枚举类的实例都是唯一的。</p>
+<p>枚举类可以用于封装一组常量，取值从这组常量中取，比如一周的七天，一年的十二个月。</p>
+<p>枚举类的底层实现其实是语法糖，每个实例可以被转化成内部类。并且使用静态代码块进行初始化，同时保证内部成员变量不可变。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="序列化">序列化<a href="#序列化" class="hash-link" aria-label="Direct link to 序列化" title="Direct link to 序列化">​</a></h3>
+<p>序列化的类要实现serializable接口</p>
+<p>transient修饰符可以保证某个成员变量不被序列化</p>
+<p>readObject和writeOject来实现实例的写入和读取。</p>
+<p>待更新。</p>
+<p>事实上，一些拥有数组变量的类都会把数组设为transient修饰，这样的话不会对整个数组进行序列化，而是利用专门的方法将有数据的数组范围进行序列化，以便节省空间。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="动态代理">动态代理<a href="#动态代理" class="hash-link" aria-label="Direct link to 动态代理" title="Direct link to 动态代理">​</a></h3>
+<p>jdk自带的动态代理可以代理一个已经实现接口的类。</p>
+<p>cglib代理可以代理一个普通的类。</p>
+<p>动态代理的基本实现原理都是通过字节码框架动态生成字节码，并且在用defineclass加载类后，获取代理类的实例。</p>
+<p>一般需要实现一个代理处理器，用来处理被代理类的前置操作和后置操作。在JDK动态代理中，这个类叫做invocationHandler。</p>
+<p>JDK动态代理首先获取被代理类的方法，并且只获取在接口中声明的方法，生成代理类的字节码后，首先把这个类通过defineclass定义成一个类，然后把该类加载到jvm，之后我们就可以通过，A.class.GetMethod()获取其方法，然后通过invoke调用其方法，在调用这个方法时，实际上会通过被代理类的引用再去调用原方法。</p>
+<p>而对于cglib动态代理，一般会把被代理类设为代理类的父类，然后获取被代理类中所有非final的方法，通过asm字节码框架生成代理类的字节码，这个代理类很神奇，他会保留原来的方法以及代理后的方法，通过方法数组的形式保存。</p>
+<p>cglib的动态代理需要实现一个enhancer和一个interceptor，在interceptor中配置我们需要的代理内容。如果没有配置interceptor，那么代理类会调用被代理类自己的方法，如果配置了interceptor，则会使用代理类修饰过的方法。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="多线程">多线程<a href="#多线程" class="hash-link" aria-label="Direct link to 多线程" title="Direct link to 多线程">​</a></h3>
+<p>这里先不讲juc包里的多线程类。juc相关内容会在Java并发专题讲解。</p>
+<p>线程的实现可以通过继承Thread类和实现Runable接口
+也可以使用线程池。callable配合future可以实现线程中的数据获取。</p>
+<p>Java中的线程有7种状态，new runable running blocked waiting time_waiting terminate
+blocked是线程等待其他线程锁释放。
+waiting是wait以后线程无限等待其他线程使用notify唤醒
+time_wating是有限时间地等待被唤醒，也可能是sleep固定时间。</p>
+<p>Thread的join是实例方法，比如a.join(b),则说明a线程要等b线程运行完才会运行。</p>
+<p>o.wait方法会让持有该对象o的线程释放锁并且进入阻塞状态，notify则是持有o锁对象的线程通知其他等待锁的线程获取锁。notify方法并不会释放锁。注意这两个方法都只能在synchronized同步方法或同步块里使用。</p>
+<p>synchronized方法底层使用系统调用的mutex锁，开销较大，jvm会为每个锁对象维护一个等待队列，让等待该对象锁的线程在这个队列中等待。当线程获取不到锁时则让线程阻塞，而其他检查notify以后则会通知任意一个线程，所以这个锁时非公平锁。</p>
+<p>Thread.sleep()，Thread.interrupt()等方法都是类方法，表示当前调用该方法的线程的操作。</p>
+<p>​<br>
+<!-- -->一个线程实例连续start两次会抛异常,这是因为线程start后会设置标识，如果再次start则判断为错误。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="io流">IO流<a href="#io流" class="hash-link" aria-label="Direct link to IO流" title="Direct link to IO流">​</a></h3>
+<p>IO流也是Java中比较重要的一块，Java中主要有字节流，字符流，文件等。其中文件也是通过流的方式打开，读取和写入的。</p>
+<p>IO流的很多接口都使用了装饰者模式，即将原类型通过传入装饰类构造函数的方式，增强原类型，以此获得像带有缓冲区的字节流，或者将字节流封装成字符流等等，其中需要注意的是编码问题，后者打印出来的结果可能是乱码哦。</p>
+<p>IO流与网络编程息息相关，一个socket接入后，我们可以获取它的输入流和输出流，以获取TCP数据包的内容，并且可以往数据报里写入内容，因为TCP协议也是按照流的方式进行传输的，实际上TCP会将这些数据进行分包处理，并且通过差错检验，超时重传，滑动窗口协议等方式，保证了TCP数据包的高效和可靠传输。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="网络编程">网络编程<a href="#网络编程" class="hash-link" aria-label="Direct link to 网络编程" title="Direct link to 网络编程">​</a></h3>
+<p>承接IO流的内容</p>
+<p>IO流与网络编程息息相关，一个socket接入后，我们可以获取它的输入流和输出流，以获取TCP数据包的内容，并且可以往数据报里写入内容，因 为TCP协议也是按照流的方式进行传输的，实际上TCP会将这些数据进行分包处理，并且通过差错检验，超时重传，滑动窗口协议等方式，保证了TCP数据包的高效和可靠传输。</p>
+<p>除了使用socket来获取TCP数据包外，还可以使用UDP的DatagramPacket来封装UDP数据包，因为UDP数据包的大小是确定的，所以不是使用流方式处理，而是需要事先定义他的长度，源端口和目标端口等信息。</p>
+<p>为了方便网络编程，Java提供了一系列类型来支持网络编程的api，比如URL类，InetAddress类等。</p>
+<p>后续文章会带来NIO相关的内容，敬请期待。</p>
+<p>​</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="java8">Java8<a href="#java8" class="hash-link" aria-label="Direct link to Java8" title="Direct link to Java8">​</a></h3>
+<p>接口中的默认方法，接口终于可以有方法实现了，使用注解即可标识出默认方法。</p>
+<p>lambda表达式实现了函数式编程，通过注解可以声明一个函数式接口，该接口中只能有一个方法，这个方法正是使用lambda表达式时会调用到的接口。</p>
+<p>Option类实现了非空检验</p>
+<p>新的日期API</p>
+<p>各种api的更新，包括chm，hashmap的实现等</p>
+<p>Stream流概念，实现了集合类的流式访问，可以基于此使用map和reduce并行计算。</p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="theme-doc-footer-edit-meta-row row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/interview/InterviewQuestions/Java核心技术总结.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_EYjg" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_eevz"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/code-note-blog/docs/interview/BATJ-Experience/alipay-pinduoduo-toutiao"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">2019年蚂蚁金服、头条、拼多多的面试总结</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/code-note-blog/docs/interview/PreparingForInterview/程序员的简历之道"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">程序员简历就该这样写</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_lc2k thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#java基础学习总结" class="table-of-contents__link toc-highlight">Java基础学习总结</a><ul><li><a href="#面向对象三大特性" class="table-of-contents__link toc-highlight">面向对象三大特性</a></li><li><a href="#基本数据类型" class="table-of-contents__link toc-highlight">基本数据类型</a></li><li><a href="#string及包装类" class="table-of-contents__link toc-highlight">String及包装类</a></li><li><a href="#final关键字" class="table-of-contents__link toc-highlight">final关键字</a></li><li><a href="#抽象类和接口" class="table-of-contents__link toc-highlight">抽象类和接口</a></li><li><a href="#代码块和加载顺序" class="table-of-contents__link toc-highlight">代码块和加载顺序</a></li><li><a href="#包内部类外部类" class="table-of-contents__link toc-highlight">包、内部类、外部类</a></li><li><a href="#异常" class="table-of-contents__link toc-highlight">异常</a></li><li><a href="#泛型" class="table-of-contents__link toc-highlight">泛型</a></li><li><a href="#class类和object类" class="table-of-contents__link toc-highlight">Class类和Object类</a></li><li><a href="#javac和java" class="table-of-contents__link toc-highlight">javac和java</a></li><li><a href="#反射" class="table-of-contents__link toc-highlight">反射</a></li><li><a href="#枚举类" class="table-of-contents__link toc-highlight">枚举类</a></li><li><a href="#序列化" class="table-of-contents__link toc-highlight">序列化</a></li><li><a href="#动态代理" class="table-of-contents__link toc-highlight">动态代理</a></li><li><a href="#多线程" class="table-of-contents__link toc-highlight">多线程</a></li><li><a href="#io流" class="table-of-contents__link toc-highlight">IO流</a></li><li><a href="#网络编程" class="table-of-contents__link toc-highlight">网络编程</a></li><li><a href="#java8" class="table-of-contents__link toc-highlight">Java8</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/code-note-blog/docs/intro">Tutorial</a></li></ul></div><div class="col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://stackoverflow.com/questions/tagged/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Stack Overflow<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://discordapp.com/invite/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Discord<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://twitter.com/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Twitter<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/code-note-blog/blog">Blog</a></li><li class="footer__item"><a href="https://github.com/facebook/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 My Project, Inc. Built with Docusaurus.</div></div></div></footer></div>
+</body>
+</html>

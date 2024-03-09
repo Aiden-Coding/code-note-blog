@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkcode_note_blog=self.webpackChunkcode_note_blog||[]).push([[4986],{85586:e=>{e.exports=JSON.parse('{"label":"facebook","permalink":"/code-note-blog/blog/tags/facebook","allTagsPath":"/code-note-blog/blog/tags","count":1,"unlisted":false}')}}]);

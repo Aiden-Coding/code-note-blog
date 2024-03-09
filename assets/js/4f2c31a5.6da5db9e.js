@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkcode_note_blog=self.webpackChunkcode_note_blog||[]).push([[5121],{58524:o=>{o.exports=JSON.parse('{"permalink":"/code-note-blog/blog/tags/facebook","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);

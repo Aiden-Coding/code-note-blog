@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-backend/Hadoop生态总结" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.1.0">
+<title data-rh="true">Hadoop生态总结 | Tommy</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://aiden-coding.github.io/code-note-blog/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://aiden-coding.github.io/code-note-blog/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://aiden-coding.github.io/code-note-blog/docs/backend/Hadoop生态总结"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Hadoop生态总结 | Tommy"><meta data-rh="true" name="description" content="这篇总结主要是基于我之前Hadoop生态基础系列文章而形成的的。主要是把重要的知识点用自己的话说了一遍，可能会有一些错误，还望见谅和指点。谢谢"><meta data-rh="true" property="og:description" content="这篇总结主要是基于我之前Hadoop生态基础系列文章而形成的的。主要是把重要的知识点用自己的话说了一遍，可能会有一些错误，还望见谅和指点。谢谢"><link data-rh="true" rel="icon" href="/code-note-blog/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://aiden-coding.github.io/code-note-blog/docs/backend/Hadoop生态总结"><link data-rh="true" rel="alternate" href="https://aiden-coding.github.io/code-note-blog/docs/backend/Hadoop生态总结" hreflang="en"><link data-rh="true" rel="alternate" href="https://aiden-coding.github.io/code-note-blog/docs/backend/Hadoop生态总结" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/code-note-blog/blog/rss.xml" title="Tommy RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/code-note-blog/blog/atom.xml" title="Tommy Atom Feed"><link rel="stylesheet" href="/code-note-blog/assets/css/styles.dd5372db.css">
+<script src="/code-note-blog/assets/js/runtime~main.f999fb27.js" defer="defer"></script>
+<script src="/code-note-blog/assets/js/main.a0bfbaed.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_XYiV" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/code-note-blog/"><b class="navbar__title text--truncate">Tommy</b></a><a class="navbar__item navbar__link" href="/code-note-blog/docs/Java/basic/抽象类和接口">java</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/JavaWeb/走进JavaWeb技术世界：JavaWeb的由来和基础知识">javaweb</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/cache/探索Redis设计与实现：连接底层与表面的数据结构robj">cache</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/code-note-blog/docs/backend/后端技术杂谈：白话虚拟化技术">backend</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/cs/algorithms/剑指offer">cs</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/database/重新学习MySQL数据库：『浅入浅出』MySQL和InnoDB">database</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/distributed/basic/分布式系统理论基础 ：CAP">distributed</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/interview/BATJ-Experience/面阿里,终获offer">interview</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/mq/kafka/消息队列kafka详解：如何实现死信队列">mq</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/Spring全家桶/Spring/第一个Spring应用">spring</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/mianshi/collection">面试</a><a href="https://aiden-coding.github.io/code-note-blog/SpringCloud%E7%AC%AC3%E5%AD%A32024.html" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Blog<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></div><div class="navbar__items navbar__items--right"><div class="toggle_XbAW colorModeToggle_r5NY"><button class="clean-btn toggleButton_Jx0n toggleButtonDisabled_zYO7" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_FjAw"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_qmEt"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_wJfS"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_LABv"><div class="docsWrapper_pdvB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_Jioa" type="button"></button><div class="docRoot_qx_v"><aside class="theme-doc-sidebar-container docSidebarContainer_NHKT"><div class="sidebarViewport_uyYB"><div class="sidebar_SZG4"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_VP_k"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/backend/后端技术杂谈：白话虚拟化技术">后端技术杂谈：白话虚拟化技术</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/backend/后端技术杂谈：捋一捋大数据研发的基本概念">后端技术杂谈：捋一捋大数据研发的基本概念</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/backend/后端技术杂谈：十分钟理解Kubernetes核心概念">后端技术杂谈：十分钟理解Kubernetes核心概念</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/backend/后端技术杂谈：搜索引擎工作原理">后端技术杂谈：搜索引擎工作原理</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/backend/后端技术杂谈：搜索引擎基础倒排索引">后端技术杂谈：搜索引擎基础倒排索引</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/backend/后端技术杂谈：先搞懂Docker核心概念吧">后端技术杂谈：先搞懂Docker核心概念吧</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/backend/后端技术杂谈：云计算的前世今生">后端技术杂谈：云计算的前世今生</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/backend/后端技术杂谈：Docker 核心技术与实现原理">后端技术杂谈：Docker 核心技术与实现原理</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/backend/后端技术杂谈：Elasticsearch与solr入门实践">后端技术杂谈：Elasticsearch与solr入门实践</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/backend/后端技术杂谈：Lucene基础原理与实践">后端技术杂谈：Lucene基础原理与实践</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/backend/后端技术杂谈：OpenStack的基石KVM">后端技术杂谈：OpenStack的基石KVM</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/backend/后端技术杂谈：OpenStack架构设计">后端技术杂谈：OpenStack架构设计</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/backend/后端技术杂谈开篇：云计算，大数据与AI的故事">后端技术杂谈开篇：云计算，大数据与AI的故事</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" href="/code-note-blog/docs/backend/Hadoop生态总结">Hadoop生态总结</a></li></ul></nav></div></div></aside><main class="docMainContainer_SejT"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_j3Yw"><div class="docItemContainer_XOSC"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_F6gm" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/code-note-blog/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YCxa"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Hadoop生态总结</span><meta itemprop="position" content="1"></li></ul></nav><div class="tocCollapsible_ToOY theme-doc-toc-mobile tocMobile_suYB"><button type="button" class="clean-btn tocCollapsibleButton_VzP_">On this page</button></div><div class="theme-doc-markdown markdown"><p>这篇总结主要是基于我之前Hadoop生态基础系列文章而形成的的。主要是把重要的知识点用自己的话说了 一遍，可能会有一些错误，还望见谅和指点。谢谢</p>
+<h1>Hadoop生态</h1>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="hdfs">hdfs<a href="#hdfs" class="hash-link" aria-label="Direct link to hdfs" title="Direct link to hdfs">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="架构">架构<a href="#架构" class="hash-link" aria-label="Direct link to 架构" title="Direct link to 架构">​</a></h3>
+<p>hdfs是一个分布式文件系统。底层的存储采用廉价的磁盘阵列RAID，由于可以并发读写所以效率很高。</p>
+<p>基本架构是一个namenode和多个dataNode。node的意思是节点，一般指主机，也可以是虚拟机。</p>
+<p>每个文件都会有两个副本存放在datanode中。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="读写">读写<a href="#读写" class="hash-link" aria-label="Direct link to 读写" title="Direct link to 读写">​</a></h3>
+<p>客户端写入文件时，先把请求发送到namenode，namenode会返回datanode的服务地址，接着客户端去访问datanode，进行文件写入，然后通知namenode，namenode接收到写入完成的消息以后，会另外选两个datanode存放冗余副本。</p>
+<p>读取文件时，从namenode获取一个datanode的地址，然后自己去读取即可。</p>
+<p>当一个文件的副本不足两份时，namenode自动会完成副本复制。并且，由于datanode一般会放在各个机架。namenode一般会把副本一个放在同一机架，一个放在其他机架，防止某个机架出问题导致整个文件读写不可用。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="高可用">高可用<a href="#高可用" class="hash-link" aria-label="Direct link to 高可用" title="Direct link to 高可用">​</a></h3>
+<p>namenode节点是单点，所以宕机了就没救了，所以我们可以使用zookeeper来保证namenode的高可用。可以使用zookeeper选主来实现故障切换，namenode先注册一个节点在zk上，表示自己是主，宕  机时zk会通知备份节点进行切换。</p>
+<p>Hadoop2.0中加入了hdfs namenode高可用的方案，也叫HDFS HA。namenode和一个备份节点绑定在一起，并且通过一个共享数据区域进行数据同步。同时支持故障切换。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="mapreduce">MapReduce<a href="#mapreduce" class="hash-link" aria-label="Direct link to MapReduce" title="Direct link to MapReduce">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="架构和流程">架构和流程<a href="#架构和流程" class="hash-link" aria-label="Direct link to 架构和流程" title="Direct link to 架构和流程">​</a></h3>
+<p>MapReduce是基于Hadoop集群的分布式计算方案。一般先编写map函数进行数据分片，然后通过shuffle进行相同分片的整合，最后通过reduce把所有的数据结果进行整理。</p>
+<p>具体来说，用户提交一个MapReduce程序给namenode节点，namenode节点启动一个jobtracker进行子任务的调度和监控，然后派发每个子任务tasktracker到datanode进行任务执行，由于数据分布在各个节点，每个tasktracker只需要执行自己的那一部分即可。最后再将结果汇总给tasktracker。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="wordcount">wordcount<a href="#wordcount" class="hash-link" aria-label="Direct link to wordcount" title="Direct link to wordcount">​</a></h3>
+<p>首先是一个文本文件<!-- -->:hi<!-- --> hello good hello hi hi。<br>
+<!-- -->三个节点，则进行三次map。hi hello，good hello，hi hi分别由三个节点处理。结果分别是hi 1 hello 1,good 1 hello 1,hi 1,hi 1。<br>
+<!-- -->shuffle时进行combine操作，得到hi 1,hello 1,good 1 hello 1,hi 2。最终reduce的结果是hi 3 hello 2 good 1.</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="hive">hive<a href="#hive" class="hash-link" aria-label="Direct link to hive" title="Direct link to hive">​</a></h2>
+<p>hive是一个基于hdfs文件系统的数据仓库。可 以通过hive sql语句执行对hdfs上文件的数据查询。原理是hive把hdfs上的数据文件看成一张张数据表，把表结构信息存在关系数据库如mysql中。然后执行sql时通过对表结构的解析再去hdfs上查询真正的数据，最后也会以结构化的形式返回。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="hbase">hbase<a href="#hbase" class="hash-link" aria-label="Direct link to hbase" title="Direct link to hbase">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="简介">简介<a href="#简介" class="hash-link" aria-label="Direct link to 简介" title="Direct link to 简介">​</a></h3>
+<p>hbase是基于列的数据库。</p>
+<p>他与传统关系数据库有很大不同。</p>
+<p>首先在表结构上，hbase使用rowkey行键作为唯一主键，通过行键唯一确定一行数据。</p>
+<p>同时，hbase使用列族的概念，每个表都有固定的列族，每一行的数据的列族都一样，但是每一行所在列族的实际列都可以不一样。<br>
+<!-- -->比如列族是info，列可以是name age，也可以是sex address等。也就是说具体列可以在插入数据时再进行确认。</p>
+<p>并且，hbase的每一行数据还可以有多个版本，通过时间戳来表示不同的数据版本。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="存储">存储<a href="#存储" class="hash-link" aria-label="Direct link to 存储" title="Direct link to 存储">​</a></h3>
+<p>一般情况下hbase使用hdfs作为底层存储，所以hdfs提供了数据的可靠性以及并发读写的高效率。</p>
+<p>hbase一个表的 每n行数据会存在一个region中，并且，对于列来说，每一个列族都会用一个region来存储，假设有m个列族，那么就会有n * m个region需要存储在hdfs上。</p>
+<p>同时hbase使用regionserver来管理这些region，他们可能存在不同的datanode里，所以通过regionserver可以找出每一个region的位置。</p>
+<p>hbase使用zookeeper来保证regionserver的高可用，会自动进行故障切换。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="zk">zk<a href="#zk" class="hash-link" aria-label="Direct link to zk" title="Direct link to zk">​</a></h2>
+<p>zk在Hadoop的作用有几个，通过选主等机制保证主节点高可用。</p>
+<p>使用zk进行配置资源的统一管理，保证服务器节点无状态，所有服务信息直接从zk获取即可。</p>
+<p>使用zookeeper进行节点间的通信等，也可以使用zk的目录顺序节点实现分布式锁，以及服务器选主。不仅在Hadoop中，zk在分布式系统中总能有用武之地。</p>
+<p>zookeeper本身的部署方式就是一个集群,一个master和多个slave。</p>
+<p>使用zab协议保证一致性和高可用。</p>
+<p>zab协议实现原理：</p>
+<p>1 使用两段式提交的方式确保一个协议需要半数以上节点同意以后再进行广播执行。</p>
+<p>2 使用基于机器编号加时间戳的id来表示每个事务，通过这个方式当初始选举或者主节点宕机时进行一轮选主，每个节点优先选择自己当主节点，在选举过程中节点优先采纳比较新的事务，将自己的选票更新，然后反馈个其他机器，最后当一个机器获得超过半数选票时当选为master。</p>
+<p>3选主结束以后，主节点与slave进行主从同步，保证数据一致性，然后对外提供服务，并且写入只能通过master而读取可以通过任意一台机器。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="sqoop">sqoop<a href="#sqoop" class="hash-link" aria-label="Direct link to sqoop" title="Direct link to sqoop">​</a></h2>
+<p>将hive表中的内容导入到MySQL数据库，也可以将MySQL中的数据导入hive中。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="yarn">yarn<a href="#yarn" class="hash-link" aria-label="Direct link to yarn" title="Direct link to yarn">​</a></h2>
+<p>没有yarn之前，hdfs使用jobtracker和tasktracker来执行和跟踪任务，jobtracker的任务太重，又 要执行又要监控还要获取结果。<br>
+<!-- -->并且不同机器的资源情况没有被考虑在内。</p>
+<p>yarn是一个资源调度系统。提供applicationmaster对一个调度任务进行封装，然后有一个resourcemanager专门负责各节点资源的管理和监控。同时nodemanager则运行每个节点中用于监控节点状态和向rm汇报。还有一个container则是对节点资源的一个抽象，applicationmaster任务将由节点上的一个container进行执行。rm会将他调度到最合适的机器上。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="kafka">kafka<a href="#kafka" class="hash-link" aria-label="Direct link to kafka" title="Direct link to kafka">​</a></h2>
+<p>架构</p>
+<blockquote>
+<p>kafka是一个分布式的消息队列。</p>
+<p>它组成一般包括kafka broker，每个broker中有多个的partition作为存储消息的队列。</p>
+<p>并且向上提供服务时抽象为一个topic，我们访问topic时实际上执行的是对partition的写入和读取操作。</p>
+</blockquote>
+<p>读写和高可用</p>
+<blockquote>
+<p>partition支持顺序写入，效率比较高，并且支持零拷贝机制，通过内存映射磁盘mmap的方式，写入partition的数据顺序写入到映射的磁盘中，比传统的IO要快。</p>
+<p>由于partition可能会宕机，所以一般也要支持partition的备份，1个broker ，master通常会有多个<br>
+<!-- -->broker slave，是主从关系，通过zookeeper进行选主和故障切换。</p>
+<p>当数据写入队列时，一般也会通过日志文件的方式进行数据备份，会把broker中的partition被分在各个slave中以便于均匀分布和恢复。</p>
+</blockquote>
+<p>生产者和消费者</p>
+<blockquote>
+<p>生产者消费者需要访问kafka的队列时，如果是写入，直接向zk发送请求，一般是向一个topic写入消息，broker会自动分配partition进行写入。然后zk会告诉生产者写入的partition所在的broker地址，然后进行写入。</p>
+<p>如果 是读取的话，也是通过zk获取partition所在位置，然后通过给定的offset进行读取，读取完后更新offset。</p>
+<p>由于kafka的partition支持顺序读写。所以保证一个partition中的读取和写入时是顺序的，但是如果是多个partition则不保证顺序。</p>
+<p>正常情况下kafka使用topic来实现消息点对点发送，并且每个consumer都要在一个consumer group中，而且comsumer group中每次只能有一个消费者能接受对应topic的消息。因为为了实现订阅也就是一对多发送，我们让每个consumer在一个单独的group，于是每个consumer都可以接受到该消息。</p>
+</blockquote>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="flume">flume<a href="#flume" class="hash-link" aria-label="Direct link to flume" title="Direct link to flume">​</a></h2>
+<p>flume用于数据的收集和分发，flume可以监听端口的数据流入，监视文件的变动以及各种数据形式的数据流入，然后再把数据重新转发到其他需要数据的节点或存储中。</p>
+<p>1、Flume的概念<br>
+<!-- -->flume是分布式的日志收集系统，它将各个服务器中的数据收集起来并送到指定的地方去，比如说送到图中的HDFS，简单来说flume就是收集日志的。<br>
+<!-- -->2、Event的概念 在这里有必要先介绍一下flume中event的相关概念：flume的核心是把数据从数据源(source)收集过来，在将收集到的数据送到指定的目的地(sink)。为了保证输送的过程一定成功，在送到目的地(sink)之前，会先缓存数据(channel),待数据真正到达目的地(sink)后，flume在删除自己缓存的数据。<br>
+<!-- -->在整个数据的传输的过程中，流动的是event，即事务保证是在event级别进行的。那么什么是event呢？—–event将传输的数据进行封装，是flume传输数据的基本单位，如果是文本文件，通常是一行记录，event也是事务的基本单位。event从source，流向channel，再到sink，本身为一个字节数组，并可携带headers(头信息)信息。event代表着一个数据的最小完整单元，从外部数据源来，向外部的目的地去。<br>
+<!-- -->flume使用   ## ambari<br>
+<!-- -->ambari就是一个Hadoop的Web应用。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="spark">spark<a href="#spark" class="hash-link" aria-label="Direct link to spark" title="Direct link to spark">​</a></h2>
+<p>spark和MapReduce不同的地方就是，把计算过程放在内存中运行。</p>
+<p>spark提出了抽象的RDD分布式内存模型，把每一步的计算操作转换成一个RDD结构，然后形成一个RDD连接而成的有向图。</p>
+<p>比如data.map().filter().reduce();<br>
+<!-- -->程序提交到master以后，会解析成多个RDD，并且形成一个有向图，然后spark再根据这些RD结构在内存中执行对应的操作。当然这个拓扑结构会被拆分为各个子任务分发到各个spark节点上，然后计算完以后再形成下一个rdd。最后汇总结果即可。</p>
+<p>由于是在内存中对数据进行操作，省去了不必要的IO操作，，不需要像Mapreduce一样还得先去hdfs读取文件再完成计算。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="storm">storm<a href="#storm" class="hash-link" aria-label="Direct link to storm" title="Direct link to storm">​</a></h2>
+<p>在运行一个Storm任务之前，需要了解一些概念：</p>
+<ol>
+<li>Topologies</li>
+<li>Streams</li>
+<li>Spouts</li>
+<li>Bolts</li>
+<li>Stream groupings</li>
+<li>Reliability</li>
+<li>Tasks</li>
+<li>Workers</li>
+<li>Configuration</li>
+</ol>
+<p>Storm集群和Hadoop集群表面上看很类似。但是Hadoop上运行的是MapReduce jobs，而在Storm上运行的是拓扑（topology），这两者之间是非常不一样的。一个关键的区别是： 一个MapReduce job最终会结束， 而一个topology永远会运行（除非你手动kill掉）。</p>
+<p>在Storm的集群里面有两种节点： 控制节点（master node）和工作节点（worker node）。控制节点上面运行一个叫Nimbus后台程序，它的作用类似Hadoop里面的JobTracker。Nimbus负责在集群里面分发代码，分配计算任务给机器， 并且监控状态。</p>
+<p>每一个工作节点上面运行一个叫做Supervisor的节点。Supervisor会监听分配给它那台机器的工作，根据需要启动/关闭工作进程。每一个工作进程执行一个topology的一个子集；一个运行的topology由运行在很多机器上的很多工作进程组成。<br>
+<img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/20230408112703.png" alt="" class="img_kGBN"></p>
+<p>Nimbus和Supervisor之间的所有协调工作都是通过Zookeeper集群完成。另外，Nimbus进程和Supervisor进程都是快速失败（fail-fast)和无状态的。所有的状态要么在zookeeper里面， 要么在本地磁盘上。这也就意味着你可以用kill -9来杀死Nimbus和Supervisor进程， 然后再重启它们，就好像什么都没有发生过。这个设计使得Storm异常的稳定。</p>
+<p>storm比起spark它的实时性能更高更强，storm可以做到亚秒级别的数据输入分析。而spark的方式是通过秒级的数据切分，来形成spark rdd数据集，然后再按照DAG有向图进行执行的。</p>
+<p>storm则不然。</p>
+<p>一：介绍Storm设计模型</p>
+<p>1.Topology</p>
+<p>Storm对任务的抽象，其实 就是将实时数据分析任务 分解为 不同的阶段　　　　<br>
+<!-- -->　　点： 计算组件   Spout   Bolt</p>
+<p>边： 数据流向    数据从上一个组件流向下一个组件  带方向</p>
+<p>2.tuple</p>
+<p>Storm每条记录 封装成一个tuple</p>
+<p>其实就是一些keyvalue对按顺序排列</p>
+<p>方便组件获取数据</p>
+<p>3.Spout</p>
+<p>数据采集器<br>
+<!-- -->　　源源不断的日志记录  如何被topology接收进行处理？</p>
+<p>Spout负责从数据源上获取数据，简单处理 封装成tuple向后面的bolt发射</p>
+<p>4.Bolt</p>
+<p>数据处理器　　二：开发wordcount案例</p>
+<p>1.书写整个大纲的点线图</p>
+<p><img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/20230408112730.png" alt="" class="img_kGBN">
+　　topology就是一个拓扑图，类似于spark中的dag有向图，只不过storm执行的流式的数据，比dag执行更加具有实时性。</p>
+<p>topology包含了spout和bolt。<br>
+<!-- -->spout负责获取数据，并且将数据发送给bolt，这个过程就是把任务派发到多个节点，bolt则负责对数据进行处理，比如splitbolt负责把每个单词提取出来，countbolt负责单词数量的统计，最后的printbolt将每个结果集tuple打印出来。</p>
+<p>这就形成了一个完整的流程。</p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="theme-doc-footer-edit-meta-row row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/backend/Hadoop生态总结.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_EYjg" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_eevz"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/code-note-blog/docs/backend/后端技术杂谈开篇：云计算，大数据与AI的故事"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">后端技术杂谈开篇：云计算，大数据与AI的故事</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_lc2k thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#hdfs" class="table-of-contents__link toc-highlight">hdfs</a><ul><li><a href="#架构" class="table-of-contents__link toc-highlight">架构</a></li><li><a href="#读写" class="table-of-contents__link toc-highlight">读写</a></li><li><a href="#高可用" class="table-of-contents__link toc-highlight">高可用</a></li></ul></li><li><a href="#mapreduce" class="table-of-contents__link toc-highlight">MapReduce</a><ul><li><a href="#架构和流程" class="table-of-contents__link toc-highlight">架构和流程</a></li><li><a href="#wordcount" class="table-of-contents__link toc-highlight">wordcount</a></li></ul></li><li><a href="#hive" class="table-of-contents__link toc-highlight">hive</a></li><li><a href="#hbase" class="table-of-contents__link toc-highlight">hbase</a><ul><li><a href="#简介" class="table-of-contents__link toc-highlight">简介</a></li><li><a href="#存储" class="table-of-contents__link toc-highlight">存储</a></li></ul></li><li><a href="#zk" class="table-of-contents__link toc-highlight">zk</a></li><li><a href="#sqoop" class="table-of-contents__link toc-highlight">sqoop</a></li><li><a href="#yarn" class="table-of-contents__link toc-highlight">yarn</a></li><li><a href="#kafka" class="table-of-contents__link toc-highlight">kafka</a></li><li><a href="#flume" class="table-of-contents__link toc-highlight">flume</a></li><li><a href="#spark" class="table-of-contents__link toc-highlight">spark</a></li><li><a href="#storm" class="table-of-contents__link toc-highlight">storm</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/code-note-blog/docs/intro">Tutorial</a></li></ul></div><div class="col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://stackoverflow.com/questions/tagged/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Stack Overflow<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://discordapp.com/invite/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Discord<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://twitter.com/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Twitter<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/code-note-blog/blog">Blog</a></li><li class="footer__item"><a href="https://github.com/facebook/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 My Project, Inc. Built with Docusaurus.</div></div></div></footer></div>
+</body>
+</html>

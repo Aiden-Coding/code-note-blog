@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkcode_note_blog=self.webpackChunkcode_note_blog||[]).push([[5845],{65557:o=>{o.exports=JSON.parse('{"permalink":"/code-note-blog/blog/tags/docusaurus","page":1,"postsPerPage":10,"totalPages":1,"totalCount":4,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);

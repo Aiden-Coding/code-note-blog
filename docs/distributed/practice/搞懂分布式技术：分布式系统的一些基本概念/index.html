@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-distributed/practice/搞懂分布式技术：分布式系统的一些基本概念" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.1.0">
+<title data-rh="true">搞懂分布式技术：分布式系统的一些基本概念 | Tommy</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://aiden-coding.github.io/code-note-blog/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://aiden-coding.github.io/code-note-blog/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://aiden-coding.github.io/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式系统的一些基本概念"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="搞懂分布式技术：分布式系统的一些基本概念 | Tommy"><meta data-rh="true" name="description" content="本文内容参考网络，侵删"><meta data-rh="true" property="og:description" content="本文内容参考网络，侵删"><link data-rh="true" rel="icon" href="/code-note-blog/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://aiden-coding.github.io/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式系统的一些基本概念"><link data-rh="true" rel="alternate" href="https://aiden-coding.github.io/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式系统的一些基本概念" hreflang="en"><link data-rh="true" rel="alternate" href="https://aiden-coding.github.io/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式系统的一些基本概念" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/code-note-blog/blog/rss.xml" title="Tommy RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/code-note-blog/blog/atom.xml" title="Tommy Atom Feed"><link rel="stylesheet" href="/code-note-blog/assets/css/styles.dd5372db.css">
+<script src="/code-note-blog/assets/js/runtime~main.f999fb27.js" defer="defer"></script>
+<script src="/code-note-blog/assets/js/main.a0bfbaed.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_XYiV" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/code-note-blog/"><b class="navbar__title text--truncate">Tommy</b></a><a class="navbar__item navbar__link" href="/code-note-blog/docs/Java/basic/抽象类和接口">java</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/JavaWeb/走进JavaWeb技术世界：JavaWeb的由来和基础知识">javaweb</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/cache/探索Redis设计与实现：连接底层与表面的数据结构robj">cache</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/backend/后端技术杂谈：白话虚拟化技术">backend</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/cs/algorithms/剑指offer">cs</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/database/重新学习MySQL数据库：『浅入浅出』MySQL和InnoDB">database</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/code-note-blog/docs/distributed/basic/分布式系统理论基础 ：CAP">distributed</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/interview/BATJ-Experience/面阿里,终获offer">interview</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/mq/kafka/消息队列kafka详解：如何实现死信队列">mq</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/Spring全家桶/Spring/第一个Spring应用">spring</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/mianshi/collection">面试</a><a href="https://aiden-coding.github.io/code-note-blog/SpringCloud%E7%AC%AC3%E5%AD%A32024.html" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Blog<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></div><div class="navbar__items navbar__items--right"><div class="toggle_XbAW colorModeToggle_r5NY"><button class="clean-btn toggleButton_Jx0n toggleButtonDisabled_zYO7" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_FjAw"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_qmEt"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_wJfS"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_LABv"><div class="docsWrapper_pdvB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_Jioa" type="button"></button><div class="docRoot_qx_v"><aside class="theme-doc-sidebar-container docSidebarContainer_NHKT"><div class="sidebarViewport_uyYB"><div class="sidebar_SZG4"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_VP_k"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/code-note-blog/docs/distributed/basic/分布式系统理论基础 ：CAP">基础</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" aria-expanded="true" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式session解决方案与一致性hash">案例</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式session解决方案与一致性hash">搞懂分布式技术：分布式session解决方案与一致性hash</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：初探分布式协调服务zookeeper">搞懂分布式技术：初探分布式协调服务zookeeper</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式事务常用解决方案">搞懂分布式技术：分布式事务常用解决方案</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式系统的一些基本概念">搞懂分布式技术：分布式系统的一些基本概念</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式一致性协议与Paxos，Raft算法">搞懂分布式技术：分布式一致性协议与Paxos，Raft算法</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式ID生成方案">搞懂分布式技术：分布式ID生成方案</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：缓存的那些事">搞懂分布式技术：缓存的那些事</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：缓存更新的套路">搞懂分布式技术：缓存更新的套路</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：浅谈分布式锁的几种方案">搞懂分布式技术：浅谈分布式锁的几种方案</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：浅谈分布式消息技术Kafka">搞懂分布式技术：浅谈分布式消息技术Kafka</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：浅析分布式事务">搞懂分布式技术：浅析分布式事务</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：使用RocketMQ事务消息解决分布式事务">搞懂分布式技术：使用RocketMQ事务消息解决分布式事务</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：消息队列因何而生">搞懂分布式技术：消息队列因何而生</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：LVS实现负载均衡的原理与实践">搞懂分布式技术：LVS实现负载均  衡的原理与实践</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：SpringBoot使用注解集成Redis缓存">搞懂分布式技术：SpringBoot使用注解集成Redis缓存</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：ZAB协议概述与选主流程详解">搞懂分布式技术：ZAB协议概述与选主流程详解</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：Zookeeper的配置与集群管理实战">搞懂分布式技术：Zookeeper的配置与集群管理实战</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：Zookeeper典型应用场景及实践">搞懂分布式技术：Zookeeper典型应用场景及实践</a></li></ul></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/distributed/分布式技术实践总结">分布式技术实践总结</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/distributed/分布式理论总结">分布式理论总结</a></li></ul></nav></div></div></aside><main class="docMainContainer_SejT"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_j3Yw"><div class="docItemContainer_XOSC"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_F6gm" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/code-note-blog/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YCxa"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">案例</span><meta itemprop="position" content="1"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">搞懂分布式技术：分布式系统的一些基本概念</span><meta itemprop="position" content="2"></li></ul></nav><div class="tocCollapsible_ToOY theme-doc-toc-mobile tocMobile_suYB"><button type="button" class="clean-btn tocCollapsibleButton_VzP_">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>搞懂分布式技术：分布式系统的一些基本概念</h1></header><p>本文内容参考网络，侵删</p>
+<p>本系列文章将整理到我在GitHub上的《Java面试指南》仓库，更多精彩内容请到我的仓库里查看</p>
+<blockquote>
+<p><a href="https://github.com/h2pl/Java-Tutorial" target="_blank" rel="noopener noreferrer">https://github.com/h2pl/Java-Tutorial</a></p>
+</blockquote>
+<p>喜欢的话麻烦点下Star哈</p>
+<p>本文也将同步到我的个人博客：</p>
+<blockquote>
+<p><a href="http://www.how2playlife.com" target="_blank" rel="noopener noreferrer">www.how2playlife.com</a></p>
+</blockquote>
+<p>更多Java技术文章将陆续在微信公众号【Java技术江湖】更新，敬请关注。</p>
+<p>该系列博文会告诉你什么是分布式系统，这对后端工程师来说是很重要的一门学问，我们会逐步了解常见的分布式技术、以及一些较为常见的分布式系统概念，同时也需要进一  步了解zookeeper、分布式事务、分布式锁、负载均衡等技术，以便让你更完整地了解分布式技术的具体实战方法，为真正应用分布式技术做好准备。</p>
+<p>如果对本系列文章有什么建议，或者是有什么疑问的话，也可以关注公众号【Java技术江湖】联系作者，欢迎你参与本系列博文的创作和修订。</p>
+<p>本文较为粗略地讲述了CAP与BASE理论，以及分布式系统需要解决的一些问题，更加系统的理论可以参考后面的分布式系统理论专题文章。更加详细的实践内容也可以参考本专题的剩余文章</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="1分布式">1、分布式<a href="#1分布式" class="hash-link" aria-label="Direct link to 1、分布式" title="Direct link to 1、分布式">​</a></h2>
+<p>小明的公司又3个系统：系统A，系统B和系统C，这三个系统所做的业务不同，被部署在3个独立的机器上运行，他们之间互相调用（当然是跨域网络的），通力合作完成公司的业务流程。</p>
+<p>将不同的业务分部在不同的地方，就构成了一个分布式的系统，现在问题来了，系统A是整个分布式系统的脸面，用户直接访问，用户访问量大的时候要么是速度巨慢，要么直接挂掉，怎么办？</p>
+<p>由于系统A只有一份，所以会引起单点失败。。。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="2集群cluster">2、集群（Cluster）<a href="#2集群cluster" class="hash-link" aria-label="Direct link to 2、集群（Cluster）" title="Direct link to 2、集群（Cluster）">​</a></h2>
+<p>小明的公司不差钱，就多买几台机器吧， 小明把系统A一下子部署了好几份（例如下图的3个服务器），每一份都是系统A的一个实例，对外提供同样的服务，这样，就不怕其中一个坏掉了，还有另外两个呢。</p>
+<p>这三个服务器的系统就组成了一个集群。</p>
+<p>可是对用户来说  ，一下子出现这么多系统A，每个系统的IP地址都不一样，到底访问哪一个呢？</p>
+<p>如果所有人都访问服务器1.1，那服务器1.1会被累死，剩下两个闲死，成了浪费钱的摆设</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="3负载均衡load-balancer">3、负载均衡（Load Balancer）<a href="#3负载均衡load-balancer" class="hash-link" aria-label="Direct link to 3、负载均衡（Load Balancer）" title="Direct link to 3、负载均衡（Load Balancer）">​</a></h2>
+<p>小明要尽可能的让3个机器上的系统A工作均衡一些，比如有3万个请求，那就让3个服务器各处理1万个（理想情况），这叫负载均衡</p>
+<p>很明显，这个负载均衡的工作最好独立出来，放到独立的服务器上（例如nginx）：</p>
+<p>后来小明发现，这个负载均衡的服务器虽然工作内容简单，就是拿到请求，分发请求，但是它还是有可能挂掉，单点失败还是会出现。</p>
+<p>没办法，只好把负载均衡也搞成一个集群，bug和系统A的集群有两点不同：</p>
+<p>1.这个新的集群中虽然有两个机器，但是我们可以用某种办法，让这个机器对外只提供一个IP地址，也就是用户看到的好像只有一个机器。</p>
+<p>2.同一时刻，我们只让一个负载均衡的机器工作，另外一个原地待命，如果工作的那个拐到了，待命的那个就顶上去。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="4弹性">4、弹性<a href="#4弹性" class="hash-link" aria-label="Direct link to 4、弹性" title="Direct link to 4、弹性">​</a></h2>
+<p>如果3个系统A的实例还是满足不了大量请求，例如双十一，可以申请增加服务器，双十一过后，新增的服务器闲置，成了摆设，于是小明决定尝试云计算，在云端可以轻松的创建，删除虚拟的服务器，那样就可以轻松的随着用户的请求动图的增减服务器了。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="5失效转移">5、失效转移<a href="#5失效转移" class="hash-link" aria-label="Direct link to 5、失效转移" title="Direct link to 5、失效转移">​</a></h2>
+<p>上面的系统看起来很美好，但是做了一个不切实际的假设：</p>
+<p>所有的服务都是无状态的，换句话说，假设用户的两次请求直接是没有关联的。</p>
+<p>但是现实是，大部分服务都是有状态的，例如购物车。</p>
+<p>用户访问系统，在服务器上创建了一个购物车，并向其中加了几个商品，然后服务器1.1挂掉了，用户后续访问就找不到服务器1.1了，这时候就要做失效转移，让另外几个服务器去接管，去处理用户的请求。</p>
+<p>可是问题来了，在服务器1.2,1.3上有用户的购物车吗？如果没有，用户就会抱怨，我刚创建的购物车哪里去了？</p>
+<p>还有更严重的，假设用户登录过得信息保存到了该服务器1.1上登录的，用户登录过的信息保存到了该服务器的session中，现在这个服务器挂了，用的session就不见了，会把用户踢到了登录界面，让用户再次登录！</p>
+<p>处理不好状态的问题，集群的威力就大打折扣，无法完成真正的失效转移，甚至无法使用。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="怎么办">怎么办？<a href="#怎么办" class="hash-link" aria-label="Direct link to 怎么办？" title="Direct link to 怎么办？">​</a></h2>
+<p>一种办法是把状态信息在集群的各个服务器之间复制，让集群的各个服务器达成一致，谁来干这个事情？只能像Webspher，Weblogic这样的应用服务器了。</p>
+<p>还有一种办法， 就是把状态信息几种存储在一个地方，让集群服务器的各个服务器都能访问到：</p>
+<p>小明听说Redis不错，那就用Redis来保存吧！</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="认识分布式架构">认识分布式架构<a href="#认识分布式架构" class="hash-link" aria-label="Direct link to 认识分布式架构" title="Direct link to 认识分布式架构">​</a></h2>
+<p>认识分布式架构
+随着计算机系统规模变得越来越大，将所有的业务单元集中部署在一个或若干个大型机上的体系结构，已经越来越不能满足当今计算机系统，尤其是大型互联网系统的快速发展，各种灵活多变的系统架构模型层出不穷。分布式的处理方式越来越受到业界的青睐——计算机系统正在经历一场前所未有的从集中式向分布式架构的变革。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="集中式与分布式">集中式与分布式<a href="#集中式与分布式" class="hash-link" aria-label="Direct link to 集中式与分布式" title="Direct link to 集中式与分布式">​</a></h2>
+<p>集中式系统</p>
+<p>所谓的集中式系统就是指由一台或多台主计算机组成中心节点，数据集中存储于这个中心节点中，并且整个系统的所有业务单元都集中部署在这个中心节点上，系统的所有功能均由其集中处理。</p>
+<p>集中式系统的最大的特点就是部署结构非常简单，底层一般采用从IBM、HP等厂商购买到的昂贵的大型主机。因此无需考虑如何对服务进行多节点的部署，也就不用考虑各节点之间的分布式协作问题。但是，由于采用单机部署，很可能带来系统大而复杂、难于维护、发生单点故障（单个点发生故障的时候会波及到整个系统或者网络，从而导致整个系统或者网络的瘫痪）、扩展性差等问题。</p>
+<p>分布式系统</p>
+<p>分布式系统是一个硬件或软件组件分布在不同的网络计算机上，彼此之间仅仅通过消息传递进行通信和协调的系统。简单来说就是一群独立计算机集合共同对外提供服务，但是对于系统的用户来说，就像是一台计算机在提供服务一样。分布式意味着可以采用更多的普通计算机（相对于昂贵的大型机）组成分布式集群对外提供服务。计算机越多，CPU、内存、存储资源等也就越多，能够处理的并发访问量也就越大。</p>
+<p>从分布式系统的概念中我们知道，各个主机之间通信和协调主要通过网络进行，所以分布式系统中的计算机在空间上几乎没有任何限制，这些计算机可能被放在不同的机柜上，也可能被部署在不同的机房中，还可能在不同的城市中，对于大型的网站甚至可能分布在不同的国家和地区。但是，无论空间上如何分布，一个标准的分布式系统应该具有以下几个主要特征：</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="分布性">分布性<a href="#分布性" class="hash-link" aria-label="Direct link to 分布性" title="Direct link to 分布性">​</a></h3>
+<p>分布式系统中的多台计算机之间在空间位置上可以随意分布，同时，机器的分布情况也会随时变动。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="对等性">对等性<a href="#对等性" class="hash-link" aria-label="Direct link to 对等性" title="Direct link to 对等性">​</a></h3>
+<p>分布式系统中的计算机没有主／从之分，即没有控制整个系统的主机，也没有被控制的从机，组成分布式系统的所有计算机节点都是对等的。副本（Replica）是分布式系统最常见的概念之一，指的是分布式系统对数据和服务提供的一种冗余方式。在常见的分布式系统中，为了对外提供高可用的服务，我们往往会对数据和服务进行副本处理。数据副本是指在不同节点上持久化同一份数据，当某一个节点上存储的数据丢失时，可以从副本上读取该数据，这是解决分布式系统数据丢失问题最为有效的手段。另一类副本是服务副本，指多个节点提供同样的服务，每个节点都有能力接收来自外部的请求并进行相应的处理。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="并发性">并发性<a href="#并发性" class="hash-link" aria-label="Direct link to 并发性" title="Direct link to 并发性">​</a></h3>
+<p>在一个计算机网络中，程序运行过程的并发性操作是非常常见的行为。例如同一个分布式系统中的多个节点，可能会并发地操作一些共享的资源，如何准确并高效地协调分布式并发操作也成为了分布式系统架构与设计中最大的挑战之一。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="缺乏全局时钟">缺乏全局时钟<a href="#缺乏全局时钟" class="hash-link" aria-label="Direct link to 缺乏全局时钟" title="Direct link to 缺乏全局时钟">​</a></h3>
+<p>在分布式系统中，很难定义两个事件究竟谁先谁后，原因就是因为分布式系统缺乏一个全局的时钟序列控制。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="故障总是会发生">故障总是会发生<a href="#故障总是会发生" class="hash-link" aria-label="Direct link to 故障总是会发生" title="Direct link to 故障总是会发生">​</a></h3>
+<p>组成分布式系统的所有计算机，都有可能发生任何形式的故障。除非需求指标允许，在系统设计时不能放过任何异常情况。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="分布式系统面临的问题">分布式系统面临的问题<a href="#分布式系统面临的问题" class="hash-link" aria-label="Direct link to 分布式系统面临的问题" title="Direct link to 分布式系统面临的问题">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="通信异常">通信异常<a href="#通信异常" class="hash-link" aria-label="Direct link to 通信异常" title="Direct link to 通信异常">​</a></h3>
+<p>分布式系统需要在各个节点之间进行网络通信，因此网络通信都会伴随着网络不可用的风险或是系统不可用都会导致最终分布式系统无法顺利完成一次网络通信。另外，即使分布式系  统各节点之间的网络通信能够正常进行，其延时也会远大于单机操作，会影响消息的收发的过程，因此消息丢失和消息延迟变得非常普遍。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="网络分区">网络分区<a href="#网络分区" class="hash-link" aria-label="Direct link to 网络分区" title="Direct link to 网络分区">​</a></h3>
+<p>当网络由于发生异常情况，导致分布式系统中部分节点之间的网络延时不断增大，最终导致组成分布式系统的所有节点中，只有部分节点之间能够进行正常通信，而另一些节点则不能——我们将这个现象称为网络分区，就是俗称的“脑裂”。当网络分区出现时，分布式系统会出现局部小集群，在极端情况下，这些局部小集群会独立完成原本需要整个分布式才能完成的功能，这就对分布式一致性提出类非常大的挑战。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="三态">三态<a href="#三态" class="hash-link" aria-label="Direct link to 三态" title="Direct link to 三态">​</a></h3>
+<p>分布式系统的每一次请求与响应，存在特有的“三态”概念，即成功、失败与超时。当出现超时现象时，网络通信的发起方是无法确定当前请求是否被成功处理的。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="节点故障">节点故障<a href="#节点故障" class="hash-link" aria-label="Direct link to 节点故障" title="Direct link to 节点故障">​</a></h3>
+<p>节点故障则是分布式环境下另一个比较常见的问题，指的是组成分布式系统的服务器节点出现的宕机或“僵死”现象。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="分布式理论一---cap定理">分布式理论(一) - CAP定理<a href="#分布式理论一---cap定理" class="hash-link" aria-label="Direct link to 分布式理论(一) - CAP定理" title="Direct link to 分布式理论(一) - CAP定理">​</a></h2>
+<p>前言
+CAP原则又称CAP定理，指的是在一个分布式系统中，Consistency（一致性）、 Availability（可用性）、Partition tolerance（分区容错性）这三个基本需求，最多只能同时满足其中的2个。</p>
+<p>初探分布式理论
+正文</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="1-cap原则简介">1. CAP原则简介<a href="#1-cap原则简介" class="hash-link" aria-label="Direct link to 1. CAP原则简介" title="Direct link to 1. CAP原则简介">​</a></h3>
+<p>选项	描述
+Consistency（一致性）	指数据在多个副本之间能够保持一致的特性（严格的一致性）
+Availability（可用性）	指系统提供的服务必须一直处于可用的状态，每次请求都能获取到非错的响应（不保证获取的数据为最新数据）
+Partition tolerance（分区容错性）	分布式系统在遇到任何网络分区故障的时候，仍然能够对外提供满足一致性和可用性的服务，除非整个网络环境都发生了故障
+什么是分区？</p>
+<p>在分布式系统中，不同的节点分布在不同的子网络中，由于一些特殊的原因，这些子节点之间出现了网络不通的状态，但他们的内部子网络是正常的。从而导致了整个系统的环境被切分成了若干个孤立的区域，这就是分区。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="2-cap原则论证">2. CAP原则论证<a href="#2-cap原则论证" class="hash-link" aria-label="Direct link to 2. CAP原则论证" title="Direct link to 2. CAP原则论证">​</a></h3>
+<p>CAP的基本场景，网络中有两个节点N1和N2，可以简单的理解N1和N2分别是两台计算机，他们之间网络可以连通，N1中有一个应用程序A，和一个数据库V，N2也有一个应用程序B和一个数据库V。现在，A和B是分布式系统的两个部分，V是分布式系统的数据存储的两个子数据库。</p>
+<p>在满足一致性的时候，N1和N2中的数据是一样的，V0=V0。
+在满足可用性的时候，用户不管是请求N1或者N2，都会得到立即响应。
+在满足分区容错性的情况下，N1和N2有任何一方宕机，或者网络不通的时候，都不会影响N1和N2彼此之间的正常运作。</p>
+<p>这是分布式系统正常运转的流程，用户向N1机器请求数据更新，程序A更新数据库V0为V1。分布式系统将数据进行同步操作M，将V1同步的N2中V0，使得N2中的数据V0也更新为V1，N2中的数据再响应N2的请求。</p>
+<p>根据CAP原则定义，系统的一致性、可用性和分区容错性细分如下：</p>
+<p>一致性：N1和N2的数据库V之间的数据是否完全一样。
+可用性：N1和N2的对外部的请求能否做出正常的响应。
+分区容错性：N1和N2之间的网络是否互通。
+这是正常运作的场景，也是理想的场景。作为一个分布式系统，它和单机系统的最大区别，就在于网络。现在假设一种极端情况，N1和N2之间的网络断开了，我们要支持这种网络异常。相当于要满足分区容错性，能不能同时满足一致性和可用性呢？还是说要对他们进行取舍？</p>
+<p>假设在N1和N2之间网络断开的时候，有用户向N1发送数据更新请求，那N1中的数据V0将被更新为V1。由于网络是断开的，所以分布式系统同步操作M，所以N2中的数据依旧是V0。这个时候，有用户向N2发送数据读取请求，由于数据还没有进行同步，应用程序没办法立即给用户返回最新的数据V1，怎么办呢？</p>
+<p>这里有两种选择：</p>
+<p>第一：牺牲数据一致性，保证可用性。响应旧的数据V0给用户。
+第二：牺牲可用性，保证数据一致性。阻塞等待，直到网络连接恢复，数据更新操作M完成之后，再给用户响应最新的数据V1。
+这个过程，证明了要满足分区容错性的分布式系统，只能在一致性和可用性两者中，选择其中一个。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="3-cap原则权衡">3. CAP原 则权衡<a href="#3-cap原则权衡" class="hash-link" aria-label="Direct link to 3. CAP原则权衡" title="Direct link to 3. CAP原则权衡">​</a></h3>
+<p>通过CAP理论，我们知道无法同时满足一致性、可用性和分区容错性这三个特性，那要舍弃哪个呢？</p>
+<p>3.1. CA without P
+如果不要求P（不允许分区），则C（强一致性）和A（可用性）是可以保证的。但其实分区不是你想不想的问题，而是始终会存在，因此CA的系统更多的是允许分区后各子系统依然保持CA。</p>
+<p>3.2. CP without A
+如果不要求A（可用），相当于每个请求都需要在Server之间强一致，而P（分区）会导致同步时间无限延长，如此CP也是可以保证的。很多传统的数据库分布式事务都属于这种模式。</p>
+<p>3.3. AP wihtout C
+要高可用并允许分区，则需放弃一致性。一旦分区发生，节点之间可能会失去联系，为了高可用，每个节点只能用本地数据提供服务，而这样会导致全局数据的不一致性。现在众多的NoSQL都属于此类。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="小结">小结<a href="#小结" class="hash-link" aria-label="Direct link to 小结" title="Direct link to 小结">​</a></h2>
+<p>对于多数大型互联网应用的场景，主机众多、部署分散。而且现在的集群规模越来越大，所以节点故障、网络故障是常态。这种应用一般要保证服务可用性达到N个9，即保证P和A，只有舍弃C（退而求其次保证最终一致性）。虽然某些地方会影响客户体验，但没达到造成用户流程的严重程度。</p>
+<p>对于涉及到钱财这样不能有一丝让步的场景，C必须保证。网络发生故障宁可停止服务，这是保证CA，舍弃P。貌似这几年国内银行业发生了不下10起事故，但影响面不大，报到也不多，广大群众知道的少。还有一种是保证CP，舍弃A，例如网络故障时只读不写。</p>
+<p>孰优孰劣 ，没有定论，只能根据场景定夺，适合的才是最好的。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="分布式理论二---base理论">分布式理论(二) - BASE理论<a href="#分布式理论二---base理论" class="hash-link" aria-label="Direct link to 分布式理论(二) - BASE理论" title="Direct link to 分布式理论(二) - BASE理论">​</a></h2>
+<p>前言
+BASE理论是由eBay架构师提出的。BASE是对CAP中一致性和可用性权衡的结果，其来源于对大规模互联网分布式系统实践的总结，是基于CAP定律逐步演化而来。其核心思想是即使无法做到强一致性，但每个应用都可以根据自身业务特点，才用适当的方式来使系统打到最终一致性。</p>
+<p>正文</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="1-cap的3选2伪命题">1. CAP的3选2伪命题<a href="#1-cap的3选2伪命题" class="hash-link" aria-label="Direct link to 1. CAP的3选2伪命题" title="Direct link to 1. CAP的3选2伪命题">​</a></h3>
+<p>实际上，不是为了P（分区容错性），必须在C（一致性）和A（可用性）之间任选其一。分区的情况很少出现，CAP在大多时间能够同时满足C和A。</p>
+<p>对于分区存在或者探知其影响的情况下，需要提供一种预备策略做出处理：</p>
+<p>探知分区的发生；
+进入显示的分区模式，限制某些操作；
+启动恢复过程，恢复数据一致性，补偿分区发生期间的错误。
+2. BASE理论简介
+BASE理论是Basically Available(基本可用)，Soft State（软状态）和Eventually Consistent（最终一致性）三个短语的缩写。</p>
+<p>其核心思想是：</p>
+<p>既是无法做到强一致性（Strong consistency），但每个应用都可以根据自身的业务特点，采用适当的方式来使系统达到最终一致性（Eventual consistency）。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="3-base理论的内容">3. BASE理论的内容<a href="#3-base理论的内容" class="hash-link" aria-label="Direct link to 3. BASE理论的内容" title="Direct link to 3. BASE理论的内容">​</a></h3>
+<p>基本可用（Basically Available）
+软状态（Soft State）
+最终一致性（Eventually Consistent）
+下面展开讨论：</p>
+<h4 class="anchor anchorWithStickyNavbar_HWLp" id="31-基本可用">3.1. 基本可用<a href="#31-基本可用" class="hash-link" aria-label="Direct link to 3.1. 基本可用" title="Direct link to 3.1. 基本可用">​</a></h4>
+<p>什么是基本可用呢？假设系统，出现了不可预知的故障，但还是能用，相比较正常的系统而言：</p>
+<p>响应时间上的损失：正常情况下的搜索引擎0.5秒即返回给用户结果，而基本可用的搜索引擎可以在2秒作用返回结果。</p>
+<p>功能上的损失：在一个电商网站上，正常情况下，用户可以顺利完成每一笔订单。但是到了大促期间，为了保护购物系统的稳定性，部分消费者可能会被引导到一个降级页面。</p>
+<h4 class="anchor anchorWithStickyNavbar_HWLp" id="32-软状态">3.2. 软状态<a href="#32-软状态" class="hash-link" aria-label="Direct link to 3.2. 软状态" title="Direct link to 3.2. 软状态">​</a></h4>
+<p>什么是软状态呢？相对于原子性而言，要求多个节点的数据副本都是一致的，这是一种“硬状态”。</p>
+<p>软状态指的是：允许系统中的数据存在中间状态，并认为该状态不影响系统的整体可用性，即允许系统在多个不同节点的数据副本存在数据延时。</p>
+<h4 class="anchor anchorWithStickyNavbar_HWLp" id="33-最终一致性">3.3. 最终一致性<a href="#33-最终一致性" class="hash-link" aria-label="Direct link to 3.3. 最终一致性" title="Direct link to 3.3. 最终一致性">​</a></h4>
+<p>上面说软状态，然后不可能一直是软状态，必须有个时间期限。在期限过后，应当保证所有副本保持数据一致性，从而达到数据的最终一致性。这个时间期限取决于网络延时、  系统负载、数据复制方案设计等等因素。</p>
+<p>而在实际工程实践中，最终一致性分为5种：</p>
+<p>3.3.1. 因果一致性（Causal consistency）</p>
+<p>因果一致性指的是：如果节点A在更新完某个数据后通知了节点B，那么节点B之后对该数据的访问和修改都是基于A更新后的值。于此同时，和节点A无因果关系的节点C的数据访问则没有这样的限制。</p>
+<p>3.3.2. 读己之所写（Read your writes）</p>
+<p>读己之所写指的是：节点A更新一个数据后，它自身总是能访问到自身更新过的最新值，而不会看到旧值。其实也算一种因果一致性。</p>
+<p>3.3.3. 会话一致性（Session consistency）</p>
+<p>会话一致性将对系统数据的访问过程框定在了一个会话当中：系统能保证在同一个有效的会话中实现 “读己之所写” 的一致性，也就是说，执行更新操作之后，客户端能够在同一个会话中始终读取到该数据项的最新值。</p>
+<p>3.3.4. 单调读一致性（Monotonic read consistency）</p>
+<p>单调读一致性指的是：如果一个节点从系统中读取出一个数据项的某个值后，那么系统对于该节点后续的任何数据访问都不应该返回更旧的值。</p>
+<p>3.3.5. 单调写一致性（Monotonic write consistency）</p>
+<p>单调写一致性指的是：一个系统要能够保证来自同一个节点的写操作被顺序的执行。</p>
+<p>在实际的实践中，这5种系统往往会结合使用，以构建一个具有最终一致性的分布式系统。</p>
+<p>实际上，不只是分布式系统使用最终一致性，关系型数据库在某个功能上，也是使用最终一致性的。比如备份，数据库的复制过程是需要时间的，这个复制过程中，业务读取到的值就是旧的。当然，最终还是达成了数据一致性。这也算是一个最终一致性的经典案例。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="更具体的分布式问题">更具体的分布式问题<a href="#更具体的分布式问题" class="hash-link" aria-label="Direct link to 更具体的分布式问题" title="Direct link to 更具体的分布式问题">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_HWLp" id="分布式事务">分布式事务<a href="#分布式事务" class="hash-link" aria-label="Direct link to 分布式事务" title="Direct link to 分布式事务">​</a></h4>
+<p>指事务的操作位于不同的节点上，需要保证事务的 AICD 特性。例如在下单场景下，库存和订单如果不在同一个节点上，就需要涉及分布式事务。</p>
+<p>本地消息</p>
+<ol>
+<li>原理
+本地消息表与业务数据表处于同一个数据库中，这样就能利用本地事务来保证在对这两个表的操作满足事务特性。</li>
+</ol>
+<p>在分布式事务操作的一方，它完成写业务数据的操作之后向本地消息表发送一个消息，本地事务能保证这个消息一定会被写入本地消息表中。
+之后将本地消息表中的消息转发到 Kafka 等消息队列（MQ）中，如果转发成功则将消息从本地消息表中删除，否则继续重新转发。
+在分布式事务操作的另一方从消息队列中读取一个消息，并执行消息中的操作。</p>
+<ol start="2">
+<li>分析
+本地消息表利用了本地事务来实现分布式事务，并且使用了消息队列来保证最终一致性。</li>
+</ol>
+<p>两阶段提交协议
+2PC</p>
+<h4 class="anchor anchorWithStickyNavbar_HWLp" id="二分布式锁">二、分布式锁<a href="#二分布式锁" class="hash-link" aria-label="Direct link to 二、分布式锁" title="Direct link to 二、分布式锁">​</a></h4>
+<p>可以使用 Java 提供的内置锁来实现进程同步：由 JVM 实现的 synchronized 和 JDK 提供的 Lock。但是在分布式场景下，需要同步的进程可能位于不同的节点上，那么就需要使用分布式锁来同步。</p>
+<p>原理
+锁可以有阻塞锁和乐观锁两种实现方式，这里主要探讨阻塞锁实现。阻塞锁通常使用互斥量来实现，互斥量为 1 表示有其它进程在使用锁，此时处于锁定状态，互斥量为 0 表示未锁定状态。1 和 0 可以用一个整型值来存储，也可以用某个数据存在或者不存在来存储，某个数据存在表示互斥量为 1，也就是锁定状态。</p>
+<p>实现</p>
+<ol>
+<li>数据库的唯一索引
+当想要获得锁时，就向表中插入一条记录，释放锁时就删除这条记录。唯一索引可以保证该记录只被插入一次，那么就可以用这个记录是否存在来判断是否存于锁定状态。</li>
+</ol>
+<p>这种方式存在以下几个问题：</p>
+<p>锁没有失效时间，解锁失败会导致死锁，其他线程无法再获得锁。
+只能是非阻塞锁，插入失败直接就报错了，无法重试。
+不可重入，同一线程在没有释放锁之前无法再获得锁。
+2. Redis 的 SETNX 指令
+使用 SETNX（set if not exist）指令插入一个键值对，如果 Key 已经存在，那么会返回 False，否则插入成功并返回 True。</p>
+<p>SETNX 指令和数据库的唯一索引类似，可以保证只存在一个 Key 的键值对，可以用一个 Key 的键值对是否存在来判断是否存于锁定状态。</p>
+<p>EXPIRE 指令可以为一个键值对设置一个过期时间，从而避免了死锁的发生。</p>
+<ol start="3">
+<li>Redis 的 RedLock 算法
+使用了多个 Redis 实例来实现分布式锁，这是为了保证在发生单点故障时仍然可用。</li>
+</ol>
+<p>尝试从 N 个相互独立 Redis 实例获取锁，如果一个实例不可用，应该尽快尝试下一个。
+计算获取锁消耗的时间，只有当这个时间小于锁的过期时间，并且从大多数（N/2+1）实例上获取了锁，那么就认为锁获取成功了。
+如果锁获取失败，会到每个实例上释放锁。
+4. Zookeeper 的有序节点
+Zookeeper 是一个为分布式应用提供一致性服务的软件，例如配置管理、分布式协同以及命名的中心化等，这些都是分布式系统中非常底层而且是必不可少的基本功能，但是如果自己实现这些功能而且要达到高吞吐、低延迟同时还要保持一致性和可用性，实际上非常困难。</p>
+<p>（一）抽象模型</p>
+<p>Zookeeper 提供了一种树形结构级的命名空间，/app1/p_1 节点表示它的父节点为 /app1。</p>
+<p>（二）节点类型</p>
+<p>永久节点：不会因为会话结束或者超时而消失；
+临时节点：如果会话结束或者超时就会消失；
+有序节点：会在节点名的后面加一个数字后缀，并且是有序的，例如生成的有序节点为 /lock/node-0000000000，它的下一个有序节点则为 /lock/node-0000000001，依次类推。</p>
+<p>（三）监听器</p>
+<p>为一个节点注册监听器，在节点状态发生改变时，会给客户端发送消息。</p>
+<p>（四）分布式锁实现</p>
+<p>创建一个锁目录 /lock；
+在 /lock 下创建临时的且有序的子节点，第一个客户端对应的子节点为 /lock/lock-0000000000，第二个为 /lock/lock-0000000001，以此类推；
+客户端获取 /lock 下的子节点列表，判断自己创建的子节点是否为当前子节点列表中序号最小的子节点，如果是则认为获得锁；否则监听自己的前一个子节点，获得子节点的变更通知后重复此步骤直至获得锁；
+执行业务代码，完成后，删除对应的子节点。</p>
+<p>（五）会话超时</p>
+<p>如果一个已经获得锁的会话超时了，因为创建的是临时节点，所以该会话对应的临时节点会被删除，其它会话就可以获得锁了。可以看到，Zookeeper 分布式锁不会出现数据库的唯一索引实现分布式锁的死锁问题。</p>
+<p>（六）羊群效应</p>
+<p>一个节点未获得锁，需要监听自己的前一个子节点，这是因为如果监听所有的子节点，那么任意一个子节点状态改变，其它所有子节点都会收到通知（羊群效应），而我们只希望它的后一个子节点收到通知。</p>
+<h4 class="anchor anchorWithStickyNavbar_HWLp" id="三分布式-session">三、分布式 Session<a href="#三分布式-session" class="hash-link" aria-label="Direct link to 三、分布式 Session" title="Direct link to 三、分布式 Session">​</a></h4>
+<p>在分布式场景下，一个用户的 Session 如果只存储在一个服务器上，那么当负载均衡器把用户的下一个请求转发到另一个服务器上，该服务器没有用户的 Session，就可能导致用户需要重新进行登录等操作。</p>
+<ol>
+<li>Sticky Sessions
+需要配置负载均衡器，使得一个用户的所有请求都路由到一个服务器节点上，这样就可以把用户的 Session 存放在该服务器节点中。</li>
+</ol>
+<p>缺点：当服务器节点宕机时，将丢失该服务器节点上的所有 Session。</p>
+<ol start="2">
+<li>Session Replication
+在服务器节点之间进行 Session 同步操作，这样的话用户可以访问任何一个服务器节点。</li>
+</ol>
+<p>缺点：需要更好的服务器硬件条件；需要对服务器进行配置。</p>
+<ol start="3">
+<li>Persistent DataStore
+将 Session 信息持久化到一个数据库中。</li>
+</ol>
+<p>缺点：有可能需要去实现存取 Session 的代码。</p>
+<ol start="4">
+<li>In-Memory DataStore
+可以使用 Redis 和 Memcached 这种内存型数据库对 Session 进行存储，可以大大提高 Session 的读写效率。内存型数据库同样可以持久化数据到磁盘中来保证数据的安全性。</li>
+</ol>
+<h4 class="anchor anchorWithStickyNavbar_HWLp" id="四负载均衡">四、负载均衡<a href="#四负载均衡" class="hash-link" aria-label="Direct link to 四、负载均衡" title="Direct link to 四、负载均衡">​</a></h4>
+<p>算法</p>
+<ol>
+<li>轮询（Round Robin）
+轮询算法把每个请求轮流发送到每个服务器上。下图中，一共有 6 个客户端产生了 6 个请求，这 6 个请求按 (1, 2, 3, 4, 5, 6) 的顺序发送。最后，(1, 3, 5) 的请求会被发送到服务器 1，(2, 4, 6) 的请求会被发送到服务器 2。</li>
+</ol>
+<p>该算法比较适合每个服务器的性能差不多的场景，如果有性能存在差异的情况下，那么性能较差的服务器可能无法承担过大的负载（下图的 Server 2）。</p>
+<ol start="2">
+<li>
+<p>加权轮询（Weighted Round Robbin）
+加权轮询是在轮询的基础上，根据服务器的性能差异，为服务器赋予一定的权值。例如下图中，服务器 1 被赋予的权值为 5，服务器 2 被赋予的权值为 1，那么 (1, 2, 3, 4, 5) 请求会被发送到服务器 1，(6) 请求会被发送到服务器 2。</p>
+</li>
+<li>
+<p>最少连接（least Connections）
+由于每个请求的连接时间不一样，使用轮询或者加权轮询算法的话，可能会让一台服务器当前连接数过大，而另一台服务器的连接过小，造成负载不均衡。例如下图中，(1, 3, 5) 请求会被发送到服务器 1，但是 (1, 3) 很快就断开连接，此时只有 (5) 请求连接服务器 1；(2, 4, 6) 请求被发送到服务器 2，只有 (2) 的连接断开。该系统继续运行时，服务器 2 会承担过大的负载。</p>
+</li>
+</ol>
+<p>最少连接算法就是将请求发送给当前最少连接数的服务器上。例如下图中，服务器 1 当前连接数最小，那么新到来的请求 6 就会被发送到服务器 1 上。</p>
+<ol start="4">
+<li>
+<p>加权最少连接（Weighted Least Connection）
+在最少连接的基础上，根据服务器的性能为每台服务器分配权重，再根据权重计算出每台服务器能处理的连接数。</p>
+</li>
+<li>
+<p>随机算法（Random）
+把请求随机发送到服务器上。和轮询算法类似，该算法比较适合服务器性能差不多的场景。</p>
+</li>
+<li>
+<p>源地址哈希法 (IP Hash)
+源地址哈希通过对客户端 IP 哈希计算得到的一个数值，用该数值对服务器数量进行取模运算，取模结果便是目标服务器的序号。</p>
+</li>
+</ol>
+<p> 优点：保证同一 IP 的客户端都会被 hash 到同一台服务器上。
+缺点：不利于集群扩展，后台服务器数量变更都会影响 hash 结果。可以采用一致性 Hash 改进。</p>
+<p>实现</p>
+<ol>
+<li>HTTP 重定向
+HTTP 重定向负载均衡服务器收到 HTTP 请求之后会返回服务器的地址，并将该地址写入 HTTP 重定向响应中返回给浏览器，浏览器收到后需要再次发送请求。</li>
+</ol>
+<p>缺点：</p>
+<p>用户访问的延迟会增加；
+如果负载均衡器宕机，就无法访问该站点。</p>
+<ol start="2">
+<li>DNS 重定向
+使用 DNS 作为负载均衡器，根据负载情况返回不同服务器的 IP 地址。大型网站基本使用了这种方式做为第一级负载均衡手段，然后在内部使用其它方式做第二级负载均衡。</li>
+</ol>
+<p>缺点：</p>
+<p>DNS 查找表可能会被客户端缓存起来，那么之后的所有请求都会被重定向到同一个服务器。</p>
+<ol start="3">
+<li>
+<p>修改 MAC 地址
+使用 LVS（Linux Virtual Server）这种链路层负载均衡器，根据负载情况修改请求的 MAC 地址。</p>
+</li>
+<li>
+<p>修改 IP 地址
+在网络层修改请求的目的 IP 地址。</p>
+</li>
+<li>
+<p>代理自动配置
+正向代理与反向代理的区别：</p>
+</li>
+</ol>
+<p>正向代理：发生在客户端，是由用户主动发起的。比如翻墙，客户端通过主动访问代理服务器，让代理服务器获得需要的外网数据，然后转发回客户端。
+反向代理：发生在服务器端，用户不知道代理的存在。
+PAC 服务器是用来判断一个请求是否要经过代理。</p>
+<h4 class="anchor anchorWithStickyNavbar_HWLp" id="高可用之脑裂">高可用之“脑裂”<a href="#高可用之脑裂" class="hash-link" aria-label="Direct link to 高可用之“脑裂”" title="Direct link to 高可用之“脑裂”">​</a></h4>
+<p>在涉及到高可用性时，经常会听到”脑裂“，到底啥是”脑裂“？</p>
+<p>一句话：当两（多  ）个节点同时认为自已是唯一处于活动状态的服务器从而出现争用资源的情况，这种争用资源的场景即是所谓的“脑裂”（split-brain）或”区间集群“（partitioned cluster）。</p>
+<hr>
+<p>HeartBeat原理：</p>
+<p>HeartBeat运行于备用主机上的Heartbeat可以通过以太网连接检测主服务器的运行状态，一旦其无法检测到主服务器的&quot;心跳&quot;则自动接管主服务器的资源。通常情况下，主、备服务器间的心跳连接是一个独立的物理连接，这个连接可以是串行线缆、一个由&quot;交叉线&quot;实现的以太网连接。Heartbeat甚至可同时通过多个物理连接检测主服务器的工作状态，而其只要能通过其中一个连接收到主服务器处于活动状态的信息，就会认为主服务器处于正常状态。从实践经验的角度来说，建议为Heartbeat配置多条独立的物理连接，以避免Heartbeat通信线路本身存在单点故障。</p>
+<hr>
+<p>在“双机热备”高可用（HA）系统中，当联系2个节点的“心跳线”断开时，本来为一整体、动作协调的HA系统，就分裂成为2个独立的个体。由于相互失去了联系，都以为是对方出了故障，2个节点上的HA软件像“裂脑人”一样，“本能”地争抢“共享资源”、争起“应用服务”，就会发生严重后果：或者共享资源被瓜分、2边“服务”都起不来了；或者2边“服务”都起来了，但同时读写“共享存储”，导致数据损坏（常见如数据库轮询着的联机日志出错）。</p>
+<p>运行于备用主机上的Heartbeat可以通过以太网连接检测主服务器的运行状态，一旦其无法检测到主服务器的“心跳”则自动接管主服务器的资源。通常情况下，主、备服务器间的心跳连接是一个独立的物理连接，这个连接可以是串行线缆、一个由“交叉线”实现的以太网连接。Heartbeat甚至可同时通过多个物理连接 检测主服务器的工作状态，而其只要能通过其中一个连接收到主服务器处于活动状态的信息，就会认为主服务器处于正常状态。从实践经验的角度来说，建议为Heartbeat配置多条独立的物理连接，以避免Heartbeat通信线路本身存在单点故障。</p>
+<p>1、串行电缆：被认为是比以太网连接安全性稍好些的连接方式，因为hacker无法通过串行连接运行诸如telnet、ssh或rsh类的程序，从而可以降低其通过已劫持的服务器再次侵入备份服务器的几率。但串行线缆受限于可用长度，因此主、备服务器的距离必须非常短。
+2、以太网连接：使用此方式可以消除串行线缆的在长度方面限制，并且可以通过此连接在主备服务器间同步文件系统，从而减少了从正常通信连接带宽的占用。</p>
+<p>基于冗余的角度考虑，应该在主、备服务器使用两个物理连接传输heartbeat的控制信息；这样可以避免在一个网络或线缆故障时导致两个节点同时认为自已是唯一处于活动状态的服务器从而出现争用资源的情况，这种争用资源的场景即是所谓的“脑裂”（split-brain）或“partitioned cluster”。在两个节点共享同一个物理设备资源的情况下，脑裂会产生相当可怕的后果。</p>
+<p>为了避免出现脑裂，可采用下面的预防措施：
+添加冗余的心跳线，例如双线条线。尽量减少“裂脑”发生机会。
+启用磁盘锁。正在服务一方锁住共享磁盘，“裂脑”发生时，让对方完全“抢不走”共享磁盘资源。但使用锁磁盘也会有一个不小的问题，如果占用共享盘的一方不主动“解锁”，另一方就永远得不到共享磁盘。现实中假如服务节点突然死机或崩溃，就不可能执行解锁命令。后备节点也就接管不了共享资源和应用服务。于是有人在HA中设计了“智能”锁。即，正在服务的一方只在发现心跳线全部断 开（察觉不到对端）时才启用磁盘锁。平时就不上锁了。</p>
+<p>设置仲裁机制。例如设置参考IP（如网关IP），当心跳线完全断开时，2个节点都各自ping一下 参考IP，不通则表明断点就出在本端，不仅“心跳”、还兼对外“服务”的本端网络链路断了，即使启动（或继续）应用服务也没有用了，那就主动放弃竞争，让能够ping通参考IP的一端去起服务。更保险一些，ping不通参考IP的一方干脆就自我重启，以彻底释放有可能还占用着的那些共享资源。</p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="theme-doc-footer-edit-meta-row row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/distributed/practice/搞懂分布式技术：分布式系统的一些基本概念.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_EYjg" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_eevz"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式事务常用解决方案"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">搞懂分布式技术：分布式事务常用解决方案</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式一致性协议与Paxos，Raft算法"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">搞懂分布式技术：分布式一致性协议  与Paxos，Raft算法</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_lc2k thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#1分布式" class="table-of-contents__link toc-highlight">1、分布式</a></li><li><a href="#2集群cluster" class="table-of-contents__link toc-highlight">2、集群（Cluster）</a></li><li><a href="#3负载均衡load-balancer" class="table-of-contents__link toc-highlight">3、负载均衡（Load Balancer）</a></li><li><a href="#4弹性" class="table-of-contents__link toc-highlight">4、弹性</a></li><li><a href="#5失效转移" class="table-of-contents__link toc-highlight">5、失效转移</a></li><li><a href="#怎么办" class="table-of-contents__link toc-highlight">怎么办？</a></li><li><a href="#认识分布式架构" class="table-of-contents__link toc-highlight">认识分布式架构</a></li><li><a href="#集中式与分布式" class="table-of-contents__link toc-highlight">集中式与分布式</a><ul><li><a href="#分布性" class="table-of-contents__link toc-highlight">分布性</a></li><li><a href="#对等性" class="table-of-contents__link toc-highlight">对等性</a></li><li><a href="#并发性" class="table-of-contents__link toc-highlight">并发性</a></li><li><a href="#缺乏全局时钟" class="table-of-contents__link toc-highlight">缺乏全局时钟</a></li><li><a href="#故障总是会发生" class="table-of-contents__link toc-highlight">故障总是会发生</a></li></ul></li><li><a href="#分布式系统面临的问题" class="table-of-contents__link toc-highlight">分布式系统面临的问题</a><ul><li><a href="#通信异常" class="table-of-contents__link toc-highlight">通信异常</a></li><li><a href="#网络分区" class="table-of-contents__link toc-highlight">网络分区</a></li><li><a href="#三态" class="table-of-contents__link toc-highlight">三态</a></li><li><a href="#节点故障" class="table-of-contents__link toc-highlight">节点故障</a></li></ul></li><li><a href="#分布式理论一---cap定理" class="table-of-contents__link toc-highlight">分布式理论(一) - CAP定理</a><ul><li><a href="#1-cap原则简介" class="table-of-contents__link toc-highlight">1. CAP原则简介</a></li><li><a href="#2-cap原则论证" class="table-of-contents__link toc-highlight">2. CAP原则论证</a></li><li><a href="#3-cap原则权衡" class="table-of-contents__link toc-highlight">3. CAP原则权衡</a></li></ul></li><li><a href="#小结" class="table-of-contents__link toc-highlight">小结</a></li><li><a href="#分布式理论二---base理论" class="table-of-contents__link toc-highlight">分布式理论(二) - BASE理论</a><ul><li><a href="#1-cap的3选2伪命题" class="table-of-contents__link toc-highlight">1. CAP的3选2伪命题</a></li><li><a href="#3-base理论的内容" class="table-of-contents__link toc-highlight">3. BASE理论的内容</a></li><li><a href="#更具体的分布式问题" class="table-of-contents__link toc-highlight">更具体的分布式问题</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/code-note-blog/docs/intro">Tutorial</a></li></ul></div><div class="col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://stackoverflow.com/questions/tagged/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Stack Overflow<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://discordapp.com/invite/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Discord<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://twitter.com/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Twitter<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/code-note-blog/blog">Blog</a></li><li class="footer__item"><a href="https://github.com/facebook/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 My Project, Inc. Built with Docusaurus.</div></div></div></footer></div>
+</body>
+</html>

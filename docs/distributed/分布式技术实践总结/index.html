@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-distributed/分布式技术实践总结" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.1.0">
+<title data-rh="true">分布式技术实践总结 | Tommy</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://aiden-coding.github.io/code-note-blog/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://aiden-coding.github.io/code-note-blog/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://aiden-coding.github.io/code-note-blog/docs/distributed/分布式技术实践总结"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="分布式技术实践总结 | Tommy"><meta data-rh="true" name="description" content="本文基于之前的分布式系统理论系列文章总结而成，本部分主要是实践内容，详细内容可见我的专栏：分布式系统理论与实践"><meta data-rh="true" property="og:description" content="本文基于之前的分布式系统理论系列文章总结而成，本部分主要是实践内容，详细内容可见我的专栏：分布式系统理论与实践"><link data-rh="true" rel="icon" href="/code-note-blog/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://aiden-coding.github.io/code-note-blog/docs/distributed/分布式技术实践总结"><link data-rh="true" rel="alternate" href="https://aiden-coding.github.io/code-note-blog/docs/distributed/分布式技术实践总结" hreflang="en"><link data-rh="true" rel="alternate" href="https://aiden-coding.github.io/code-note-blog/docs/distributed/分布式技术实践总结" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/code-note-blog/blog/rss.xml" title="Tommy RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/code-note-blog/blog/atom.xml" title="Tommy Atom Feed"><link rel="stylesheet" href="/code-note-blog/assets/css/styles.dd5372db.css">
+<script src="/code-note-blog/assets/js/runtime~main.f999fb27.js" defer="defer"></script>
+<script src="/code-note-blog/assets/js/main.a0bfbaed.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_XYiV" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/code-note-blog/"><b class="navbar__title text--truncate">Tommy</b></a><a class="navbar__item navbar__link" href="/code-note-blog/docs/Java/basic/抽象类和接口">java</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/JavaWeb/走进JavaWeb技术世界：JavaWeb的由来和基础知识">javaweb</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/cache/探索Redis设计与实现：连接底层与表面的数据结构robj">cache</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/backend/后端技术杂谈：白话虚拟化技术">backend</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/cs/algorithms/剑指offer">cs</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/database/重新学习MySQL数据库：『浅入浅出』MySQL和InnoDB">database</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/code-note-blog/docs/distributed/basic/分布式系统理论基础 ：CAP">distributed</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/interview/BATJ-Experience/面阿里,终获offer">interview</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/mq/kafka/消息队列kafka详解：如何实现死信队列">mq</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/Spring全家桶/Spring/第一个Spring应用">spring</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/mianshi/collection">面试</a><a href="https://aiden-coding.github.io/code-note-blog/SpringCloud%E7%AC%AC3%E5%AD%A32024.html" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Blog<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></div><div class="navbar__items navbar__items--right"><div class="toggle_XbAW colorModeToggle_r5NY"><button class="clean-btn toggleButton_Jx0n toggleButtonDisabled_zYO7" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_FjAw"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_qmEt"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_wJfS"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_LABv"><div class="docsWrapper_pdvB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_Jioa" type="button"></button><div class="docRoot_qx_v"><aside class="theme-doc-sidebar-container docSidebarContainer_NHKT"><div class="sidebarViewport_uyYB"><div class="sidebar_SZG4"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_VP_k"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/code-note-blog/docs/distributed/basic/分布式系统理论基础 ：CAP">基础</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式session解决方案与一致性hash">案例</a></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" href="/code-note-blog/docs/distributed/分布式技术实践总结">分布式技术实践总结</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/distributed/分布式理论总结">分布式理论总结</a></li></ul></nav></div></div></aside><main class="docMainContainer_SejT"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_j3Yw"><div class="docItemContainer_XOSC"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_F6gm" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/code-note-blog/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YCxa"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">分布式技术实践总结</span><meta itemprop="position" content="1"></li></ul></nav><div class="tocCollapsible_ToOY theme-doc-toc-mobile tocMobile_suYB"><button type="button" class="clean-btn tocCollapsibleButton_VzP_">On this page</button></div><div class="theme-doc-markdown markdown"><p>本文基于之前的分布式系统理论系列文章总结而成，本部分主要是实践内容，详细内容可见我的专栏：分布式系统理论与实践</p>
+<p><a href="https://blog.csdn.net/column/details/24090.html" target="_blank" rel="noopener noreferrer">https://blog.csdn.net/column/details/24090.html</a></p>
+<p>本文主要是按照我自己的理解以及参考之前文章综合而成的，其中可能会有一些错误，还请见谅，也请指出。</p>
+<h1>分布式技术</h1>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="分布式数据和nosql">分布式数据和nosql<a href="#分布式数据和nosql" class="hash-link" aria-label="Direct link to 分布式数据和nosql" title="Direct link to 分布式数据和nosql">​</a></h2>
+<p>分布式一般是指分布式部署的数据库。</p>
+<p>比如Hbase基于HDFS分布式部署，所以他是一个分布式数据库。</p>
+<p>当然MySQL也可以分布式部署，比如按照不同业务部署，或者把单表内容拆成多个表乃至多个库进行部署。</p>
+<p>一般MySQL的扩展方式有：</p>
+<p>1 主从复制 使用冗余保证可用</p>
+<p>2 读写分离 主库负责写从库负责读，分担压力，并且保证数据一致性和备份。</p>
+<p>3 分表分库，横向拆分数据表放到多个表中或者多个库中，一般多个表或者多个库会使用不同节点部署，也就是一种分布式方案，提高并发的读写量。</p>
+<p>Nosql的话就比较多了，redis，memcache等。<br>
+<!-- -->当然hbase也是，hbase按照region将数据文件分布在hdfs上，并且hdfs提供高可用和备份，同时hbase的regionserver也保证高可用，于是hbase的分布式方案也是比较成熟的。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="缓存-分布式缓存">缓存 分布式缓存<a href="#缓存-分布式缓存" class="hash-link" aria-label="Direct link to 缓存 分布式缓存" title="Direct link to 缓存 分布式缓存">​</a></h2>
+<p>一般作为缓存的软件有redis，memcache等。当然我本地写一个hashmap也可以作为缓存。</p>
+<p>memcache提出了一致性哈希的算法，但是本身不支持数据持久化，也没有提供分布式方案，需要自己完成持久化以及分布式部署并且保证其可用性。</p>
+<p>redis作为新兴的内存数据库，提供了比memcache更多的数据结构，以及各种分布式方案。当然它也支持持久化。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="redis的部  署方案">redis的部署方案：<a href="#redis的部署方案" class="hash-link" aria-label="Direct link to redis的部署方案：" title="Direct link to redis的部署方案：">​</a></h3>
+<blockquote>
+<p>1 redis的主从复制结构，和MySQL类似，使用日志aof或者持久化文件rdb进行主从同步。</p>
+<p>2 读写分离，也可以做，但一般不需要。因为redis够快。</p>
+<p>3 redis的哨兵方案，主节点配置哨兵，每当宕机时自动完成主从切换。</p>
+<p>4 redis的集群方案，p2p的Redis Cluster部署了多台Redis服务器，每台Redis拥有全局的分片信息，所以任意节点都可以对外提供服务，当然每个节点只保存一部分分片，所以某台机器宕机时不会影响整个集群，当然每个节点也有slave，哨兵自动进行故障切换。</p>
+<p>5 codis方案，codis屏蔽了集群的内部实现，可以不更改redis api的情况下使用代理的方式提供集群访问。并且使用 group的概念封装一组节点。</p>
+</blockquote>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="缓存需要解决的问题">缓存需要解决的问题：<a href="#缓存需要解决的问题" class="hash-link" aria-label="Direct link to 缓存需要解决的问题：" title="Direct link to 缓存需要解决的问题：">​</a></h3>
+<p>命中：缓存有数据<br>
+<!-- -->不命中：去数据库读取    失效：过期    替换：缓存淘汰算法。        一般有lru，fifo，随机缓存等。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="缓存更新的方法">缓存更新的方法<a href="#缓存更新的方法" class="hash-link" aria-label="Direct link to 缓存更新的方法" title="Direct link to 缓存更新的方法">​</a></h3>
+<p>缓存更新可以先更新数据库再更新缓存，也可以先更新缓存再更新数据库。</p>
+<p>一般推荐先更新数据库，否则写一条数据时刚好有人读到缓存，把旧数据读到缓存中，此时新数据在数据库确不在缓存中。</p>
+<p>还有一种方法，就是让缓存自己去完成数据库更新，而不是让应用去选择如何更新数据库，这样的话缓存和数据库的更新操作就是透明的了，我们只需要操作缓存即可。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="缓存在springboot中的使用">缓存在springboot中的使用<a href="#缓存在springboot中的使用" class="hash-link" aria-label="Direct link to 缓存在springboot中的使用" title="Direct link to 缓存在springboot中的使用">​</a></h3>
+<p>springboot支持将缓存的curd操作配置在注解中，只需要在对应方法上配置好键和更新策略。<br>
+<!-- -->则redis会根据该方法的操作类型执行对应操作，非常方便。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="一致性哈希">一致性哈希<a href="#一致性哈希" class="hash-link" aria-label="Direct link to 一致性哈希" title="Direct link to 一致性哈希">​</a></h3>
+<p>分布式部署时，经常要面对的问题是，一个服务集群由谁来提供给这个客户度服务，需要一种算法来完成这一步映射。</p>
+<p>如果直接使用hash显然分布非常不均匀。那如果使用余数法呢，一共有N台机器，我对N取余可以映射到任意一台机器上。</p>
+<p>这种方法的缺点在于，当取余的值集中在某一范围时，就容易集中访问某些机器，导致热点问题。</p>
+<blockquote>
+<p>于是memcache推出了一个叫做一致性哈希的算法，一个哈希环，环上支持2^32次方个节点，也就是包含了所有的ip。</p>
+<p>然后我们把主机通过hash值分布到这个环上，请求到来时会映射到某一个节点，如果该节点没有主机，则顺时针寻找真正主机。</p>
+<p>当节点加入或者节点删除时，并不会影响服务的可用性，只是某些请求会被映射到别的节点。</p>
+</blockquote>
+<p>但是当请求集中到某个区域时，会产生倾斜，我们引入了虚拟节点来改善这个问题，虚拟节点 对应到真实节点，所以加入虚拟节点可以更好地转移请求。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="session和分布式session">session和分布式session<a href="#session和分布式session" class="hash-link" aria-label="Direct link to session和分布式session" title="Direct link to session和分布式session">​</a></h2>
+<p>session是web应用必备的一个结构。<br>
+<!-- -->一般有几种方案来管理session。</p>
+<p>1 web应用保存session到内存中，但是宕机会丢失</p>
+<p>2 web应用持久化到数据库或者redis，增加数据库负担。</p>
+<p>3 使用cookie保存加密后的session，浏览器压力大，可能被破解</p>
+<p>4 使用单独的session服务集群提供session服务，并且本身也可以采用分布式部署，部署的时候可以主从。</p>
+<p>保证session一致性的解决方法（客户端可以访问到自己的session）：</p>
+<p>1 客户端cookie保存</p>
+<p>2 多个webserver进行同步，效率低</p>
+<p>3 反向代理绑定ip映射同一个服务器，但是宕机时出错</p>
+<p>4 后端统一存储，比如redis，或则部署session服务。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="负载均衡">负载均衡<a href="#负载均衡" class="hash-link" aria-label="Direct link to 负载均衡" title="Direct link to 负载均衡">​</a></h2>
+<p>负载均衡一般可以分为七层，四层负载均衡。</p>
+<p>Nginx</p>
+<p>七层的负载均衡也就是http负载均衡，主要使用Nginx完成。</p>
+<blockquote>
+<p>配置Nginx进行反向代理的url，然后转发请求到上游服务器，请求进来时自动转发到上游服务器，通过url进行负载均衡，所以是七层负载均衡。既然是七层负载，那么上游服务器提供了http服务，也可以解析该请求。</p>
+<p>四层负载均衡主要是tcp请求的负载均衡，因为tcp请求是绑定到一个端口上的，所以我们根据端口进行请求转发到上游服务器的。既然是四层负载，上游服务器监听该端口的服务就可以处理该请求。</p>
+</blockquote>
+<p>LVS</p>
+<p>LVS术语定义：</p>
+<p>DS：Director Server，前端负载均衡器节点（后文用Director称呼）；<br>
+<!-- -->RS：Real Server，后端真实服务器；<br>
+<!-- -->VIP：用户请求的目标的IP地址，一般是公网IP地址；<br>
+<!-- -->DIP：Director Server IP，Director和Real Server通讯的内网IP地址；<br>
+<!-- -->RIP：Real Server IP，Director和Real Server通讯的内网IP地址；</p>
+<p>LVS有三种实现负载均衡的方式</p>
+<p>NAT 四层负载均衡</p>
+<blockquote>
+<p>NAT支持四层负载均衡，NAT中只有DS提供公网ip，并且VIP绑定在DS的mac地址上，客户端只能访问DS。同时DS和RS通过内网ip进行网络连接。当TCP数据报到达DS时，DS修改数据报，指向RS的ip和port。进行转发即可。</p>
+<p>同时，RS处理完请求后，由于网关时DS，所以仍然要返回给DS处理。</p>
+<p>NAT模式中，RS返回数据包是返回给Director，Director再返回给客户端；事实上这跟NAT网络协议没什么关系。</p>
+</blockquote>
+<p>DR 二层负载均衡</p>
+<blockquote>
+<p>DR模式中，DS负责接收请求。接收请求后把数据报的mac地址改成指向RS的mac地址，并且由于三台机器拥有同样的vip地址。<br>
+<!-- -->所以RS接收请求后认为该数据报应该由自己处理并相应。</p>
+<p>同时为了避免RS再把相应转发会DS，我们禁用了对DS的arp，所以此时RS就会通过vip把响应通过vip网关返回给客户端。</p>
+<p>Director通过修改请求中目标地址MAC为选定的RS实现数据转发，这就要求Diretor和Real Server必须在同一个广播域内，也就是他们的mac地址是可达的。<br>
+<!-- -->DR（Direct Routing）模式中，RS返回数据是直接返回给客户端（通过额外的路由）；</p>
+</blockquote>
+<p>TUN</p>
+<blockquote>
+<p>TUN中使用了IP隧道技术，客户端请求发给DS时，DS会通过隧道技术把数据报通过隧道发给实际的RS，然后RS解析数据以后可以直接响应给客户端，因为他有客户端的ip地址。这就不要求DS和RS在同一网段了，当然前提是RS有公网ip。</p>
+<p>TUN（IP Tunneling）模式中，RS返回的数据也是直接返回给客户端，这种模式通过Overlay协议（把一个IP数据包封装到另一个数据包内部叫Overlay）避免了DR的限制。</p>
+</blockquote>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="zookeeper">zookeeper<a href="#zookeeper" class="hash-link" aria-label="Direct link to zookeeper" title="Direct link to zookeeper">​</a></h2>
+<p>zookeeper集群自身的特性：</p>
+<blockquote>
+<p>1 一个zookeeper服务器集群，一开始就会进行选主，主节点挂掉后也会进行选主。</p>
+<p>使用zab协议中的选主机制进行选主，也就是每个节点进行一次提议，刚开始提议自己，如果有新的提议则覆盖自己原来的提议，不断重复，直到有节点获得过半的投票。完成一轮选主。</p>
+<p>2 选主结束后，开始进行消息广播和数据同步，保证每一台服务器的数据都和leader同步。</p>
+<p>3 开始提供服务，客户端向leader发送请求，leader首先发出提议，当有半数以上节点响应时，leader会发送commit信息，于是所有节点执行该操作。当有机器宕机时重启后会和leader同步。这是一个类似2pc的提交方式。</p>
+</blockquote>
+<p>zookeeper提供了分布式环境中常用的服务</p>
+<blockquote>
+<p>1 配置服务，多个机器可以通过文件节点共享配置。</p>
+<p>2 选主服务，通过添加顺序节点，可以进行选主。</p>
+<p>3 分布式锁，顺序节点和watcher</p>
+<p>4 全局id，使用机器号+时间戳可以生成一个transactionid，是全局唯一的。</p>
+</blockquote>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="数据库的分布式事务">数据库的分布式事务<a href="#数据库的分布式事务" class="hash-link" aria-label="Direct link to 数据库的分布式事务" title="Direct link to 数据库的分布式事务">​</a></h2>
+<p>分布式事务的实现一般可以用2PC和3PC解决。</p>
+<p>成熟的方案有：</p>
+<blockquote>
+<p>1 TCC 补偿式事务，对每一个步骤都有一个补偿措施。</p>
+<p>2 全局事务实现。</p>
+<p>3 事务消息：rocketmq的事务实现，先发消息到队列中，然后本地执行事务并通知消息队列，若成功则消息主动推给另一个服务，直到服务二执行成功，消息从队列中删除。如果超时不成功，则消息要求事务A回滚。</p>
+<p>如果过程中失败了，本地事务也会回滚。消息队列可以回调本地接口判断事务是否执行成功，防止超时。</p>
+<p>4 本地实现消息表：<br>
+<!-- -->本地实现消息表并且和事务记录存在一起，自己实现消息的轮询发送。<br>
+<!-- -->首先把本地事务操作和消息增加放在一个事务里执行，然后轮询消息表进行发送，如果执行成功则消息达到服务B，通知其执行。执行成功后消息被删除，否则回滚事务删除消息。</p>
+</blockquote>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="分布式锁问题">分布式锁问题<a href="#分布式锁问题" class="hash-link" aria-label="Direct link to 分布式锁问题" title="Direct link to 分布式锁问题">​</a></h2>
+<p>分布式锁用于分布式环境中的资源互斥，因为单机可以通过共享内存实现，而分布式环境只能通过网络实现。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="mysql实现分布式锁">MySQL实现分布式锁<a href="#mysql实现分布式锁" class="hash-link" aria-label="Direct link to MySQL实现分布式锁" title="Direct link to MySQL实现分布式锁">​</a></h3>
+<p>insert加锁，锁没有失效时间，容易产生死锁</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="redis实现分布式锁">redis实现分布式锁<a href="#redis实现分布式锁" class="hash-link" aria-label="Direct link to redis实现分布式锁" title="Direct link to redis实现分布式锁">​</a></h3>
+<ol>
+<li>基于setnx、expire两个命令来实现<br>
+<!-- -->基于setnx（set if not exist）的特点，当缓存里key不存在时，才会去set，否则直接返回false。<br>
+<!-- -->如果返回true则获取到锁，否则获取锁失败，为了防止死锁，我们再用expire命令对这个key设置一个超时时间来避免。<br>
+<!-- -->但是这里看似完美，实则有缺陷，当我们setnx成功后，线程发生异常中断，expire还没来的及设置，那么就会产生死锁。<br>
+<!-- -->2 使用getset实现，可以判断自己是否获得了锁，但是可能会出现并发的原子性问题。拆分成两个操作。<br>
+<!-- -->3 避免原子性问题可以使用lua脚本保证事务的原子性。<br>
+<!-- -->4 上述都是单点的redis，如果是分布式环境的redis集群，可以使用redlock，要求节点向半数以上redis机器请求锁。才算成功。</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="zookeeper实现分布式锁">zookeeper实现分布式锁<a href="#zookeeper实现分布式锁" class="hash-link" aria-label="Direct link to zookeeper实现分布式锁" title="Direct link to zookeeper实现分布式锁">​</a></h3>
+<p>创建有序节点，最小的抢到锁，其他的监听他的上一个节点即可。并且抢到锁的节点释放时只会通知下一个节点。</p>
+<p>小结</p>
+<p>在分布式系统中，共享资源互斥访问问题非常普遍，而针对访问共享资源的互斥问题，常用的解决方案就是使用分布式锁，这里只介绍了几种常用的分布式锁，分布式锁的实现方式还有有很多种，根据业务选择合适的分布式锁，下面对上述几种锁进行一下比较：<br>
+<!-- -->数据库锁：<br>
+<!-- -->优点：直接使用数据库，使用简单。<br>
+<!-- -->缺点：分布式系统大多数瓶颈都在数据库，使用数据库锁会增加数据库负担。<br>
+<!-- -->缓存锁：<br>
+<!-- -->优点：性能高，实现起来较为方便，在允许偶发的锁失效情况，不影响系统正常使用，建议采用缓存锁。<br>
+<!-- -->缺点：通过锁超时机制不是十分可靠，当线程获得锁后，处理时间过长导致锁超时，就失效了锁的作用。<br>
+<!-- -->zookeeper锁：<br>
+<!-- -->优点：不依靠超时时间释放锁；可靠性高；系统要求高可靠性时，建议采用zookeeper锁。<br>
+<!-- -->缺点：性能比不上缓存锁，因为要频繁的创建节点删除节点。并且zookeeper只能单点写入。而Redis可以并发写入。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="消息队列">消息队列<a href="#消息队列" class="hash-link" aria-label="Direct link to 消息队列" title="Direct link to 消息队列">​</a></h2>
+<p>适合场景：</p>
+<p>1 服务之间解耦，比如淘宝的买家服务和物流服务，中间需要消息传递订单信息。但又不需要强耦合。便于服务的划分和独立部署</p>
+<p>2 控制流量，大流量访问某服务时，避免服务出现问题，将其先存入队列，均匀释放流量。</p>
+<p>3 削峰，当某一个服务如秒杀，如果直接集中访问，服务器可能会冲垮，所以先存到队列中，控制访问量，避免服务器冲击。</p>
+<p>4 事务，消息事务</p>
+<p>5 异步请求处理，比如一些不重要的服务可以延缓执行，比如卖家评价，站内信等。</p>
+<p>常用消息队列：</p>
+<p>rabbitmq：使用consumer和producer的模型，并且使用了broker，broker中包含路由功能的exchanger，每个key绑定一个queue，应用通过key进行队列消费和生产。</p>
+<p>一般是点对点的消息，也可以支持一对多的消息，当然也可以支持消息的订阅。还有就是主题模式，和key的区别就是主题模式是多级的key表示。</p>
+<p>kafka：</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="微服务和dubbo">微服务和Dubbo<a href="#微服务和dubbo" class="hash-link" aria-label="Direct link to 微服务和Dubbo" title="Direct link to 微服务和Dubbo">​</a></h2>
+<p>分布式架构意味着服务的拆分，最早的SOA架构已经进行了服务拆分，但是每个服务还是太过庞大，不适合扩展和修改。</p>
+<p>微服务的拆分粒度更加细，服务可以独立部署和快速迭代，通知支持扩展。</p>
+<p>服务之间一般使用rpc调用进行访问，可以使用自定义协议也可以使用http服务，当然通过netty 实现TCP服务并且搭配合理的序列化方案也可以完成rpc功能。rpc是微服务的基础。</p>
+<p>微服务一般需要配置中心来进行服务注册和发现，以便服务信息更新和配置，dubbo中使用的是zookeeper，用于配置服务信息提供给生产者使用。</p>
+<p>一般情况下微服务需要有监控中心，心跳检测每一台服务器，及时完成故障切换和通知。同时监控服务的性能和使用情况。</p>
+<p>序列化方式一般可以使用protobuf，http服务一般使用json。</p>
+<p>微服务还支持更多的包括权限控制，流量控制，灰度发布，服务降级等内容，这里就不再细谈。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="全局id">全局id<a href="#全局id" class="hash-link" aria-label="Direct link to 全局id" title="Direct link to 全局id">​</a></h3>
+<p>方法一：使用数据库的 auto_increment 来生成全局唯一递增ID</p>
+<p>优点：<br>
+<!-- -->简单，使用数据库已有的功能<br>
+<!-- -->能够保证唯一性<br>
+<!-- -->能够保证递增性<br>
+<!-- -->步长固定</p>
+<p>缺点：<br>
+<!-- -->可用性难以保证：数据库常见架构是一主多从+读写分离，生成自增ID是写请求，主库挂了就玩不转了<br>
+<!-- -->扩展性差，性能有上限：因为写入是单点，数据库主库的写性能决定ID的生成性能上限，并且难以扩展</p>
+<p>方法三：uuid/guid</p>
+<p>不管是通过数据库，还是通过服务来生成ID，业务方Application都需要进行一次远  程调用，比较耗时。</p>
+<p>有没有一种本地生成ID的方法，即高性能，又时延低呢？</p>
+<p>uuid是一种常见的方案：</p>
+<p>string ID =GenUUID();</p>
+<p>优点：</p>
+<p>本地生成ID，不需要进行远程调用，时延低</p>
+<p>扩展性好，基本可以认为没有性能上限</p>
+<p>缺点：</p>
+<p>无法保证趋势递增</p>
+<p>uuid过长，往往用字符串表示，作为主键建立索引查询效率低，常见优化方案为“转化为两个uint64整数存储”或者“折半存储”（折半后不能保证唯一性）</p>
+<p>方法四：取当前毫秒数</p>
+<p>uuid是一个本地算法，生成性能高，但无法保证趋势递增，且作为字符串ID检索效率低，有没有一种能保证递增的本地算法呢？</p>
+<p>取当前毫秒数是一种常见方案：</p>
+<p>uint64 ID = GenTimeMS();</p>
+<p>优点：</p>
+<p>本地生成ID，不需要进行远程调用，时延低</p>
+<p>生成的ID趋势递增</p>
+<p>生成的ID是整数，建立索引后查询效率高</p>
+<p>缺点：</p>
+<p>如果并发量超过1000，会生成重复的ID</p>
+<p>方法五：类snowflake算法</p>
+<p>snowflake是twitter开源的分布式ID生成算法，其核心思想为，一个long型的ID：</p>
+<p>41bit作为毫秒数</p>
+<p>10bit作为机器编号</p>
+<p>12bit作为毫秒内序列号</p>
+<p>算法单机每秒内理论上最多可以生成1000*(2^12)，也就是400W的ID，完全能满足业务的需求。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="秒杀系统">秒杀系统<a href="#秒杀系统" class="hash-link" aria-label="Direct link to 秒杀系统" title="Direct link to 秒杀系统">​</a></h2>
+<p><img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/9eda905930f00090d55b5ae3f6796d2b.png" alt="image" class="img_kGBN"></p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="第一层客户端怎么优化浏览器层app层">第一层，客户端怎么优化（浏览器层，APP层）<a href="#第一层客户端怎么优化浏 览器层app层" class="hash-link" aria-label="Direct link to 第一层，客户端怎么优化（浏览器层，APP层）" title="Direct link to 第一层，客户端怎么优化（浏览器层，APP层）">​</a></h3>
+<p>（a）产品层面，用户点击“查询”或者“购票”后，按钮置灰，禁止用户重复提交请求；</p>
+<p>（b）JS层面，限制用户在x秒之内只能提交一次请求；</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="第二层站点层面的请求拦截">第二层，站点层面的请求拦截<a href="#第二层站点层面的请求拦截" class="hash-link" aria-label="Direct link to 第二层，站点层面的请求拦截" title="Direct link to 第二层，站点层面的请求拦截">​</a></h3>
+<blockquote>
+<p>怎么拦截？怎么防止程序员写for循环调用，有去重依据么？ip？cookie-id？…想复杂了，这类业务都需要登录，用uid即可。在站点层面，对uid进行请求计数和去重，甚至不需要统一存储计数，直接站点层内存存储（这样计数会不准，但最简单）。一个uid，5秒只准透过1个请求，这样又能拦住99%的for循环请求。</p>
+<p>5s只透过一个请求，其余的请求怎么办？缓存，页面缓存，同一个uid，限制访问频度，做页面缓存，x秒内到达站点层的请求，均返回同一页面。同一个item的查询，例如车次，做页面缓存，x秒内到达站点层的请求，均返回同一页面。如此限流，既能保证用户有良好的用户体验（没有返回404）又能保证系统的健壮性（利用页面缓存，把请求拦截在站点层了）。</p>
+</blockquote>
+<p>好，这个方式拦住了写for循环发http请求的程序员，有些高端程序员（黑客）控制了10w个肉鸡，手里有10w个uid，同时发请求（先不考虑实名制的问题，小米抢手机不需要实名制），这下怎么办，站点层按照uid限流拦不住了。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="第三层-服  务层来拦截反正就是不要让请求落到数据库上去消息队列缓存">第三层 服务层来拦截（反正就是不要让请求落到数据库上去）消息队列+缓存<a href="#第三层-服务层来拦截反正就是不要让请求落到数据库上去消息队列缓存" class="hash-link" aria-label="Direct link to 第三层 服务层来拦截（反正就是不要让请求落到数据库上去）消息队列+缓存" title="Direct link to 第三层 服务层来拦截（反正就是不要让请求落到数据库上去）消息队列+缓存">​</a></h3>
+<p>服务层怎么拦截？大哥，我是服务层，我清楚的知道小米只有1万部手机，我清楚的知道一列火车只有2000张车票，我透10w个请求去数据库有什么意义呢？没错，请求队列！</p>
+<p>对于写请求，做请求队列，每次只透有限的写请求去数据层（下订单，支付这样的写业务）</p>
+<p>1w部手机，只透1w个下单请求去db</p>
+<p>3k张火车票，只透3k个下单请求去db</p>
+<p>如果均成功再放下一批，如果库存不够则队列里的写请求全部返回“已售完”。</p>
+<p>对于读请求，怎么优化？cache抗，不管是memcached还是redis，单机抗个每秒10w应该都是没什么问题的。如此限流，只有非常少的写请求，和非常少的读缓存mis的请求会透到数据层去，又有99.9%的请求被拦住了。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="好了最后是数据库层">好了，最后是数据库层<a href="#好了最后是数据库层" class="hash-link" aria-label="Direct link to 好了，最后是数据库层" title="Direct link to 好了，最后是数据库层">​</a></h3>
+<p>浏览器拦截了80%，站点层拦截了99.9%并做了页面缓存，服务层又做了写请求队列与数据缓存，每次透到数据库层的请求都是可控的。db基本就没什么压力了，闲庭信步，单机也能扛得住，还是那句话，库存是有限的，小米的产能有限，透这么多请求来数据库没有意义。</p>
+<p>全部透到数据库，100w个下单，0个成功，请求有效率0%。透3k个到数据，全部成功，请求有效率100%。</p>
+<p><img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/bf7107f82e635020a43f12aa4a8dc856.png" alt="image" class="img_kGBN"></p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="总结">总结<a href="#总结" class="hash-link" aria-label="Direct link to 总结" title="Direct link to 总结">​</a></h3>
+<p>上文应该描述的非常清楚了，没什么总结了，对于秒杀系统，再次重复下我个人经验的两个架构优化思路：</p>
+<p>（1）尽量将请求拦截在系统上游（越上游越好）；</p>
+<p>（2）读多写少的常用多使用缓存（缓存抗读压力）；</p>
+<p>浏览器和APP：做限速</p>
+<p>站点层：按照uid做限速，做页面缓存</p>
+<p>服务层：按照业务做写请求队列控制流量，做数据缓存</p>
+<p>数据层：闲庭信步</p>
+<p>并且：结合业务做优化</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="微信公众号">微信公众号<a href="#微信公众号" class="hash-link" aria-label="Direct link to 微信公众号" title="Direct link to 微信公众号">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="java技术江湖">Java技术江湖<a href="#java技术江湖" class="hash-link" aria-label="Direct link to Java技术江湖" title="Direct link to Java技术江湖">​</a></h3>
+<p>如果大家想要实时关注我更新的文章以及分享的干货的话，可以关注我的公众号【Java技术江湖】一位阿里 Java 工程师的技术小站，作者黄小斜，专注 Java 相关技术：SSM、SpringBoot、MySQL、分布式、中间件、集群、Linux、网络、多线程，偶尔讲点Docker、ELK，同时也分享技术干货和学习经验，致力于Java全栈开发！</p>
+<p><strong>Java工程师必备学习资源:</strong> 一些Java工程师常用学习资源，关注公众号后，后台回复关键  字 <strong>“Java”</strong> 即可免费无套路获取。</p>
+<p><img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/20190805090108984.jpg" alt="我的公众号" class="img_kGBN"></p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="个人公众号黄小斜">个人公众号：黄小斜<a href="#个人公众号黄小斜" class="hash-link" aria-label="Direct link to 个人公众号：黄小斜" title="Direct link to 个人公众号：黄小斜">​</a></h3>
+<p>作者是 985 硕士，蚂蚁金服 JAVA 工程师，专注于 JAVA 后端技术栈：SpringBoot、MySQL、分布式、中间件、微服务，同时也懂点投资理财，偶尔讲点算法和计算机理论基础，坚持学习和写作，相信终身学习的力量！</p>
+<p><strong>程序员3T技术学习资源：</strong> 一些程序员学习技术的资源大礼包，关注公众号后，后台回复关键字 <strong>“资料”</strong> 即可免费无套路获取。<br>
+<img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/20190829222750556.jpg" alt="" class="img_kGBN"></p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="theme-doc-footer-edit-meta-row row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/distributed/分布式技术实践总结.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_EYjg" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_eevz"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：Zookeeper典型应用场  景及实践"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">搞懂分布式技术：Zookeeper典型应用场景及实践</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/code-note-blog/docs/distributed/分布式理论总结"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">分布式理论总结</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_lc2k thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#分布式数据和nosql" class="table-of-contents__link toc-highlight">分布式数据和nosql</a></li><li><a href="#缓存-分布式缓存" class="table-of-contents__link toc-highlight">缓存 分布式缓存</a><ul><li><a href="#redis的部署方案" class="table-of-contents__link toc-highlight">redis的部署方案：</a></li><li><a href="#缓存需要解决的问题" class="table-of-contents__link toc-highlight">缓存需要解决的问题：</a></li><li><a href="#缓存更新的方法" class="table-of-contents__link toc-highlight">缓存更新的方法</a></li><li><a href="#缓存在springboot中的使用" class="table-of-contents__link toc-highlight">缓存在springboot中的使用</a></li><li><a href="#一致性哈希" class="table-of-contents__link toc-highlight">一致性哈希</a></li></ul></li><li><a href="#session和分布式session" class="table-of-contents__link toc-highlight">session和分布式session</a></li><li><a href="#负载均衡" class="table-of-contents__link toc-highlight">负载均衡</a></li><li><a href="#zookeeper" class="table-of-contents__link toc-highlight">zookeeper</a></li><li><a href="#数据库的分布式事务" class="table-of-contents__link toc-highlight">数据库的分布式事务</a></li><li><a href="#分布式锁问题" class="table-of-contents__link toc-highlight">分布式锁问题</a><ul><li><a href="#mysql实现分布式锁" class="table-of-contents__link toc-highlight">MySQL实现分 布式锁</a></li><li><a href="#redis实现分布式锁" class="table-of-contents__link toc-highlight">redis实现分布式锁</a></li><li><a href="#zookeeper实现分布式锁" class="table-of-contents__link toc-highlight">zookeeper实现分布式锁</a></li></ul></li><li><a href="#消息队列" class="table-of-contents__link toc-highlight">消息队列</a></li><li><a href="#微服务和dubbo" class="table-of-contents__link toc-highlight">微服务和Dubbo</a><ul><li><a href="#全局id" class="table-of-contents__link toc-highlight">全局id</a></li></ul></li><li><a href="#秒杀系统" class="table-of-contents__link toc-highlight">秒杀系统</a><ul><li><a href="#第一层客户端怎么优化浏览器层app层" class="table-of-contents__link toc-highlight">第一层，客户端怎么优化（浏览器层，APP层）</a></li><li><a href="#第二层站点层面的请求拦截" class="table-of-contents__link toc-highlight">第二层，站点层面的请求拦截</a></li><li><a href="#第三层-服务层来拦截反正就是不要让请求落到数据库上去消息队列缓存" class="table-of-contents__link toc-highlight">第三层 服务层来拦截（反正就是不要让请求落到数据库上去）消息队列+缓存</a></li><li><a href="#好了最后是数据库层" class="table-of-contents__link toc-highlight">好了，最后是数据库层</a></li><li><a href="#总结" class="table-of-contents__link toc-highlight">总结</a></li></ul></li><li><a href="#微信公众号" class="table-of-contents__link toc-highlight">微信公众号</a><ul><li><a href="#java技术江湖" class="table-of-contents__link toc-highlight">Java技术江湖</a></li><li><a href="#个人公众号黄小斜" class="table-of-contents__link toc-highlight">个人公众号：黄小斜</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/code-note-blog/docs/intro">Tutorial</a></li></ul></div><div class="col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://stackoverflow.com/questions/tagged/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Stack Overflow<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://discordapp.com/invite/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Discord<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://twitter.com/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Twitter<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/code-note-blog/blog">Blog</a></li><li class="footer__item"><a href="https://github.com/facebook/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 My Project, Inc. Built with Docusaurus.</div></div></div></footer></div>
+</body>
+</html>

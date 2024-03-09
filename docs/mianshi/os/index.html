@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-mianshi/os" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.1.0">
+<title data-rh="true">操作系统 | Tommy</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://aiden-coding.github.io/code-note-blog/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://aiden-coding.github.io/code-note-blog/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://aiden-coding.github.io/code-note-blog/docs/mianshi/os"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="操作系统 | Tommy"><meta data-rh="true" name="description" content="操作系统面试题，32道操作系统八股文（1万字51张手绘图），面渣逆袭必看👍"><meta data-rh="true" property="og:description" content="操作系统面试题，32道操作系统八股文（1万字51张手绘图），面渣逆袭必看👍"><link data-rh="true" rel="icon" href="/code-note-blog/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://aiden-coding.github.io/code-note-blog/docs/mianshi/os"><link data-rh="true" rel="alternate" href="https://aiden-coding.github.io/code-note-blog/docs/mianshi/os" hreflang="en"><link data-rh="true" rel="alternate" href="https://aiden-coding.github.io/code-note-blog/docs/mianshi/os" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/code-note-blog/blog/rss.xml" title="Tommy RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/code-note-blog/blog/atom.xml" title="Tommy Atom Feed"><link rel="stylesheet" href="/code-note-blog/assets/css/styles.dd5372db.css">
+<script src="/code-note-blog/assets/js/runtime~main.f999fb27.js" defer="defer"></script>
+<script src="/code-note-blog/assets/js/main.a0bfbaed.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_XYiV" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/code-note-blog/"><b class="navbar__title text--truncate">Tommy</b></a><a class="navbar__item navbar__link" href="/code-note-blog/docs/Java/basic/抽象类和接口">java</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/JavaWeb/走进JavaWeb技术世界：JavaWeb的由来和基础知识">javaweb</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/cache/探索Redis设计与实现：连接底层与表面的数据结构robj">cache</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/backend/后端技术杂谈：白话虚拟化技术">backend</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/cs/algorithms/剑指offer">cs</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/database/重新学习MySQL数据库：『浅入浅出』MySQL和InnoDB">database</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/distributed/basic/分布式系统理论基础 ：CAP">distributed</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/interview/BATJ-Experience/面阿里,终获offer">interview</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/mq/kafka/消息队列kafka详解：如何实现死信队列">mq</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/Spring全家桶/Spring/第一个Spring应用">spring</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/code-note-blog/docs/mianshi/collection">面试</a><a href="https://aiden-coding.github.io/code-note-blog/SpringCloud%E7%AC%AC3%E5%AD%A32024.html" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Blog<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></div><div class="navbar__items navbar__items--right"><div class="toggle_XbAW colorModeToggle_r5NY"><button class="clean-btn toggleButton_Jx0n toggleButtonDisabled_zYO7" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_FjAw"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_qmEt"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_wJfS"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_LABv"><div class="docsWrapper_pdvB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_Jioa" type="button"></button><div class="docRoot_qx_v"><aside class="theme-doc-sidebar-container docSidebarContainer_NHKT"><div class="sidebarViewport_uyYB"><div class="sidebar_SZG4"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_VP_k"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/mianshi/collection">Java集合框架</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/mianshi/fenbushi">分布式</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/mianshi/javabasic">Java 基础</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/mianshi/javase">Java SE</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/mianshi/javathread">Java并发编程</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/mianshi/jvm">JVM</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/mianshi/mybatis">MyBatis</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/mianshi/mysql">MySQL</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/mianshi/network">计算机网络</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/mianshi/nixi">面渣逆袭</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" href="/code-note-blog/docs/mianshi/os">操作系统</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/mianshi/redis">Redis</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/mianshi/rocketmq">RocketMQ</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/mianshi/spring">Spring</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/mianshi/weifuwu">微服务</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/code-note-blog/docs/test/b">b</a></div></li></ul></nav></div></div></aside><main class="docMainContainer_SejT"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_j3Yw"><div class="docItemContainer_XOSC"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_F6gm" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/code-note-blog/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YCxa"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">操作系统</span><meta itemprop="position" content="1"></li></ul></nav><div class="tocCollapsible_ToOY theme-doc-toc-mobile tocMobile_suYB"><button type="button" class="clean-btn tocCollapsibleButton_VzP_">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>操作系统</h1></header><p>1 万字 51 张手绘图，详解 32 道操作系统面试高频题（让天下没有难背的八股），面渣背会这些 OS 八股文，这次吊打面试官，我觉得稳了（手动 dog）。整理：沉默王二，戳<a href="https://mp.weixin.qq.com/s/CYsn0M5ddDuG--mALmhsuw" target="_blank" rel="noopener noreferrer">转载链接</a>，作者：三分恶，戳<a href="https://mp.weixin.qq.com/s/KMGyn-FLkvzsMH06LV4OfQ" target="_blank" rel="noopener noreferrer">原文链接</a>。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="引论">引论<a href="#引论" class="hash-link" aria-label="Direct link to 引论" title="Direct link to 引论">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="01什么是操 作系统">01、什么是操作系统？<a href="#01什么是操作系统" class="hash-link" aria-label="Direct link to 01、什么是操作系统？" title="Direct link to 01、什么是操作系统？">​</a></h3>
+<p>可以这么说，操作系统是一种运行在内核态的软件。</p>
+<p>它是应用程序和硬件之间的媒介，向应用程序提供硬件的抽象，以及管理硬件资源。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-284-84ef4b956c56a6c40757d8260417a4c7.png" width="1302" height="551" class="img_kGBN"></p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="02操作系统主要有哪些功能">02、操作系统主要有哪些功能？<a href="#02操作系统主要有哪些功能" class="hash-link" aria-label="Direct link to 02、操作系统主要有哪些功能？" title="Direct link to 02、操作系统主要有哪些功能？">​</a></h3>
+<p>操作系统最主要的功能：</p>
+<ul>
+<li>处理器（CPU）管理：CPU的管理和分配，主要指的是进程管理。</li>
+<li>内存管理：内存的分配和管理，主要利用了虚拟内存的方式。</li>
+<li>外存管理：外存（磁盘等）的分配和管理，将外存以文件的形式提供出去。</li>
+<li>I/O管理：对输入/输出设备的统一管理。</li>
+</ul>
+<p>除此之外，还有保证自身正常运行的健壮性管理，防止非法操作和入侵的安全性管理。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-285-c90cb61ae97ffaea9a2ee311a43b2cfd.png" width="670" height="340" class="img_kGBN"></p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="操作系统结构">操作系统结构<a href="#操作系统结构" class="hash-link" aria-label="Direct link to 操作系统结构" title="Direct link to 操作系统结构">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="03什么是内核">03、什么是内核？<a href="#03什么是内核" class="hash-link" aria-label="Direct link to 03、什么是内核 ？" title="Direct link to 03、什么是内核？">​</a></h3>
+<p>可以这么说，内核是一个计算机程序，它是操作系统的核心，提供了操作系统最核心的能力，可以控制操作系统中所有的内容。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="04什么是用户态和内核态">04、什么是用户态和内核态？<a href="#04什么是用户态和内核态" class="hash-link" aria-label="Direct link to 04、什么是用户态和内核态？" title="Direct link to 04、什么是用户态和内核态？">​</a></h3>
+<p>内核具有很⾼的权限，可以控制 cpu、内存、硬盘等硬件，出于权限控制的考虑，因此⼤多数操作系统，把内存分成了两个区域：</p>
+<ul>
+<li>内核空间，这个内存空间只有内核程序可以访问；</li>
+<li>⽤户空间，这个内存空间专⻔给应⽤程序使⽤，权限比较小；</li>
+</ul>
+<p>⽤户空间的代码只能访问⼀个局部的内存空间，⽽内核空间的代码可以访问所有内存空间。因此，当程序使⽤⽤户空间时，我们常说该程序在<strong>⽤户态</strong>执⾏，⽽当程序使内核空间时，程序则在<strong>内核态</strong>执⾏。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="05用户态和内核态是如何切换的">05、用户态和内核态是如何切换的？<a href="#05用户态和内核态是如何切换的" class="hash-link" aria-label="Direct link to 05、用户态和内核态是如何切换的？" title="Direct link to 05、用户态和内核态是如何切换的？">​</a></h3>
+<p>应⽤程序如果需要进⼊内核空间，就需要通过系统调⽤，来进入内核态：</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-286-4229e3f58920e88afe9042118671f07d.png" width="817" height="217" class="img_kGBN"></p>
+<p>内核程序执⾏在内核态，⽤户程序执⾏在⽤户态。当应⽤程序使⽤系统调⽤时，会产⽣⼀个中断。发⽣中断后， CPU 会中断当前 在执⾏的⽤户程序，转⽽跳转到中断处理程序，也就是开始执⾏内核程序。内核处理完后，主动触发中断，把 CPU 执⾏权限交回给⽤户程序，回到⽤户态继续⼯作。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="进程和线程">进程和线程<a href="#进程和线程" class="hash-link" aria-label="Direct link to 进程和线程" title="Direct link to 进程和线程">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="06并行和并发有什么区别">06、并行和并发有什么区别？<a href="#06并行和并发有什么区别" class="hash-link" aria-label="Direct link to 06、并行和并发有什么区别？" title="Direct link to 06、并行和并发有什么区别？">​</a></h3>
+<p>并发就是在一段时间内，多个任务都会被处理；但在某一时刻，只有一个任务在执行。单核处理器做到的并发，其实是利用时间片的轮转，例如有两个进程A和B，A运行一个时间片之后，切换到B，B运行一个时间片之后又切换到A。因为切换速度足够快，所以宏观上表现为在一段时间内能同时运行多个程序。</p>
+<p>并行就是在同一时刻，有多个任务在执行。这个需要多核处理器才能完成，在微观上就能同时执行多条指令，不同的程序被放到不同的处理器上运行，这个是物理上的多个进程同时进行。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-288-8cbc0001f1a7ae10dc4672565cfaeeda.png" width="797" height="386" class="img_kGBN"></p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="07什么是进程上下文切换">07、什么是进程上下文切换？<a href="#07什么是进程上下文切换" class="hash-link" aria-label="Direct link to 07、什么是进程上下文切换？" title="Direct link to 07、什么是进程上下文切换？">​</a></h3>
+<p>对于单核单线程 CPU 而言，在某一时刻只能执行一条 CPU 指令。上下文切换 (Context Switch) 是一种将 CPU 资源从一个进程分配给另一个进程的机制。从用户角度看，计算机能够并行运行多个进程，这恰恰是操作系统通过快速上下文切换造成的结果。在切换的过程中，操作系统需要先存储当前进程的状态 (包括内存空间的指针，当前执行完的指令等等)，再读入下一个进程的状态，然后执行此进程。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-287-03f6438581862a0c7a3ec319a0006a56.png" width="1117" height="293" class="img_kGBN"></p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="08进程有哪些状态">08、进程有哪些状态？<a href="#08进程有哪些状态" class="hash-link" aria-label="Direct link to 08、进程有哪些状态？" title="Direct link to 08、进程有哪些状态？">​</a></h3>
+<p>当一个进程开始运行时，它可能会经历下面这几种状态：</p>
+<p>上图中各个状态的意义：</p>
+<ul>
+<li>运⾏状态（<em>Runing</em>）：该时刻进程占⽤ CPU；</li>
+<li>就绪状态（<em>Ready</em>）：可运⾏，由于其他进程处于运⾏状态⽽暂时停⽌运⾏；</li>
+<li>阻塞状态（<em>Blocked</em>）：该进程正在等待某⼀事件发⽣（如等待输⼊/输出操作的完成）⽽暂时停⽌运⾏，这时，即使给它CPU控制权，它也⽆法运⾏；</li>
+</ul>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-289-ebe35b9cf2594a26ff8e449d695df533.png" width="592" height="276" class="img_kGBN"></p>
+<p>当然，进程还有另外两个基本状态：</p>
+<ul>
+<li>创建状态（<em>new</em>）：进程正在被创建时的状态；</li>
+<li>结束状态（<em>Exit</em>）：进程正在从系统中消失时的状态；</li>
+</ul>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-290-6e78b3e51f860c8efee75e711eb70a02.png" width="861" height="270" class="img_kGBN"></p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="09什么是僵尸进程">09、什么是僵尸进程？<a href="#09什么是僵尸进程" class="hash-link" aria-label="Direct link to 09、什么是僵尸进程？" title="Direct link to 09、什么是僵尸进程？">​</a></h3>
+<p>僵尸进程是已完成且处于终止状态，但在进程表中却仍然存在的进程。</p>
+<p>僵尸进程一般发生有父子关系的进程中，一个子进程的进程描述符在子进程退出时不会释放，只有当父进程通过 wait() 或 waitpid() 获取了子进程信息后才会释放。如果子进程退出，而父进程并没有调用 wait() 或 waitpid()，那么子进程的进程描述符仍然保存在系统中。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="10什么是孤儿进程">10、什么是孤儿进程？<a href="#10什么是孤儿进程" class="hash-link" aria-label="Direct link to 10、什么是孤儿进程？" title="Direct link to 10、什么是孤儿进程？">​</a></h3>
+<p>一个父进程退出，而它的一个或多个子进程还在运行，那么这些子进程将成为孤儿进程。孤儿进程将被 init 进程 (进程 ID 为 1 的进程) 所收养，并由 init 进程对它们完成状态收集工作。因为孤儿进程会被 init 进程收养，所以孤儿进程不会对系统造成危害。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="11进程有哪些调度算法">11、进程有哪些调度算法？<a href="#11进程有哪些调度算法" class="hash-link" aria-label="Direct link to 11、进程有哪些调度算法？" title="Direct link to 11、进程有哪些调度算法？">​</a></h3>
+<p>进程调度就是确定某一个时刻CPU运行哪个进程，常见的进程调度算法有：</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-291-9912ae2aba0087db5860807296d7f9a0.png" width="531" height="433" class="img_kGBN"></p>
+<ul>
+<li><strong>先来先服务</strong></li>
+</ul>
+<p>非抢占式的调度算法，按照请求的顺序进行调度。有利于长作业，但不利于短作业，因为短  作业必须一直等待前面的长作业执行完毕才能执行，而长作业又需要执行很长时间，造成了短作业等待时间过长。另外，对I/O密集型进程也不利，因为这种进程每次进行I/O操作之后又得重新排队。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-292-0e4ef062ddce62eccef606f8eaf3566b.png" width="929" height="215" class="img_kGBN"></p>
+<ul>
+<li><strong>短作业优先</strong></li>
+</ul>
+<p>非抢占式的调度算法，按估计运行时间最短的顺序进行调度。长作业有可能会饿死，处于一直等待短作业执行完毕的状态。因为如果一直有短作业到来，那么长作业永远得不到调度。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-293-d76145f60aa2ae3835b6be439c9a7335.png" width="753" height="202" class="img_kGBN"></p>
+<ul>
+<li><strong>优先级调度</strong></li>
+</ul>
+<p>为每个进程分配一个优先级，按优先级进行调度。为了防止低优先级的进程永远等不到调度，可以随着时间的推移增加等待进程的优先级。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-294-7381c7e0f83a3e491afe4089ae4ad1ef.png" width="656" height="204" class="img_kGBN"></p>
+<ul>
+<li><strong>时间片轮转</strong></li>
+</ul>
+<p>将所有就绪进程按 先来先服务的原则排成一个队列，每次调度时，把 CPU 时间分配给队首进程，该进程可以执行一个时间片。当时间片用完时，由计时器发出时钟中断，调度程序便停止该进程的执行，并将它送往就绪队列的末尾，同时继续把 CPU 时间分配给队首的进程。</p>
+<p>时间片轮转算法的效率和时间片的大小有很大关系：因为进程切换都要保存进程的信息并且载入新进程的信息，如果时间片太小，会导致进程切换得太频繁，在进程切换上就会花过多时间。 而如果时间片过长，那么实时性就不能得到保证。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-295-0406567a041a3065d5e808bf40ce0c6d.png" width="701" height="211" class="img_kGBN"></p>
+<ul>
+<li><strong>最短剩余时间优先</strong></li>
+</ul>
+<p>最短作业优先的抢占式版本，按剩余运行时间的顺序进行调度。 当一个新的作业到达时，其整个运行时间与当前进程的剩余时间作比较。如果新的进程需要的时间更少，则挂起当前进程，运行新的进程。否则新的进程等待。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="12进程间通信有哪些方式">12、进程间通信有哪些方式？<a href="#12进程间通信有哪些方式" class="hash-link" aria-label="Direct link to 12、进程间通信有哪些方式？" title="Direct link to 12、进程间通信有哪些方式？">​</a></h3>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-296-cc0478680445fcc8e5b401d4d9efcb25.png" width="371" height="359" class="img_kGBN"></p>
+<ul>
+<li>
+<p>管道：管道可以理解成不同进程之间的对白，一方发声，一方接收，声音的介质可是是空气或者电缆，进程之间就可以通过管道，<strong>所谓的管道就是内核中的一串缓存</strong>，从管道的一端写入数据，就是缓存在了内核里，另一端读取，也是从内核中读取这段数据。</p>
+<p>管道可以分为两类：<strong>匿名管道</strong>和<strong>命名管道</strong>。匿名管道是单向的，只能在有亲缘关系的进程间通信；命名管道是双向的，可以实现本机任意两个进程通信。</p>
+</li>
+</ul>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-297-ce75624a4d5b8210ab374dd7f93541aa.png" width="735" height="393" class="img_kGBN"></p>
+<ul>
+<li>
+<p>信号 ： 信号可以理解成一种电报，发送方发送内容，指定接收进程，然后发出特定的软件中断，操作系统接到中断请求后，找到接收进程，通知接收  进程处理信号。</p>
+<p>比如<code>kill -9 1050</code>就表示给PID为1050的进程发送<code>SIGKIL</code>信号。Linux系统中常用信号：</p>
+<p>（1）SIGHUP：用户从终端注销，所有已启动进程都将收到该进程。系统缺省状态下对该信号的处理是终止进程。
+（2）SIGINT：程序终止信号。程序运行过程中，按Ctrl+C键将产生该信号。
+（3）SIGQUIT：程序退出信号。程序运行过程中，按Ctrl+\键将产生该信号。
+（4）SIGBUS和SIGSEGV：进程访问非法地址。
+（5）SIGFPE：运算中出现致命错误，如除零操作、数据溢出等。
+（6）SIGKILL：用户终止进程执行信号。shell下执行kill -9发送该信号。
+（7）SIGTERM：结束进程信号。shell下执行kill 进程pid发送该信号。
+（8）SIGALRM：定时器信号。
+（9）SIGCLD：子进程退出信号。如果其父进程没有忽略该信号也没有处理该信号，则子进程退出后将形成僵尸进程。</p>
+</li>
+<li>
+<p>消息队列：<strong>消息队列就是保存在内核中的消息链表</strong>，包括Posix消息队列和System V消息队列。有足够权限的进程可以向队列中添加消息，被赋予读权限的进程则可以读走队列中的消息。消息队列克服了信号承载信息量少，管道只能承载无格式字节流以及缓冲区大小受限等缺点。</p>
+</li>
+</ul>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-298-7b922fccb8a9e23e86d7477a921aa509.png" width="719" height="200" class="img_kGBN"></p>
+<ul>
+<li>共享内存：<strong>共享内存的机制，就是拿出⼀块虚拟地址空间来，映射到相同的物理内存中</strong>。这样这个进程写⼊的东西，另外的进程⻢上就能看到。共享内存是最快的 IPC 方式，它是针对其他进程间通信方式运行效率低而专门设计的。它往往与其他通信机制，如信号量，配合使用，来实现进程间的同步和通信。</li>
+</ul>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-299-78b3b1759edab26a076544e262226134.png" width="774" height="365" class="img_kGBN"></p>
+<ul>
+<li>
+<p>信号量：信号量我们可以理解成红绿灯，红灯行，绿灯停。<strong>它本质上是一个整数计数器</strong>，可以用来控制多个进程对共享资源的访问。它常作为一种锁机制，防止某进程正在访问共享资源时，其他进程也访问该资源。因此，主要作为进程间以及同一进程内不同线程之间的同步手段。</p>
+<p>信号量表示资源的数量，控制信号量的⽅式有两种原⼦操作：</p>
+<ul>
+<li>⼀个是 <strong>P</strong> <strong>操作</strong>，这个操作会把信号量减去 1，相减后如果<code>信号量 &lt; 0</code>，则表明资源已被占⽤，进程需阻塞等待；相减后如果<code>信号量 &gt;= 0</code>，则表明还有资源可使⽤，进程可正常继续执⾏。</li>
+<li>另⼀个是 <strong>V</strong> <strong>操作</strong>，这个操作会把信号量加上 1，相加后如果<code>信号量 &lt;= 0</code>，则表明当前有阻塞中的进程，于是会将该进程唤醒运⾏；相加后如果<code>信号量 &gt; 0</code>，则表明当前没有阻塞中的进程；</li>
+</ul>
+<p>P 操作是⽤在进⼊共享资源之前，V 操作是⽤在离开共享资源之后，这两个操作是必须成对出现的。</p>
+</li>
+</ul>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-300-baf41da2c6d81910dffa8e71732d6a38.png" width="583" height="289" class="img_kGBN"></p>
+<ul>
+<li>Socket：与其他通信机制不同的是，它可用于不同机器间的进程通信。</li>
+</ul>
+<p>优缺点：</p>
+<ul>
+<li>管道：简单；效率低，容量有限；</li>
+<li>消息队列：不及时，写入和读取需要用户态、内核态拷贝。</li>
+<li>共享内存区：能够很容易控制容量，速度快，但需要注意不同进程的同步问题。</li>
+<li>信号量：不能传递复杂消息，一般用  来实现进程间的同步；</li>
+<li>信号：它是进程间通信的唯一异步机制。</li>
+<li>Socket：用于不同主机进程间的通信。</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="13进程和线程的联系和区别">13、进程和线程的联系和区别？<a href="#13进程和线程的联系和区别" class="hash-link" aria-label="Direct link to 13、进程和线程的联系和区别？" title="Direct link to 13、进程和线程的联系和区别？">​</a></h3>
+<p>线程和进程的联系：</p>
+<p><strong>线程是进程当中的⼀条执⾏流程。</strong></p>
+<p>同⼀个进程内多个线程之间可以共享代码段、数据段、打开的⽂件等资源，但每个线程各⾃都有⼀套独⽴的寄存器和栈，这样可以确保线程的控制流是相对独⽴的。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-607-8baa9d86f8b5b3270233d170abbcc658.png" width="706" height="659" class="img_kGBN"></p>
+<p>线程与进程的⽐较如下：</p>
+<ul>
+<li>调度：<strong>进程是资源（包括内存、打开的⽂件等）分配的单位</strong>，<strong>线程是 CPU 调度的单位</strong>；</li>
+<li>资源：进程拥有⼀个完整的资源平台，⽽线程只独享必不可少的资源，如寄存器和栈；</li>
+<li>拥有资源：线程同样具有就绪、阻塞、执⾏三种基本状态，同样具有状态之间的转换关系；</li>
+<li>系统开销：线程能减少并发执⾏的时间和空间开销——创建或撤销进程时，系统都要为之分配或回收系统资源，如内存空间，I/O设备等，OS所付出的开销显著大于在创建或撤销线程时的开销，进程切换的开销也远大于线程切换的开销。</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="14线程上下文切换了解吗">14、线程上下文切换了解吗？<a href="#14线程上下文切换了解吗" class="hash-link" aria-label="Direct link to 14、线程上下文切换了解吗？" title="Direct link to 14、线程上下文切换了解吗？">​</a></h3>
+<p>这还得看线程是不是属于同⼀个进程：</p>
+<ul>
+<li>
+<p>当两个线程不是属于同⼀个进程，则切换的过程就跟进程上下⽂切换⼀样；</p>
+</li>
+<li>
+<p><strong>当两个线程是属于同⼀个进程，因为虚拟内存是共享的，所以在切换时，虚拟内存这些资源就保持不动，只需要切换线程的私有数据、寄存器等不共享的数据</strong>；</p>
+</li>
+</ul>
+<p>所以，线程的上下⽂切换相⽐进程，开销要⼩很多。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="15线程有哪些实现方式">15、线程有哪些实现方式？<a href="#15线程有哪些实现方式" class="hash-link" aria-label="Direct link to 15、线程有哪些实现方式？" title="Direct link to 15、线程有哪些实现方式？">​</a></h3>
+<p>主要有三种线程的实现⽅式：</p>
+<ul>
+<li><strong>内核态线程实现</strong>：在内核空间实现的线程，由内核直接管理直接管理线程。</li>
+</ul>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-608-5717c59d66f2353c2b3df7bf278687a8.png" width="686" height="458" class="img_kGBN"></p>
+<ul>
+<li><strong>⽤户态线程实现</strong>：在⽤户空间实现线程，不需要内核的参与，内核对线程无感知。</li>
+</ul>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-609-94bb60fd2b3fb17916a3c3b601411c83.png" width="681" height="485" class="img_kGBN"></p>
+<ul>
+<li><strong>混合线程实现</strong>：现代操作系统基本都是将两种方式结合起来使用。用户态的执行系统负责进程内部线程在非阻塞时的切换；内核态的操作系统负责阻塞线程的切换。即我们同时实现内核态和用户态线程管理。其中内核态线程数量较少，而用户态线程数量较多。每个内核态线程可以服务一个或多个用户态线程。</li>
+</ul>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-610-8b769972260fcd916606996d52d62f25.png" width="757" height="464" class="img_kGBN"></p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="16线程间如何同步">16、线程间如何同步？<a href="#16线程间如何同步" class="hash-link" aria-label="Direct link to 16、线程间如何同步？" title="Direct link to 16、线程间如何同步？">​</a></h3>
+<p>同步解决的多线程操作共享资源的问题，目的是不管线程之间的执行如何穿插，最后的结果都是正确的。</p>
+<p>我们前面知道线程和进程的关系：线程是进程当中的⼀条执⾏流程。所以说下面的一些同步机制不止针对线程，同样也可以针对进程。</p>
+<p><strong>临界区</strong>：我们把对共享资源访问的程序片段称为<code>临界区</code>，我们希望这段代码是<code>互斥</code>的，保证在某时刻只能被一个线程执行，也就是说一个线程在临界区执行时，其它线程应该被阻止进入临界区。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-611-eb72912ead472bdb8f0558253627fc90.png" width="929" height="471" class="img_kGBN"></p>
+<p>临界区不仅针对线程，同样针对进程。</p>
+<p>临界区同步的一些实现方式：</p>
+<p>1、<strong>锁</strong></p>
+<p>使⽤加锁操作和解锁操作可以解决并发线程/进程的互斥问题。</p>
+<p>任何想进⼊临界区的线程，必须先执⾏加锁操作。若加锁操作顺利通过，则线程可进⼊临界区；在完成对临界资源的访问后再执⾏解锁操作，以释放该临界资源。</p>
+<p>加锁和解锁锁住的是什么呢？可以是<code>临界区对象</code>，也可以只是一个简单的<code>互斥量</code>，例如互斥量是<code>0</code>无锁，<code>1</code>表示加锁。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-612-d23be46ecab3dc61a8fd90d00fab4212.png" width="634" height="699" class="img_kGBN"></p>
+<p>根  据锁的实现不同，可以分为<code>忙等待锁和</code>和<code>⽆忙等待锁</code>。</p>
+<p><code>忙等待锁和</code>就是加锁失败的线程，会不断尝试获取锁，也被称为自旋锁，它会一直占用CPU。</p>
+<p><code>⽆忙等待锁</code>就是加锁失败的线程，会进入阻塞状态，放弃CPU，等待被调度。</p>
+<p>2、<strong>信号量</strong></p>
+<p>信号量是操作系统提供的⼀种协调共享资源访问的⽅法。</p>
+<p>通常<strong>信号量表示资源的数量</strong>，对应的变量是⼀个整型（ sem ）变量。</p>
+<p>另外，还有<strong>两个原⼦操作的系统调⽤函数来控制信号量的</strong>，分别是：</p>
+<ul>
+<li>
+<p><em>P</em> 操作：将 sem 减 1 ，相减后，如果 <code>sem &lt; 0</code> ，则进程/线程进⼊阻塞等待，否则继续，表明 P操作可能会阻塞；</p>
+</li>
+<li>
+<p><em>V</em> 操作：将 sem 加 1 ，相加后，如果 <code>sem &lt;= 0</code> ，唤醒⼀个等待中的进程/线程，表明 V 操作不会阻塞；</p>
+</li>
+</ul>
+<p>P 操作是⽤在进⼊临界区之前，V 操作是⽤在离开临界区之后，这两个操作是必须成对出现的。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="17什么是死锁">17、什么是死锁？<a href="#17什么是死锁" class="hash-link" aria-label="Direct link to 17、什么是死锁？" title="Direct link to 17、什么是死锁？">​</a></h3>
+<p>在两个或者多个并发线程中，如果每个线程持有某种资源，而又等待其它线程释放它或它们现在保持着的资源，在未改变这种状态之前都不能向前推进，称这一组线程产生了死锁。通俗的讲就是两个或多个线程无限期的阻塞、相互等待的一种状态。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-613-0d1aa196a87eb747bef1446f9a1fcd06.png" width="575" height="335" class="img_kGBN"></p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="18死锁产生有哪些  条件">18、死锁产生有哪些条件？<a href="#18死锁产生有哪些条件" class="hash-link" aria-label="Direct link to 18、死锁产生有哪些条件？" title="Direct link to 18、死锁产生有哪些条件？">​</a></h3>
+<p>死锁产生需要<strong>同时</strong>满足四个条件：</p>
+<ul>
+<li><strong>互斥条件</strong>：指线程对己经获取到的资源进行它性使用，即该资源同时只由一个线程占用。如果此时还有其它线程请求获取获取该资源，则请求者只能等待，直至占有资源的线程释放该资源。</li>
+<li><strong>请求并持有条件</strong>：指一个 线程己经持有了至少一个资源，但又提出了新的资源请求，而新资源己被其它线程占有，所以当前线程会被阻塞，但阻塞 的同时并不释放自己已经获取的资源。</li>
+<li><strong>不可剥夺条件</strong>：指线程获取到的资源在自己使用完之前不能被其它线程抢占，只有在自己使用完毕后才由自己释放该资源。</li>
+<li><strong>环路等待条件</strong>：指在发生死锁时，必然存在一个线程——资源的环形链，即线程集合 <code>{T0，T1，T2,…… ，Tn}</code> 中 T0 正在等待一 T1 占用的资源，Tl1正在等待 T2用的资源，…… Tn 在等待己被 T0占用的资源。</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="19如何避免死锁呢">19、如何避免死锁呢？<a href="#19如何避免死锁呢" class="hash-link" aria-label="Direct link to 19、如何避免死锁呢？" title="Direct link to 19、如何避免死锁呢？">​</a></h3>
+<p>产⽣死锁的有四个必要条件：互斥条件、持有并等待条件、不可剥夺条件、环路等待条件。</p>
+<p>避免死锁，破坏其中的一个就可以。</p>
+<p><strong>消除互斥条件</strong></p>
+<p>这个是没法实现，因为很多资源就是只能被一个线程占用，例如锁。</p>
+<p><strong>消除请求并持有条件</strong></p>
+<p>消除这个条件的办法很简单，就是一个线程一次请求其所需要的所有资源。</p>
+<p><strong>消除不可剥夺条件</strong></p>
+<p>占用部分资源的线程进一步申请其他资源时，如果申请不到，可以主动释放它占有的资源，这样不可剥夺这个条件就破坏掉了。</p>
+<p><strong>消除环路等待条件</strong></p>
+<p>可以靠按序申请资源来预防。所谓按序申请，是指资源是有线性顺序的，申请的时候可以先申请资源序号小的，再申请资源序号大的，这样线性化后就不存在环路了。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="20活锁和饥饿锁了解吗">20、活锁和饥饿锁了解吗？<a href="#20活锁和饥饿锁了解吗" class="hash-link" aria-label="Direct link to 20、活锁和饥饿锁了解吗？" title="Direct link to 20、活锁和饥饿锁了解吗？">​</a></h3>
+<p><strong>饥饿锁：</strong></p>
+<p>饥饿锁，这个饥饿指的是资源饥饿，某个线程一直等不到它所需要的资源，从而无法向前推进，就像一个人因为饥饿无法成长。</p>
+<p><strong>活锁：</strong></p>
+<p>在活锁状态下，处于活锁线程组里的线程状态可以改变，但是整个活锁组的线程无法推进。</p>
+<p>活锁可以用两个人过一条很窄的小桥来比喻：为了让对方先过，两个人都往旁边让，但两个人总是让到同一边。这样，虽然两个人的状态一直在变化，但却都无法往前推进。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="内存管理">内存管理<a href="#内存管理" class="hash-link" aria-label="Direct link to 内存管理" title="Direct link to 内存管理">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="21什么是虚拟内存">21、什么是虚拟内存？<a href="#21什么是虚拟内存" class="hash-link" aria-label="Direct link to 21、什么是虚拟内存？" title="Direct link to 21、什么是虚拟内存？">​</a></h3>
+<p>我们实际的物理内存主要是主存，但是  物理主存空间有限，所以一般现代操作系统都会想办法把一部分内存块放到磁盘中，用到的时候再装入主存，但是对用户程序而言，是不需要注意实际的物理内存的，为什么呢？因为有<code>虚拟内存</code>的机制。</p>
+<p><strong>简单说，虚拟内存是操作系统提供的⼀种机制，将不同进程的虚拟地址和不同内存的物理地址映射起来。</strong></p>
+<p>每个进程都有自己独立的地址空间，再由操作系统映射到到实际的物理内存。</p>
+<p>于是，这⾥就引出了两种地址的概念：</p>
+<p>程序所使⽤的内存地址叫做<strong>虚拟内存地址</strong>（<em>Virtual Memory Address</em>）</p>
+<p>实际存在硬件⾥⾯的空间地址叫<strong>物理内存地址</strong>（<em>Physical Memory Address</em>）。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-614-833017279853f063705405b4a65cb57f.png" width="888" height="639" class="img_kGBN"></p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="22什么是内存分段">22、什么是内存分段？<a href="#22什么是内存分段" class="hash-link" aria-label="Direct link to 22、什么是内存分段？" title="Direct link to 22、什么是内存分段？">​</a></h3>
+<p>程序是由若⼲个逻辑分段组成的，如可由代码分段、数据分段、栈段、堆段组成。不同的段是有不同的属性的，所以就⽤分段（Segmentation）的形式把这些段分离出来。</p>
+<p>分段机制下的虚拟地址由两部分组成，<strong>段号</strong>和<strong>段内偏移量</strong>。</p>
+<p>虚拟地址和物理地址通过段表映射，段表主要包括<strong>段号</strong>、<code>段的界限</code>。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-615-b2af9b452033360aa218247be2439be1.png" width="1130" height="614" class="img_kGBN"></p>
+<p>我们来看一个映射，虚拟地址：段3、段偏移量500  ----&gt;  段基地址7000+段偏移量500 ----&gt; 物理地址：8700+。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-616-2c06c4134abd6fc8e1f44af79065d9e8.png" width="670" height="240" class="img_kGBN"></p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="23什么是内存分页">23、什么是内存分页？<a href="#23什么是内存分页" class="hash-link" aria-label="Direct link to 23、什么是内存分页？" title="Direct link to 23、什么是内存分页？">​</a></h3>
+<p><strong>分⻚是把整个虚拟和物理内存空间切成⼀段段固定尺⼨的⼤⼩</strong>。这样⼀个连续并且尺⼨固定的内存空间，我们叫<strong>⻚</strong>（<em>Page</em>）。在 Linux 下，每⼀⻚的⼤⼩为 4KB 。</p>
+<p>访问分页系统中内存数据需要两次的内存访问 ：一次是从内存中访问页表，从中找到指定的物理页号，加上页内偏移得到实际物理地址，第二次就是根据第一次得到的物理地址访问内存取出数据。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-617-5433afde31758e4deb4bcd8ae29db015.png" width="1098" height="642" class="img_kGBN"></p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="24多级页表知道吗">24、多级页表知道吗？<a href="#24多级页表知道吗" class="hash-link" aria-label="Direct link to 24、多级页表知道吗？" title="Direct link to 24、多级页表知道吗？">​</a></h3>
+<p>操作系统可能会有非常多进程，如果只是使用简单分页，可能导致的后果就是页表变得非常庞大。</p>
+<p>所以，引入了多级页表的解决方案。</p>
+<p>所谓的多级页表，就是把我们原来的单级页表再次分页，这里利用了<code>局部性原理</code>，除了顶级页表，其它级别的页表一来可以在需要的时候才被创建，二来内存紧张的时候还可以被置换到磁盘中。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-618-5c279180dc685a6e89729f4ada13e9d0.png" width="909" height="652" class="img_kGBN"></p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="25什么是块表">25、什么是块表？<a href="#25什么是块表" class="hash-link" aria-label="Direct link to 25、什么是块表？" title="Direct link to 25、什么是块表？">​</a></h3>
+<p>同样利用了<code>局部性原理</code>，即在⼀段时间内，整个程序的执⾏仅限于程序中的某⼀部分。相应地，执⾏所访问的存储空间也局限于某个内存区域。</p>
+<p>利⽤这⼀特性，把最常访问的⼏个⻚表项存储到访问速度更快的硬件，于是计算机科学家们，就在 CPU 芯⽚中，加⼊了⼀个专⻔存放程序最常访问的⻚表项的 Cache，这个 Cache 就是 TLB（<em>Translation Lookaside Buffer</em>） ，通常称为⻚表缓存、转址旁路缓存、快表等。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-619-3bb67ac679ce03a29e9649e64f80f23d.png" width="911" height="483" class="img_kGBN"></p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="26分页和分段有什么区别">26、分页和分段有什么区别？<a href="#26分页和分段有什么区别" class="hash-link" aria-label="Direct link to 26、分页和分段有什么区别？" title="Direct link to 26、分页和分段有什么区别？">​</a></h3>
+<ul>
+<li>段是信息的逻辑单位，它是根据用户的需要划分的，因此段对用户是可见的 ；页是信息的物理单位，是为了管理主存的方便而划分的，对用户是透明的。</li>
+<li>段的大小不固定，有它所完成的功能决定；页的大小固定，由系统决定</li>
+<li>段向用户提供二维地址空间；页向用户提供的是一维地址空间</li>
+<li>段是信息的逻辑单位，便于存储保护和信息的共享，页的保护和共享受到限制。</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="27什么是交换空间">27、什么是交换空间？<a href="#27什么是交 换空间" class="hash-link" aria-label="Direct link to 27、什么是交换空间？" title="Direct link to 27、什么是交换空间？">​</a></h3>
+<p>操作系统把物理内存(Physical RAM)分成一块一块的小内存，每一块内存被称为页(page)。当内存资源不足时，Linux把某些页的内容转移至磁盘上的一块空间上，以释放内存空间。磁盘上的那块空间叫做交换空间(swap space),而这一过程被称为交换(swapping)。物理内存和交换空间的总容量就是虚拟内存的可用容量。</p>
+<p>用途：</p>
+<ul>
+<li>物理内存不足时一些不常用的页可以被交换出去，腾给系统。</li>
+<li>程序启动时很多内存页被用来初始化，之后便不再需要，可以交换出去。</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="28页面置换算法有哪些">28、页面置换算法有哪些？<a href="#28页面置换算法有哪些" class="hash-link" aria-label="Direct link to 28、页面置换算法有哪些？" title="Direct link to 28、页面置换算法有哪些？">​</a></h3>
+<p>在分页系统里，一个虚拟的页面可能在主存里，也可能在磁盘中，如果CPU发现虚拟地址对应的物理页不在主存里，就会产生一个缺页中断，然后从磁盘中把该页调入主存中。</p>
+<p>如果内存里没有空间，就需要从主存里选择一个页面来置换。</p>
+<p>常见的页面置换算法：</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-625-6bc8f411d6ae41652f0fd5a6afd48459.png" width="488" height="388" class="img_kGBN"></p>
+<ul>
+<li><strong>最佳⻚⾯置换算法（<em>OPT</em>）</strong></li>
+</ul>
+<p>最佳⻚⾯置换算法是一个理想的算法，基本思路是，<strong>置换在未来最⻓时间不访问的⻚⾯</strong>。</p>
+<p>所以，该算法实现需要计算内存中每个逻辑⻚⾯的下⼀次访问时间，然后⽐较，选择未来最⻓时间不访问的⻚⾯。</p>
+<p>但这个算法是无法实现的，因为当缺页中断发生时，操作系统无法知道各个页面下一次将在什么时候被访问。</p>
+<ul>
+<li><strong>先进先出置换算法（FIFO）</strong></li>
+</ul>
+<p>既然我们⽆法预知⻚⾯在下⼀次访问前所需的等待时间，那可以<strong>选择在内存驻留时间很⻓的⻚⾯进⾏中置换</strong>，这个就是「先进先出置换」算法的思想。</p>
+<p>FIFO的实现机制是使用链表将所有在内存的页面按照进入时间的早晚链接起来，然后每次置换链表头上的页面就行了，新加进来的页面则挂在链表的末端。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-626-b002a93cac6d2a3f40ba37fb736bda98.png" width="832" height="239" class="img_kGBN"></p>
+<ul>
+<li><strong>最近最久未使⽤的置换算法（LRU）</strong></li>
+</ul>
+<p>最近最久未使⽤（<em>LRU</em>）的置换算法的基本思路是，发⽣缺⻚时，<strong>选择最⻓时间没有被访问的⻚⾯进⾏置换</strong>，也就是说，该算法假设已经很久没有使⽤的⻚⾯很有可能在未来较⻓的⼀段时间内仍然不会被使⽤。</p>
+<p>这种算法近似最优置换算法，最优置换算法是通过「未来」的使⽤情况来推测要淘汰的⻚⾯，⽽ LRU 则是通过<code>历史</code>的使⽤情况来推测要淘汰的⻚⾯。</p>
+<p>LRU 在理论上是可以实现的，但代价很⾼。为了完全实现 LRU，需要在内存中维护⼀个所有⻚⾯的链表，最近最多使⽤的⻚⾯在表头，最近最少使⽤的⻚⾯在表尾。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-627-feb365c2ea998fae9622027cd8a80dbe.png" width="723" height="326" class="img_kGBN"></p>
+<p>困难的是，在每次访问内存时都必须要更新整个链表。在链表中找到⼀个⻚⾯，删除它，然后把它移动到表头是⼀个⾮常费时的操作。</p>
+<p>所以，LRU 虽然看上去不错，但是由于开销⽐较⼤，实际应⽤中⽐较少使⽤。</p>
+<ul>
+<li><strong>时钟页面置换算法</strong></li>
+</ul>
+<p>这个算法的思路是，把所有的⻚⾯都保存在⼀个类似钟⾯的环形链表中，⼀个表针指向最⽼的⻚⾯。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-628-cc9887f32032753bee04adce9c322851.png" width="915" height="687" class="img_kGBN"></p>
+<p>当发⽣缺⻚中断时，算法⾸先检查表针指向的⻚⾯：</p>
+<p>如果它的访问位位是 0 就淘汰该⻚⾯，并把新的⻚⾯插⼊这个位置，然后把表针前移⼀个位置；</p>
+<p>如果访问位是 1 就清除访问位，并把表针前移⼀个位置，重复这个过程直到找到了⼀个访问位为 0 的⻚⾯为⽌；</p>
+<ul>
+<li><strong>最不常⽤置换算法</strong></li>
+</ul>
+<p>最不常用算法（LFU），<strong>当发⽣缺⻚中断时，选择访问次数最少的那个⻚⾯，将其置换</strong>。</p>
+<p>它的实现⽅式是，对每个⻚⾯设置⼀个「访问计数器」，每当⼀个⻚⾯被访问时，该⻚⾯的访问计数器就累加 1。在发⽣缺⻚中断时，淘汰计数器值最⼩的那个⻚⾯。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="文件">文件<a href="#文件" class="hash-link" aria-label="Direct link to 文件" title="Direct link to 文件">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="29硬链接和软链接有什么区别">29、硬链接和软链接有什么区别？<a href="#29硬链接和软链接有什么区别" class="hash-link" aria-label="Direct link to 29、硬链接和软链接有什么区别？" title="Direct link to 29、硬链接和软链接有什么区别？">​</a></h3>
+<ul>
+<li>硬链接就是在目录下创建一个条目，记录着文件名与 inode 编号，这个 inode 就是源文件的 inode。删除任意一个条目，文件还是存在，只要引用数量不为 0。但是硬链接有限制，它不能跨越文件系统，也不能对目录进行链接。</li>
+</ul>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-622-cfc666942087f3ebe3f786bc06b64463.png" width="917" height="503" class="img_kGBN"></p>
+<ul>
+<li>软链接相当于重新创建⼀个⽂件，这个⽂件有<strong>独⽴的</strong> <strong>inode</strong>，但是这个<strong>⽂件的内容是另外⼀个⽂件的路径</strong>，所以访问软链接的时候，实际上相当于访问到了另外⼀个⽂件，所以<strong>软链接是可以跨⽂件系统的</strong>，甚⾄<strong>⽬标⽂件被删除了，链接⽂件还是在的，只不过打不开指向的文件了而已。</strong></li>
+</ul>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-621-1bec651b6236232dce2ff127cfef4026.png" width="926" height="484" class="img_kGBN"></p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="io">IO<a href="#io" class="hash-link" aria-label="Direct link to IO" title="Direct link to IO">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="30零拷贝了解吗">30、零拷贝了解吗？<a href="#30零拷贝了解吗" class="hash-link" aria-label="Direct link to 30、零拷贝了解吗？" title="Direct link to 30、零拷贝了解吗？">​</a></h3>
+<p>假如需要文件传输，使用传统I/O，数据读取和写入是用户空间到内核空间来回赋值，而内核空间的数据是通过操作系统的I/O接口从磁盘读取或者写入，这期间发生了多次用户态和内核态的上下文切换，以及多次数据拷贝。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-623-a9211e8c499b2b2dbdd3a8e8cab3d79d.png" width="914" height="568" class="img_kGBN"></p>
+<p>为了提升I/O性能，就需要<strong>减少用户态与内核态的上下文切换</strong>和<strong>内存拷贝的次数</strong>。</p>
+<p>这就用到了我们零拷贝的技术，零拷贝技术实现主要有两种：</p>
+<ul>
+<li><strong>mmap + write</strong></li>
+</ul>
+<p>mmap() 系统调⽤函数会直接把内核缓冲区⾥的数据「<strong>映射</strong>」到⽤户空间，这样，操作系统内核与⽤户空间就不需要再进⾏任何的数据拷⻉操作。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-624-cabab103180ee5bafe396cda810f3b35.png" width="925" height="587" class="img_kGBN"></p>
+<ul>
+<li><strong>sendfile</strong></li>
+</ul>
+<p>在 Linux 内核版本 2.1 中，提供了⼀个专⻔发送⽂件的系统调⽤函数 sendfile() 。</p>
+<p>⾸先，它可以替代前⾯的 read() 和 write() 这两个系统调⽤，这样就可以减少⼀次系统调⽤，也就减少了 2 次上下⽂切换的开销。</p>
+<p>其次，该系统调⽤，可以直接把内核缓冲区⾥的数据拷⻉到 socket 缓冲区⾥，不再拷⻉到⽤户态，这样就只有 2 次上下⽂切换，和 3 次数据拷⻉。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-629-e7c3abb34fee75807aca95f31c74bf87.png" width="912" height="613" class="img_kGBN"></p>
+<p>很多开源项目如Kafka、RocketMQ都采用了零拷贝技术来提升IO效率。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="31聊聊阻塞与阻塞-io-同步与异步io">31、聊聊阻塞与⾮阻塞 IO、 同步与异步IO？<a href="#31聊聊阻塞与阻塞-io-同步与异步io" class="hash-link" aria-label="Direct link to 31、聊聊阻塞与⾮阻塞 IO、 同步与异步IO？" title="Direct link to 31、聊聊阻塞与⾮阻塞 IO、 同步与异步IO？">​</a></h3>
+<ul>
+<li><strong>阻塞I/O</strong></li>
+</ul>
+<p>先来看看<strong>阻塞</strong> <strong>I/O</strong>，当⽤户程序执⾏ read ，线程会被阻塞，⼀直等到内核数据准备好，并把数据从内核缓冲区拷⻉到应⽤程序的缓冲区中，当拷⻉过程完成， read 才会返回。</p>
+<p>注意，<strong>阻塞等待的是<code>内核数据准备好</code>和<code>数据从内核态拷⻉到⽤户态</code>这两个过程</strong>。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-630-2a139df29acfe960f48955a396cb40f6.png" width="816" height="485" class="img_kGBN"></p>
+<ul>
+<li><strong>非阻塞I/O</strong></li>
+</ul>
+<p>⾮阻塞的 read 请求在数据未准备好的情况下⽴即返回，可以继续往下执⾏，此时应⽤程序不断轮询内核，直到数据准备好，内核将数据拷⻉到应⽤程序缓冲区， read 调⽤才可以获取到结果。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-631-25aae2b3067ab25ac4b12ab1cfefc996.png" width="813" height="676" class="img_kGBN"></p>
+<ul>
+<li><strong>基于非阻塞的I/O多路复用</strong></li>
+</ul>
+<p>我们上面的非阻塞I/O有一个问题，什么问题呢？应用程序要一直轮询，这个过程没法干其它事情，所以引入了<strong>I/O</strong> <strong>多路复⽤</strong>技术。</p>
+<p>当内核数据准备好时，以事件通知应⽤程序进⾏操作。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-632-c340e7c6cbe29a5feffbf8e4305fa6b8.png" width="843" height="667" class="img_kGBN"></p>
+<p><strong>注意：<strong>⽆论是阻塞 I/O、还是⾮阻塞 I/O、非阻塞I/O多路复用，都是同步调⽤。因为它们在read调⽤时，内核将数据从内核空间拷⻉到应⽤程序空间，过程都是需要等待的，也就是说这个过程是</strong>同步</strong>的，如果内核实现的拷⻉效率不⾼，read调⽤就会在这个同步过程中等待⽐较⻓的时间。</p>
+<ul>
+<li><strong>异步I/O</strong></li>
+</ul>
+<p>真正的<strong>异步</strong> <strong>I/O</strong> 是<code>内核数据准备好</code>和<code>数据从内核态拷⻉到⽤户态</code>这两个过程都不⽤等待。</p>
+<p>发起 aio_read 之后，就⽴即返回，内核⾃动将数据从内核空间拷⻉到应⽤程序空间，这个拷⻉过程同样是异步的，内核⾃动完成的，和前⾯的同步操作不⼀样，应⽤程序并不需要主动发起拷⻉动作。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-633-e7009d449880a266bda3867243cb7ec2.png" width="781" height="614" class="img_kGBN"></p>
+<blockquote>
+<p>拿例子理解几种I/O模型</p>
+</blockquote>
+<p>老三关注了很多UP主，有些UP主是老鸽子，到了更新的时间：</p>
+<p>阻塞I/O就是，老三不干别的，就干等着，盯着UP的更新。</p>
+<p>非阻塞I/O就是，老三发现UP没更，就去喝个茶什么的，过一会儿来盯一次，一直等到UP更新。</p>
+<p>基于⾮阻塞的 I/O 多路复⽤好⽐，老三发现UP没更，就去干别的，过了一会儿B站推送消息了，老三一看，有很多条，就去翻动态，看看等的UP是不是更新了。</p>
+<p>异步I/O就是，老三说UP你该更了，UP赶紧爆肝把视频做出来，然后把视频亲自呈到老三面前，这个过程不用等待。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-634-b76ad073352812dd0020fb6e3f09266c.png" width="813" height="658" class="img_kGBN"></p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="32详细讲一讲io多路复用">32、详细讲一讲I/O多路复用？<a href="#32详细讲一讲io多路复用" class="hash-link" aria-label="Direct link to 32、详细讲一讲I/O多路复用？" title="Direct link to 32、详细讲一讲I/O多路复用？">​</a></h3>
+<blockquote>
+<p>我们先了解什么是I/O多路复用？</p>
+</blockquote>
+<p>我们在传统的I/O模型中，如果服务端需要支持多个客户端，我们可能要为每个客户端分配一个进程/线程。</p>
+<p>不管是基于重一点的进程模型，还是轻一点的线程模型，假如连接多了，操作系统是扛不住的。</p>
+<p>所以就引入了<strong>I/O多路复用</strong> 技术。</p>
+<p>简单说，就是一个进程/线程维护多个Socket，这个多路复用就是多个连接复用一个进程/线程。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-635-ee96ca2f5d15881f734a99b21a77898f.png" width="505" height="264" class="img_kGBN"></p>
+<p>我们来看看I/O多路复用三种实现机制：</p>
+<ul>
+<li><strong>select</strong></li>
+</ul>
+<p>select 实现多路复⽤的⽅式是：</p>
+<p>将已连接的 Socket 都放到⼀个<strong>⽂件描述符集合</strong>fd_set，然后调⽤ select 函数将fd_set集合拷⻉到内核⾥，让内核来检查是否有⽹络事件产⽣，检查的⽅式很粗暴，就是通过遍历fd_set的⽅式，当检查到有事件产⽣后，将此 Socket 标记为可读或可写， 接着再把整个fd_set拷⻉回⽤户态⾥，然后⽤户态还需要再通过遍历的⽅法找到可读或可写的 Socket，再对其处理。</p>
+<p>select 使⽤固定⻓度的 BitsMap，表示⽂件描述符集合，⽽且所⽀持的⽂件描述符的个数是有限制的，在Linux 系统中，由内核中的 FD_SETSIZE 限制， 默认最⼤值为 1024 ，只能监听 0~1023 的⽂件描述符。</p>
+<blockquote>
+<p>select机制的缺点：</p>
+</blockquote>
+<p>（1）每次调用select，都需要把fd_set集合从用户态拷贝到内核态，如果fd_set集合很大时，那这个开销也很大，比如百万连接却只有少数活跃连接时这样做就太没有效率。</p>
+<p>（2）每次调用select都需要在内核遍历传递进来的所有fd_set，如果fd_set集合很大时，那这个开销也很大。</p>
+<p>（3）为了减少数据拷贝带来的性能损坏，内核对被监控的fd_set集合大小做了限制，一般为1024，如果想要修改会比较麻烦，可能还需要编译内核。</p>
+<p>（4）每次调用select之前都需要遍历设置监听集合，重复工作。</p>
+<ul>
+<li><strong>poll</strong></li>
+</ul>
+<p>poll 不再⽤ BitsMap 来存储所关注的⽂件描述符，取⽽代之⽤动态数组，以链表形式来组织，突破了select 的⽂件描述符个数限制，当然还会受到系统⽂件描述符限制。</p>
+<p>但是 poll 和 select 并没有太⼤的本质区别，都是使⽤线性结构存储进程关注的Socket集合，因此都需要遍历⽂件描述符集合来找到可读或可写的Socke，时间复杂度为O(n)，⽽且也需要在⽤户态与内核态之间拷⻉⽂件描述符集合，这种⽅式随着并发数上来，性能的损耗会呈指数级增⻓。</p>
+<ul>
+<li><strong>epoll</strong></li>
+</ul>
+<p>epoll 通过两个⽅⾯，很好解决了 select/poll 的问题。</p>
+<p>第⼀点，epoll 在内核⾥使⽤<strong>红⿊树来跟踪进程所有待检测的⽂件描述字</strong>，把需要监控的 socket 通过epoll_ctl() 函数加⼊内核中的红⿊树⾥，红⿊树是个⾼效的数据结构，增删查⼀般时间复杂度是O(logn) ，通过对这棵⿊红树进⾏操作，这样就不需要像 select/poll 每次操作时都传⼊整个 socket 集合，只需要传⼊⼀个待检测的 socket，<strong>减少了内核和⽤户空间⼤量的数据拷⻉和内存分配</strong>。</p>
+<p>第⼆点， epoll 使⽤事件驱动的机制，内核⾥<strong>维护了⼀个链表来记录就绪事件</strong>，当某个 socket 有事件发⽣时，通过回调函数，内核会将其加⼊到这个就绪事件列表中，当⽤户调⽤ epoll_wait() 函数时，只会返回有事件发⽣的⽂件描述符的个数，不需要像 select/poll 那样轮询扫描整个 socket 集合，⼤⼤提⾼了检测的效率。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-620-40a662f3121ed6f40684e61b7025d22f.png" width="929" height="465" class="img_kGBN"></p>
+<p>epoll 的⽅式即使监听的 Socket 数量越多的时候，效率不会⼤幅度降低，能够同时监听的 Socket 的数⽬也⾮常的多了，上限就为系统定义的进程打开的最⼤⽂件描述符个数。因⽽，<strong>epoll</strong> <strong>被称为解决</strong> <strong>C10K</strong> <strong>问题的利器</strong>。</p>
+<p><em>没有什么使我停留——除了目的，纵然岸旁有玫瑰、有绿荫、有宁静的港湾，我是不系之舟</em>。</p>
+<p><strong>系列内容</strong>：</p>
+<ul>
+<li><a href="/code-note-blog/docs/mianshi/javase">面渣逆袭 Java SE 篇👍</a></li>
+<li><a href="/code-note-blog/docs/mianshi/javathread">面渣逆袭 Java 集合框架篇👍</a></li>
+<li><a href="/code-note-blog/docs/mianshi/collection">面渣逆袭 Java 并发编程篇👍</a></li>
+<li><a href="/code-note-blog/docs/mianshi/jvm">面渣逆袭 JVM 篇👍</a></li>
+<li><a href="/code-note-blog/docs/mianshi/spring">面渣逆袭 Spring 篇👍</a></li>
+<li><a href="/code-note-blog/docs/mianshi/redis">面渣逆袭 Redis 篇👍</a></li>
+<li><a href="/code-note-blog/docs/mianshi/mybatis">面渣逆袭 MyBatis 篇👍</a></li>
+<li><a href="/code-note-blog/docs/mianshi/mysql">面渣逆袭 MySQL 篇👍</a></li>
+<li><a href="/code-note-blog/docs/mianshi/os">面渣逆袭操作系统篇👍</a></li>
+<li><a href="/code-note-blog/docs/mianshi/network">面渣逆袭计算机网络篇👍</a></li>
+<li><a href="/code-note-blog/docs/mianshi/rocketmq">面渣逆袭RocketMQ篇👍</a></li>
+<li><a href="/code-note-blog/docs/mianshi/fenbushi">面渣逆袭分布式篇👍</a></li>
+<li><a href="/code-note-blog/docs/mianshi/weifuwu">面渣逆袭微服务篇👍</a></li>
+</ul>
+<hr>
+<blockquote>
+<p>图文详解操作系统面试高频题，这次吊打面试官，我觉得稳了（手动 dog）。整理：沉默王二，戳<a href="https://mp.weixin.qq.com/s/CYsn0M5ddDuG--mALmhsuw" target="_blank" rel="noopener noreferrer">转载链接</a>，作者：三分恶，戳<a href="https://mp.weixin.qq.com/s/KMGyn-FLkvzsMH06LV4OfQ" target="_blank" rel="noopener noreferrer">原文链接</a>。</p>
+</blockquote></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="theme-doc-footer-edit-meta-row row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/mianshi/os.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_EYjg" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_eevz"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/code-note-blog/docs/mianshi/nixi"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">面渣逆袭</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/code-note-blog/docs/mianshi/redis"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Redis</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_lc2k thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#引论" class="table-of-contents__link toc-highlight">引论</a><ul><li><a href="#01什么是操作系统" class="table-of-contents__link toc-highlight">01、什么是操作系统？</a></li><li><a href="#02操作系统主要有哪些功能" class="table-of-contents__link toc-highlight">02、操作系统主要有哪些功能？</a></li></ul></li><li><a href="#操作系统结构" class="table-of-contents__link toc-highlight">操作系统结构</a><ul><li><a href="#03什么是内核" class="table-of-contents__link toc-highlight">03、什么是内核？</a></li><li><a href="#04什么是用户态和内核态" class="table-of-contents__link toc-highlight">04、什么是用户态和内核态？</a></li><li><a href="#05用户态和内核态是如何切换的" class="table-of-contents__link toc-highlight">05、用户态和内核态是如何切换的？</a></li></ul></li><li><a href="#进程和线程" class="table-of-contents__link toc-highlight">进程和线程</a><ul><li><a href="#06并行和并发有什么区别" class="table-of-contents__link toc-highlight">06、并行和并发有什么区别？</a></li><li><a href="#07什么是进程上下文切换" class="table-of-contents__link toc-highlight">07、什么是进程上下文切换？</a></li><li><a href="#08进程有哪些状态" class="table-of-contents__link toc-highlight">08、进程有哪些状态？</a></li><li><a href="#09什么是僵尸进程" class="table-of-contents__link toc-highlight">09、什么是僵尸进程？</a></li><li><a href="#10什么是孤儿进程" class="table-of-contents__link toc-highlight">10、什么是孤儿进程？</a></li><li><a href="#11进程有哪些调度算法" class="table-of-contents__link toc-highlight">11、进程有哪些调度算法？</a></li><li><a href="#12进程间通信有哪些方式" class="table-of-contents__link toc-highlight">12、进程间通信有哪些方式？</a></li><li><a href="#13进程和线程的联系和区别" class="table-of-contents__link toc-highlight">13、进程和线程的联系和区别？</a></li><li><a href="#14线程上下文切换了解吗" class="table-of-contents__link toc-highlight">14、线程上下文切换了解吗？</a></li><li><a href="#15线程有哪些实现方式" class="table-of-contents__link toc-highlight">15、线程有哪些实现方式？</a></li><li><a href="#16线程间如何同步" class="table-of-contents__link toc-highlight">16、线程间如何同步？</a></li><li><a href="#17什么是死锁" class="table-of-contents__link toc-highlight">17、什么是死锁？</a></li><li><a href="#18死锁产生有哪些条件" class="table-of-contents__link toc-highlight">18、死锁产生有哪些条件？</a></li><li><a href="#19如何避免死锁呢" class="table-of-contents__link toc-highlight">19、如何避免死锁呢？</a></li><li><a href="#20活锁和饥饿锁了解吗" class="table-of-contents__link toc-highlight">20、活锁和饥饿锁了解吗？</a></li></ul></li><li><a href="#内存管理" class="table-of-contents__link toc-highlight">内存管理</a><ul><li><a href="#21什么是虚拟内存" class="table-of-contents__link toc-highlight">21、什么是虚拟内存？</a></li><li><a href="#22什么是内存分段" class="table-of-contents__link toc-highlight">22、什么是内存分段？</a></li><li><a href="#23什么是内存分页" class="table-of-contents__link toc-highlight">23、什么是内存分页？</a></li><li><a href="#24多级页表知道吗" class="table-of-contents__link toc-highlight">24、多级页表知道吗？</a></li><li><a href="#25什么是块表" class="table-of-contents__link toc-highlight">25、什么是块表？</a></li><li><a href="#26分页和分段有什么区别" class="table-of-contents__link toc-highlight">26、分页和分段有什么区别？</a></li><li><a href="#27什么是交换空间" class="table-of-contents__link toc-highlight">27、什么是交换空间？</a></li><li><a href="#28页面置换算法有哪些" class="table-of-contents__link toc-highlight">28、页面置换算法有哪些？</a></li></ul></li><li><a href="#文件" class="table-of-contents__link toc-highlight">文件</a><ul><li><a href="#29硬链接和软链接有什么区别" class="table-of-contents__link toc-highlight">29、硬链接和软链接有什么区别？</a></li></ul></li><li><a href="#io" class="table-of-contents__link toc-highlight">IO</a><ul><li><a href="#30零拷贝了解吗" class="table-of-contents__link toc-highlight">30、零拷贝了解吗？</a></li><li><a href="#31聊聊阻塞与阻塞-io-同步与异步io" class="table-of-contents__link toc-highlight">31、聊聊阻塞与⾮阻塞 IO、 同步与异步IO？</a></li><li><a href="#32详细讲一讲io多路复用" class="table-of-contents__link toc-highlight">32、详细讲一讲I/O多路复用？</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/code-note-blog/docs/intro">Tutorial</a></li></ul></div><div class="col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://stackoverflow.com/questions/tagged/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Stack Overflow<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://discordapp.com/invite/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Discord<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://twitter.com/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Twitter<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/code-note-blog/blog">Blog</a></li><li class="footer__item"><a href="https://github.com/facebook/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 My Project, Inc. Built with Docusaurus.</div></div></div></footer></div>
+</body>
+</html>

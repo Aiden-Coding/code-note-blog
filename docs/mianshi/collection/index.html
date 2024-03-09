@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-mianshi/collection" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.1.0">
+<title data-rh="true">Java集合框架 | Tommy</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://aiden-coding.github.io/code-note-blog/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://aiden-coding.github.io/code-note-blog/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://aiden-coding.github.io/code-note-blog/docs/mianshi/collection"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Java集合框架 | Tommy"><meta data-rh="true" name="description" content="引言"><meta data-rh="true" property="og:description" content="引言"><link data-rh="true" rel="icon" href="/code-note-blog/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://aiden-coding.github.io/code-note-blog/docs/mianshi/collection"><link data-rh="true" rel="alternate" href="https://aiden-coding.github.io/code-note-blog/docs/mianshi/collection" hreflang="en"><link data-rh="true" rel="alternate" href="https://aiden-coding.github.io/code-note-blog/docs/mianshi/collection" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/code-note-blog/blog/rss.xml" title="Tommy RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/code-note-blog/blog/atom.xml" title="Tommy Atom Feed"><link rel="stylesheet" href="/code-note-blog/assets/css/styles.dd5372db.css">
+<script src="/code-note-blog/assets/js/runtime~main.f999fb27.js" defer="defer"></script>
+<script src="/code-note-blog/assets/js/main.a0bfbaed.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_XYiV" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/code-note-blog/"><b class="navbar__title text--truncate">Tommy</b></a><a class="navbar__item navbar__link" href="/code-note-blog/docs/Java/basic/抽象类和接口">java</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/JavaWeb/走进JavaWeb技术世界：JavaWeb的由来和基础知识">javaweb</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/cache/探索Redis设计与实现：连接底层与表面的数据结构robj">cache</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/backend/后端技术杂谈：白话虚拟化技术">backend</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/cs/algorithms/剑指offer">cs</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/database/重新学习MySQL数据库：『浅入浅出』MySQL和InnoDB">database</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/distributed/basic/分布式系统理论基础 ：CAP">distributed</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/interview/BATJ-Experience/面阿里,终获offer">interview</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/mq/kafka/消息队列kafka详解：如何实现死信队列">mq</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/Spring全家桶/Spring/第一个Spring应用">spring</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/code-note-blog/docs/mianshi/collection">面试</a><a href="https://aiden-coding.github.io/code-note-blog/SpringCloud%E7%AC%AC3%E5%AD%A32024.html" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Blog<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></div><div class="navbar__items navbar__items--right"><div class="toggle_XbAW colorModeToggle_r5NY"><button class="clean-btn toggleButton_Jx0n toggleButtonDisabled_zYO7" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_FjAw"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_qmEt"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_wJfS"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_LABv"><div class="docsWrapper_pdvB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_Jioa" type="button"></button><div class="docRoot_qx_v"><aside class="theme-doc-sidebar-container docSidebarContainer_NHKT"><div class="sidebarViewport_uyYB"><div class="sidebar_SZG4"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_VP_k"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" href="/code-note-blog/docs/mianshi/collection">Java集合框架</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/mianshi/fenbushi">分布式</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/mianshi/javabasic">Java 基础</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/mianshi/javase">Java SE</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/mianshi/javathread">Java并发编程</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/mianshi/jvm">JVM</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/mianshi/mybatis">MyBatis</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/mianshi/mysql">MySQL</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/mianshi/network">计算机网络</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/mianshi/nixi">面渣逆袭</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/mianshi/os">操作系统</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/mianshi/redis">Redis</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/mianshi/rocketmq">RocketMQ</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/mianshi/spring">Spring</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/mianshi/weifuwu">微服务</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/code-note-blog/docs/test/b">b</a></div></li></ul></nav></div></div></aside><main class="docMainContainer_SejT"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_j3Yw"><div class="docItemContainer_XOSC"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_F6gm" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/code-note-blog/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YCxa"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Java集合框架</span><meta itemprop="position" content="1"></li></ul></nav><div class="tocCollapsible_ToOY theme-doc-toc-mobile tocMobile_suYB"><button type="button" class="clean-btn tocCollapsibleButton_VzP_">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>Java集合框架</h1></header><h2 class="anchor anchorWithStickyNavbar_HWLp" id="引言">引言<a href="#引言" class="hash-link" aria-label="Direct link to 引言" title="Direct link to 引言">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="1说说有哪些常见集合">1.说说有哪些常见集合？<a href="#1说说有哪些常见集合" class="hash-link" aria-label="Direct link to 1.说说有哪些常见集合？" title="Direct link to 1.说说有哪些常见集合？">​</a></h3>
+<p>集合相关类和接口都在java.util中，主要分为3种：List（列表）、Map（映射）、Set(集)。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-20-e91989cf4092394ee1e447d9a2441c4f.png" width="1472" height="576" class="img_kGBN"></p>
+<p>其中<code>Collection</code>是集合<code>List</code>、<code>Set</code>的父接口，它主要有两个子接口：</p>
+<ul>
+<li><code>List</code>：存储的元素有序，可重复。</li>
+<li><code>Set</code>：存储的元素不无序，不可重复。</li>
+</ul>
+<p><code>Map</code>是另外的接口，是键值对映射结构的集合。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="list">List<a href="#list" class="hash-link" aria-label="Direct link to List" title="Direct link to List">​</a></h2>
+<p>List，也没啥好问的，但不排除面试官剑走偏锋，比如面试官也看了我这篇文章。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="2arraylist和linkedlist有什么区别">2.ArrayList和LinkedList有什么区别？<a href="#2arraylist和linkedlist有什么区别" class="hash-link" aria-label="Direct link to 2.ArrayList和LinkedList有什么区别？" title="Direct link to 2.ArrayList和LinkedList有什么区别？">​</a></h3>
+<p><strong>（1）</strong> 数据结构不同</p>
+<ul>
+<li>ArrayList基于数组实现</li>
+<li>LinkedList基于双向链表实现</li>
+</ul>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-21-931093baac78e388153136648efa8550.png" width="1042" height="427" class="img_kGBN"></p>
+<p><strong>（2）</strong> 多数情况下，ArrayList更利于查找，LinkedList更利于增删</p>
+<ul>
+<li>ArrayList基于数组实现，get(int index)可以直接通过数组下标获取，时间复杂度是O(1)；LinkedList基于链表实现，get(int index)需要遍历链表，时间复杂度是O(n)；当然，get(E element)这种查找，两种集合都需要遍历，时间复杂度都是O(n)。</li>
+<li>ArrayList增删如果是数组末尾的位置，直接插入或者删除就可以了，但是如果插入中间的位置，就需要把插入位置后的元素都向前或者向后移动，甚至还有可能触发扩容；双向链表的插入和删除只需要改变前驱节点、后继节点  和插入节点的指向就行了，不需要移动元素。</li>
+</ul>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-22-1abb623486241280d011d0f7a5305bfa.png" width="923" height="667" class="img_kGBN"></p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-23-dca6816d817610ea35119fb8739b10d8.png" width="925" height="649" class="img_kGBN"></p>
+<blockquote>
+<p>注意，这个地方可能会出陷阱，LinkedList更利于增删更多是体现在平均步长上，不是体现在时间复杂度上，二者增删的时间复杂度都是O(n)</p>
+</blockquote>
+<p><strong>（3）</strong> 是否支持随机访问</p>
+<ul>
+<li>ArrayList基于数组，所以它可以根据下标查找，支持随机访问，当然，它也实现了RandmoAccess 接口，这个接口只是用来标识是否支持随机访问。</li>
+<li>LinkedList基于链表，所以它没法根据序号直接获取元素，它没有实现RandmoAccess 接口，标记不支持随机访问。</li>
+</ul>
+<p><strong>（4）</strong> 内存占用，ArrayList基于数组，是一块连续的内存空间，LinkedList基于链表，内存空间不连续，它们在空间占用上都有一些额外的消耗：</p>
+<ul>
+<li>ArrayList是预先定义好的数组，可能会有空的内存空间，存在一定空间浪费</li>
+<li>LinkedList每个节点，需要存储前驱和后继，所以每个节点会占用更多的空间</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="3arraylist的扩容机制了解吗">3.ArrayList的扩容机制了解吗？<a href="#3arraylist的扩容机制了解吗" class="hash-link" aria-label="Direct link to 3.ArrayList的扩容机制了解吗？" title="Direct link to 3.ArrayList的扩容机制了解吗？">​</a></h3>
+<p>ArrayList是基于数组的集合，数组的容量是在定义的时候确定的，如果数组满了，再插入，就会数组溢出。所以在插入时候，会先检查是否需要扩容，如果当前容量+1超过数组长度，就会进行扩容。</p>
+<p>ArrayList的扩容是创建一个<strong>1.5倍</strong>的新数组，然后把原数组的值拷贝过去。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-24-3d7b55f3fc352018813ba4dc030f13fa.png" width="895" height="440" class="img_kGBN"></p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="4arraylist怎么序列化的知道吗-为什么用transient修饰数组">4.ArrayList怎么序列化的知道吗？ 为什么用transient修饰数组？<a href="#4arraylist怎么序列化的知道吗-为什么用transient修饰数组" class="hash-link" aria-label="Direct link to 4.ArrayList怎么序列化的知道吗？ 为什么用transient修饰数组？" title="Direct link to 4.ArrayList怎么序列化的知道吗？ 为什么用transient修饰数组？">​</a></h3>
+<p>ArrayList的序列化不太一样，它使用<code>transient</code>修饰存储元素的<code>elementData</code>的数组，<code>transient</code>关键字的作用是让被修饰的成员属性不被序列化。</p>
+<p><strong>为什么最ArrayList不直接序列化元素数组呢？</strong></p>
+<p>出于效率的考虑，数组可能长度100，但实际只用了50，剩下的50不用其实不用序列化，这样可以提高序列化和反序列化的效率，还可以节省内存空间。</p>
+<p><strong>那ArrayList怎么序列化呢？</strong></p>
+<p>ArrayList通过两个方法<strong>readObject、writeObject</strong>自定义序列化和反序列化策略，实际直接使用两个流<code>ObjectOutputStream</code>和<code>ObjectInputStream</code>来进行序列化和反序列化。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-25-f2e186703f530f0ca22b76b58be2a9bf.png" width="1660" height="2308" class="img_kGBN"></p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="5快速失败fail-fast和安全失败fail-safe了解吗">5.快速失败(fail-fast)和安全失败(fail-safe)了解吗？<a href="#5快速失败fail-fast和安全失败fail-safe了解吗" class="hash-link" aria-label="Direct link to 5.快速失败(fail-fast)和安全失败(fail-safe)了解吗？" title="Direct link to 5.快速失败(fail-fast)和安全失败(fail-safe)了解吗？">​</a></h3>
+<p><strong>快速失败（fail—fast）</strong>：快速失败是Java集合的一种错误检测机制</p>
+<ul>
+<li>在用迭代器遍历一个集合对象时，如果线程A遍历过程中，线程B对集合对象的内容进行了修改（增加、删除、修改），则会抛出Concurrent Modification Exception。</li>
+<li>原理：迭代器在遍历时直接访问集合中的内容，并且在遍历过程中使用一个 <code> modCount</code>  变量。集合在被遍历期间如果内容发生变化，就会改变<code>modCount</code>的值。每当迭代器使用hashNext()/next()遍历下一个元素之前，都会检测modCount变量是否为expectedmodCount值，是的话就返回遍历；否则抛出异常，终止遍历。</li>
+<li>注意：这里异常的抛出条件是检测到 modCount！=expectedmodCount  这个条件。如果集合发生变化时修改modCount值刚好又设置为了expectedmodCount值，则异常不会抛出。因此，不能依赖于这个异常是否抛出而进行并发操作的编程，这个异常只建议用于检测并发修改的bug。</li>
+<li>场景：java.util包下的集合类都是快速失败的，不能在多线程下发生并发修改（迭代过程中被修改），比如ArrayList 类。</li>
+</ul>
+<p><strong>安全失败（fail—safe）</strong></p>
+<ul>
+<li>采用安全失败机制的集合容器，在遍历时不是直接在集合内容上访问的，而是先复制原有集合内容，在拷贝的集合上进行遍历。</li>
+<li>原理：由于迭代时是对原集合的拷贝进行遍历，所以在遍历过程中对原集合所作的修改并不能被迭代器检测到，所以不会触发Concurrent Modification Exception。</li>
+<li>缺点：基于拷贝内容的优点是避免了Concurrent Modification Exception，但同样地，迭代器并不能访 问到修改后的内容，即：迭代器遍历的是开始遍历那一刻拿到的集合拷贝，在遍历期间原集合发生的修改迭代器是不知道的。</li>
+<li>场景：java.util.concurrent包下的容器都是安全失败，可以在多线程下并发使用，并发修改，比如CopyOnWriteArrayList类。</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="6有哪几种实现arraylist线程安全的方法">6.有哪几种实现ArrayList线程安全的方法？<a href="#6有哪几种实现arraylist线程安全的方法" class="hash-link" aria-label="Direct link to 6.有哪几种实现ArrayList线程安全的方法？" title="Direct link to 6.有哪几种实现ArrayList线程安全的方法？">​</a></h3>
+<p>fail-fast是一种可能触发的机制，实际上，ArrayList的线程安全仍然没有保证，一般，保证ArrayList的线程安全可以通过这些方案：</p>
+<ul>
+<li>使用 Vector 代替 ArrayList。（不推荐，Vector是一个历史遗留类）</li>
+<li>使用 Collections.synchronizedList 包装 ArrayList，然后操作包装后的 list。</li>
+<li>使用 CopyOnWriteArrayList 代替 ArrayList。</li>
+<li>在使用 ArrayList 时，应用程序通过同步机制去控制 ArrayList 的读写。</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="7copyonwritearraylist了解多少">7.CopyOnWriteArrayList了解多少？<a href="#7copyonwritearraylist了解多少" class="hash-link" aria-label="Direct link to 7.CopyOnWriteArrayList了解多少？" title="Direct link to 7.CopyOnWriteArrayList了解多少？">​</a></h3>
+<p>CopyOnWriteArrayList就是线程安全版本的ArrayList。</p>
+<p>它的名字叫<code>CopyOnWrite</code>——写时复制，已经明示了它的原理。</p>
+<p>CopyOnWriteArrayList采用了一种读写分离的并发策略。CopyOnWriteArrayList容器允许并发读，读操作是无锁的，性能较高。至于写操作，比如向容器中添加一个元素，则首先将当前容器复制一份，然后在新副本上执行写操作，结束之后再将原容器的引用指向新容器。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-26-d14f0ed0bc95a8f868b24dad96ab2743.png" width="1140" height="619" class="img_kGBN"></p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="map">Map<a href="#map" class="hash-link" aria-label="Direct link to Map" title="Direct link to Map">​</a></h2>
+<p>Map中，毫无疑问，最重要的就是HashMap，面试基本被盘出包浆了，各种问法，一定要好好准备。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="8能说一下hashmap的数据结构吗">8.能说一下HashMap的数据结构吗？<a href="#8能说一下hashmap的数据结构吗" class="hash-link" aria-label="Direct link to 8.能说一下HashMap的数据结构吗？" title="Direct link to 8.能说一下HashMap的数据结构吗？">​</a></h3>
+<p>JDK1.7的数据结构是<code>数组</code>+<code>链表</code></p>
+<p>JDK1.8的数据结构是<code>数组</code>+<code>链表</code>+<code>红黑树</code>。</p>
+<p>数据结构示意图如下：</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-27-56a89bc83ba6ff7760d8a4d4ee06f58a.png" width="1116" height="593" class="img_kGBN"></p>
+<p>其中，桶数组是用来存储数据元素，链表是用来解决冲突，红黑树是为了提高查询的效率。</p>
+<ul>
+<li>数据元素通过映射关系，也就是散列函数，映射到桶数组对应索引的位置</li>
+<li>如果发生冲突，从冲突的位置拉一个链表，插入冲突的元素</li>
+<li>如果链表长度&gt;8&amp;数组大小&gt;=64，链表转为红黑树</li>
+<li>如果红黑树节点个数 &lt; 6 ，转为链表</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="9你对红黑树了解多少为什么不用二叉树平衡树呢">9.你对红黑树了解多少？为什么不用二叉树/平衡树呢？<a href="#9你对红黑树了解多少为什么不用二叉树平衡树呢" class="hash-link" aria-label="Direct link to 9.你对红黑树了解多少？为什么不用二叉树/平衡树呢？" title="Direct link to 9.你对红黑树了解多少？为什么不用二叉树/平衡树呢？">​</a></h3>
+<p>红黑树本质上是一种二叉查找树，为了保持平衡，它又在二叉查找树的基础上增加了一些规则：</p>
+<ol>
+<li>每个节点要么是红色，要么是黑色；</li>
+<li>根节点永远是黑色的；</li>
+<li>所有的叶子节点都是是黑色的（注意这里说叶子节点其实是图中的 NULL 节点）；</li>
+<li>每个红色节点的两个子节点一定都是黑色；</li>
+<li>从任一节点到其子树中每个叶子节点的路径都包含相同数量的黑色节点；</li>
+</ol>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-28-5e53529f86141ede151e343868e3d704.png" width="734" height="406" class="img_kGBN"></p>
+<p>之所以不用二叉树：</p>
+<blockquote>
+<p>红黑树是一种平衡的二叉树，插入、删除、查找的最坏时间复杂度都为 O(logn)，避免了二叉树最坏情况下的O(n)时间复杂度。</p>
+</blockquote>
+<p>之所以不用平衡二叉树：</p>
+<blockquote>
+<p>平衡二叉树是比红黑树更严格的平衡树，为了保持保持平衡，需要旋转的次数更多，也就是说平衡二叉树保持平衡的效率更低，所以平衡二叉树插入和删除的效率比红黑树要低。</p>
+</blockquote>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="10红黑树怎么保持平衡的知道吗">10.红黑树怎么保持平衡的知道吗？<a href="#10红黑树怎么保持平衡的知道吗" class="hash-link" aria-label="Direct link to 10.红黑树怎么保持平衡的知道吗？" title="Direct link to 10.红黑树怎么保持平衡的知道吗？">​</a></h3>
+<p>红黑树有两种方式保持平衡：<code>旋转</code>和<code>染色</code>。</p>
+<ul>
+<li>旋转：旋转分为两种，左旋和右旋</li>
+</ul>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-29-a1cee9a09fe4eed92ca1b831d5a1233f.png" width="700" height="271" class="img_kGBN"></p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-30-610f2364c517e9e541fa89839d0c79c3.png" width="701" height="298" class="img_kGBN"></p>
+<ul>
+<li>染⾊：</li>
+</ul>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-31-536f30b910008164d817c98fca8ce40a.png" width="811" height="339" class="img_kGBN"></p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="11hashmap的put流程知道吗">11.HashMap的put流程知道吗？<a href="#11hashmap的put流程知道吗" class="hash-link" aria-label="Direct link to 11.HashMap的put流程知道吗？" title="Direct link to 11.HashMap的put流程知道吗？">​</a></h3>
+<p>先上个流程图吧:</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-32-85a5a4e5af2ac384cc0f0818b13ae793.png" width="1346" height="1416" class="img_kGBN"></p>
+<ol>
+<li>
+<p>首先进行哈希值的扰动，获取一个新的哈希值。<code>(key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);</code></p>
+</li>
+<li>
+<p>判断tab是否位空或者长度为0，如果是则进行扩容操作。</p>
+<div class="language-java codeBlockContainer_Ty55 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_zoWS"><pre tabindex="0" class="prism-code language-java codeBlock_Po6r thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_Llrq"><span class="token-line" style="color:#393A34"><span class="token plain">if ((tab = table) == null || (n = tab.length) == 0)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    n = (tab = resize()).length;</span><br></span></code></pre><div class="buttonGroup_EjFN"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_RXpO" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_sabX"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_WdXf"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+<li>
+<p>根据哈希值计算下标，如果对应小标正好没有存放数据，则直接插入即可否则需要覆盖。<code>tab[i = (n - 1) &amp; hash])</code></p>
+</li>
+<li>
+<p>判断tab[i]是否为树节点，否则向链表中插入数据，是则向树中插入节点。</p>
+</li>
+<li>
+<p>如果链表中插入节点的时候，链表长度大于等于8，则需要把链表转换为红黑树。<code>treeifyBin(tab, hash);</code></p>
+</li>
+<li>
+<p>最后所有元素处理完成后，判断是否超过阈值；<code>threshold</code>，超过则扩容。</p>
+</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="12hashmap怎么查找元素的呢">12.HashMap怎么查找元素的呢？<a href="#12hashmap怎么查找元素的呢" class="hash-link" aria-label="Direct link to 12.HashMap怎么查找元素的呢？" title="Direct link to 12.HashMap怎么查找元素的呢？">​</a></h3>
+<p>先看流程图：</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-33-26aa49b3c651cdae4887ca0a5f1a9914.png" width="600" height="741" class="img_kGBN"></p>
+<p>HashMap的查找就简单很多：</p>
+<ol>
+<li>使用扰动函数，获取新的哈希值</li>
+<li>计算数组下标，获取节点</li>
+<li>当前节点和key匹配，直接返回</li>
+<li>否则，当前节点是否为树节点，查找红黑树</li>
+<li>否则，遍历链表查找</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="13hashmap的哈希扰动函数是怎么设计的">13.HashMap的哈希/扰动函数是怎么设计的?<a href="#13hashmap的哈希扰动函数是怎么设计的" class="hash-link" aria-label="Direct link to 13.HashMap的哈希/扰动函数是怎么设计的?" title="Direct link to 13.HashMap的哈希/扰动函数是怎么设计的?">​</a></h3>
+<p>HashMap的哈希函数是先拿到 key 的hashcode，是一个32位的int类型的数值，然后让hashcode的高16位和低16位进行异或操作。</p>
+<div class="language-java codeBlockContainer_Ty55 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_zoWS"><pre tabindex="0" class="prism-code language-java codeBlock_Po6r thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_Llrq"><span class="token-line" style="color:#393A34"><span class="token plain">    static final int hash(Object key) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        int h;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        // key的hashCode和key的hashCode右移16位做异或运算</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    }</span><br></span></code></pre><div class="buttonGroup_EjFN"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_RXpO" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_sabX"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_WdXf"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>这么设计是为了降低哈希碰撞的概率。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="14为什么哈希扰动函数能降hash碰撞">14.为什么哈希/扰动函数能降hash碰撞？<a href="#14为什么哈希扰动函数能降hash碰撞" class="hash-link" aria-label="Direct link to 14.为什么哈希/扰动函数能降hash碰撞？" title="Direct link to 14.为什么哈希/扰动函数能降hash碰撞？">​</a></h3>
+<p>因为 key.hashCode() 函数调用的是 key 键值类型自带的哈希函数，返回 int 型散列值。int 值范围为 <strong>-2147483648~2147483647</strong>，加起来大概 40 亿的映射空间。</p>
+<p>只要哈希函数映射得比较均匀松散，一般应用是很难出现碰撞的。但问题是一个 40 亿长度的数组，内存是放不下的。</p>
+<p>假如 HashMap 数组的初始大小才 16，就需要用之前需要对数组的长度取模运算，得到的余数才能用来访问数组下标。</p>
+<div class="language-java codeBlockContainer_Ty55 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_zoWS"><pre tabindex="0" class="prism-code language-java codeBlock_Po6r thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_Llrq"><span class="token-line" style="color:#393A34"><span class="token plain">bucketIndex = indexFor(hash, table.length);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">static int indexFor(int h, int length) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">     return h &amp; (length-1);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre><div class="buttonGroup_EjFN"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_RXpO" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_sabX"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_WdXf"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>顺便说一下，这也正好解释了为什么 HashMap 的数组长度要取 2 的整数幂。因为这样（数组长度 - 1）正好相当于一个 “低位掩码”。<code>与</code> 操作的结果就是散列值的高位全部归零，只保留低位值，用来做数组下标访问。以初始长度 16 为例，16-1=15。2 进制表示是<code> 0000 0000 0000 0000 0000 0000 0000 1111</code>。和某个散列值做 <code>与</code> 操作如下，结果就是截取了最低的四位值。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-34-efa80ca21d60a0ccb83d876f0878d343.png" width="1456" height="320" class="img_kGBN"></p>
+<p>这样是要快捷一些，但是新的问题来了，就算散列值分布再松散，要是只取最后几位的话，碰撞也会很严重。如果散列本身做得不好，分布上成等差数列的漏洞，如果正好让最后几个低位呈现规律性重复，那就更难搞了。</p>
+<p>这时候 <code>扰动函数</code> 的价值就体现出来了，看一下扰动函数的示意图：</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-35-9563d4c627603ec27a3d3d100df16ad1.png" width="6261" height="2019" class="img_kGBN"></p>
+<p>右移 16 位，正好是 32bit 的一半，自己的高半区和低半区做异或，就是为了混合原始哈希码的高位和低位，以此来加大低位的随机性。而且混合后的低位掺杂了高位的部分特征，这样高位的信息也被变相保留下来。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="15为什么hashmap的容量是2的倍数呢">15.为什么HashMap的容量是2的倍数呢？<a href="#15为什么hashmap的容量是2的倍数呢" class="hash-link" aria-label="Direct link to 15.为什么HashMap的容量是2的倍数呢？" title="Direct link to 15.为什么HashMap的容量是2的倍数呢？">​</a></h3>
+<ul>
+<li>第一个原因是为了方便哈希取余：</li>
+</ul>
+<p>将元素放在table数组上面，是用hash值%数组大小定位位置，而HashMap是用hash值&amp;(数组大小-1)，却能和前面达到一样的效果，这就得益于HashMap的大小是2的倍数，2的倍数意味着该数的二进制位只有一位为1，而该数-1就可以得到二进制位上1变成0，后面的0变成1，再通过&amp;运算，就可以得到和%一样的效果，并且位运算比%的效率高得多</p>
+<p>HashMap的容量是2的n次幂时，(n-1)的2进制也就是1111111***111这样形式的，这样与添加元素的hash值进行位运算时，能够充分的散列，使得添加的元素均匀分布在HashMap的每个位置上，减少hash碰撞。</p>
+<ul>
+<li>第二个方面是在扩容时，利用扩容后的大小也是2的倍数，将已经产生hash碰撞的元素完美的转移到新的table中去</li>
+</ul>
+<p>我们可以简单看看HashMap的扩容机制，HashMap中的元素在超过<code>负载因子*HashMap</code>大小时就会产生扩容。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-36-ea5071479b8c8773e8c923103e584d53.png" width="792" height="143" class="img_kGBN"></p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="16如果初始化hashmap传一个17的值new-hashmap它会怎么处理">16.如果初始化HashMap，传一个17的值<code>new HashMap&lt;&gt;</code>，它会怎么处理？<a href="#16如果初始化hashmap传一个17的值new-hashmap它会怎么处理" class="hash-link" aria-label="Direct link to 16如果初始化hashmap传一个17的值new-hashmap它会怎么处理" title="Direct link to 16如果初始化hashmap传一个17的值new-hashmap它会怎么处理">​</a></h3>
+<p>简单来说，就是初始化时，传的不是2的倍数时，HashMap会向上寻找<code>离得最近的2的倍数</code>，所以传入17，但HashMap的实际容量是32。</p>
+<p>我们来看看详情，在HashMap的初始化中，有这样⼀段⽅法；</p>
+<div class="language-java codeBlockContainer_Ty55 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_zoWS"><pre tabindex="0" class="prism-code language-java codeBlock_Po6r thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_Llrq"><span class="token-line" style="color:#393A34"><span class="token plain">public HashMap(int initialCapacity, float loadFactor) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"> ...</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"> this.loadFactor = loadFactor;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"> this.threshold = tableSizeFor(initialCapacity);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre><div class="buttonGroup_EjFN"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_RXpO" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_sabX"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_WdXf"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<ul>
+<li>阀值 threshold ，通过⽅法<code> tableSizeFor</code> 进⾏计算，是根据初始化传的参数来计算的。</li>
+<li>同时，这个⽅法也要要寻找⽐初始值⼤的，最⼩的那个2进制数值。⽐如传了17，我应该找到的是32。</li>
+</ul>
+<div class="language-java codeBlockContainer_Ty55 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_zoWS"><pre tabindex="0" class="prism-code language-java codeBlock_Po6r thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_Llrq"><span class="token-line" style="color:#393A34"><span class="token plain">static final int tableSizeFor(int cap) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"> int n = cap - 1;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"> n |= n &gt;&gt;&gt; 1;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"> n |= n &gt;&gt;&gt; 2;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"> n |= n &gt;&gt;&gt; 4;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"> n |= n &gt;&gt;&gt; 8;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"> n |= n &gt;&gt;&gt; 16;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"> return (n &lt; 0) ? 1 : (n &gt;= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + 1; }</span><br></span></code></pre><div class="buttonGroup_EjFN"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_RXpO" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_sabX"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_WdXf"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<ul>
+<li><code>MAXIMUM_CAPACITY = 1 &lt;&lt; 30</code>，这个是临界范围，也就是最⼤的Map集合。</li>
+<li>计算过程是向右移位1、2、4、8、16，和原来的数做<code>|</code>运算，这主要是为了把⼆进制的各 个位置都填上1，当⼆进制的各个位置都是1以后，就是⼀个标准的2的倍数减1了，最后把结果加1再返回即可。</li>
+</ul>
+<p>以17为例，看一下初始化计算table容量的过程：</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-37-fdb4737cda77459e59f2c10a9bad0664.png" width="774" height="400" class="img_kGBN"></p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="17你还知道哪些哈希函数的构造方法呢">17.你还知道哪些哈希函数的构造方法呢？<a href="#17你还知道哪些哈希函数的构造方法呢" class="hash-link" aria-label="Direct link to 17.你还知道哪些哈希函数的构造方法呢？" title="Direct link to 17.你还知道哪些哈希函数的构造方法呢？">​</a></h3>
+<p>HashMap里哈希构造函数的方法叫：</p>
+<ul>
+<li><strong>除留取余法</strong>：<code>H（key)=key%p（p&lt;=N）</code>,关键字除以一个不大于哈希表长度的正整数p，所得余数为地址，当然HashMap里进行了优化改造，效率更高，散列也更均衡。
+除此之外，还有这几种常见的哈希函数构造方法：</li>
+<li><strong>直接定址法</strong>
+直接根据<code>key</code>来映射到对应的数组位置，例如1232放到下标1232的位置。</li>
+<li><strong>数字分析法</strong>
+取<code>key</code>的某些数字（例如十位和百位）作为映射的位置</li>
+<li><strong>平方取中法</strong>
+取<code>key</code>平方的中间几位作为映射的位置</li>
+<li><strong>折叠法</strong>
+将<code>key</code>分割成位数相同的几段，然后把它们的叠加和作为映射的位置</li>
+</ul>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-38-2a8be6a009d7f1e3d7494c3d583714f4.png" width="993" height="452" class="img_kGBN"></p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="18解决哈希冲突有哪些方法呢">18.解决哈希冲突有哪些方法呢？<a href="#18解决哈希冲突有哪些方法呢" class="hash-link" aria-label="Direct link to 18.解决哈希冲突有哪些方法呢？" title="Direct link to 18.解决哈希冲突有哪些方法呢？">​</a></h3>
+<p>我们到现在已经知道，HashMap使用链表的原因为了处理哈希冲突，这种方法就是所谓的：</p>
+<ul>
+<li><strong>链地址法</strong>：在冲突的位置拉一个链表，把冲突的元素放进去。</li>
+</ul>
+<p>除此之外，还有一些常见的解决冲突的办法：</p>
+<ul>
+<li><strong>开放定址法</strong>：开放定址法就是从冲突的位置再接着往下找，给冲突元素找个空位。
+找到空闲位置的方法也有很多种：<!-- -->
+<ul>
+<li>线行探查法: 从冲突的位置开始，依次判断下一个位置是否空闲，直至找到空闲位置</li>
+<li>平方探查法: 从冲突的位置x开始，第一次增加<code>1^2</code>个位置，第二次增加<code>2^2</code>…，直至找到空闲的位置</li>
+<li>……</li>
+</ul>
+</li>
+</ul>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-39-485ba228750b4f4aebc715aea5bff7e6.png" width="1263" height="554" class="img_kGBN"></p>
+<ul>
+<li><strong>再哈希法</strong>：换种哈希函数，重新计算冲突元素的地址。</li>
+<li><strong>建立公共溢出区</strong>：再建一个数组，把冲突的元素放进去。</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="19为什么hashmap链表转红黑树的阈值为8呢">19.为什么HashMap链表转红黑树的阈值为8呢？<a href="#19为什么hashmap链表转红黑树的阈值为8呢" class="hash-link" aria-label="Direct link to 19.为什么HashMap链表转红黑树的阈值为8呢？" title="Direct link to 19.为什么HashMap链表转红黑树的阈值为8呢？">​</a></h3>
+<p>树化发生在table数组的长度大于64，且链表的长度大于8的时候。</p>
+<p>为什么是8呢？源码的注释也给出了答案。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-40-ae24863f2719115d9d21dfaf4cf748f6.png" width="1420" height="1340" class="img_kGBN"></p>
+<p>红黑树节点的大小大概是普通节点大小的两倍，所以转红黑树，牺牲了空间换时间，更多的是一种兜底的策略，保证极端情况下的查找效率。</p>
+<p>阈值为什么要选8呢？和统计学有关。理想情况下，使用随机哈希码，链表里的节点符合泊松分布，出现节点个数的概率是递减的，节点个数为8的情况，发生概率仅为<code>0.00000006</code>。</p>
+<p>至于红黑树转回链表的阈值为什么是6，而不是8？是因为如果这个阈值也设置成8，假如发生碰撞，节点增减刚好在8附近，会发生链表和红黑树的不断转换，导致资源浪费。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="20扩容在什么时候呢为什么扩容因子是075">20.扩容在什么时候呢？为什么扩容因子是0.75？<a href="#20扩容在什么时候呢为什么扩容因子是075" class="hash-link" aria-label="Direct link to 20.扩容在什么时候呢？为什么扩容因子是0.75？" title="Direct link to 20.扩容在什么时候呢？为什么扩容因子是0.75？">​</a></h3>
+<p>为了减少哈希冲突发生的概率，当当前HashMap的元素个数达到一个临界值的时候，就会触发扩容，把所有元素rehash之后再放在扩容后的容器中，这是一个相当耗时的操作。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-41-fc8de84cb8d1b3fb200aac629baa9092.png" width="612" height="63" class="img_kGBN"></p>
+<p>而这个<code>临界值threshold</code>就是由加载因子和当前容器的容量大小来确定的，假如采用默认的构造方法：</p>
+<blockquote>
+<p>临界值（threshold ）= 默认容量（DEFAULT_INITIAL_CAPACITY） * 默认扩容因子（DEFAULT_LOAD_FACTOR）</p>
+</blockquote>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-42-b3ee757e39ee7d2290265a2b83ed42ba.png" width="807" height="289" class="img_kGBN"></p>
+<p>  那就是大于<code>16x0.75=12</code>时，就会触发扩容操作。</p>
+<blockquote>
+<p>那么为什么选择了0.75作为HashMap的默认加载因子呢？</p>
+</blockquote>
+<p>简单来说，这是对<code>空间</code>成本和<code>时间</code>成本平衡的考虑。</p>
+<p>在HashMap中有这样一段注释：</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-43-1163998e2cd86caf799baa92c3583a98.png" width="1404" height="836" class="img_kGBN"></p>
+<p>我们都知道，HashMap的散列构造方式是Hash取余，负载因子决定元素个数达到多少时候扩容。</p>
+<p>假如我们设的比较大，元素比较多，空位比较少的时候才扩容，那么发生哈希冲突的概率就增加了，查找的时间成本就增加了。</p>
+<p>我们设的比较小的话，元素比较少，空位比较多的时候就扩容了，发生哈希碰撞的概率就降低了，查找时间成本降低，但是就需要更多的空间去存储元素，空间成本就增加了。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="21那扩容机制了解吗">21.那扩容机制了解吗？<a href="#21那扩容机制了解吗" class="hash-link" aria-label="Direct link to 21.那扩容机制了解吗？" title="Direct link to 21.那扩容机制了解吗？">​</a></h3>
+<p>HashMap是基于数组+链表和红黑树实现的，但用于存放key值的桶数组的长度是固定的，由初始化参数确定。</p>
+<p>那么，随着数据的插入数量增加以及负载因子的作用下，就需要扩容来存放更多的数据。而扩容中有一个非常重要的点，就是jdk1.8中的优化操作，可以不需要再重新计算每一个元素的哈希值。</p>
+<p>因为HashMap的初始容量是2的次幂，扩容之后的长度是原来的二倍，新的容量也是2的次幂，所以，元素，要么在原位置，要么在原位置再移动2的次幂。</p>
+<p>看下这张图，n为table的长度，图<code>a</code>表示扩容前的key1和key2两种key确定索引 的位置，图<code>b</code>表示扩容后key1和key2两种key确定索引位置。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-44-4f61924b5c9cf3340b457a669cc5679b.png" width="1632" height="446" class="img_kGBN"></p>
+<p>元素在重新计算hash之后，因为n变为2倍，那么n-1的mask范围在高位多1bit(红色)，因此新的index就会发生这样的变化：</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-45-37b2f58aa0215c5bf99d32f9874532cd.png" width="876" height="219" class="img_kGBN"></p>
+<p>所以在扩容时，只需要看原来的hash值新增的那一位是0还是1就行了，是0的话索引没变，是1的化变成<code>原索引+oldCap</code>，看看如16扩容为32的示意图：</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-46-59af6abafe6910cfddab0f50a6b6297d.png" width="1179" height="568" class="img_kGBN"></p>
+<p>扩容节点迁移主要逻辑：</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-47-61af6a3b0cc6890ed7eb43b1496f8e45.png" width="1164" height="1882" class="img_kGBN"></p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="22jdk18对hashmap主要做了哪些优化呢为什么">22.jdk1.8对HashMap主要做了哪些优化呢？为什么？<a href="#22jdk18对hashmap主要做了哪些优化呢为什么" class="hash-link" aria-label="Direct link to 22.jdk1.8对HashMap主要做了哪些优化呢？为什么？" title="Direct link to 22.jdk1.8对HashMap主要做了哪些优化呢？为什么？">​</a></h3>
+<p>jdk1.8 的HashMap主要有五点优化：</p>
+<ol>
+<li><strong>数据结构</strong>：数组 + 链表改成了数组 + 链表或红黑树
+<code>原因</code>：发生 hash 冲突，元素会存入链表，链表过长转为红黑树，将时间复杂度由<code>O(n)</code>降为<code>O(logn)</code></li>
+<li><strong>链表插入方式</strong>：链表的插入方式从头插法改成了尾插法
+简单说就是插入时，如果 数组位置上已经有元素，1.7 将新元素放到数组中，原始节点作为新节点的后继节点，1.8 遍历链表，将元素放置到链表的最后。
+<code>原因</code>：因为 1.7 头插法扩容时，头插法会使链表发生反转，多线程环境下会产生环。</li>
+<li><strong>扩容rehash</strong>：扩容的时候 1.7 需要对原数组中的元素进行重新 hash 定位在新数组的位置，1.8 采用更简单的判断逻辑，不需要重新通过哈希函数计算位置，新的位置不变或索引 + 新增容量大小。
+<code>原因：</code>提高扩容的效率，更快地扩容。</li>
+<li><strong>扩容时机</strong>：在插入时，1.7 先判断是否需要扩容，再插入，1.8 先进行插入，插入完成再判断是否需要扩容；</li>
+<li><strong>散列函数</strong>：1.7 做了四次移位和四次异或，jdk1.8只做一次。
+<code>原因</code>：做 4 次的话，边际效用也不大，改为一次，提升效率。</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="23你能自己设计实现一个hashmap吗">23.你能自己设计实现一个HashMap吗？<a href="#23你能自己设计实现一个hashmap吗" class="hash-link" aria-label="Direct link to 23.你能自己设计实现一个HashMap吗？" title="Direct link to 23.你能自己设计实现一个HashMap吗？">​</a></h3>
+<p>这道题<strong>快手</strong>常考。</p>
+<p>不要慌，红黑树版咱们多半是写不出来，但是数组+链表版还是问题不大的，详细可见： <a href="https://mp.weixin.qq.com/s/Z9yoRZW5itrtgbS-cj0bUg" target="_blank" rel="noopener noreferrer">手写HashMap，快手面试官直呼内行！</a>。</p>
+<p>整体的设计：</p>
+<ul>
+<li>散列函数：hashCode()+除留余数法</li>
+<li>冲突解决：链地址法</li>
+<li>扩容：节点重新hash获取位置</li>
+</ul>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-48-0bda6add6d860318e90dd8323b7790c7.png" width="1102" height="374" class="img_kGBN"></p>
+<p>完整代码：</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-49-ecd3b310645a78f3d405de5d6230d522.png" width="1430" height="7298" class="img_kGBN"></p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="24hashmap-是线程安全的吗多线程下会有什么问题">24.HashMap 是线程安全的吗？多线程下会有什么问题？<a href="#24hashmap-是线程安全的吗多线程下会有什么问题" class="hash-link" aria-label="Direct link to 24.HashMap 是线程安全的吗？多线程下会有什么问题？" title="Direct link to 24.HashMap 是线程安全的吗？多线程下会有什么问题？">​</a></h3>
+<p>HashMap不是线程安全的，可能会发生这些问题：</p>
+<ul>
+<li>
+<p>多线程下扩容死循环。JDK1.7 中的 HashMap 使用头插法插入元素，在多线程的环境下，扩容的时候有可能导致环形链表的出现，形成死循环。因此，JDK1.8 使用尾插法插入元素，在扩容时会保持链表元素原本的顺序，不会出现环形链表的问题。</p>
+</li>
+<li>
+<p>多线程的 put 可能导致元素的丢失。多线程同时执行 put 操作，如果计算出来的索引位置是相同的，那会造成前一个 key 被后一个 key 覆盖，从而导致元素的丢失。此问题在 JDK 1.7 和 JDK 1.8 中都存在。</p>
+</li>
+<li>
+<p>put 和 get 并发时，可能导致 get 为 null。线程 1 执行 put 时，因为元素个数超出 threshold 而导致 rehash，线程 2 此时执行 get，有可能导致这个问题。这个问题在 JDK 1.7 和 JDK 1.8 中都存在。</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="25有什么办法能解决hashmap线程不安全的问题呢">25.有什么办法能解决HashMap线程不安全的问题呢？<a href="#25有什么办法能解决hashmap线程不安全的问题呢" class="hash-link" aria-label="Direct link to 25.有什么办法能解决HashMap线程不安全的问题呢？" title="Direct link to 25.有什么办法能解决HashMap线程不  安全的问题呢？">​</a></h3>
+<p>Java 中有 HashTable、Collections.synchronizedMap、以及 ConcurrentHashMap 可以实现线程安全的 Map。</p>
+<ul>
+<li>HashTable 是直接在操作方法上加 synchronized 关键字，锁住整个table数组，粒度比较大；</li>
+<li>Collections.synchronizedMap 是使用 Collections 集合工具的内部类，通过传入 Map 封装出一个 SynchronizedMap 对象，内部定义了一个对象锁，方法内通过对象锁实现；</li>
+<li>ConcurrentHashMap 在jdk1.7中使用分段锁，在jdk1.8中使用CAS+synchronized。</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="26能具体说一下concurrenthashmap的实现吗">26.能具体说一下ConcurrentHashmap的实现吗？<a href="#26能具体说一下concurrenthashmap的实现吗" class="hash-link" aria-label="Direct link to 26.能具体说一下ConcurrentHashmap的实现吗？" title="Direct link to 26.能具体说一下ConcurrentHashmap的实现吗？">​</a></h3>
+<p>ConcurrentHashmap线程安全在jdk1.7版本是基于<code>分段锁</code>实现，在jdk1.8是基于<code>CAS+synchronized</code>实现。</p>
+<h4 class="anchor anchorWithStickyNavbar_HWLp" id="17分段锁">1.7分段锁<a href="#17分段锁" class="hash-link" aria-label="Direct link to 1.7分段锁" title="Direct link to 1.7分段锁">​</a></h4>
+<p>从结构上说，1.7版本的ConcurrentHashMap采用分段锁机制，里面包含一个Segment数组，Segment继承于ReentrantLock，Segment则包含HashEntry的数组，HashEntry本身就是一个链表的结构，具有保存key、value的能力能指向下一个节点的指针。</p>
+<p>实际上就是相当于每个Segment都是一个HashMap，默认的Segment长度是16，也就是支持16个线程的并发写，Segment之间相互不会受到影响。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-50-512fc69528f6fdc49634bff0cddb8fc5.png" width="1057" height="376" class="img_kGBN"></p>
+<p><strong>put流程</strong></p>
+<p>整个流程  和HashMap非常类似，只不过是先定位到具体的Segment，然后通过ReentrantLock去操作而已，后面的流程，就和HashMap基本上是一样的。</p>
+<ol>
+<li>计算hash，定位到segment，segment如果是空就先初始化</li>
+<li>使用ReentrantLock加锁，如果获取锁失败则尝试自旋，自旋超过次数就阻塞获取，保证一定获取锁成功</li>
+<li>遍历HashEntry，就是和HashMap一样，数组中key和hash一样就直接替换，不存在就再插入链表，链表同样操作</li>
+</ol>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-51-40da35a5a98a0725957787ac427c0ff6.png" width="1045" height="1667" class="img_kGBN"></p>
+<p><strong>get流程</strong></p>
+<p>get也很简单，key通过hash定位到segment，再遍历链表定位到具体的元素上，需要注意的是value是volatile的，所以get是不需要加锁的。</p>
+<h4 class="anchor anchorWithStickyNavbar_HWLp" id="18-cassynchronized">1.8 CAS+synchronized**<a href="#18-cassynchronized" class="hash-link" aria-label="Direct link to 1.8 CAS+synchronized**" title="Direct link to 1.8 CAS+synchronized**">​</a></h4>
+<p>jdk1.8实现线程安全不是在数据结构上下功夫，它的数据结构和HashMap是一样的，数组+链表+红黑树。它实现线程安全的关键点在于put流程。</p>
+<p><strong>put流程</strong></p>
+<ol>
+<li>首先计算hash，遍历node数组，如果node是空的话，就通过CAS+自旋的方式初始化</li>
+</ol>
+<div class="language-java codeBlockContainer_Ty55 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_zoWS"><pre tabindex="0" class="prism-code language-java codeBlock_Po6r thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_Llrq"><span class="token-line" style="color:#393A34"><span class="token plain"> tab = initTable();</span><br></span></code></pre><div class="buttonGroup_EjFN"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_RXpO" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_sabX"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_WdXf"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>node数组初始化：</p>
+<div class="language-java codeBlockContainer_Ty55 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_zoWS"><pre tabindex="0" class="prism-code language-java codeBlock_Po6r thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_Llrq"><span class="token-line" style="color:#393A34"><span class="token plain">private final Node&lt;K,V&gt;[] initTable() {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    Node&lt;K,V&gt;[] tab; int sc;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    while ((tab = table) == null || tab.length == 0) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        //如果正在初始化或者扩容</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        if ((sc = sizeCtl) &lt; 0)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            //等待</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            Thread.yield(); // lost initialization race; just spin</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        else if (U.compareAndSwapInt(this, SIZECTL, sc, -1)) {   //CAS操作</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            try {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                if ((tab = table) == null || tab.length == 0) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                    int n = (sc &gt; 0) ? sc : DEFAULT_CAPACITY;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                    @SuppressWarnings(&quot;unchecked&quot;)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                    Node&lt;K,V&gt;[] nt = (Node&lt;K,V&gt;[])new Node&lt;?,?&gt;[n];</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                    table = tab = nt;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                    sc = n - (n &gt;&gt;&gt; 2);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                }</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            } finally {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                sizeCtl = sc;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            }</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            break;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        }</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    }</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    return tab;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre><div class="buttonGroup_EjFN"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_RXpO" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_sabX"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_WdXf"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>2.如果当前数组位置是空则直接通过CAS自旋写入数据</p>
+<div class="language-java codeBlockContainer_Ty55 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_zoWS"><pre tabindex="0" class="prism-code language-java codeBlock_Po6r thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_Llrq"><span class="token-line" style="color:#393A34"><span class="token plain">static final &lt;K,V&gt; boolean casTabAt(Node&lt;K,V&gt;[] tab, int i,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                                    Node&lt;K,V&gt; c, Node&lt;K,V&gt; v) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    return U.compareAndSwapObject(tab, ((long)i &lt;&lt; ASHIFT) + ABASE, c, v);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre><div class="buttonGroup_EjFN"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_RXpO" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_sabX"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_WdXf"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<ol start="3">
+<li>如果hash==MOVED，说明需要扩容，执行扩容</li>
+</ol>
+<div class="language-java codeBlockContainer_Ty55 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_zoWS"><pre tabindex="0" class="prism-code language-java codeBlock_Po6r thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_Llrq"><span class="token-line" style="color:#393A34"><span class="token plain">else if ((fh = f.hash) == MOVED)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                tab = helpTransfer(tab, f);</span><br></span></code></pre><div class="buttonGroup_EjFN"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_RXpO" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_sabX"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_WdXf"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<div class="language-java codeBlockContainer_Ty55 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_zoWS"><pre tabindex="0" class="prism-code language-java codeBlock_Po6r thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_Llrq"><span class="token-line" style="color:#393A34"><span class="token plain">final Node&lt;K,V&gt;[] helpTransfer(Node&lt;K,V&gt;[] tab, Node&lt;K,V&gt; f) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    Node&lt;K,V&gt;[] nextTab; int sc;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    if (tab != null &amp;&amp; (f instanceof ForwardingNode) &amp;&amp;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        (nextTab = ((ForwardingNode&lt;K,V&gt;)f).nextTable) != null) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        int rs = resizeStamp(tab.length);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        while (nextTab == nextTable &amp;&amp; table == tab &amp;&amp;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">               (sc = sizeCtl) &lt; 0) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            if ((sc &gt;&gt;&gt; RESIZE_STAMP_SHIFT) != rs || sc == rs + 1 ||</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                sc == rs + MAX_RESIZERS || transferIndex &lt;= 0)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                break;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            if (U.compareAndSwapInt(this, SIZECTL, sc, sc + 1)) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                transfer(tab, nextTab);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                break;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            }</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        }</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        return nextTab;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    }</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    return table;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre><div class="buttonGroup_EjFN"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_RXpO" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_sabX"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_WdXf"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<ol start="4">
+<li>如果都不满足，就使用synchronized写入数据，写入数据同样判断链表、红黑树，链表写入和HashMap的方式一样，key hash一样就覆盖，反之就尾插法，链表长度超过8就转换成红黑树</li>
+</ol>
+<div class="language-java codeBlockContainer_Ty55 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_zoWS"><pre tabindex="0" class="prism-code language-java codeBlock_Po6r thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_Llrq"><span class="token-line" style="color:#393A34"><span class="token plain"> synchronized (f){</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">     ……</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"> }</span><br></span></code></pre><div class="buttonGroup_EjFN"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_RXpO" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_sabX"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_WdXf"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-52-efb17bfa3c149fc8d973b2c8bb80c020.png" width="784" height="734" class="img_kGBN"></p>
+<p><strong>get查询</strong></p>
+<p>get很简单，和HashMap基本相同，通过key计算位置，table该位置key相同就返回，如果是红黑树按照红黑树获取，否则就遍历链表获取。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="27hashmap-内部节点是有序的吗">27.HashMap 内部节点是有序的吗？<a href="#27hashmap-内部节点是有序的吗" class="hash-link" aria-label="Direct link to 27.HashMap 内部节点是有序的吗？" title="Direct link to 27.HashMap 内部节点是有序的吗？">​</a></h3>
+<p>HashMap是无序的，根据 hash 值随机插入。如果想使用有序的Map，可以使用LinkedHashMap 或者 TreeMap。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="28讲讲-linkedhashmap-怎么实现有序的">28.讲讲 LinkedHashMap 怎么实现有序的？<a href="#28讲讲-linkedhashmap-怎么实现有序的" class="hash-link" aria-label="Direct link to 28.讲讲 LinkedHashMap 怎么实现有序的？" title="Direct link to 28.讲讲 LinkedHashMap 怎么实现有序的？">​</a></h3>
+<p>LinkedHashMap维护了一个双向链表，有头尾节点，同时 LinkedHashMap 节点 Entry 内部除了继承 HashMap 的 Node 属性，还有 before 和 after 用于标识前置节点和后置节点。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-53-273d362d5e0766f1ef5ce7cb82ebacfb.png" width="634" height="309" class="img_kGBN"></p>
+<p>可以实现按插入的顺序或访问顺序排序。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-54-176679da4fb66917337c35786412188f.png" width="727" height="499" class="img_kGBN"></p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="29讲讲-treemap-怎么实现有序的">29.讲讲 TreeMap 怎么实现有序的 ？<a href="#29讲讲-treemap-怎么实现有序的" class="hash-link" aria-label="Direct link to 29.讲讲 TreeMap 怎么实现有序的？" title="Direct link to 29.讲讲 TreeMap 怎么实现有序的？">​</a></h3>
+<p>TreeMap 是按照 Key 的自然顺序或者 Comprator 的顺序进行排序，内部是通过红黑树来实现。所以要么 key 所属的类实现 Comparable 接口，或者自定义一个实现了 Comparator 接口的比较器，传给 TreeMap 用于 key 的比较。</p>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-55-37c9a851cdb9b5d14bceb2f294eb88e3.png" width="1231" height="548" class="img_kGBN"></p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="set">Set<a href="#set" class="hash-link" aria-label="Direct link to Set" title="Direct link to Set">​</a></h2>
+<p>Set面试没啥好问的，拿HashSet来凑个数。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="30讲讲hashset的底层实现">30.讲讲HashSet的底层实现？<a href="#30讲讲hashset的底层实现" class="hash-link" aria-label="Direct link to 30.讲讲HashSet的底层实现？" title="Direct link to 30.讲讲HashSet的底层实现？">​</a></h3>
+<p>HashSet 底层就是基于 HashMap 实现的。（ HashSet 的源码⾮常⾮常少，因为除了 clone() 、 writeObject() 、 readObject() 是 HashSet⾃⼰不得不实现之外，其他⽅法都是直接调⽤ HashMap 中的⽅法。</p>
+<p>HashSet的add方法，直接调用HashMap的put方法，将添加的元素作为key，new一个Object作为value，直接调用HashMap的put方法，它会根据返回值是否为空来判断是否插入元素成功。</p>
+<div class="language-java codeBlockContainer_Ty55 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_zoWS"><pre tabindex="0" class="prism-code language-java codeBlock_Po6r thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_Llrq"><span class="token-line" style="color:#393A34"><span class="token plain">public boolean add(E e) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    return map.put(e, PRESENT)==null;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre><div class="buttonGroup_EjFN"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_RXpO" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_sabX"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_WdXf"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><img loading="lazy" alt="Alt text" src="/code-note-blog/assets/images/image-56-ab0cbd180c8ab5a21cb7c21443b07785.png" width="449" height="286" class="img_kGBN"></p>
+<p>而在HashMap的putVal方法中，进行了一系列判断，最后的结果是，只有在key在table数组中不存在的时候，才会返回插入的值。</p>
+<div class="language-java codeBlockContainer_Ty55 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_zoWS"><pre tabindex="0" class="prism-code language-java codeBlock_Po6r thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_Llrq"><span class="token-line" style="color:#393A34"><span class="token plain">if (e != null) { // existing mapping for key</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    V oldValue = e.value;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    if (!onlyIfAbsent || oldValue == null)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        e.value = value;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    afterNodeAccess(e);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    return oldValue;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre><div class="buttonGroup_EjFN"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_RXpO" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_sabX"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_WdXf"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><strong>系列内容</strong>：</p>
+<ul>
+<li><a href="/code-note-blog/docs/mianshi/javase">面渣逆袭 Java SE 篇👍</a></li>
+<li><a href="/code-note-blog/docs/mianshi/javathread">面渣逆袭 Java 并发编程篇👍</a></li>
+<li><a href="/code-note-blog/docs/mianshi/collection">面渣逆袭 Java 集合框架篇👍</a></li>
+<li><a href="/code-note-blog/docs/mianshi/jvm">面渣逆袭 JVM 篇👍</a></li>
+<li><a href="/code-note-blog/docs/mianshi/spring">面渣逆袭 Spring 篇👍</a></li>
+<li><a href="/code-note-blog/docs/mianshi/redis">面渣逆袭 Redis 篇👍</a></li>
+<li><a href="/code-note-blog/docs/mianshi/mybatis">面渣逆袭 MyBatis 篇👍</a></li>
+<li><a href="/code-note-blog/docs/mianshi/mysql">面渣逆袭 MySQL 篇👍</a></li>
+<li><a href="/code-note-blog/docs/mianshi/os">面渣逆袭操作系统篇👍</a></li>
+<li><a href="/code-note-blog/docs/mianshi/network">面渣逆袭计算机网络篇👍</a></li>
+<li><a href="/code-note-blog/docs/mianshi/rocketmq">面渣逆袭RocketMQ篇👍</a></li>
+<li><a href="/code-note-blog/docs/mianshi/fenbushi">面渣逆袭分布式篇👍</a></li>
+<li><a href="/code-note-blog/docs/mianshi/weifuwu">面渣逆袭微服务篇👍</a></li>
+</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="theme-doc-footer-edit-meta-row row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/mianshi/collection.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_EYjg" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_eevz"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--next" href="/code-note-blog/docs/mianshi/fenbushi"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">分布式</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_lc2k thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#引言" class="table-of-contents__link toc-highlight">引言</a><ul><li><a href="#1说说有哪些常见集合" class="table-of-contents__link toc-highlight">1.说说有哪些常见集合？</a></li></ul></li><li><a href="#list" class="table-of-contents__link toc-highlight">List</a><ul><li><a href="#2arraylist和linkedlist有什么区别" class="table-of-contents__link toc-highlight">2.ArrayList和LinkedList有什么区别？</a></li><li><a href="#3arraylist的扩容机制了解吗" class="table-of-contents__link toc-highlight">3.ArrayList的扩容机制了解吗？</a></li><li><a href="#4arraylist怎么序列化的知道吗-为什么用transient修饰数组" class="table-of-contents__link toc-highlight">4.ArrayList怎么序列化的知道吗？ 为什么用transient修饰数组？</a></li><li><a href="#5快速失败fail-fast和安全失败fail-safe了解吗" class="table-of-contents__link toc-highlight">5.快速失败(fail-fast)和安全失败(fail-safe)了解吗？</a></li><li><a href="#6有哪几种实现arraylist线程安全的方法" class="table-of-contents__link toc-highlight">6.有哪几种实现ArrayList线程安全的方法？</a></li><li><a href="#7copyonwritearraylist了解多少" class="table-of-contents__link toc-highlight">7.CopyOnWriteArrayList了解多少？</a></li></ul></li><li><a href="#map" class="table-of-contents__link toc-highlight">Map</a><ul><li><a href="#8能说一下hashmap的数据结构吗" class="table-of-contents__link toc-highlight">8.能说一下HashMap的数据结构吗？</a></li><li><a href="#9你对红黑树了解多少为什么不用二叉树平衡树呢" class="table-of-contents__link toc-highlight">9.你对红黑树了解多少？为什么不用二叉树/平衡树呢？</a></li><li><a href="#10红黑树怎么保持平衡的知道吗" class="table-of-contents__link toc-highlight">10.红黑树怎么保持平衡的知道吗？</a></li><li><a href="#11hashmap的put流程知道吗" class="table-of-contents__link toc-highlight">11.HashMap的put流程知道吗？</a></li><li><a href="#12hashmap怎么查找元素的呢" class="table-of-contents__link toc-highlight">12.HashMap怎么查找元素的呢？</a></li><li><a href="#13hashmap的哈希扰动函数是怎么设计的" class="table-of-contents__link toc-highlight">13.HashMap的哈希/扰动函数是怎么设计的?</a></li><li><a href="#14为什么哈希扰动函数能降hash碰撞" class="table-of-contents__link toc-highlight">14.为什么哈希/扰动函数能降hash碰撞？</a></li><li><a href="#15为什么hashmap的容量是2的倍数呢" class="table-of-contents__link toc-highlight">15.为什么HashMap的容量是2的倍数呢？</a></li><li><a href="#16如果初始化hashmap传一个17的值new-hashmap它会怎么处理" class="table-of-contents__link toc-highlight">16.如果初始化HashMap，传  一个17的值<code>new HashMap&lt;&gt;</code>，它会怎么处理？</a></li><li><a href="#17你还知道哪些哈希函数的构造方法呢" class="table-of-contents__link toc-highlight">17.你还知道哪些哈希函数的构造方法呢？</a></li><li><a href="#18解决哈希冲突有哪些方法呢" class="table-of-contents__link toc-highlight">18.解决哈希冲突有哪些方法呢？</a></li><li><a href="#19为什么hashmap链表转红黑树的阈值为8呢" class="table-of-contents__link toc-highlight">19.为什么HashMap链表转红黑树的阈值为8呢？</a></li><li><a href="#20扩容在什么时候呢为什么扩容因子是075" class="table-of-contents__link toc-highlight">20.扩容在什么时候呢？为什么扩容因子是0.75？</a></li><li><a href="#21那扩容机制了解吗" class="table-of-contents__link toc-highlight">21.那扩容机制了解吗？</a></li><li><a href="#22jdk18对hashmap主要做了哪些优化呢为什么" class="table-of-contents__link toc-highlight">22.jdk1.8对HashMap主要做了哪些优化呢？为什么？</a></li><li><a href="#23你能自己设计实现一个hashmap吗" class="table-of-contents__link toc-highlight">23.你能自己设计实现一个HashMap吗？</a></li><li><a href="#24hashmap-是线程安全的吗多线程下会有什么问题" class="table-of-contents__link toc-highlight">24.HashMap 是线程安全的吗？多线程下会有什么问题？</a></li><li><a href="#25有什么办法能解决hashmap线程不安全的问题呢" class="table-of-contents__link toc-highlight">25.有什么办法能解决HashMap线程不安全的问题呢？</a></li><li><a href="#26能具体说一下concurrenthashmap的实现吗" class="table-of-contents__link toc-highlight">26.能具体说一下ConcurrentHashmap的实现吗？</a></li><li><a href="#27hashmap-内部节点是有序的吗" class="table-of-contents__link toc-highlight">27.HashMap 内部节点是有序的吗？</a></li><li><a href="#28讲讲-linkedhashmap-怎么实现有序的" class="table-of-contents__link toc-highlight">28.讲讲 LinkedHashMap 怎么实现有序的？</a></li><li><a href="#29讲讲-treemap-怎么实现有序的" class="table-of-contents__link toc-highlight">29.讲讲 TreeMap 怎么实现有序的？</a></li></ul></li><li><a href="#set" class="table-of-contents__link toc-highlight">Set</a><ul><li><a href="#30讲讲hashset的底层实现" class="table-of-contents__link toc-highlight">30.讲讲HashSet的底层实现？</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/code-note-blog/docs/intro">Tutorial</a></li></ul></div><div class="col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://stackoverflow.com/questions/tagged/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Stack Overflow<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://discordapp.com/invite/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Discord<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://twitter.com/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Twitter<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/code-note-blog/blog">Blog</a></li><li class="footer__item"><a href="https://github.com/facebook/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 My Project, Inc. Built with Docusaurus.</div></div></div></footer></div>
+</body>
+</html>

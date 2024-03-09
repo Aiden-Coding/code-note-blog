@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-Java/concurrency/Java并发指南：Java内存模型JMM总结" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.1.0">
+<title data-rh="true">Java并发指南：Java内存模型JMM总结 | Tommy</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://aiden-coding.github.io/code-note-blog/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://aiden-coding.github.io/code-note-blog/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://aiden-coding.github.io/code-note-blog/docs/Java/concurrency/Java并发指南：Java内存模型JMM总结"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Java并发指南：Java内存模型JMM总结 | Tommy"><meta data-rh="true" name="description" content="本文转自 https://www.cnblogs.com/kukri/p/9109639.html"><meta data-rh="true" property="og:description" content="本文转自 https://www.cnblogs.com/kukri/p/9109639.html"><link data-rh="true" rel="icon" href="/code-note-blog/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://aiden-coding.github.io/code-note-blog/docs/Java/concurrency/Java并发指南：Java内存模型JMM总结"><link data-rh="true" rel="alternate" href="https://aiden-coding.github.io/code-note-blog/docs/Java/concurrency/Java并发指南：Java内存模型JMM总结" hreflang="en"><link data-rh="true" rel="alternate" href="https://aiden-coding.github.io/code-note-blog/docs/Java/concurrency/Java并发指南：Java内存模型JMM总结" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/code-note-blog/blog/rss.xml" title="Tommy RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/code-note-blog/blog/atom.xml" title="Tommy Atom Feed"><link rel="stylesheet" href="/code-note-blog/assets/css/styles.dd5372db.css">
+<script src="/code-note-blog/assets/js/runtime~main.f999fb27.js" defer="defer"></script>
+<script src="/code-note-blog/assets/js/main.a0bfbaed.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_XYiV" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/code-note-blog/"><b class="navbar__title text--truncate">Tommy</b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/code-note-blog/docs/Java/basic/抽象类和接口">java</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/JavaWeb/走进JavaWeb技术世界：JavaWeb的由来和基础知识">javaweb</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/cache/探索Redis设计与实现：连接底层与表面的数据结构robj">cache</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/backend/后端技术杂谈：白话虚拟化技术">backend</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/cs/algorithms/剑指offer">cs</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/database/重新学习MySQL数据库：『浅入浅出』MySQL和InnoDB">database</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/distributed/basic/分布式系统理论基础 ：CAP">distributed</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/interview/BATJ-Experience/面阿里,终获offer">interview</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/mq/kafka/消息队列kafka详解：如何实现死信队列">mq</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/Spring全家桶/Spring/第一个Spring应用">spring</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/mianshi/collection">面试</a><a href="https://aiden-coding.github.io/code-note-blog/SpringCloud%E7%AC%AC3%E5%AD%A32024.html" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Blog<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></div><div class="navbar__items navbar__items--right"><div class="toggle_XbAW colorModeToggle_r5NY"><button class="clean-btn toggleButton_Jx0n toggleButtonDisabled_zYO7" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_FjAw"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_qmEt"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_wJfS"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_LABv"><div class="docsWrapper_pdvB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_Jioa" type="button"></button><div class="docRoot_qx_v"><aside class="theme-doc-sidebar-container docSidebarContainer_NHKT"><div class="sidebarViewport_uyYB"><div class="sidebar_SZG4"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_VP_k"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/code-note-blog/docs/Java/basic/抽象类和接口">基础</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/code-note-blog/docs/Java/collection/Java集合类总结">集合</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" aria-expanded="true" href="/code-note-blog/docs/Java/concurrency/Java并发编程学习总结">并发</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/concurrency/Java并发编程学习总结">Java并发编程学习总结</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/concurrency/Java并发指南：并发基础与Java多线程">Java并发指南：并发基础与Java多线程</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/concurrency/Java并发指南：并发三大问题与volatile关键字，CAS操作">Java并发指南：并发三大问题与volatile关键字，CAS操作</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/concurrency/Java并发指南：解读Java阻塞队列BlockingQueue">Java并发指南：解读Java阻塞队列BlockingQueue</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/concurrency/Java并发指南：深度解读Java线程池设计思想及源码实现">Java并发指南：深度解读Java线程池设计思想及源码实现</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/concurrency/Java并发指南：深入理解Java内存模型JMM">Java并发指南：深入理解Java内存模型JMM</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/concurrency/Java并发指南：AQS共享模式与并发工具类的实现">Java并发指南：AQS共享模式与并发工具类的实现</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/concurrency/Java并发指南：AQS中的公平锁与非公平锁，Condtion">Java并发指南：AQS中的公平锁与非公平锁，Condtion</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/concurrency/Java并发指南：ForkJoin并发框架与工作窃取算法剖析">Java并发指南：ForkJoin并发框架与工作窃取算法剖析</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/concurrency/Java并发指南：Java读写锁ReentrantReadWriteLock源码分析">Java并发指南：Java读写锁ReentrantReadWriteLock源码分析</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/code-note-blog/docs/Java/concurrency/Java并发指南：Java内存模型JMM总结">Java并发指南：Java内存模型JMM总结</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/concurrency/Java并发指南：Java中的锁Lock和synchronized">Java并发指南：Java中的锁Lock和synchronized</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/concurrency/Java并发指南：Java中的HashMap和ConcurrentHashMap全解析">Java并发指南：Java中的HashMap和ConcurrentHashMap全解析</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/concurrency/Java并发指南：JMM中的final关键字解析">Java并发指南：JMM中的final关键字解析</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/concurrency/Java并发指南：JUC的核心类AQS详解">Java并发指南：JUC的核心类AQS详解</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/concurrency/Java并发指南：JUC中常用的Unsafe和Locksupport">Java并发指南：JUC中常用的Unsafe和Locksupport</a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/code-note-blog/docs/Java/design-parttern/初探Java设计模式：创建型模式（工厂，单例等）">设计模式</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/code-note-blog/docs/Java/JVM/深入理解JVM虚拟机：垃圾回收器详解">jvm</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/code-note-blog/docs/Java/network/Java网络编程与NIO详解：基于NIO的网络编程框架Netty">网络</a></div></li></ul></nav></div></div></aside><main class="docMainContainer_SejT"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_j3Yw"><div class="docItemContainer_XOSC"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_F6gm" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/code-note-blog/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YCxa"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">并发</span><meta itemprop="position" content="1"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Java并发指南：Java内存模型JMM总结</span><meta itemprop="position" content="2"></li></ul></nav><div class="tocCollapsible_ToOY theme-doc-toc-mobile tocMobile_suYB"><button type="button" class="clean-btn tocCollapsibleButton_VzP_">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>Java并发指南：Java内存模型JMM总结</h1></header><p>本文转自 <a href="https://www.cnblogs.com/kukri/p/9109639.html" target="_blank" rel="noopener noreferrer">https://www.cnblogs.com/kukri/p/9109639.html</a></p>
+<p>本系列文章将整理到我在GitHub上的《Java面试指南》仓库，更多精彩内容请到我的仓库里查看</p>
+<blockquote>
+<p><a href="https://github.com/h2pl/Java-Tutorial" target="_blank" rel="noopener noreferrer">https://github.com/h2pl/Java-Tutorial</a></p>
+</blockquote>
+<p>喜欢的话麻烦点下Star哈</p>
+<p>文章同步发于我的个人博客：</p>
+<blockquote>
+<p><a href="http://www.how2playlife.com" target="_blank" rel="noopener noreferrer">www.how2playlife.com</a></p>
+</blockquote>
+<p>本文是微信公众号【Java技术江湖】的《Java并发指南》其中一篇，本文大部分内容来源于网络，为了把本文主题讲得清晰透彻，也整合了很多我认为不错的技术博客内容，引用其中了一些比较好的博客文章，如有侵权，请联系作者。</p>
+<p>该系列博文会告诉你如何全面深入地学习Java并发技术，从Java多线程基础，再到并发编程的基础知识，从Java并发包的入门和实战，再到JUC的源码剖析，一步步地学习Java并发编程，并上手进行实战，以便让你更完整地了解整个Java并发编程知识体系，形成自己的知识框架。</p>
+<p>为了更好地总结和检验你的学习成果，本系列文章也会提供一些对应的面试题以及参考答案。</p>
+<p>如果对本系列文章有什么建议，或者是有什么疑问的话，也可以关注公众号【Java技术江湖】联系作者，欢迎你参与本系列博文的创作和修订。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="简介">简介<a href="#简介" class="hash-link" aria-label="Direct link to 简介" title="Direct link to 简介">​</a></h2>
+<p>　　首先介绍两个名词：1）可见性:一个线程对共享变量值的修改,能够及时地被其他线程看到。2）共享变量:如果一个变量在多个线程的工作内存中都存在副本,那么这个变量就是这几个线程的共享变量　　</p>
+<p>　　Java线程之间的通信对程序员完全透明，在并发编程中，需要处理两个关键问题：线程之间如何通信及线程之间如何同步。</p>
+<p>　　通信：通信是指线程之间以何种机制来交换信息。在命令式编程中，线程之间的通信机制有两种：共享内存和消息传递。在共享内存的并发模型里，线程之间共享程序的公共状态，通过写-读内存中的公共状态来进行隐式通信。在消息传递的并发模型里，线程之间没有公共状态，线程之间必须通过发送消息来进行显示通信。</p>
+<p>　　同步：同步是指程序中用于控制不同线程间操作发生相对顺序的机制。在共享内存并发模型里，同步是显示进行的，程序员必须显示指定某个方法或某段代码需要在线程之间互斥执行。在消息传递的并发模型里，由于消息的发送必须在消息的接收之前，因此同步是隐式进行的。</p>
+<p>　　Java并发采用的是共享内存模型。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="一java内存区域jvm内存区域">一、Java内存区域（JVM内存区域）<a href="#一java内存区域jvm内存区域" class="hash-link" aria-label="Direct link to 一、Java内存区域（JVM内存区域）" title="Direct link to 一、Java内存区域（JVM内存区域）">​</a></h3>
+<p><img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/20230404195526.png" alt="" class="img_kGBN"></p>
+<p>Java虚拟机在运行程序时会把其自动管理的内存划分为以上几个区域，每个区域都有的用途以及创建销毁的时机，其中蓝色部分代表的是所有线程共享的数据区域，而绿色部分代表的是每个线程的私有数据区域。</p>
+<ul>
+<li>
+<p>方法区（Method Area）：</p>
+<p>方法区属于线程共享的内存区域，又称Non-Heap（非堆），主要用于存储已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据，根据Java 虚拟机规范的规定，当方法区无法满足内存分配需求时，将抛出OutOfMemoryError 异常。值得注意的是在方法区中存在一个叫运行时常量池(Runtime Constant Pool）的区域，它主要用于存放编译器生成的各种字面量和符号引用，这些内容将在类加载后存放到运行时常量池中，以便后续使用。</p>
+</li>
+<li>
+<p>JVM堆（Java Heap）：</p>
+<p>Java 堆也是属于线程共享的内存区域，它在虚拟机启动时创建，是Java 虚拟机所管理的内存中最大的一块，  主要用于存放对象实例，几乎所有的对象实例都在这里分配内存，注意Java 堆是垃圾收集器管理的主要区域，因此很多时候也被称做GC 堆，如果在堆中没有内存完成实例分配，并且堆也无法再扩展时，将会抛出OutOfMemoryError 异常。</p>
+</li>
+<li>
+<p>程序计数器(Program Counter Register)：</p>
+<p>属于线程私有的数据区域，是一小块内存空间，主要代表当前线程所执行的字节码行号指示器。字节码解释器工作时，通过改变这个计数器的值来选取下一条需要执行的字节码指令，分支、循环、跳转、异常处理、线程恢复等基础功能都需要依赖这个计数器来完成。</p>
+</li>
+<li>
+<p>虚拟机栈(Java Virtual Machine Stacks)：</p>
+<p>属于线程私有的数据区域，与线程同时创建，总数与线程关联，代表Java方法执行的内存模型。栈中只保存基础数据类型和自定义对象的引用(不是对象)，对象都存放在堆区中。每个方法执行时都会创建一个栈桢来存储方法的的变量表、操作数栈、动态链接方法、返回值、返回地址等信息。每个方法从调用直结束就对于一个栈桢在虚拟机栈中的入栈和出栈过程，如下（图有误，应该为栈桢）：</p>
+</li>
+</ul>
+<p><img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/20230404195609.png" alt="" class="img_kGBN"></p>
+<ul>
+<li>
+<p>本地方法栈(Native Method Stacks)：</p>
+<p>本地方法栈属于线程私有的数据区域，这部分主要与虚拟机用到的 Native 方法相关，一般情况下，我们无需关心此区域。</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="二java内存模型">二、Java内存模型<a href="#二java内存模型" class="hash-link" aria-label="Direct link to 二、Java内存模型" title="Direct link to 二、Java内存模型">​</a></h3>
+<p>Java内存模型(即Java Memory Model，简称JMM)本身是一种抽象的概念，并不真实  存在。Java线程之间的通信由JMM控制，JMM决定一个线程对共享变量的写入何时对另一个线程可见。从抽象的角度来看，JMM定义了线程和主内存之间的抽象关系。</p>
+<p>　
+由于JVM运行程序的实体是线程，而每个线程创建时JVM都会为其创建一个工作内存(有些地方称为栈空间)，用于存储线程私有的数据，而Java内存模型中规定所有变量都存储在主内存，主内存是共享内存区域，所有线程都可以访问，但线程对变量的操作(读取赋值等)必须在工作内存中进行。</p>
+<p>　　
+首先要将变量从主内存拷贝的自己的工作内存空间，然后对变量进行操作，操作完成后再将变量写回主内存，不能直接操作主内存中的变量，工作内存中存储着主内存中的变量副本拷贝，前面说过，工作内存是每个线程的私有数据区域，因此不同的线程间无法访问对方的工作内存，线程间的通信(传值)必须通过主内存来完成，其简要访问过程如下图</p>
+<p><img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/20230404195704.png" alt="" class="img_kGBN"></p>
+<p>图3</p>
+<p>　　需要注意的是，JMM与Java内存区域的划分是不同的概念层次，更恰当说JMM描述的是一组规则，通过这组规则控制程序中各个变量在共享数据区域和私有数据区域的访问方式，JMM是围绕原子性，有序性、可见性展开的(稍后会分析)。
+　　
+　　JMM与Java内存区域唯一相似点，都存在共享数据区域和私有数据区域，在JMM中主内存属于共享数据区域，从某个程度上讲应该包括了堆和方法区，而工作内存数据线程私有数据区域，从某个程度上讲则应该包括程序计数器、虚拟机栈以及本地方法栈。或许在某些地方，我们可能会看见主内存被描述为堆内存，工作内存被称为线程栈，实际上他们表达的都是同一个含义。关于JMM中的主 内存和工作内存说明如下</p>
+<ul>
+<li>
+<p>主内存</p>
+<p>主要存储的是Java实例对象以及线程之间的共享变量，所有线程创建的实例对象都存放在主内存中，不管该实例对象是成员变量还是方法中的本地变量(也称局部变量)，当然也包括了共享的类信息、常量、静态变量。由于是共享数据区域，多条线程对同一个变量进行访问可能会发现线程安全问题。</p>
+</li>
+<li>
+<p>工作内存</p>
+<p>有的书籍中也称为本地内存，主要存储当前方法的所有本地变量信息(工作内存中存储着主内存中的变量副本拷贝)，每个线程只能访问自己的工作内存，即线程中的本地变量对其它线程是不可见的，就算是两个线程执行的是同一段代码，它们也会各自在自己的工作内存中创建属于当前线程的本地变量，当然也包括了字节码行号指示器、相关Native方法的信息。</p>
+<p>注意由于工作内存是每个线程的私有数据，线程间无法相互访问工作内存，因此存储在工作内存的数据不存在线程安全问题。注意，工作内存是JMM的一个抽象概念，并不真实存在。</p>
+</li>
+</ul>
+<p>弄清楚主内存和工作内存后，接了解一下主内存与工作内存的数据存储类型以及操作方式，根据虚拟机规范，对于一个实例对象中的成员方法而言，如果方法中包含本地变量是基本数据类型（boolean,byte,short,char,int,long,float,double），将直接存储在工作内存的帧栈结构中，但倘若本地变量是引用类型，那么该变量的引用会存储在功能内存的帧栈中，而对象实例将存储在主内存(共享数据区域，堆)中。
+　　
+但对于实例对象的成员变量，不管它是基本数据类型或者包装类型(Integer、Double等)还是引用类型，都会被存储到堆区。至于static变量以及类本身相关信息将会存储在主内存中。需要注意的是，在主内存中的实例对  象可以被多线程共享，倘若两个线程同时调用了同一个对象的同一个方法，那么两条线程会将要操作的数据拷贝一份到自己的工作内存中，执行完成操作后才刷新到主内存，简单示意图如下所示：</p>
+<p><img loading="lazy" src="https://images2018.cnblogs.com/blog/1332556/201805/1332556-20180530111627434-363867932.png" alt="" class="img_kGBN"></p>
+<p>图4</p>
+<p>从图3来看，如果线程A与线程B之间要通信的话，必须经历下面两个步骤：</p>
+<p>1）线程A把本地内存A中更新过的共享变量刷新到主内存中去</p>
+<p>2）线程B到主内存中去读取线程A之前已更新过的共享变量</p>
+<p>从以上两个步骤来看，共享内存模型完成了“隐式通信”的过程。</p>
+<p>JMM也主要是通过控制主内存与每个线程的工作内存之间的交互，来为Java程序员提供内存可见性的保证。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="三as-if-serial语义happens-before原则">三、as-if-serial语义、happens-before原则<a href="#三as-if-serial语义happens-before原则" class="hash-link" aria-label="Direct link to 三、as-if-serial语义、happens-before原则" title="Direct link to 三、as-if-serial语义、happens-before原则">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="31-as-if-serial语义">3.1 as-if-serial语义<a href="#31-as-if-serial语义" class="hash-link" aria-label="Direct link to 3.1 as-if-serial语义" title="Direct link to 3.1 as-if-serial语义">​</a></h3>
+<p>重排序是指编译器和处理器为了优化程序性能而对指令序列进行重新排序的一种手段。as-if-serial语义的意思是：不管怎么重排序（编译器和处理器为了提高并行度），（单线程）程序的执行结果不能被改变。编译器、runtime和处理器都必须遵守as-if-serial语义。为了遵守as-if-serial语义，编译器和处理器不会对存在数据依赖关系的操作做重排序，因为这种重排序会改 变执行结果。</p>
+<p>　　但是，如果操作之间不存在数据依赖关系，这些操作就可能被编译器和处理器重排序。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="32-happens-before原则">3.2 happens-before原则<a href="#32-happens-before原则" class="hash-link" aria-label="Direct link to 3.2 happens-before原则" title="Direct link to 3.2 happens-before原则">​</a></h3>
+<p>　　happens-before是JMM最核心的概念。对应Java程序来说，理解happens-before是理解JMM的关键。</p>
+<p>　　设计JMM时，需要考虑两个关键因素：</p>
+<ul>
+<li>
+<ul>
+<li>程序员对内存模型的使用。程序员希望内存模型易于理解、易于编程。程序员希望基于一个强内存模型来编写代码。</li>
+<li>编译器和处理器对内存模型的实现。编译器和处理器希望内存模型对它们的束缚越少越好，这样它们就可以做尽可能多的优化来提高性能。编译器和处理器希望实现弱内存模型。</li>
+</ul>
+</li>
+</ul>
+<p>但以上两点相互矛盾，所以JSR-133专家组在设计JMM时的核心膜表就是找到一个好的平衡点：一方面，为程序员提高足够强的内存可见性保证；另一方面，对编译器和处理器的限制尽可能地放松。</p>
+<p>另外还要一个特别有意思的事情就是关于重排序问题，更简单的说，重排序可以分为两类：1)会改变程序执行结果的重排序。 2)不会改变程序执行结果的重排序。</p>
+<p>JMM对这两种不同性质的重排序，采取了不同的策略，如下：</p>
+<ul>
+<li>对于会改变程序执行结果的重排序，JMM要求编译器和处理器必须禁止这种重排序。</li>
+<li>对于不会改变程序执行结果的重排序，JMM对编译器和处理器不做要求（JMM允许这种 重排序）</li>
+</ul>
+<p>JMM的设计图为：</p>
+<p><img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/20230404195805.png" alt="" class="img_kGBN"></p>
+<p>JMM设计示意 图 从图可以看出：</p>
+<ul>
+<li>JMM向程序员提供的happens-before规则能满足程序员的需求。JMM的happens-before规则不但简单易懂，而且也向程序员提供了足够强的内存可见性保证（有些内存可见性保证其实并不一定真实存在，比如上面的A happens-before B）。</li>
+<li>JMM对编译器和处理器的束缚已经尽可能少。从上面的分析可以看出，JMM其实是在遵循一个基本原则：只要不改变程序的执行结果（指的是单线程程序和正确同步的多线程程序），编译器和处理器怎么优化都行。例如，如果编译器经过细致的分析后，认定一个锁只会被单个线程访问，那么这个锁可以被消除。再如，如果编译器经过细致的分析后，认定一个volatile变量只会被单个线程访问，那么编译器可以把这个volatile变量当作一个普通变量来对待。这些优化既不会改变程序的执行结果，又能提高程序的执行效率。</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="33-happens-before定义">3.3 happens-before定义<a href="#33-happens-before定义" class="hash-link" aria-label="Direct link to 3.3 happens-before定义" title="Direct link to 3.3 happens-before定义">​</a></h3>
+<p>happens-before的概念最初由Leslie Lamport在其一篇影响深远的论文（《Time，Clocks and the Ordering of Events in a Distributed System》）中提出。JSR-133使用happens-before的概念来指定两个操作之间的执行顺序。由于这两个操作可以在一个线程之内，也可以是在不同线程之间。因此，JMM可以通过happens-before关系向程序员提供跨线程的内存可见性保证（如果A线程的写操作a与B线程的读操作b之间存在happens-before关系，尽管a操作和b操作在不同的线程中执行，但JMM向程序员保证a操作将对b操作可见）。具体的定义为：</p>
+<p>1）如果一个操作happens-before另一个操作，那么第一个操作的执行结果将对 第二个操作可见，而且第一个操作的执行顺序排在第二个操作之前。</p>
+<p>2）两个操作之间存在happens-before关系，并不意味着Java平台的具体实现必须要按照happens-before关系指定的顺序来执行。如果重排序之后的执行结果，与按happens-before关系来执行的结果一致，那么这种重排序并不非法（也就是说，JMM允许这种重排序）。</p>
+<p>上面的1）是JMM对程序员的承诺。从程序员的角度来说，可以这样理解happens-before关系：如果A happens-before B，那么Java内存模型将向程序员保证——A操作的结果将对B可见，且A的执行顺序排在B之前。注意，这只是Java内存模型向程序员做出的保证！</p>
+<p>上面的2）是JMM对编译器和处理器重排序的约束原则。正如前面所言，JMM其实是在遵循一个基本原则：只要不改变程序的执行结果（指的是单线程程序和正确同步的多线程程序），编译器和处理器怎么优化都行。JMM这么做的原因是：程序员对于这两个操作是否真的被重排序并不关心，程序员关心的是程序执行时的语义不能被改变（即执行结果不能被改变）。因此，happens-before关系本质上和as-if-serial语义是一回事。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="33-happens-before对比as-if-serial">3.3 happens-before对比as-if-serial<a href="#33-happens-before对比as-if-serial" class="hash-link" aria-label="Direct link to 3.3 happens-before对比as-if-serial" title="Direct link to 3.3 happens-before对比as-if-serial">​</a></h3>
+<ul>
+<li>as-if-serial语义保证单线程内程序的执行结果不被改变，happens-before关系保证正确同步的多线程程序的执行结果不被改变。</li>
+<li>as-if-serial语义给编写单线程程序的程序员创造了一个幻境：单线程程序是按程序的顺序来执行的。happens-before关系给编写正确同步的多线程程序的程序员创造了一个幻境：正确  同步的多线程程序是按happens-before指定的顺序来执行的。</li>
+<li>as-if-serial语义和happens-before这么做的目的，都是为了在不改变程序执行结果的前提下，尽可能地提高程序执行的并行度。</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="34-happens-before具体规则">3.4 happens-before具体规则<a href="#34-happens-before具体规则" class="hash-link" aria-label="Direct link to 3.4 happens-before具体规则" title="Direct link to 3.4 happens-before具体规则">​</a></h3>
+<ul>
+<li>程序顺序规则：一个线程中的每个操作，happens-before于该线程中的任意后续操作。</li>
+<li>监视器锁规则：对一个锁的解锁，happens-before于随后对这个锁的加锁。</li>
+<li>volatile变量规则：对一个volatile域的写，happens-before于任意后续对这个volatile域的读。</li>
+<li>传递性：如果A happens-before B，且B happens-before C，那么A happens-before C。</li>
+<li>start()规则：如果线程A执行操作ThreadB.start()（启动线程B），那么A线程的ThreadB.start()操作happens-before于线程B中的任意操作。</li>
+<li>join()规则：如果线程A执行操作ThreadB.join()并成功返回，那么线程B中的任意操作happens-before于线程A从ThreadB.join()操作成功返回。</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="35-happens-before与jmm的关系图">3.5 happens-before与JMM的关系图<a href="#35-happens-before与jmm的关系图" class="hash-link" aria-label="Direct link to 3.5 happens-before与JMM的关系图" title="Direct link to 3.5 happens-before与JMM的关系图">​</a></h3>
+<p><img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/20230404195827.png" alt="" class="img_kGBN"></p>
+<p>一个happens-before规则对应于一个或多个编译器和处理器重排序规则。对于Java程序员来说，happens-before规则简单易懂，它避免Java程序员为了理解JMM提供的内存可见性保证而去学习复杂的重排序规则以及这些规则的具体实现方法</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="四volatile锁的内存语义">四、volatile、锁的内存语义<a href="#四volatile锁的内存语义" class="hash-link" aria-label="Direct link to 四、volatile、锁的内存语义" title="Direct link to 四、volatile、锁的内存语义">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="41-volatile的内存语义">4.1 volatile的内存语义<a href="#41-volatile的内存语义" class="hash-link" aria-label="Direct link to 4.1 volatile的内存语义" title="Direct link to 4.1 volatile的内存语义">​</a></h3>
+<p>当声明共享变量为volatile后，对这个变量的读/写会很特别。一个volatile变量的单个读/写操作，与一个普通变量的读/写操作都是使用同一个锁来同步，它们之间的执行效果相同。</p>
+<p>锁的happens-before规则保证释放锁和获取锁的两个线程之间的内存可见性，这意味着对一个volatile变量的读，总是能看到（任意线程）对这个volatile变量最后的写入。</p>
+<p>锁的语义决定了临界区代码的执行具有原子性。这意味着，即使是64位的long型和double型变量，只要是volatile变量，对该变量的读/写就具有原子性。如果是多个volatile操作或类似于volatile++这种复合操作，这些操作整体上不具有原子性。</p>
+<p>简而言之，一旦一个共享变量（类的成员变量、类的静态成员变量）被volatile修饰之后，那么就具备了两层语义：</p>
+<p>　　1）保证了不同线程对这个变量进行操作时的可见性，即一个线程修改了某个变量的值，这新值对其他线程来说是立即可见的。</p>
+<p>　　2）禁止进行指令重排序。</p>
+<ul>
+<li>
+<p>可见性。对一个volatiole变量的读，总是能看到（任意线程）对这个volatile变量最后的写入。</p>
+</li>
+<li>
+<p>有序性。volatile关键字能禁止指令重排序，所以volatile能在一定程  度上保证有序性。</p>
+<p>　　volatile关键字禁止指令重排序有两层意思：</p>
+<p>　　1）当程序执行到volatile变量的读操作或者写操作时，在其前面的操作的更改肯定全部已经进行，且结果已经对后面的操作可见；在其后面的操作肯定还没有进行；</p>
+<p>　　2）在进行指令优化时，不能将在对volatile变量访问的语句放在其后面执行，也不能把volatile变量后面的语句放到其前面执行。</p>
+<p>　　可能上面说的比较绕，举个简单的例子：</p>
+</li>
+</ul>
+<div class="codeBlockContainer_Ty55 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_zoWS"><pre tabindex="0" class="prism-code language-text codeBlock_Po6r thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_Llrq"><span class="token-line" style="color:#393A34"><span class="token plain">//x、y为非volatile变量 //flag为volatile变量</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"> x = 2;        //语句1</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">y = 0;        //语句2</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">flag = true;  //语句3</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">x = 4;         //语句4</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">y = -1;       //语句5</span><br></span></code></pre><div class="buttonGroup_EjFN"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_RXpO" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_sabX"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_WdXf"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>由于flag变量为volatile变量，那么在进行指令重排序的过程的时候，不会将语句3放到语句1、语句2前面，也不会讲语句3放到语句4、语句5后面。但是要注意语句1和语句2的顺序、语句4和语句5的顺序是不作任何保证的。</p>
+<ul>
+<li>原子性。对任意单个volatile变量的读、写具有原子性，但类似于volatile++这种复合操作不具有原子性。</li>
+</ul>
+<p>volatile写的内存语义：当写一个volatile变量时，JMM会把该线程对应的本地内存中的共享变量值刷新到主内存。</p>
+<p>volatile读的内存语义：当读一个volatile变量时，JMM会把该线程对应的本地内存置位无效。线程接下来将从主内存中读取共享变量。（强制从主内存读取共享变量，把本地内存与主内存的共享变量的值变成一致）。</p>
+<p>volatile写和读的内存语义总结总结：</p>
+<ul>
+<li>线程A写一个volatile变量，实质上是线程A向接下来将要读这个volatile变量的某个线程发出了（其对变量所做修改的）消息。</li>
+<li>线程B读一个volatile变量，实质上是线程B接收了之前某个线程发出的消息。</li>
+<li>线程A写一个volatile变量，随后线程B读这个volatile变量，这个过程实质上是线程A通过主内存向线程B发送消息。(隐式通信)</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="42-volatile内存语义的实现">4.2 volatile内存语义的实现<a href="#42-volatile内存语义的实现" class="hash-link" aria-label="Direct link to 4.2 volatile内存语义的实现" title="Direct link to 4.2 volatile内存语义的实现">​</a></h3>
+<p>前面提到过编译器重排序和处理器重排序。为了实现volatile内存语义，JMM分别限制了这两种类型的重排序类型。</p>
+<ul>
+<li>当第二个操 作是volatile写时，不管第一个操作是什么，都不能重排序。这个规则确保volatile写之前的操作不会被编译器重排序到volatile写之后。</li>
+<li>当第一个操作是volatile读时，不管第二个操作是什么，都不能重排序。这个规则确保volatile读之后的操作不会被编译器重排序到volatile读之前。</li>
+<li>当第一个操作是volatile写时，第二个操作是volatile读时，不能重排序。</li>
+</ul>
+<p>为了实现volatile的内存语义，编译器在生成字节码时，会在指令序列中插入内存屏障来禁止特定类型的处理器重排序。对于编译器来说，发现一个最优布置来最小化插入屏障的总数几乎不可能。为此，JMM采取保守策略。下面是基于保守策略的JMM内存屏障插入策略：</p>
+<ul>
+<li>在每个volatile写操作的前面插入一个StoreStore屏障。</li>
+<li>在每个volatile写操作的后面插入一个StoreLoad屏障。</li>
+<li>在每个volatile读操作的后面插入一个LoadLoad屏障。</li>
+<li>在每个volatile读操作的后面插入一个LoadStore屏障。</li>
+</ul>
+<p>上述内存屏障插入策略非常保守，但它可以保证在任意处理器平台，任意的程序中都能得到正确的volatile内存语义。</p>
+<p>下面是保守策略下，volatile写插入内存屏障后生成的指令序列示意图：</p>
+<p><img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/20230404195915.png" alt="" class="img_kGBN"></p>
+<p>上图中的StoreStore屏障可以保证在volatile写之前，其前面的所有普通写操作已经对任意处理器可见了。这是因为StoreStore屏障将保障上面所有的普通写在volatile写之前刷新到主内存。</p>
+<p>这里比较有意思的是volatile写后面的StoreLoad屏障。这个屏障的作用是避免volatile写与后面可能有的volatile读/写操作重排序。因为编译器常常无法准确判断在一个volatile写的后面，是否需要插入一个StoreLoad屏 障（比如，一个volatile写之后方法立即return）。为了保证能正确实现volatile的内存语义，JMM在这里采取了保守策略：在每个volatile写的后面或在每个volatile读的前面插入一个StoreLoad屏障。从整体执行效率的角度考虑，JMM选择了在每个volatile写的后面插入一个StoreLoad屏障。因为volatile写-读内存语义的常见使用模式是：一个写线程写volatile变量，多个读线程读同一个volatile变量。当读线程的数量大大超过写线程时，选择在volatile写之后插入StoreLoad屏障将带来可观的执行效率的提升。从这里我们可以看到JMM在实现上的一个特点：首先确保正确性，然后再去追求执行效率。下面是在保守策略下，volatile读插入内存屏障后生成的指令序列示意图：</p>
+<p><img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/20230404195934.png" alt="" class="img_kGBN">
+上图中的LoadLoad屏障用来禁止处理器把上面的volatile读与下面的普通读重排序。LoadStore屏障用来禁止处理器把上面的volatile读与下面的普通写重排序。</p>
+<p>上述volatile写和volatile读的内存屏障插入策略非常保守。在实际执行时，只要不改变volatile写-读的内存语义，编译器可以根据具体情况省略不必要的屏障。下面我们通过具体的示例代码来说明：</p>
+<div class="codeBlockContainer_Ty55 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_zoWS"><pre tabindex="0" class="prism-code language-text codeBlock_Po6r thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_Llrq"><span class="token-line" style="color:#393A34"><span class="token plain">class VolatileBarrierExample { int a; volatile int v1 = 1; volatile int v2 = 2; void readAndWrite() { int i = v1;      //第一个volatile读</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    int j = v2;      // 第二个volatile读</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    a = i + j;      //普通写</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    v1 = i + 1;     // 第一个volatile写</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    v2 = j * 2;     //第二个 volatile写</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"> }</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  … //其他方法</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre><div class="buttonGroup_EjFN"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_RXpO" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_sabX"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_WdXf"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>针对readAndWrite()方法，编译器在生成字节码时可以做如下的优化：</p>
+<p><img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/20230404195956.png" alt="" class="img_kGBN"></p>
+<p>注意，最后的StoreLoad屏障不能省略。因为第二个volatile写之后，方法立即return。此时编译器可能无法准确断定后面是否会有volatile读或写，为了安全起见，编译器常常会在这里插入一个StoreLoad屏障。</p>
+<p>上面的优化是针对任意处理器平台，由于不同的处理器有  不同“松紧度”的处理器内存模型，内存屏障的插入还可以根据具体的处理器内存模型继续优化。以x86处理器为例，上图中除最后的StoreLoad屏障外，其它的屏障都会被省略。</p>
+<p>为了提供一种比锁更轻量级的线程之间通信的机制，JSR-133专家组决定增强volatile的内存语义：严格限制编译器和处理器对volatile变量与普通变量的重排序，确保volatile的写-读和锁的释放-获取具有相同的内存语义。</p>
+<p>由于volatile仅仅保证对单个volatile变量的读/写具有原子性，而锁的互斥执行的特性可以确保对整个临界区代码的执行具有原子性。在功能上，锁比volatile更强大；在可伸缩性和执行性能上，volatile更有优势。</p>
+<p>当一个变量被定义为volatile之后，就可以保证此变量对所有线程的可见性，即当一个线程修改了此变量的值的时候，变量新的值对于其他线程来说是可以立即得知的。可以理解成：对volatile变量所有的写操作都能立刻被其他线程得知。但是这并不代表基于volatile变量的运算在并发下是安全的，因为volatile只能保证内存可见性，却没有保证对变量操作的原子性。比如下面的代码：</p>
+<div class="codeBlockContainer_Ty55 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_zoWS"><pre tabindex="0" class="prism-code language-text codeBlock_Po6r thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_Llrq"><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">/ * </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"> * 发起20个线程，每个线程对race变量进行10000次自增操作，如果代码能够正确并发，</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"> * 则最终race的结果应为200000，但实际的运行结果却小于200000。</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"> * </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"> * @author Colin Wang */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">public class Test { public static volatile int race = 0; public static void increase() {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        race++;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    } private static final int THREADS_COUNT = 20; public static void main(String[] args) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        Thread[] threads = new Thread[THREADS_COUNT]; for (int i = 0; i &lt; THREADS_COUNT; i++) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            threads[i] = new Thread(new Runnable() {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                @Override public void run() { for (int i = 0; i &lt; 10000; i++) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                        increase();</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                    }</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                }</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            });</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            threads[i].start();</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        } while (Thread.activeCount() &gt; 1)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            Thread.yield();</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        System.out.println(race);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    }</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span></code></pre><div class="buttonGroup_EjFN"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_RXpO" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_sabX"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_WdXf"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>按道理来说结果是10000，但是运行下很可能是个小于10000的值。有人可能会说volatile不是保证了可见性啊，一个线程对race的修改，另外一个线程应该立刻看到啊！可是这里的操作race++是个复合操作啊，包括读取race的值，对其自增，然后再写回主存。</p>
+<p>假设线程A，读取了race的值为10，这时候被阻塞了，因为没有对变量进行修改，触发不了volatile规则。</p>
+<p>线程B此时也读读race的值，主存里race的值依旧为10，做自增，然后立刻就被写回主存了，为11。</p>
+<p>此时又轮到线程A执行，由于工作内存里保存的是10，所以继续做自增，再写回主存，11又被写了一遍。所以虽然两个线程执行了两次increase()，结果却只加了一次。</p>
+<p>有人说，volatile不是会使缓存行无效的吗？但是这里线程A读取到线程B也进行操作之前，并没有修改inc值，所以线程B读取的时候，还是读的10。</p>
+<p>又有人说，线程B将11写回主存，不会把线程A的缓存行设为无效吗？但是线程A的读取操作已经做过了啊，只有在做读取操作时，发现自己缓存行无效，才会去读主存的值，所以这里线程A只能继续做自增了。</p>
+<p>综上所述，在这种复合操作的情景下，原子性的功能是维持不了了。但是volatile在上面那种设置flag值的例子里，由于对flag的读/写操作都是单步的，所以还是能保证原子性的。</p>
+<p>要想保证原子性，只能借助于synchronized,Lock以及并发包下的atomic的原子操作类了，即对基本数据类型的 自增（加1操作），自减（减1操作）、以及加法操作（加一个数），减法操作（减一个数）进行了封装，保证这些操作是原子性操作。</p>
+<p><a href="http://www.ibm.com/developerworks/cn/java/j-jtp06197.html" target="_blank" rel="noopener noreferrer">Java 理论与实践: 正确使用 Volatile 变量</a>总结了volatile关键的使用场景，</p>
+<p>只能在有限的一些情形下使用 volatile 变量替代锁。要使 volatile 变量提供理想的线程安全，必须同时满足下面两个条件：</p>
+<ul>
+<li>对变量的写操作不依赖于当前值。</li>
+<li>该变量没有包含在具有其他变量的不变式中。</li>
+</ul>
+<p>实际上，这些条件表明，可以被写入 volatile 变量的这些有效值独立于任何程序的状态，包括变量的当前状态。</p>
+<p>第一个条件的限制使 volatile 变量不能用作线程安全计数器。虽然增量操作（<code>x++</code>）看上去类似一个单独操作，实际上它是一个由读取－修改－写入操作序列组成的组合操作，必须以原子方式执行，而 volatile 不能提供必须的原子特性。实现正确的操作需要使<code>x</code>的值在操作期间保持不变，而 volatile 变量无法实现这点。（然而，如果将值调整为只从单个线程写入，那么可以忽略第一个条件。）</p>
+<p>volatile一个使用场景是状态位；还有只有一个线程写，其余线程读的场景</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="43-锁的内存语义">4.3 锁的内存语义<a href="#43-锁的内存语义" class="hash-link" aria-label="Direct link to 4.3 锁的内存语义" title="Direct link to 4.3 锁的内存语义">​</a></h3>
+<p>锁可以让临界区互斥执行。锁的释放-获取的内存语义与volatile变量写-读的内存语义很像。</p>
+<p>当线程释放锁时，JMM会把该线程对应的本地内存中的共享变量刷新到主内存中。</p>
+<p>当线程获取锁时，JMM会把该线程对应的本地内存置位无效，从而使得被监视器保护的临界区代码必须从主内存中读取共享变量。</p>
+<p>不难发现：锁释放与volatile写有相同的内存语音；锁获取与volatile读有相同的内存语义。</p>
+<p>下面对锁释放和锁获取  的内存语义做个总结。</p>
+<ul>
+<li>线程A释放一个锁，实质上是线程A向接下来将要获取这个锁的某个线程发出了（线程A对共享变量所做修改的）消息。</li>
+<li>线程B获取一个锁，实质上是线程B接收了之前某个线程发出的（在释放这个锁之前对共享变量所做修改）的消息。</li>
+<li>线程A释放锁，随后线程B获取这个锁，这个过程实质上是线程A通过主内存向线程B发送消息。</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="44-final域的内存语义">4.4 final域的内存语义<a href="#44-final域的内存语义" class="hash-link" aria-label="Direct link to 4.4 final域的内存语义" title="Direct link to 4.4 final域的内存语义">​</a></h3>
+<p>与前面介绍的锁和volatile想比，对final域的读和写更像是普通的变量访问。</p>
+<p>对于final域，编译器和处理器要遵循两个重排序规则：</p>
+<p>1.在构造函数内对一个final域的写入，与随后把这个被构造对象的引用赋值给一个引用变量，这两个操作之间不能重排序。</p>
+<p>2.初次读一个包含final域的对象的应用，与随后初次读这个final域，这两个操作之间不能重排序</p>
+<p>下面通过一个示例来分别说明这两个规则：</p>
+<div class="codeBlockContainer_Ty55 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_zoWS"><pre tabindex="0" class="prism-code language-text codeBlock_Po6r thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_Llrq"><span class="token-line" style="color:#393A34"><span class="token plain">public class FinalTest { int i;//普通变量</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    final int j; static FinalExample obj; public FinalExample(){</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        i = 1;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        j = 2;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    } public static void writer(){</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        obj = new FinalExample();</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    } public static void reader(){</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        FinalExample object = obj;//读对象引用</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        int a = object.i; int b = object.j;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    }</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span></code></pre><div class="buttonGroup_EjFN"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_RXpO" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_sabX"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_WdXf"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>这里假设一个线程A执行writer()方法，随后另一个线程B执行reader()方法。下面我们通过这两个线程的交互来说明这两个规则。</p>
+<p>写final域的重排序规则禁止把final域的写重排序到构造函数之外。这个规则的实现包含下面两个方面。</p>
+<p>1）JMM禁止编译器把final域的写重排序到构造函数之外。</p>
+<p>2）编译器会在final域的写之后，构造函数return之前，插入一个StoreStore屏障。这个屏障禁止处理器把final域的写重排序到构造函数之外。</p>
+<p>现在让我们分析writer方法，writer方法只包含一行代码obj =newFinalTest();这行代码包含两个步骤：</p>
+<p>1）构造一个FinalTest类型的对象</p>
+<p>2）把这个对象的引用赋值给obj</p>
+<p>假设线程B的读对象引用与读对象的成员域之间没有重排序，下图是一种可能的执行时序</p>
+<p><img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/20230404200259.png" alt="" class="img_kGBN"></p>
+<p>在上图中，写普通域的操作被编译器重排序到了构造函数之外，读线程B错误的读取到了普通变量i初始化之前的值。而写final域的操作被写final域重排序的规则限定在了构造函数之内，读线程B正确的读取到了final变量初始化之后的值。</p>
+<p>写final域的重排序规则可以确保：在对象引用为任意线程可见之前，对象的final域已经被初始化了，而普通变量不具有这个保证。以上图为例，读线程B看到对象obj的时候，很可能obj对象还没有构造完成（对普通域i的写操作被重排序到构造函数外，此时初始值1还没有写入普通域i）</p>
+<p>读final域的重排序规则是：在一个线程中，初次读对象的引用与初次读这个对象包含的final域，JMM禁止重排序这两个操作(该规则仅仅针对处理器)。编译器会在读final域的操作前面加一个LoadLoad屏障。</p>
+<p>初次读对象引用与初次读该对象包含的final域，这两个操作之间存在间接依赖关系。由于编译器遵守间接依赖关系，因此编译器不会重排序这两个操作。大多数处理器也会遵守间接依赖，也不会重排序这两个操作。但有少数处理器允许对存在间接依赖关系的操作做重排序（比如alpha处理器），这个规则就是专门用来  针对这种处理器的。</p>
+<p>上面的例子中，reader方法包含三个操作</p>
+<p>1）初次读引用变量obj</p>
+<p>2）初次读引用变量指向对象的普通域</p>
+<p>3）初次读引用变量指向对象的final域</p>
+<p>现在假设写线程A没有发生任何重排序，同时程序在不遵守间接依赖的处理器上执行，下图是一种可能的执行时序：</p>
+<p><img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/20230404200319.png" alt="" class="img_kGBN"></p>
+<p>在上图中，读对象的普通域操作被处理器重排序到读对象引用之前。在读普通域时，该域还没有被写线程写入，这是一个错误的读取操作，而读final域的重排序规则会把读对象final域的操作“限定”在读对象引用之后，此时该final域已经被A线程初始化过了，这是一个正确的读取操作。</p>
+<p>读final域的重排序规则可以确保：在读一个对象的final域之前，一定会先读包含这个final域的对象的引用。在这个示例程序中，如果该引用不为null，那么引用对象的final域一定已经被A线程初始化过了。</p>
+<p>final域为引用类型，上面我们看到的final域是基础的数据类型，如果final域是引用类型呢？</p>
+<div class="codeBlockContainer_Ty55 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_zoWS"><pre tabindex="0" class="prism-code language-text codeBlock_Po6r thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_Llrq"><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">public class FinalReferenceTest { final int[] arrs;//final引用</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    static FinalReferenceTest obj; public FinalReferenceTest(){</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        arrs = new int[1];//1</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        arrs[0] = 1;//2</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"> } public static void write0(){//A线程</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        obj = new FinalReferenceTest();//3</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"> } public static void write1(){//线程B</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        obj.arrs[0] = 2;//4</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"> } public static void reader(){//C线程</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        if(obj!=null){//5</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            int temp =obj.arrs[0];//6</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"> }</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    }</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span></code></pre><div class="buttonGroup_EjFN"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_RXpO" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_sabX"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_WdXf"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>JMM可以确保读线程C至少能看到写线程A在构造函数中对final引用对象的成员域的写入。即C至少能看到数组下标0的值为1。而写线程B对数组元素的写入，读线程C可能看得到，也可能看不到。JMM不保证线程B的写入对读线程C可见，因为写线程B和读线程C之间存在数据竞争，此时的执行结果不可预知。</p>
+<p>如果想要确保读线程C看到写线程B对数组元素的写入，写线程B和读线程C之间需要使用同步原语（lock或volatile）来确保内存可见性。</p>
+<p>前面我们提到过，写final域的重排序规则可以确保：在引用变量为任意线程可见之前，该引用变量指向的对象的final域已经在构造函数中被正确初始化过了。其实，要得到这个效果，还需要一个保证：在构造函数内部，不能让这个被构造对象的引用为其他线程所见，也就是对象引用不能在构造函数中“逸出”。</p>
+<div class="codeBlockContainer_Ty55 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_zoWS"><pre tabindex="0" class="prism-code language-text codeBlock_Po6r thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_Llrq"><span class="token-line" style="color:#393A34"><span class="token plain">public class FinalReferenceEscapeExample {final int i;static FinalReferenceEscapeExample obj;public FinalReferenceEscapeExample () {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">　　　　i = 1; // 1写final域</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">　　　　obj = this; // 2 this引用在此&quot;逸出&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">　　}</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">　　public static void writer() {new FinalReferenceEscapeExample ();</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">　　}public static void reader() {if (obj != null) { // 3</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">　　　　　　int temp = obj.i; // 4</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">　　　　}</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">　　}</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span></code></pre><div class="buttonGroup_EjFN"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_RXpO" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_sabX"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_WdXf"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>假设一个线程A执行writer()方法，另一个线程B执行reader()方法。这里的操作2使得对象还未完成构造前就为线程B可见。即使这里的操作2是构造函数的最后一步，且在程序中操作2排在操作1后面，执行read()方法的线程仍然可能无法看到final域被初始化后的值，因为这里的操作1和操作2之间可能被重排序。</p>
+<p>JSR-133为什么要增强final的语义：</p>
+<p>通过为final域增加写和读重排序规则，可以为Java程序员提供初始化安全保证：只要对象是正确构造的（被构造对象的引用在构造函数中没有“逸出”），那么不需要使用同步（指lock和volatile的使用）就可以保证任意线程都能看到这个final域在构造函数中被初始化之后的值。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="五jmm是如何处理并发过程中的三大特性">五、JMM是如何处理并发过程中的三大特性<a href="#五jmm是如何处理并发过程中的三大特性" class="hash-link" aria-label="Direct link to 五、JMM是如何处理并发过程中的三大特性" title="Direct link to 五、JMM是如何处理并发过程中的三大特性">​</a></h2>
+<p>JMM是围绕这在并发过程中如何处理原子性、可见性和有序性这3个特性来建立的。</p>
+<ul>
+<li>
+<p>原子性：</p>
+<p>Java中，对基本数据类型的读取和赋值操作是原子性操作，所谓原子性操作就是指这些操作是不可中断的，要做一定做完，要么就没有执行。比如：</p>
+<p>i = 2;j = i;i++;i = i + 1；</p>
+<p>上面4个操作中，i=2是读取操作，必定是原子性操作，j=i你以为是原子性操作，其实吧，分为两步，一是读取i的值，然后再赋值给j,这就是2步操作了，称不上原子操作，i++和i = i + 1其实是等效的，读取i的值，加1，再写回主存，那就是3步操作了。所以上面的举例中，最后的值可能出现多种情况，就是因为满足不了原子性。</p>
+<p>JMM只能保证对单个volatile变量的读/写具有原子性，但类似于volatile++这种符合操作不具有原子性，这时候就必须借助于synchronized和Lock来保证整块代码的原子性了。线程在释放锁之前，必然会把i的值刷回到主存的。</p>
+</li>
+<li>
+<p>可见性：可见性指当一个线程修改了共享变量的值，其他线程能够立即得知这个修改。Java内存模型是通过在变量修改后将新值同步回主内存，在变量读取前从主内 存刷新变量值这种依赖主内存作为传递媒介的方式来实现可见性。</p>
+</li>
+<li>
+<p>无论是普通变量还是volatile变量，它们的区别是：volatile的特殊规则保证了新值能立即同步到主内存，以及每次使用前立即从主内存刷新。因为，可以说volatile保证了多线程操作时变量的可见性，而普通变量不能保证这一点。</p>
+</li>
+<li>
+<p>除了volatile之外，java中还有2个关键字能实现可见性，即synchronized和final（final修饰的变量，线程安全级别最高）。同步块的可见性是由“对一个变量执行unlock操作之前，必须先把此变量同步回主内存中（执行store，write操作）”这条规则获得；而final关键字的可见性是指：被final修饰的字段在构造器中一旦初始化完成，并且构造器没有把“this”的引用传递出去（this引用逃逸是一件很危险的事，其他线程有可能通过这个引用访问到“初始化了一半”的对象），那么在其他线程中就能看到final字段的值。</p>
+</li>
+<li>
+<p>有序性：JMM的有序性在讲解volatile时详细的讨论过，java程序中天然的有序性可以总结为一句话：如果在本线程内观察，所有操作都是有序的；如果在一个线程中观察另一个线程，所有操作都是无序的。前半句是指“线程内表现为串行的语义”，后半句指的是“指令重排”现象和“工作内存与主内存同步延迟”现象。</p>
+</li>
+<li>
+<p>前半句可以用JMM规定的as-if-serial语义来解决，后半句可以用JMM规定的happens-before原则来解决。Java语义提供了volatile和synchronized两个关键字来保证线程之间操作的有序性，volatile关键字本身就包含了禁止指令重排的语义，而synchronized则是由“一个变量在同一个时刻只允许一条线程对其进行lock操作”这条规则获取的。这个规则决定了持有同一个锁的两个同步块只能串行的进入。</p>
+</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="参考链接">参考链接：<a href="#参考链接" class="hash-link" aria-label="Direct link to 参考链接：" title="Direct link to 参考链接：">​</a></h2>
+<p><a href="https://blog.csdn.net/javazejian/article/details/72772461#volatile%E7%A6%81%E6%AD%A2%E9%87%8D%E6%8E%92%E4%BC%98%E5%8C%96" target="_blank" rel="noopener noreferrer">https://blog.csdn.net/javazejian/article/details/72772461#volatile%E7%A6%81%E6%AD%A2%E9%87%8D%E6%8E%92%E4%BC%98%E5%8C%96</a></p>
+<p><a href="https://www.cnblogs.com/_popc/p/6096517.html" target="_blank" rel="noopener noreferrer">https://www.cnblogs.com/_popc/p/6096517.html</a></p>
+<p><a href="https://blog.csdn.net/liu_dong_liang/article/details/80391040" target="_blank" rel="noopener noreferrer">https://blog.csdn.net/liu_dong_liang/article/details/80391040</a></p>
+<p><a href="https://www.jb51.net/article/76006.htm" target="_blank" rel="noopener noreferrer">https://www.jb51.net/article/76006.htm</a></p>
+<p><a href="https://blog.csdn.net/x_i_y_u_e/article/details/50728602" target="_blank" rel="noopener noreferrer">https://blog.csdn.net/x_i_y_u_e/article/details/50728602</a></p>
+<p><a href="https://blog.csdn.net/FYGu18/article/details/79001688" target="_blank" rel="noopener noreferrer">https://blog.csdn.net/FYGu18/article/details/79001688</a></p>
+<p><a href="https://blog.csdn.net/soongp/article/details/80292796" target="_blank" rel="noopener noreferrer">https://blog.csdn.net/soongp/article/details/80292796</a></p>
+<p>《Java 并发编程的艺术》 方腾飞 魏鹏 程晓明 著</p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="theme-doc-footer-edit-meta-row row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/Java/concurrency/Java并发指南：Java内存模型JMM总结.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_EYjg" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_eevz"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/code-note-blog/docs/Java/concurrency/Java并发指南：Java读写锁ReentrantReadWriteLock源码分析"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Java并发指南：Java读写锁ReentrantReadWriteLock源码分析</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/code-note-blog/docs/Java/concurrency/Java并发指南：Java中的锁Lock和synchronized"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Java并发指南：Java中的锁Lock和synchronized</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_lc2k thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#简介" class="table-of-contents__link toc-highlight">简介</a><ul><li><a href="#一java内存区域jvm内存区域" class="table-of-contents__link toc-highlight">一、Java内存区域（JVM内存区域）</a></li><li><a href="#二java内存模型" class="table-of-contents__link toc-highlight">二、Java内存模型</a></li></ul></li><li><a href="#三as-if-serial语义happens-before原则" class="table-of-contents__link toc-highlight">三、as-if-serial语义、happens-before原则</a><ul><li><a href="#31-as-if-serial语义" class="table-of-contents__link toc-highlight">3.1 as-if-serial语义</a></li><li><a href="#32-happens-before原则" class="table-of-contents__link toc-highlight">3.2 happens-before原则</a></li><li><a href="#33-happens-before定义" class="table-of-contents__link toc-highlight">3.3 happens-before定义</a></li><li><a href="#33-happens-before  对比as-if-serial" class="table-of-contents__link toc-highlight">3.3 happens-before对比as-if-serial</a></li><li><a href="#34-happens-before具体规则" class="table-of-contents__link toc-highlight">3.4 happens-before具体规则</a></li><li><a href="#35-happens-before与jmm的关系图" class="table-of-contents__link toc-highlight">3.5 happens-before与JMM的关系图</a></li></ul></li><li><a href="#四volatile锁的内存语义" class="table-of-contents__link toc-highlight">四、volatile、锁的内存语义</a><ul><li><a href="#41-volatile的内存语义" class="table-of-contents__link toc-highlight">4.1 volatile的内存语义</a></li><li><a href="#42-volatile内存语义的实现" class="table-of-contents__link toc-highlight">4.2 volatile内存语义的实现</a></li><li><a href="#43-锁的内存语义" class="table-of-contents__link toc-highlight">4.3 锁的内存语义</a></li><li><a href="#44-final域的内存语义" class="table-of-contents__link toc-highlight">4.4 final域的内存语义</a></li></ul></li><li><a href="#五jmm是如何处理并发过程中的三大特性" class="table-of-contents__link toc-highlight">五、JMM是如何处理并发过程中的三大特性</a></li><li><a href="#参考链接" class="table-of-contents__link toc-highlight">参考链接：</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/code-note-blog/docs/intro">Tutorial</a></li></ul></div><div class="col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://stackoverflow.com/questions/tagged/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Stack Overflow<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://discordapp.com/invite/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Discord<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://twitter.com/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Twitter<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/code-note-blog/blog">Blog</a></li><li class="footer__item"><a href="https://github.com/facebook/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 My Project, Inc. Built with Docusaurus.</div></div></div></footer></div>
+</body>
+</html>

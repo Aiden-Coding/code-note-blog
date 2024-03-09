@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-cs/network/计算机网络学习总结" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.1.0">
+<title data-rh="true">计算机网络学习总结 | Tommy</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://aiden-coding.github.io/code-note-blog/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://aiden-coding.github.io/code-note-blog/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://aiden-coding.github.io/code-note-blog/docs/cs/network/计算机网络学习总结"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="计算机网络学习总结 | Tommy"><meta data-rh="true" name="description" content="---"><meta data-rh="true" property="og:description" content="---"><link data-rh="true" rel="icon" href="/code-note-blog/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://aiden-coding.github.io/code-note-blog/docs/cs/network/计算机网络学习总结"><link data-rh="true" rel="alternate" href="https://aiden-coding.github.io/code-note-blog/docs/cs/network/计算机网络学习总结" hreflang="en"><link data-rh="true" rel="alternate" href="https://aiden-coding.github.io/code-note-blog/docs/cs/network/计算机网络学习总结" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/code-note-blog/blog/rss.xml" title="Tommy RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/code-note-blog/blog/atom.xml" title="Tommy Atom Feed"><link rel="stylesheet" href="/code-note-blog/assets/css/styles.dd5372db.css">
+<script src="/code-note-blog/assets/js/runtime~main.f999fb27.js" defer="defer"></script>
+<script src="/code-note-blog/assets/js/main.a0bfbaed.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_XYiV" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/code-note-blog/"><b class="navbar__title text--truncate">Tommy</b></a><a class="navbar__item navbar__link" href="/code-note-blog/docs/Java/basic/抽象类和接口">java</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/JavaWeb/走进JavaWeb技术世界：JavaWeb的由来和基础知识">javaweb</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/cache/探索Redis设计与实现：连接底层与表面的数据结构robj">cache</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/backend/后端技术杂谈：白话虚拟化技术">backend</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/code-note-blog/docs/cs/algorithms/剑指offer">cs</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/database/重新学习MySQL数据库：『浅入浅出』MySQL和InnoDB">database</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/distributed/basic/分布式系统理论基础 ：CAP">distributed</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/interview/BATJ-Experience/面阿里,终获offer">interview</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/mq/kafka/消息队列kafka详解：如何实现死信队列">mq</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/Spring全家桶/Spring/第一个Spring应用">spring</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/mianshi/collection">面试</a><a href="https://aiden-coding.github.io/code-note-blog/SpringCloud%E7%AC%AC3%E5%AD%A32024.html" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Blog<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></div><div class="navbar__items navbar__items--right"><div class="toggle_XbAW colorModeToggle_r5NY"><button class="clean-btn toggleButton_Jx0n toggleButtonDisabled_zYO7" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_FjAw"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_qmEt"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_wJfS"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_LABv"><div class="docsWrapper_pdvB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_Jioa" type="button"></button><div class="docRoot_qx_v"><aside class="theme-doc-sidebar-container docSidebarContainer_NHKT"><div class="sidebarViewport_uyYB"><div class="sidebar_SZG4"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_VP_k"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/code-note-blog/docs/cs/algorithms/剑指offer">算法</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" aria-expanded="true" href="/code-note-blog/docs/cs/network/计算机网络学习总结">网络</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/code-note-blog/docs/cs/network/计算机网络学习总结">计算机网络学习总结</a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/code-note-blog/docs/cs/operating-system/操作系统学习总结">网络</a></div></li></ul></nav></div></div></aside><main class="docMainContainer_SejT"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_j3Yw"><div class="docItemContainer_XOSC"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_F6gm" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/code-note-blog/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YCxa"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">网络</span><meta itemprop="position" content="1"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">计算机网络学习总结</span><meta itemprop="position" content="2"></li></ul></nav><div class="tocCollapsible_ToOY theme-doc-toc-mobile tocMobile_suYB"><button type="button" class="clean-btn tocCollapsibleButton_VzP_">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>计算机网络学习总结</h1></header><hr>
+<p>title: 计算机网络学习总结
+date: 2018-07-09 22:32:57
+tags:</p>
+<ul>
+<li>计算机网络
+categories:</li>
+<li>后端</li>
+<li>技术总结</li>
+</ul>
+<hr>
+<p>这部分内容主要是基于一些关于计算机网络基础的学习总结，内容不全面，只讲述了其中的一小部分，后续会再补充，如有错误，还请见谅。</p>
+<p>计算机网络常见概念</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="网卡和路由器">网卡和路由器<a href="#网卡和路由器" class="hash-link" aria-label="Direct link to 网卡和路由器" title="Direct link to 网卡和路由器">​</a></h2>
+<p>网卡是一个有mac地址的物理设备，通过mac地址与局域网内的交换机通信，交换机可以识别mac地址。</p>
+<p>而单纯的中继器，集线器，双绞线等设备只识别物理层设备。</p>
+<p>路由器则工作在3层ip层，必须要有ip才能工作，所以路由器每一个接口都对应一个ip，维护一个可以识别ip的路由表，进行ip数据报转发。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="交换机">交换机<a href="#交换机" class="hash-link" aria-label="Direct link to 交换机" title="Direct link to 交换机">​</a></h2>
+<p>交换机具有自学习能力，学习的是交换表的内容。交换表中存储着 MAC 地址到接口的映射。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="以太网">以太网<a href="#以太网" class="hash-link" aria-label="Direct link to 以太网" title="Direct link to 以太网">​</a></h2>
+<p>以太网是一种星型拓扑结构局域网。</p>
+<p>早期使用集线器进行连接，它是一种物理层设备，作用于比特而不是帧，当一个比特到达接口时，集线器重新生成这个比特，并将其能量强度放大，从而扩大网络的传输距离。之后再将这个比特向其它所有接口。特别是，如果集线器同时收到同时从两个不同接口的帧，那么就发生了碰撞。</p>
+<p>目前以太网使用交换机替代了集线器，它不会发生碰撞，能根据 MAC 地址进行存储转发。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="虚拟局域网vlan">  虚拟局域网VLAN<a href="#虚拟局域网vlan" class="hash-link" aria-label="Direct link to 虚拟局域网VLAN" title="Direct link to 虚拟局域网VLAN">​</a></h2>
+<p>正常情况下，局域网中的链路层广播在整个局域网可达，而vlan可以在物理局域网中划分虚拟局域网，使广播帧只有在vlan当中的主机才能收到。</p>
+<p>虚拟局域网可以建立与物理位置无关的逻辑组，只有在同一个虚拟局域网中的成员才会收到链路层广播信息，例如下图中 (A1, A2, A3, A4) 属于一个虚拟局域网，A1 发送的广播会被 A2、A3、A4 收到，而其它站点收不到。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="dhcp协议动态主机配置协议">DHCP协议(动态主机配置协议)<a href="#dhcp协议动态主机配置协议" class="hash-link" aria-label="Direct link to DHCP协议(动态主机配置协议)" title="Direct link to DHCP协议(动态主机配置协议)">​</a></h2>
+<p>首先DHCP是为了让主机获得一个ip地址，所以主机会发一个0.0.0.0为发送方，255.255.255.255为接收方的ip数据报，也就是广播数据报，并且广播数据包只在局域网中有效，然后链路层解析为数据帧，发送给局域网内的DHCP服务器。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="arp协议">ARP协议<a href="#arp协议" class="hash-link" aria-label="Direct link to ARP协议" title="Direct link to ARP协议">​</a></h2>
+<p>arp负责把ip地址解析成局域网内的一个mac地址，只在局域网中有效。逆arp则把mac地址解析成ip地址。</p>
+<p>网络层实现主机之间的通信，而链路层实现具体每段链路之间的通信。因此在通信过程中，IP 数据报的源地址和目的地址始终不变，而 MAC 地址随着链路的改变而改变。</p>
+<p><a href="https://github.com/CyC2018/Interview-Notebook/blob/master/pics/66192382-558b-4b05-a35d-ac4a2b1a9811.jpg" target="_blank" rel="noopener noreferrer"><img loading="lazy" src="https://github.com/CyC2018/Interview-Notebook/raw/master/pics/66192382-558b-4b05-a35d-ac4a2b1a9811.jpg" alt="" class="img_kGBN"></a></p>
+<p>ARP 实现由 IP 地址得到 MAC 地址。</p>
+<p><a href="https://github.com/CyC2018/Interview-Notebook/blob/master/pics/b9d79a5a-e7af-499b-b989-f10483e71b8b.jpg" target="_blank" rel="noopener noreferrer"><img loading="lazy" src="https://github.com/CyC2018/Interview-Notebook/raw/master/pics/b9d79a5a-e7af-499b-b989-f10483e71b8b.jpg" alt="" class="img_kGBN"></a></p>
+<p>每个主机都有一个 ARP 高速缓存，里面有本局域网上的各主机和路由器的 IP 地址到硬件地址的映射表。</p>
+<blockquote>
+<p>如果主机 A 知道主机 B 的 IP 地址，但是 ARP 高速缓存中没有该 IP 地址到 MAC 地址的映射，此时主机 A 通过广播的方式发送 ARP 请求分组，主机 B 收到该请求后会发送 ARP 响应分组给主机 A 告知其 MAC 地址，随后主机 A 向其高速缓存中写入主机 B 的 IP 地址到 MAC 地址的映射。</p>
+</blockquote>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="网关和nat">网关和NAT<a href="#网关和nat" class="hash-link" aria-label="Direct link to 网关和NAT" title="Direct link to 网关和NAT">​</a></h2>
+<p>当需要和外部局域网访问时，需要经过网关服务器以便兼容不同协议栈。局域网内部使用内网ip，经过网关时要转成外网ip，网关会帮你完成改写操作，当收到数据报时，网关又会帮你把ip改为内网ip。这种修改ip隐藏内部网络的方式叫做NAT。</p>
+<p>nat穿透的方式是主机和网关服务器协定一个ip地址作为主机服务的ip，所以主机可以通过这个ip和外网交流。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="dns协议和http请求过程">DNS协议和http请求过程<a href="#dns协议和http请求过程" class="hash-link" aria-label="Direct link to DNS协议和http请求过程" title="Direct link to DNS协议和http请求过程">​</a></h2>
+<p>访问一个域名时，会发送dns报文请求 （应用层）给本地的DNS服务器，解析出域名对应的ip，然后三次握手建立连接，（当然TCP数据报由本地局域网经过网关转给外网，再经过多次路由才到达目标主机），然后发送http请求获得响应报文</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="icmp">ICMP<a href="#icmp" class="hash-link" aria-label="Direct link to ICMP" title="Direct link to ICMP">​</a></h2>
+<p>ICMP 是为了更有效地转发 IP 数据报和提高交付成功的机会。它封装在 IP 数据报中，但是不属于高层协议。</p>
+<p><a href="https://github.com/CyC2018/Interview-Notebook/blob/master/pics/e3124763-f75e-46c3-ba82-341e6c98d862.jpg" target="_blank" rel="noopener noreferrer"><img loading="lazy" src="https://github.com/CyC2018/Interview-Notebook/raw/master/pics/e3124763-f75e-46c3-ba82-341e6c98d862.jpg" alt="" class="img_kGBN"></a></p>
+<p>ICMP 报文分为差错报告报文和询问报文。</p>
+<p><a href="https://github.com/CyC2018/Interview-Notebook/blob/master/pics/aa29cc88-7256-4399-8c7f-3cf4a6489559.png" target="_blank" rel="noopener noreferrer"><img loading="lazy" src="https://github.com/CyC2018/Interview-Notebook/raw/master/pics/aa29cc88-7256-4399-8c7f-3cf4a6489559.png" alt="" class="img_kGBN"></a></p>
+<ol>
+<li>Ping
+Ping 是 ICMP 的一个重要应用，主要用来测试两台主机之间的连通性。</li>
+</ol>
+<p>Ping 发送的 IP 数据报封装的是无法交付的 UDP 用户数据报。</p>
+<ol start="2">
+<li>Traceroute
+Traceroute 是 ICMP 的另一个应用，用来跟踪一个分组从源点到终点的路径，事实上，traceroute也封装着无法交付的udp，和ping类似。。</li>
+</ol>
+<p>源主机向目的主机发送一连串的 IP 数据报，每个数据包的ttl时间不同，所以可以跟踪每一跳路由的信息。</p>
+<p>==但是因为数据报封装的是无法交付的UDP报文，因此目的主机要向源主机发送 ICMP终点不可达差错报告报文。之后源主机知道了到达目的主机所经过的路由 器 IP地址以及到达每个路由器的往返时间。==</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="虚拟专用网vpn和内网ip">虚拟专用网VPN和内网ip<a href="#虚拟专用网vpn和内网ip" class="hash-link" aria-label="Direct link to 虚拟专用网VPN和内网ip" title="Direct link to 虚拟专用网VPN和内网ip">​</a></h2>
+<p>由于 IP 地址的紧缺，一个机构能申请到的 IP 地址数往往远小于本机构所拥有的主机数。并且一个机构并不需要把所有的主机接入到外部的互联网中，机构内的计算机可以使用仅在本机构有效的 IP 地址（专用地址）。</p>
+<p>有三个专用地址块：</p>
+<ul>
+<li>10.0.0.0 ~ 10.255.255.255</li>
+<li>172.16.0.0 ~ 172.31.255.255</li>
+<li>192.168.0.0 ~ 192.168.255.255</li>
+</ul>
+<p>这些ip也称为内网ip，用于局域网间的通信，只能通过网关抵达公网。</p>
+<p><a href="https://github.com/CyC2018/Interview-Notebook/blob/master/pics/1556770b-8c01-4681-af10-46f1df69202c.jpg" target="_blank" rel="noopener noreferrer"><img loading="lazy" src="https://github.com/CyC2018/Interview-Notebook/raw/master/pics/1556770b-8c01-4681-af10-46f1df69202c.jpg" alt="" class="img_kGBN"></a></p>
+<p>使用隧道技术实现vpn。</p>
+<p>原理是；普通的内网ip无法被访问到，一般可以使用nat技术让网关作为中转人，而ip数据报也会改写成网关服务器的地址。</p>
+<p>如果想让数据报保留内网地址，并且实现跨公网访问，那么只能通过隧道技术，把内网数据报加密包装在公网ip数据报中，然后通过公网ip抵达对方的专用网络，进行拆包和发送。</p>
+<p>为什么vpn能翻墙呢，因为我们通过对vpn服务器的连接，可以将内网ip数据报装在里面，发送给vpn，vpn解析后再发送给真正的服务器。</p>
+<p>由于本地网关阻拦了某些网站的请求，所以我们要把这个请求加密封装，然后通过隧道把数据发给一个海外服务器，让他真正完成请求。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="应用层">应用层<a href="#应用层" class="hash-link" aria-label="Direct link to 应用层" title="Direct link to 应用层">​</a></h2>
+<p>应用层的协议主要是http，ftp这类协议，http访问超文本html，而ftp访问文件系统。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="http">http<a href="#http" class="hash-link" aria-label="Direct link to http" title="Direct link to http">​</a></h3>
+<p>通过浏览器可以方便地进行dns解析，建立tcp连接，发送http请求，得到http响应，这些工作都是浏览器完成的。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="http10-11和20">http1.0 1.1和2.0<a href="#http10-11和20" class="hash-link" aria-label="Direct link to http1.0 1.1和2.0" title="Direct link to http1.0 1.1和2.0">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_HWLp" id="10和11的主要变化">1.0和1.1的主要变化<a href="#10和11的主要变化" class="hash-link" aria-label="Direct link to 1.0和1.1的主要变化" title="Direct link to 1.0和1.1的主要变化">​</a></h4>
+<p>1 http1.0经过多年发展，在1.1提出了改进。
+首先是提出了长连接，http请求可以在一次tcp连接中不断发送。</p>
+<p>2 然后是http1.1支持只发送header而不发送body。原因是先用header判断能否成功，再发数据，节约带宽，事实上，post请求默认就是这样做的。</p>
+<p>3 http1.1的host字段。由于虚拟主机可以支持多个域名，所以一般将域名解析后得到host。</p>
+<h4 class="anchor anchorWithStickyNavbar_HWLp" id="http10和http20的区别">http1.0和http2.0的区别。<a href="#http10和http20的区别" class="hash-link" aria-label="Direct link to http1.0和http2.0的区别。" title="Direct link to http1.0和http2.0的区别。">​</a></h4>
+<p>http2.0变化巨大。</p>
+<p>1 http支持多路复用，同一个连接可以并发处理多个请求，方法是把http数据包拆为多个帧，并发有序的发送，根据序号在  另一端进行重组，而不需要一个个http请求顺序到达。</p>
+<p>2 http2.0支持服务端推送，就是服务端在http请求到达后，除了返回数据之外，还推送了额外的内容给客户端。</p>
+<p>3HTTP2.0压缩了请求头，同时基本单位是二进制帧流，这样的数据占用空间更少。</p>
+<p>4http2.0只适用于https场景，因为其在http和tcp中间加了一层ssl层。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="get和post">get和post<a href="#get和post" class="hash-link" aria-label="Direct link to get和post" title="Direct link to get和post">​</a></h3>
+<p>get和post本质都是http请求，只不过对他们的作用做了界定和适配，并且让他们适应各自的场景。</p>
+<p>1本质区别是get只是一次http请求，post先发请求体再发请求体，实际上是两次请求</p>
+<p>2表面区别：</p>
+<p>get可以cache而post不能，因为浏览器是这么安排的</p>
+<p>一般设计get是幂等的而post不是</p>
+<p>get的参数放在url传递，而post放在请求体里，因为get没有请求体。
+所以get请求不安全，并且有长度限制（url不能太长），而post几乎没有限制，请求体可以很大。</p>
+<h3></h3>
+<h4 class="anchor anchorWithStickyNavbar_HWLp" id="session和cookie">session和cookie<a href="#session和cookie" class="hash-link" aria-label="Direct link to session和cookie" title="Direct link to session和cookie">​</a></h4>
+<p>并且浏览器还维护了cookie以便记录用于对网站的一些信息，下次请求时在http报文中带上这些数据，服务器接收以后根据cookie中的sessionid获取对应的session即可</p>
+<h4 class="anchor anchorWithStickyNavbar_HWLp" id="token">token<a href="#token" class="hash-link" aria-label="Direct link to token" title="Direct link to token">​</a></h4>
+<p>session一般维护在内存中，有时候也会持久化到数据库，但是如果session由单点维护可能出现宕机等情况，于是一般会采用分布式的方案。</p>
+<p>session存放的几种方案。
+0 存在内存中。用sessionid标识用户。
+这样的session十分依赖于cookie。如果浏览器禁用了cookie则session无用武之地。</p>
+<p>当然也可以把内容存在数据库里，缺点是数据库访问压力较大。</p>
+<p>1有做法会将session内容存在cookie中，但前提是经过了加密，然后下次服务器对其进行解密，但是这样浏览器需要维护太多内容了。</p>
+<p>2当用户登录或者执行某些操作，则使用用户的一部分字段信息进行加密算法得到一串字符串成为token，用于唯一标识用户，或者是某些操作，比如登录，支付，服务端生成该token返回给用户，用户提交请求时必须带上这个token，就可以确认用户信息以及操作是否合法了。</p>
+<p>这样我们不需要存session，只需要在想得到用户信息时解密token即可。</p>
+<p>token还有一个好处就是可以在移动端和pc端兼容，因为移动端不支持cookie。</p>
+<p>3token和oauth。经常有第三方授权登录的例子，本质就是使用token。首先我们打开授权登录页，登陆后服务端返回token，我们提交第三方的请求时，带上这个token，第三方不知道他是啥意思，并且token过段时间就过期了。</p>
+<h4 class="anchor anchorWithStickyNavbar_HWLp" id="cas单点登录">cas单点登录<a href="#cas单点登录" class="hash-link" aria-label="Direct link to cas单点登录" title="Direct link to cas单点登录">​</a></h4>
+<p>单点登录是为了多个平台之间公用一个授权系统，做法是，所有登录都要指向统一登录服务，登陆成功以后在认证中心建立session，并且得到ticket，然后重定向页面，此时页面也会向认证中心确认ticket是否合法，然后就可以访问其他系统的页面了。</p>
+<p>从而访问其他系统时，由于已经有了认证中心的cookie，所以直接带上ticket访问即可。</p>
+<p>每次访问新系统时需要在认证中心注册session，然后单点退出时再把这些session退出，才能实现用户登出。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="web安全和https">web安全和https<a href="#web安全和https" class="hash-link" aria-label="Direct link to web安全和https" title="Direct link to web安全和https">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="密码加密">密码加密<a href="#密码加密" class="hash-link" aria-label="Direct link to 密码加密" title="Direct link to 密码加密">​</a></h3>
+<p>MD5等加密方法可以用来对密码进行加密。一般还会加盐</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="xss跨站脚本攻击">xss跨站脚本攻击<a href="#xss跨站脚本攻击" class="hash-link" aria-label="Direct link to xss跨站脚本攻击" title="Direct link to xss跨站脚本攻击">​</a></h3>
+<p>利用有输入功能网站的输入框来注入JavaScript脚本代码，用户访问该页面时会自动执行某些脚本代码，导致cookie等个人信息泄露，可能会被转发到其他网站。</p>
+<p>解决办法是对输入进行检验，利用一个些工具类就可以做到。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="跨站点请求伪造csrf">跨站点请求伪造csrf<a href="#跨站点请求伪造csrf" class="hash-link" aria-label="Direct link to 跨站点请求伪造csrf" title="Direct link to 跨站点请求伪造csrf">​</a></h3>
+<p>首先用户访问了一个网站并登陆，会把cookie保留在浏览器，
+然后某些网站用一些隐性链接诱导用户点击，点击时发送请求会携带浏览器中的cookie，比如支付宝的账号密码，通过该cookie再去伪造一个支付宝支付请求，达到伪造请求的目的。</p>
+<p>解决这个问题的办法就是禁止js请求跨域名。但是他为ajax提供了特殊定制。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="sql-注入攻击">SQL 注入攻击<a href="#sql-注入攻击" class="hash-link" aria-label="Direct link to SQL 注入攻击" title="Direct link to SQL 注入攻击">​</a></h3>
+<ol>
+<li>
+<p>概念
+服务器上的数据库运行非法的 SQL 语句，主要通过拼接来完成。</p>
+</li>
+<li>
+<p>防范手段
+（一）使用参数化查询</p>
+</li>
+</ol>
+<p>以下以 Java 中的 PreparedStatement 为例，它是预先编译的 SQL 语句，可以传入适当参数并且多次执行。由于没有拼接的过程，因此可以防止 SQL 注入的发生。</p>
+<p>（二）单引号转换</p>
+<p>将传入的参数中的单引号转换为连续两个单引号，PHP 中的 Magic quote 可以完成这个功能。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="拒绝服务攻击">拒绝服务攻击<a href="#拒绝服务攻击" class="hash-link" aria-label="Direct link to 拒绝服务攻击" title="Direct link to 拒绝服务攻击">​</a></h3>
+<p>拒绝服务攻击（denial-of-service attack，DoS），亦称洪水攻击，其目的在于使目标电脑的网络或系统资源耗尽，使服务暂时中断或停止，导致其正常用户无法访问。</p>
+<p>分布式拒绝服务攻击（distributed denial-of-service attack，DDoS），指攻击者使用网络上两个或以上被攻陷的电脑作为“僵尸”向特定的目标发动“拒绝服务”式攻击。</p>
+<p>DDoS攻击通过大量合法的请求占用大量网络资源，以达到瘫痪网络的目的。</p>
+<p>这种攻击方式可分为以下几种：</p>
+<p>通过使网络过载来干扰甚至阻断正常的网络通讯；
+通过向服务器提交大量请求，使服务器超负荷；
+阻断某一用户访问服务器；
+阻断某服务与特定系统或个人的通讯。</p>
+<p>攻击现象</p>
+<p>被攻击主机上有大量等待的TCP连接；
+网络中充斥着大量的无用的数据包；
+源地址为假 制造高流量无用数据，造成网络拥塞，使受害主机无法正常和外界通讯；
+利用受害主机提供的传输协议上的缺陷反复高速的发出特定的服务请求，使主机无法处理所有正常请求；
+严重时会造成系  统死机。</p>
+<p>总体来说，对DoS和DDoS的防范主要从下面几个方面考虑：</p>
+<p>尽可能对系统加载最新补丁，并采取有效的合规性配置，降低漏洞利用风险；</p>
+<p>采取合适的安全域划分，配置防火墙、入侵检测和防范系统，减缓攻击。</p>
+<p>采用分布式组网、负载均衡、提升系统容量等可靠性措施，增强总体服务能力。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="https">https<a href="#https" class="hash-link" aria-label="Direct link to https" title="Direct link to https">​</a></h3>
+<p>https博大精深，首先先来看看他的基础知识</p>
+<p>1对称加密和非对称加密</p>
+<p>对称加密两方使用同一把密钥加密和解密，传输密钥时如果丢失就会被破解。</p>
+<p>2非对称加密两方各有一把私钥，而公钥公开，A用私钥加密，把公钥和数据传给B，B用公钥解密。同理，B用私钥对数据进行加密，返回给A，A也用公钥进行解密。</p>
+<p>3非对称加密只要私钥不丢就很安全，但是效率比较低，所以一般使用非对称加密传输对称加密的密钥，使用对称加密完成数据传输。</p>
+<p>4数字签名，为了避免数据在传输过程中被替换，比如黑客修改了你的报文内容，但是你并不知道，所以我们让发送端做一个数字签名，把数据的摘要消息进行一个加密，比如MD5，得到一个签名，和数据一起发送。然后接收端把数据摘要进行md5加密，如果和签名一样，则说明数据确实是真的。</p>
+<p>5数字证书，对称加密中，双方使用公钥进行解密。虽然数字签名可以保证数据不被替换，但是数据是由公钥加密的，如果公钥也被替换，则仍然可以伪造数据，因为用户不知道对方提供的公钥其实是假的。</p>
+<p>所以为了保证发送方的公钥是真的，CA证书机构会负责颁发一个证书，里面的公钥保证是真的，用户请求服务器时，服务 器将证书发给用户，这个证书是经由系统内置证书的备案的。</p>
+<p>​<br>
+<!-- -->​<br>
+<!-- -->6 https过程</p>
+<p>用户发送请求，服务器返回一个数字证书。</p>
+<p>用户在浏览器端生成一个随机数，使用证书中的公钥加密，发送给服务端。</p>
+<p>服务端使用公钥解密该密文，得到随机数。</p>
+<p>往后两者使用该随机数作为公钥进行对称加密。</p>
+<p>番外：关于公钥加密私钥解密与私钥加密公钥解密说明
+第一种是签名,使用私钥加密,公钥解密,用于让所有公钥所有者验证私钥所有者的身份并且用来防止私钥所有者发布的内容被篡改.但是不用来保证内容不被他人获得.</p>
+<p>第二种是加密,用公钥加密,私钥解密,用于向公钥所有者发布信息,这个信息可能被他人篡改,但是无法被他人获得.搜索</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="传输层">传输层<a href="#传输层" class="hash-link" aria-label="Direct link to 传输层" title="Direct link to 传输层">​</a></h2>
+<p>UDP 和 TCP 的特点
+用户数据报协议 UDP（User Datagram Protocol）是无连接的，尽最大可能交付，没有拥塞控制，面向报文（对于应用程序传下来的报文不合并也不拆分，只是添加 UDP 首部），支持一对一、一对多、多对一和多对多的交互通信。</p>
+<p>传输控制协议 TCP（Transmission Control Protocol）是面向连接的，提供可靠交付，有流量控制，拥塞控制，提供全双工通信，面向字节流（把应用层传下来的报文看成字节流，把字节流组织成大小不等的数据块），每一条 TCP 连接只能是点对点的（一对一）。</p>
+<p>TCP是传输层最重要的协议。</p>
+<blockquote>
+<p>由于网络层只提供最大交付的服务，尽可能地完成路由转发，以及把链路层报文传送给任意一台主机。他做的工作很专注，所以不会提供其他的可靠性保证。</p>
+<p>但是真实  网络环境下随时会发生丢包，乱序，数据内容出错等情况，这些情况必须得到处理，于是我们使用传输层tcp来解决这些问题。</p>
+</blockquote>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="udp报文">UDP报文<a href="#udp报文" class="hash-link" aria-label="Direct link to UDP报文" title="Direct link to UDP报文">​</a></h3>
+<p>伪首部的意义：伪首部并非TCP&amp;UDP数据报中实际的有效成分。伪首部是一个虚拟的数据结构，其中的信息是从数据报所在IP分组头的分组头中提取的，既不向下传送也不向上递交，而仅仅是为计算校验和。</p>
+<p><img loading="lazy" src="https://github.com/CyC2018/Interview-Notebook/raw/master/pics/d4c3a4a1-0846-46ec-9cc3-eaddfca71254.jpg" alt="image" class="img_kGBN"></p>
+<p>首部字段只有 8 个字节，包括源端口、目的端口、长度、检验和。12 字节的伪首部是为了计算检验和临时添加的。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="tcp-首部格式">TCP 首部格式<a href="#tcp-首部格式" class="hash-link" aria-label="Direct link to TCP 首部格式" title="Direct link to TCP 首部格式">​</a></h3>
+<p><a href="https://github.com/CyC2018/Interview-Notebook/blob/master/pics/55dc4e84-573d-4c13-a765-52ed1dd251f9.png" target="_blank" rel="noopener noreferrer"><img loading="lazy" src="https://github.com/CyC2018/Interview-Notebook/raw/master/pics/55dc4e84-573d-4c13-a765-52ed1dd251f9.png" alt="" class="img_kGBN"></a></p>
+<ul>
+<li>
+<p><strong>序号</strong> ：用于对字节流进行编号，例如序号为 301，表示第一个字节的编号为 301，如果携带的数据长度为 100 字节，那么下一个报文段的序号应为 401。</p>
+</li>
+<li>
+<p><strong>确认号</strong> ：期望收到的下一个报文段的序号。例如 B 正确收到 A 发送来的一个报文段，序号为 501，携带的数据长度为 200 字节，因此 B 期望下一个报文段的序号为 701，B 发送给 A 的确认报文段中 确认号就为 701。</p>
+</li>
+<li>
+<p><strong>数据偏移</strong> ：指的是数据部分距离报文段起始处的偏移量，实际上指的是首部的长度。</p>
+</li>
+<li>
+<p><strong>确认 ACK</strong> ：当 ACK=1 时确认号字段有效，否则无效。TCP 规定，在连接建立后所有传送的报文段都必须把 ACK 置 1。</p>
+</li>
+<li>
+<p><strong>同步 SYN</strong> ：在连接建立时用来同步序号。当 SYN=1，ACK=0 时表示这是一个连接请求报文段。若对方同意建立连接，则响应报文中 SYN=1，ACK=1。</p>
+</li>
+<li>
+<p><strong>终止 FIN</strong> ：用来释放一个连接，当 FIN=1 时，表示此报文段的发送方的数据已发送完毕，并要求释放连接。</p>
+</li>
+<li>
+<p><strong>窗口</strong> ：窗口值作为接收方让发送方设置其发送窗口的依据。之所以要有这个限制，是因为接收方的数据缓存空间是有限的。</p>
+</li>
+<li></li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="三次握手和四次挥手">三次握手和四次挥手<a href="#三次握手和四次挥手" class="hash-link" aria-label="Direct link to 三次握手和四次挥手" title="Direct link to 三次握手和四次挥手">​</a></h3>
+<p>为了保证tcp的可靠传输，需要建立起一条通路，也就是所谓连接。这条通路必须保证有效并且能正确结束。</p>
+<p><a href="https://github.com/CyC2018/Interview-Notebook/blob/master/pics/e92d0ebc-7d46-413b-aec1-34a39602f787.png" target="_blank" rel="noopener noreferrer"><img loading="lazy" src="https://github.com/CyC2018/Interview-Notebook/raw/master/pics/e92d0ebc-7d46-413b-aec1-34a39602f787.png" alt="" class="img_kGBN"></a></p>
+<p>​<br>
+<!-- -->三次握手</p>
+<p>1 首先客户端发送连接请求syn，携带随机数x。
+2 服务端返回请求ack，x + 1,说明服务端对x进行了回复。
+3 客户端返回请求ack，y，说明接受到了信息并且开始传输数据，起始数据为y。</p>
+<p>客户端状态时syn_send和establish
+服务端则是从listen到syn_rcvd，再到establish</p>
+<p><a href="https://github.com/CyC2018/Interview-Notebook/blob/master/pics/f87afe72-c2df-4c12-ac03-9b8d581a8af8.jpg" target="_blank" rel="noopener noreferrer"><img loading="lazy" src="https://github.com/CyC2018/Interview-Notebook/raw/master/pics/f87afe72-c2df-4c12-ac03-9b8d581a8af8.jpg" alt="" class="img_kGBN"></a></p>
+<p>四次挥手</p>
+<p>1 首先客户端请求断开连接，发送fin请求，服务端返回fin的ack，继续处理断开前需要处理完的数据。</p>
+<p>2 过了一会，服务端处理完数据发送给客户端ack，表明已经关闭，客户端最后再发一个ack给服务端，如果服务端已关闭则无反应，客户端经过两个ttl后挥手完毕，确认服务端断开。这两个ttl成为time wait状态，用于确定服务端真的关闭。</p>
+<p>3 客户端发完fin后的状态从establish变为fin1——wait，服务端发完ack后的状态从establish变为closewait。</p>
+<p>4 客户端收到第一个ack后进入fin_2wait状态，服务端过了一会发送last——ack给客户端，说明关闭好了，客户端收到ack后进入timewait，然后发送ack。双方都closed。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="半连接syn和洪泛法攻击">半连接syn和洪泛法攻击<a href="#半连接syn和洪泛法攻击" class="hash-link" aria-label="Direct link to 半连接syn和洪泛法攻击" title="Direct link to 半连接syn和洪泛法攻击">​</a></h3>
+<p>黑客开启大量的syn请求而不发送ack，服务端开启半连接等待ack，直到资源耗尽，所以必须检测来访ip</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="为什么要三次握手">为什么要三次握手<a href="#为什么要三次握手" class="hash-link" aria-label="Direct link to 为什么要三次握手" title="Direct link to 为什么要三次握手">​</a></h3>
+<p>三次握手的原因</p>
+<p>第三次握手是为了防止失效的连接请求到达服务器，让服务器错误打开连接。</p>
+<p>也就是说，如果只有两次握手，服务端返回ack后直接通信，那么如果客户端因为网络问题没有收到ack，可能会再次请求连接，但时服务端不知道这其实是同一个请求，于是又打开了一个连接，相当于维护了很多的无用连接。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="time-wait的作用">time wait的作用<a href="#time-wait的作用" class="hash-link" aria-label="Direct link to time wait的作用" title="Direct link to time wait的作用">​</a></h3>
+<p>1 需要服务端可靠地终止连接，如果处于time_wait客户端发给服务端的ack报文丢失，则服务端会再发一次fin，此时客户端不应该关闭。</p>
+<p>2 保证迟来的tcp报文有时间被丢弃，因为2msl里超时抵达的报文都会被丢弃。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="可靠传输协议">可靠传输协议<a href="#可靠传输协议" class="hash-link" aria-label="Direct link to 可靠传输协议" title="Direct link to 可靠传输协议">​</a></h2>
+<p>TCP协议有三个重要属性。</p>
+<p>可靠传输，主要通过有序接收，确认后发送，以及超时重传来实现，并且使用分片来提高发送效率，通过检验和避免错误。</p>
+<p>流量控制，主要通过窗口限制接收和发送速率。</p>
+<p>拥塞控制，主要通过不同拥塞状态的算法来处理拥塞，一开始发的比较慢，然后指数增加，当丢包时再降低速度，重新开始第一阶段，避免拥塞。</p>
+<p>总结以下就是几个特点：</p>
+<p>TCP 可靠传输</p>
+<p>TCP 使用超时重传来实现可靠传输：</p>
+<p>1 如果一个已经发送的报文段在超时时间内没有收到确认，那么就重传这个报文段。</p>
+<p>​<br>
+<!-- -->2 滑动窗口可以连续发送多个数据再统一进行确认。</p>
+<p>因为发送端希望在收到确认前，继续发送其它报文段。比如说在收到0号报文的确认前还发出了1-3号的报文，这样提高了信道的利用率。</p>
+<p>3 滑动窗口只重传丢失的数据报</p>
+<p>但可以想想，0-4发出去后可能要重传，所以需要一个缓冲区维护这些报文，所以就有了窗口。</p>
+<p>4每当完成一个确认窗口往前滑动一格，可以传新的一个数据，因此可以顺序发送顺序确认</p>
+<p>TCP 流量控制</p>
+<p>流量控制是为了控制发送方发送速率，保证接收方来得及接收。</p>
+<p>接收方发送的确认报文中的窗口字段可以用来控制发送方窗口大小，从而影响发送方的发送速率。将窗口字段设置为 0，则发送方不能发送数据。</p>
+<p>TCP 拥塞控制</p>
+<p>如果网络出现拥塞，分组将会丢失，此时发送方会继续重传，从而导致网络拥塞程度更高。因此当出现拥塞时，应当控制发送方的速率。这一点和流量控制很像，但是出发点不同。流量控制是为了让接收方能来得及接受，而拥塞控制是为了降低整个网络的拥塞程度。</p>
+<p>TCP 主要通过四种算法来进行拥塞控制：慢开始、拥塞避免、快重传、快恢复。</p>
+<p>一般刚开始时慢开始，然后拥塞避免，出现个别丢包时（连续三个包序号不对），</p>
+<p>则执行快重传，然后进入快恢复阶段，接着继续拥塞避免。如果发生多次超时也就是拥塞时，直接进入慢开始。</p>
+<blockquote>
+<p>这种情况下，只是丢失个别报文段，而不是网络拥塞，因此执行快恢复，令 ssthresh = cwnd/2 ，cwnd = ssthresh，注意到此时直接进入拥塞避免。慢开始和快恢复的快慢指的是 cwnd 的设定值，而不是 cwnd 的增长速率。慢开始 cwnd 设定为 1，而快恢复 cwnd 设定为 ssthresh。</p>
+</blockquote>
+<p>==发送方需要维护一个叫做拥塞窗口（cwnd）的状态变量，注意拥塞窗口与发送方窗口的区别：拥塞窗口只是一个状态变量，实际决定发送方能发送多少数据的是发送方窗口==。</p>
+<p>滑动窗口协议综合实现了上述这一些内容：</p>
+<p>为什么要使用滑动窗口，因为滑动窗口可以实现可靠传输，流量控制和拥塞控制（拥塞控制用的是拥塞窗口变量）</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="tcp的粘包拆包">tcp的粘包拆包<a href="#tcp的粘包拆包" class="hash-link" aria-label="Direct link to tcp的粘包拆包" title="Direct link to tcp的粘包拆包">​</a></h3>
+<p>tcp报文是流式的数据，没有标识数据结束，只有序号等字段，tcp协议自动完成数据报的切分。由于tcp使用缓冲区发送，又没有标识结束，当缓冲区的数据没清空又有新数据进来，就会发生粘包，如果数据太大存装不下，就会被拆包。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="网络层">网络层<a href="#网络层" class="hash-link" aria-label="Direct link to 网络层" title="Direct link to 网络层">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="ip-数据报格式">IP 数据报格式<a href="#ip-数据报格式" class="hash-link" aria-label="Direct link to IP 数据报格式" title="Direct link to IP 数据报格式">​</a></h2>
+<p><a href="https://github.com/CyC2018/Interview-Notebook/blob/master/pics/85c05fb1-5546-4c50-9221-21f231cdc8c5.jpg" target="_blank" rel="noopener noreferrer"><img loading="lazy" src="https://github.com/CyC2018/Interview-Notebook/raw/master/pics/85c05fb1-5546-4c50-9221-21f231cdc8c5.jpg" alt="" class="img_kGBN"></a></p>
+<ul>
+<li>
+<p><strong>版本</strong> : 有 4（IPv4）和 6（IPv6）两个值；</p>
+</li>
+<li>
+<p><strong>首部长度</strong> : 占 4 位，因此最大值为 15。</p>
+</li>
+<li>
+<p><strong>总长度</strong> : 包括首部长度和数据部分长度。</p>
+</li>
+<li>
+<p><strong>生存时间</strong> ：TTL，它的存在是为了防止无法交付的数据报在互联网中不断兜圈子。以路由器跳数为单位，当 TTL 为 0 时就丢弃数据报。</p>
+</li>
+</ul>
+<p>==*   <strong>协议</strong> ：指出携带的数据  应该上交给哪个协议进行处理，例如 ICMP、TCP、UDP 等。==</p>
+<ul>
+<li>
+<p><strong>首部检验和</strong> ：因为数据报每经过一个路由器，都要重新计算检验和，因此检验和不包含数据部分可以减少计算的工作量。</p>
+</li>
+<li>
+<p><strong>片偏移</strong> : 和标识符一起，用于发生分片的情况。片偏移的单位为 8 字节。</p>
+</li>
+</ul>
+<p><a href="https://github.com/CyC2018/Interview-Notebook/blob/master/pics/23ba890e-e11c-45e2-a20c-64d217f83430.png" target="_blank" rel="noopener noreferrer"><img loading="lazy" src="https://github.com/CyC2018/Interview-Notebook/raw/master/pics/23ba890e-e11c-45e2-a20c-64d217f83430.png" alt="" class="img_kGBN"></a></p>
+<p>总结：</p>
+<p>ip层只保证尽最大努力交付，他所承载的一切都是对路由，转发，已经网络传输最友好的设计。</p>
+<p>路由器负责记录路由表和转发ip数据报，路由表记录着ip地址和下一跳路由的端口的对应关系。</p>
+<p>由于路由聚合的缘故，一般用170.177.233.0/24就可以标识好几个网络了。</p>
+<p>以前会使用A，B，C类地址，和子网，现在直接使用地址聚合，前24位是网络号，后面8位是主机号。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="某个聚合路由地址划分网络给n台机器是否符合要求">某个聚合路由地址划分网络给n台机器，是否符合要求。。<a href="#某个聚合路由地址划分网络给n台机器是否符合要求" class="hash-link" aria-label="Direct link to 某个聚合路由地址划分网络给n台机器，是否符合要求。。" title="Direct link to 某个聚合路由地址划分网络给n台机器，是否符合要求。。">​</a></h2>
+<p>要看这个网络中的主机号能否达到n个。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="ip-地址编址方式">IP 地址编址方式<a href="#ip-地址编址方式" class="hash-link" aria-label="Direct link to IP 地址编址方式" title="Direct link to IP 地址编址方式">​</a></h3>
+<p>IP 地址的编址方式经历了三个历史阶段：</p>
+<ul>
+<li>分类</li>
+<li>子网划分</li>
+<li>无分类</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="分类">分类<a href="#分类" class="hash-link" aria-label="Direct link to 分类" title="Direct link to 分类">​</a></h3>
+<p>由两部分组成，网络号和主机号，其中不同分类具有不同的网络号长度，并且是固定的。</p>
+<p><code>IP 地址 ::= {&lt; 网络号 &gt;, &lt; 主机号 &gt;}</code></p>
+<p><a href="https://github.com/CyC2018/Interview-Notebook/blob/master/pics/cbf50eb8-22b4-4528-a2e7-d187143d57f7.png" target="_blank" rel="noopener noreferrer"><img loading="lazy" src="https://github.com/CyC2018/Interview-Notebook/raw/master/pics/cbf50eb8-22b4-4528-a2e7-d187143d57f7.png" alt="" class="img_kGBN"></a></p>
+<ol start="2">
+<li>
+<p>子网划分</p>
+<p>通过在主机号字段中拿一部分作为子网号，把两级 IP 地址划分为三级 IP 地址。注意，外部网络看不到子网的存在。</p>
+<p><code>IP 地址 ::= {&lt; 网络号 &gt;, &lt; 子网号 &gt;, &lt; 主机号 &gt;}</code></p>
+<p>要使用子网，必须配置子网掩码。一个 B 类地址的默认子网掩码为 255.255.0.0，如果 B 类地址的子网占两个比特，那么子网掩码为 11111111 11111111 11000000 00000000，也就是 255.255.192.0。</p>
+</li>
+<li>
+<p>无分类</p>
+<p>无分类编址 CIDR 消除了传统 A 类、B 类和 C 类地址以及划分子网的概念，使用网络前缀和主机号来对 IP 地址进行编码，网络前缀的长度可以根据需要变化。</p>
+<p><code>IP 地址 ::= {&lt; 网络前缀号 &gt;, &lt; 主机号 &gt;}</code></p>
+<p>CIDR 的记法上采用在 IP 地址后面加上网络前缀长度的方法，例如 128.14.35.7/20 表示前 20 位为网络前缀。</p>
+<p>CIDR 的地址掩码可以继续称为子网掩码，子网掩码首 1 长度为网络前缀的长度。</p>
+</li>
+</ol>
+<p>一个 CIDR 地址块中有很多地址，一个 CIDR 表示的网络就可以表示原来的很多个网络，并且在路由表中只需要一个路由就可以代替原来的多个路由，减少了路由表项的数量。</p>
+<p>把这种通过使用网络前缀来减少路由表项的方式称为路由聚合，也称为 构成超网 。</p>
+<p>在路由表中的项目由“网络前缀”和“下一跳地址”组成，在查找时可能会得到不止一个匹配结果，应当采用最长前缀匹配来确定应该匹配哪一个。</p>
+<p>总结</p>
+<p>使用分类法的ip必须标识是哪一类地址，比较麻烦，而且一旦设置为某类地址它就只能使用那一部分地址空间了。</p>
+<p>使用子网掩码可以避免使用分类并且更灵活地决定网络号和主机号的划分。但是需要配置子网掩码，比较复杂。</p>
+<p>CIDR 138.1.2.11/24
+使用CIDR避免了子网划分，直接使用后n位作为网络号，简化了子网的配置（实际上用n代替了子网掩码）。并且在路由器中可以使用地址聚合，一个ip可以聚合多个网络号。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="ip分片详谈">ip分片详谈<a href="#ip分片详谈" class="hash-link" aria-label="Direct link to ip分片详谈" title="Direct link to ip分片详谈">​</a></h3>
+<p>在TCP/IP分层中，数据链路层用MTU（Maximum Transmission Unit，最大传输单元）来限制所能传输的数据包大小，MTU是指一次传送的数据最大长度，不包括数据链路层数据帧的帧头，如以太网的MTU为1500字节，实际上数据帧的最大长度为1512字节，其中以太网数据帧的帧头为12字节。</p>
+<p>当发送的IP数据报的大小超过了MTU时，IP层就需要对数据进行分片，否则数据将无法发送成功。</p>
+<p>IP分片的实现</p>
+<blockquote>
+<p>IP分片发生在IP层，不仅源端主机会进行分片，中间的路由器也有可能分片，因为不同的网络的MTU是不一样的，如果传输路径上的某个网络的MTU比源端网络的MTU要  小，路由器就可能对IP数据报再次进行分片。而分片数据的重组只会发生在目的端的IP层。</p>
+</blockquote>
+<p>==避免IP分片==</p>
+<blockquote>
+<p>在网络编程中，我们要避免出现IP分片，那么为什么要避免呢？原因是IP层是没有超时重传机制的，如果IP层对一个数据包进行了分片，只要有一个分片丢失了，只能依赖于传输层进行重传，结果是所有的分片都要重传一遍，这个代价有点大。由此可见，IP分片会大大降低传输层传送数据的成功率，所以我们要避免IP分片。</p>
+</blockquote>
+<p>对于UDP包，我们需要在应用层去限制每个包的大小，一般不要超过1472字节，即以太网MTU（1500）—UDP首部（8）—IP首部（20）。</p>
+<p>对于TCP数据，应用层就不需要考虑这个问题了，因为传输层已经帮我们做了。</p>
+<p>在建立连接的三次握手的过程中，连接双方会相互通告MSS（Maximum Segment =Size，最大报文段长度），MSS一般是MTU—IP首部（20）—TCP首部（20），每次发送的TCP数据都不会超过双方MSS的最小值，所以就保证了IP数据报不会超过MTU，避免了IP分片。</p>
+<ol start="3">
+<li>
+<p>外部网关协议 BGP</p>
+<p>BGP（Border Gateway Protocol，边界网关协议）</p>
+<p>AS 之间的路由选择很困难，主要是因为互联网规模很大。并且各个 AS 内部使用不同的路由选择协议，就无法准确定义路径的度量。并且 AS 之间的路由选择必须考虑有关的策略，比如有些 AS 不愿意让其它 AS 经过。</p>
+<p>BGP 只能寻找一条比较好的路由，而不是最佳路由。</p>
+<p>每个 AS 都必须配置 BGP 发言人，通过在两个相邻 BGP 发言人之间建立 TCP 连接来交换路由信息。</p>
+</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="路由选择协议和算法">路由选择协议和算法<a href="#路由选择协议和算法" class="hash-link" aria-label="Direct link to 路由选择协议和算法" title="Direct link to 路由选择协议和算法">​</a></h3>
+<blockquote>
+<p>路由选择协议
+路由选择协议都是自适应的，能随着网络通信量和拓扑结构的变化而自适应地进行调整。</p>
+<p>互联网可以划分为许多较小的自治系统 AS，一个 AS 可以使用一种和别的 AS 不同的路由选择协议。</p>
+<p>可以把路由选择协议划分为两大类：</p>
+<p>自治系统内部的路由选择：RIP 和 OSPF
+自治系统间的路由选择：BGP</p>
+</blockquote>
+<p>总结：</p>
+<ol>
+<li>内部网关协议 RIP
+RIP 是一种基于距离向量的路由选择协议。距离是指跳数，直接相连的路由器跳数为 1，跳数最多为 15，超过 15 表示不可达。</li>
+</ol>
+<p>RIP 按固定的时间间隔仅和相邻路由器交换自己的路由表，经过若干次交换之后，所有路由器最终会知道到达本自治系统中任何一个网络的最短距离和下一跳路由器地址。</p>
+<ol start="2">
+<li>内部网关协议 OSPF
+开放最短路径优先 OSPF，是为了克服 RIP 的缺点而开发出来的。</li>
+</ol>
+<p>开放表示 OSPF 不受某一家厂商控制，而是公开发表的；最短路径优先表示使用了 Dijkstra 提出的最短路径算法 SPF。</p>
+<p>OSPF 具有以下特点：</p>
+<p>计算出最短路径，然后向本自治系统中的所有路由器发送信息，这种方法是洪泛法。</p>
+<p>发送的信息就是与相邻路由器的链路状态，链路状态包括与哪些路由器相连以及链路的度量，度量用费用、距离、时延、带宽等来表示。</p>
+<p>变化时，路由器才会发送信息。</p>
+<p>所有路由器都具有全网的拓扑结构图，并且是一致的。相比于 RIP，OSPF 的更新过程收敛的很快。</p>
+<p>总结：</p>
+<p>AS是一个自治域，一般是指相似度很大公用一个协议的路由器族，比如同一个运营商的网络。</p>
+<p>因特网中AS之间的路由选择协议是BGP。</p>
+<p>AS内的路由选择协议有RIP和OSPF。</p>
+<p>RIP两两交换，最后大家都同步。</p>
+<p>OSPF找到最短路径。告诉大家。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="链路层">链路层<a href="#链路层" class="hash-link" aria-label="Direct link to 链路层" title="Direct link to 链路层">​</a></h2>
+<p>链路层最主要是指局域网内的网络交互了，使用mac地址通过交换机进行通信，其中用得最多的局域网协议就是以太网。</p>
+<p>链路层使用MTU表示最大传输帧长度，报文长度不能超过MTU,否则会进行分片，比如比较大的IP数据报就会被分片，为了避免被分片。一般要控制IP报文长度。</p>
+<p>广播：</p>
+<p>要理解什么是广播风暴，就必须先理解网络通信技术。 网络上的一个节点，它发送一个数据帧或包，被传输到由广播域定义的本地网段上的每个节点就是广播。</p>
+<blockquote>
+<p>网络广播分为第2层广播和第3层广播。第2层广播也称硬件广播，用于在局域网内向所有的结点发送数据，通常不会穿过局域网的边界（路由器），除非它变成一个单播。广播将是一个二进制的全1或者十六进制全F的地址。而第3层广播用于在这个网络内向所有的结点发送数据。</p>
+</blockquote>
+<p>帧的传输方式，即单播帧（Unicast Frame）、多播帧（Multicast Frame）和广播帧（Broadcast Frame）。</p>
+<p>1、单播帧
+单播帧也称“点对点”通信。此时帧的接收和传递只在两个节点之间进行，帧的目的MAC地址就是对方的MAC地址，网络设备（指交换机和路由器）根据帧中的目的MAC地址，将帧转发出去。</p>
+<p>2、多播帧
+多播帧可以理解为一个人向多个人（但不是在场的所有人）说话，这样能够提高通话的效率。多播占网络中的比重并不多，主要应用于网络设备内部通信、网上视频会议、网上视频点播等。</p>
+<p>3、广播帧
+广播帧可以理解为一个人对在场  的所有人说话，这样做的好处是通话效率高，信息一下子就可以传递到全体。在广播帧中，帧头中的目的MAC地址是“FF.FF.FF.FF.FF.FF”，代表网络上所有主机网卡的MAC地址。</p>
+<p>广播帧在网络中是必不可少的，如客户机通过DHCP自动获得IP地址的过程就是通过广播帧来实现的。而且，由于设备之间也需要相互通信，因此在网络中即使没有用户人为地发送广播帧，网络上也会出现一定数量的广播帧。</p>
+<p>同单播和多播相比，广播几乎占用了子网内网络的所有带宽。网络中不能长时间出现大量的广播帧，否则就会出现所谓的“广播风暴”（每秒的广播帧数在1000以上）。拿开会打一个比方，在会场上只能有一个人发言，如果所有人都同时发言的话，会场上就会乱成一锅粥。广播风暴就是网络长时间被大量的广播数据包所占用，使正常的点对点通信无法正常进行，其外在表现为网络速度奇慢无比。出现广播风暴的原因有很多，一块故障网卡就可能长时间地在网络上发送广播包而导致广播风暴。</p>
+<p>使用路由器或三层交换机能够实现在不同子网间隔离广播风暴的作用。当路由器或三层交换机收到广播帧时并不处理它，使它无法再传递到其他子网中，从而达到隔离广播风暴的目的。因此在由几百台甚至上千台电脑构成的大中型局域网中，为了隔离广播风暴，都要进行子网划分。
+使用vlan完全可以隔离广播风暴。</p>
+<blockquote>
+<p>在交换以太网上运行TCP/IP环境下：
+二层广播是在数据链路层的广播，它 的广播范围是二层交换机连接的所有端口；二层广播不能通过路由器。</p>
+<p>三层广播就是在网络层的广播，它的范围是同一IP子网内的设备，子网广播也不能通过路由器。</p>
+<p>第三层的数据必须通过第二层的封装再发送，所以三层广播必然通过 二层广播来实现。</p>
+<p>设想在同一台二层交换机上连接2个ip子网的设备，所有的设备都可以接收到二层广播，但三层广播只对本子网设备有效，非本子网的设备也会接收到广播包，但会被丢弃。</p>
+</blockquote>
+<p>广播风暴（broadcast storm）</p>
+<p>简单的讲是指当广播数据充斥网络无法处理，并占用大量网络带宽，导致正常业务不能运行，甚至彻底瘫痪，这就发生了“广播风暴”</p>
+<p>。一个数据帧或包被传输到本地网段 （由广播域定义）上的每个节点就是广播；由于网络拓扑的设计和连接问题，或其他原因导致广播在网段内大量复制，传播数据帧，导致网络性能下降，甚至网络瘫痪，这就是广播风暴。</p>
+<p>要避免广播风暴，可以采用恰当划分VLAN、缩小广播域、隔离广播风暴，还可在千兆以太网口上启用广播风暴控制，最大限度地避免网络再次陷入瘫痪。</p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="theme-doc-footer-edit-meta-row row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/cs/network/计算机网络学习总结.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_EYjg" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_eevz"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/code-note-blog/docs/cs/algorithms/剑指offer"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">剑指offer</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/code-note-blog/docs/cs/operating-system/操作系统学习总结"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">操作系统学习总结</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_lc2k thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#网卡和路由器" class="table-of-contents__link toc-highlight">网卡和路由器</a></li><li><a href="#交换机" class="table-of-contents__link toc-highlight">交换机</a></li><li><a href="#以太网" class="table-of-contents__link toc-highlight">以太网</a></li><li><a href="#虚拟局域网vlan" class="table-of-contents__link toc-highlight">虚拟局域网VLAN</a></li><li><a href="#dhcp协议动态主机配置协议" class="table-of-contents__link toc-highlight">DHCP协议(动态主机配置协议)</a></li><li><a href="#arp协议" class="table-of-contents__link toc-highlight">ARP协议</a></li><li><a href="#网关和nat" class="table-of-contents__link toc-highlight">网关和NAT</a></li><li><a href="#dns协议和http请求过程" class="table-of-contents__link toc-highlight">DNS协议和http请求过程</a></li><li><a href="#icmp" class="table-of-contents__link toc-highlight">ICMP</a></li><li><a href="#虚拟专用网vpn和内网ip" class="table-of-contents__link toc-highlight">虚拟专用网VPN和内网ip</a></li><li><a href="#应用层" class="table-of-contents__link toc-highlight">应用层</a><ul><li><a href="#http" class="table-of-contents__link toc-highlight">http</a></li><li><a href="#http10-11和20" class="table-of-contents__link toc-highlight">http1.0 1.1和2.0</a></li><li><a href="#get和post" class="table-of-contents__link toc-highlight">get和post</a></li></ul></li><li><a href="#web安全和https" class="table-of-contents__link toc-highlight">web安全和https</a><ul><li><a href="#密码加密" class="table-of-contents__link toc-highlight">密码加密</a></li><li><a href="#xss跨站脚本攻击" class="table-of-contents__link toc-highlight">xss跨站脚本攻击</a></li><li><a href="#跨站点请求伪造csrf" class="table-of-contents__link toc-highlight">跨站点请求伪造csrf</a></li><li><a href="#sql-注入攻击" class="table-of-contents__link toc-highlight">SQL 注入攻击</a></li><li><a href="#拒绝服务攻击" class="table-of-contents__link toc-highlight">拒绝服务攻击</a></li><li><a href="#https" class="table-of-contents__link toc-highlight">https</a></li></ul></li><li><a href="#传输层" class="table-of-contents__link toc-highlight">传输层</a><ul><li><a href="#udp报文" class="table-of-contents__link toc-highlight">UDP报文</a></li><li><a href="#tcp-首部格式" class="table-of-contents__link toc-highlight">TCP 首部格式</a></li><li><a href="#三次握手和四次挥手" class="table-of-contents__link toc-highlight">三次握手和四次挥手</a></li><li><a href="#半连接syn和洪泛法攻击" class="table-of-contents__link toc-highlight">半连接syn和洪泛法攻击</a></li><li><a href="#为什么要三次握手" class="table-of-contents__link toc-highlight">为什么要三次握手</a></li><li><a href="#time-wait的作用" class="table-of-contents__link toc-highlight">time wait的作用</a></li></ul></li><li><a href="#可靠传输协议" class="table-of-contents__link toc-highlight">可靠传输协议</a><ul><li><a href="#tcp的粘包拆包" class="table-of-contents__link toc-highlight">tcp的粘包拆包</a></li></ul></li><li><a href="#网络层" class="table-of-contents__link toc-highlight">网络层</a></li><li><a href="#ip-数据报格式" class="table-of-contents__link toc-highlight">IP 数据报格式</a></li><li><a href="#某个聚合路由地址划分网络给n台机器是否符合要求" class="table-of-contents__link toc-highlight">某个聚合路由地址划分网络给n台机器，是否符合要求。。</a><ul><li><a href="#ip-地址编址方式" class="table-of-contents__link toc-highlight">IP 地址编址方式</a></li><li><a href="#分类" class="table-of-contents__link toc-highlight">分类</a></li><li><a href="#ip分片详谈" class="table-of-contents__link toc-highlight">ip分片详谈</a></li><li><a href="#路由选择协议和算法" class="table-of-contents__link toc-highlight">路由选择协议和算法</a></li></ul></li><li><a href="#链路层" class="table-of-contents__link toc-highlight">链路层</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/code-note-blog/docs/intro">Tutorial</a></li></ul></div><div class="col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://stackoverflow.com/questions/tagged/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Stack Overflow<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://discordapp.com/invite/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Discord<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://twitter.com/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Twitter<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/code-note-blog/blog">Blog</a></li><li class="footer__item"><a href="https://github.com/facebook/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 My Project, Inc. Built with Docusaurus.</div></div></div></footer></div>
+</body>
+</html>

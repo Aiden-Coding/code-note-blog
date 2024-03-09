@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-Java/JVM/深入理解JVM虚拟机：JVM常用参数以及调优实践" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.1.0">
+<title data-rh="true">深入理解JVM虚拟机：JVM常用参数以及调优实践 | Tommy</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://aiden-coding.github.io/code-note-blog/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://aiden-coding.github.io/code-note-blog/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://aiden-coding.github.io/code-note-blog/docs/Java/JVM/深入理解JVM虚拟机：JVM常用参数以及调优实践"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="深入理解JVM虚拟机：JVM常用参数以及调优实践 | Tommy"><meta data-rh="true" name="description" content="JVM优化的必要性"><meta data-rh="true" property="og:description" content="JVM优化的必要性"><link data-rh="true" rel="icon" href="/code-note-blog/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://aiden-coding.github.io/code-note-blog/docs/Java/JVM/深入理解JVM虚拟机：JVM常用参数以及调优实践"><link data-rh="true" rel="alternate" href="https://aiden-coding.github.io/code-note-blog/docs/Java/JVM/深入理解JVM虚拟机：JVM常用参数以及调优实践" hreflang="en"><link data-rh="true" rel="alternate" href="https://aiden-coding.github.io/code-note-blog/docs/Java/JVM/深入理解JVM虚拟机：JVM常用参数以及调优实践" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/code-note-blog/blog/rss.xml" title="Tommy RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/code-note-blog/blog/atom.xml" title="Tommy Atom Feed"><link rel="stylesheet" href="/code-note-blog/assets/css/styles.dd5372db.css">
+<script src="/code-note-blog/assets/js/runtime~main.f999fb27.js" defer="defer"></script>
+<script src="/code-note-blog/assets/js/main.a0bfbaed.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_XYiV" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/code-note-blog/"><b class="navbar__title text--truncate">Tommy</b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/code-note-blog/docs/Java/basic/抽象类和接口">java</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/JavaWeb/走进JavaWeb技术世界：JavaWeb的由来和基础知识">javaweb</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/cache/探索Redis设计与实现：连接底层与表面的数据结构robj">cache</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/backend/后端技术杂谈：白话虚拟化技术">backend</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/cs/algorithms/剑指offer">cs</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/database/重新学习MySQL数据库：『浅入浅出』MySQL和InnoDB">database</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/distributed/basic/分布式系统理论基础 ：CAP">distributed</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/interview/BATJ-Experience/面阿里,终获offer">interview</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/mq/kafka/消息队列kafka详解：如何实现死信队列">mq</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/Spring全家桶/Spring/第一个Spring应用">spring</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/mianshi/collection">面试</a><a href="https://aiden-coding.github.io/code-note-blog/SpringCloud%E7%AC%AC3%E5%AD%A32024.html" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Blog<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></div><div class="navbar__items navbar__items--right"><div class="toggle_XbAW colorModeToggle_r5NY"><button class="clean-btn toggleButton_Jx0n toggleButtonDisabled_zYO7" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_FjAw"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_qmEt"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_wJfS"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_LABv"><div class="docsWrapper_pdvB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_Jioa" type="button"></button><div class="docRoot_qx_v"><aside class="theme-doc-sidebar-container docSidebarContainer_NHKT"><div class="sidebarViewport_uyYB"><div class="sidebar_SZG4"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_VP_k"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/code-note-blog/docs/Java/basic/抽象类和接口">基础</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/code-note-blog/docs/Java/collection/Java集合类总结">集合</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/code-note-blog/docs/Java/concurrency/Java并发编程学习总结">并发</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/code-note-blog/docs/Java/design-parttern/初探Java设计模式：创建型模式（工厂，单例等）">设计模式</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" aria-expanded="true" href="/code-note-blog/docs/Java/JVM/深入理解JVM虚拟机：垃圾回收器详解">jvm</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/JVM/深入理解JVM虚拟机：垃圾回收器详解">深入理解JVM虚拟机：垃圾回收器详解</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/JVM/深入理解JVM虚拟机：深入理解JVM类加载机制">深入理解JVM虚拟机：深入理解JVM类加载机制</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/JVM/深入理解JVM虚拟机：虚拟机字节码执行引擎">深入理解JVM虚拟机：虚拟机字节码执行引擎</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/JVM/深入理解JVM虚拟机：再谈四种引用及GC实践">深入理解JVM虚拟机：再谈四种引用及GC实践</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/JVM/深入理解JVM虚拟机：GC调优思路与常用工具">深入理解JVM虚拟机：GC调优思路与常用工具</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/JVM/深入理解JVM虚拟机：Java的编译期优化与运行期优化">深入理解JVM虚拟机：Java的编译期优化与运行期优化</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/JVM/深入理解JVM虚拟机：Java内存异常原理与实践">深入理解JVM虚拟机：Java内存异常原理与实践</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/JVM/深入理解JVM虚拟机：Java字节码介绍与解析实践">深入理解JVM虚拟机：Java字节码介绍与解析实践</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/JVM/深入理解JVM虚拟机：JNDI，OSGI，Tomcat类加载器实现">深入理解JVM虚拟机：JNDI，OSGI，Tomcat类加载器实现</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/code-note-blog/docs/Java/JVM/深入理解JVM虚拟机：JVM常用参数以及调优实践">深入理解JVM虚拟机：JVM常用参数以及调优实践</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/JVM/深入理解JVM虚拟机：JVM监控工具与诊断实践">深入理解JVM虚拟机：JVM监控工具与诊断实践</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/JVM/深入理解JVM虚拟机：JVM垃圾回收基本原理和算法">深入理解JVM虚拟机：JVM垃圾回收基本原理和算法</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/JVM/深入理解JVM虚拟机：JVM内存的结构与消失的永久代">深入理解JVM虚拟机：JVM内存的结构与消失的永久代</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/JVM/深入理解JVM虚拟机：JVM性能管理神器VisualVM介绍与实战">深入理解JVM虚拟机：JVM性能管理神器VisualVM介绍与实战</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/JVM/JVM总结">JVM总结</a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/code-note-blog/docs/Java/network/Java网络编程与NIO详解：基于NIO的网络编程框架Netty">网络</a></div></li></ul></nav></div></div></aside><main class="docMainContainer_SejT"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_j3Yw"><div class="docItemContainer_XOSC"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_F6gm" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/code-note-blog/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YCxa"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">jvm</span><meta itemprop="position" content="1"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">深入理解JVM虚拟机：JVM常用参数以及调优实践</span><meta itemprop="position" content="2"></li></ul></nav><div class="tocCollapsible_ToOY theme-doc-toc-mobile tocMobile_suYB"><button type="button" class="clean-btn tocCollapsibleButton_VzP_">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>深入理解JVM虚拟机：JVM常用参数以及调优实践</h1></header><p><img loading="lazy" src="https://pic.rmb.bdstatic.com/bjh/down/97522789c423e19931adafa65bd5424d.png" alt="" class="img_kGBN"></p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="jvm优化的必要性">JVM优化的必要性<a href="#jvm优化的必要性" class="hash-link" aria-label="Direct link to JVM优化的必要性" title="Direct link to JVM优化的必要性">​</a></h2>
+<p><strong>1.1： 项目上线后，什么原因使得我们需要进行jvm调优</strong></p>
+<p>1)、垃圾太多（java线程，对象占满内存），内存占满了，程序跑不动了！！
+2)、垃圾回收线程太多，频繁地回收垃圾（垃圾回收线程本身也会占用资源： 占用内存，cpu资源），导致程序性能下降
+3)、回收垃圾频繁导致STW</p>
+<p>因此基于以上的原因，程序上线后，必须进行调优，否则程序性能就无法提升；也就是程序上线后，必须设置合理的垃圾回收策略；</p>
+<p><strong>1.2： jvm调优的本质是什么？  ？</strong></p>
+<p>答案： 回收垃圾，及时回收没有用垃圾对象，及时释放掉内存空间</p>
+<p><strong>1.3： 基于服务器环境，jvm堆内存到底应用设置多少内存？</strong></p>
+<p>1、32位的操作系统 --- 寻址能力 2^32 = 4GB ,最大的能支持4gb; jvm可以分配 2g+</p>
+<p>2、64位的操作系统 --- 寻址能力 2^64 = 16384PB , 高性能计算机（IBM Z unix 128G 200+）</p>
+<p><img loading="lazy" src="https://pic.rmb.bdstatic.com/bjh/down/aae367a929e2d1361975942091ffadfe.png" alt="" class="img_kGBN"></p>
+<p>Jvm堆内存不能设置太大，否则会导致寻址垃圾的时间过长，也就是导致整个程序STW, 也不能设置太小，否则会导致回收垃圾过于频繁；</p>
+<p><strong>1.4：总结</strong></p>
+<p>如果你遇到以下情况，就需要考虑进行JVM调优了：</p>
+<ul>
+<li>
+<p>Heap内存（老年代）持续上涨达到设置的最大内存值；</p>
+</li>
+<li>
+<p>Full GC 次数频繁；</p>
+</li>
+<li>
+<p>GC 停顿时间过长（超过1秒）；</p>
+</li>
+<li>
+<p>应用出现OutOfMemory 等内存异常；</p>
+</li>
+<li>
+<p>应用中有使用本地缓存且占用大量内存空间；</p>
+</li>
+<li>
+<p>系统吞吐量与响应性能不高或下降。</p>
+</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="jvm调优原则">JVM调优原则<a href="#jvm调优原则" class="hash-link" aria-label="Direct link to JVM调优原则" title="Direct link to JVM调优原则">​</a></h2>
+<p><img loading="lazy" src="https://pic.rmb.bdstatic.com/bjh/down/7cd4f5c19ab4f5f5d3087422097ee931.png" alt="" class="img_kGBN"></p>
+<p>JVM调优是一个手段，但并不一定所有问题都可以通过JVM进行调优解决，因此，在进行JVM调优时，我们要遵循一些原则：</p>
+<ul>
+<li>
+<p>大多数的Java应用不需要进行JVM优化；</p>
+</li>
+<li>
+<p>大多数导致GC问题的原因是代码层面的问题导致的（代码层面）；</p>
+</li>
+<li>
+<p>上线之前，应先考虑将机器的JVM参数设置到最优；</p>
+</li>
+<li>
+<p>减少创建对象的数量（代码层面）；</p>
+</li>
+<li>
+<p>减少使用全局变量和大对象（代码层面）；</p>
+</li>
+<li>
+<p>优先架构调优和代码调优，JVM优化是不得已的手段（代码、架构层面）；</p>
+</li>
+<li>
+<p>分析GC情况优化代码比优化JVM参数更好（代码层面）；</p>
+</li>
+</ul>
+<p>通过以上原则，我们发现，其实最有效的优化手段是架构和代码层面的优化，而JVM优化则是最后不得已的手段，也可以说是对服务器配置的最后一次“压榨”。</p>
+<p><strong>2.1 JVM调优目标</strong></p>
+<p>调优的最终目的都是为了令应用程序使用最小的硬件消耗来承载更大的吞吐。jvm调优主要是针对垃圾收集器的收集性能优化，令运行在虚拟机上的应用能够使用更少的内存以及延迟获取更大的吞吐量。</p>
+<ul>
+<li>
+<p>延迟：GC低停顿和GC低频率；</p>
+</li>
+<li>
+<p>低内存占用；</p>
+</li>
+<li>
+<p>高吞吐量;</p>
+</li>
+</ul>
+<p>其中，任何一个属性性能的提高，几乎都是以牺牲其他属性性能的损为代价的，不可兼得。具体根据在业务中的重要性确定。</p>
+<p><strong>2.2 JVM调优量化目标</strong></p>
+<p>下面展示了一些JVM调优的量化目标参考实例：</p>
+<ul>
+<li>
+<p>Heap 内存使用率 <code>&lt;=</code> 70%;</p>
+</li>
+<li>
+<p>Old generation内存使用率<code>&lt;=</code> 70%;</p>
+</li>
+<li>
+<p>avgpause <code>&lt;=</code> 1秒;</p>
+</li>
+<li>
+<p>Full gc 次数0 或 avg pause interval <code>&gt;=</code> 24小时 ;</p>
+</li>
+</ul>
+<p>注意：不同应用的JVM调优量化目标是不一样的。</p>
+<p><strong>2.3 JVM调优的步骤</strong></p>
+<p>一般情况下，JVM调优可通过以下步骤进行：</p>
+<ul>
+<li>
+<p>分析GC日志及dump文件，判断是否需要优化，确定瓶颈问题点；</p>
+</li>
+<li>
+<p>确定JVM调优量化目标；</p>
+</li>
+<li>
+<p>确定JVM调优参数（根据历史JVM参数来调整）；</p>
+</li>
+<li>
+<p>依次调优内存、 延迟、吞吐量等指标；</p>
+</li>
+<li>
+<p>对比观察调优前后的差异；</p>
+</li>
+<li>
+<p>不断的分析和调整，直到找到合适的JVM参数配置；</p>
+</li>
+<li>
+<p>找到最合适的参数，将这些参数应用到所有服务器，并进行后续跟踪。</p>
+</li>
+</ul>
+<p>以上操作步骤中，某些步骤是需要多次不断迭代完成的。一般是从满足程序的内存使用需求开始的，之后是时间延迟的要求，最后才是吞吐量的要求，要基于这个步骤来不断优化，每一个步骤都是进行下一步的基础，不可逆行之。</p>
+<p><img loading="lazy" src="https://pic.rmb.bdstatic.com/bjh/down/c271890a3714d538ed3362073c66893d.png" alt="" class="img_kGBN"></p>
+<p><strong>调优原则总结</strong></p>
+<p>JVM的自动内存管理本来就是为了将开发人员从内存管理的泥潭里拉出来。JVM调优不是常规手段，性能问题一般第一选择是优化程序，最后的选择才是进行JVM调优。</p>
+<p>即使不得不进行JVM调优，也绝对不能拍脑门就去调整参数，一定要全面监控，详细分析性能数据。</p>
+<p><strong>附录：系统性能优化指导</strong></p>
+<p><img loading="lazy" src="https://pic.rmb.bdstatic.com/bjh/down/00d90cef8369568f8581a9850dcd42e6.png" alt="" class="img_kGBN"></p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="jvm运行参数设置">JVM运行参数设置<a href="#jvm运行参数设置" class="hash-link" aria-label="Direct link to JVM运行参数设置" title="Direct link to JVM运行参数设置">​</a></h3>
+<p><strong>3.1、堆参数设置</strong></p>
+<p><strong>-XX:+PrintGC</strong>使用这个参数，虚拟机启动后，只要遇到GC就会打印日志</p>
+<p><strong>-XX:+UseSerialGC</strong>配置串行回收器</p>
+<p><strong>-XX:+PrintGCDetails</strong>可以查看详细信息，包括各个区的情况</p>
+<p><strong>-Xms</strong>设置Java程序启动时初始化堆大小</p>
+<p><strong>-Xmx</strong>设置Java程序能获得最大的堆大小</p>
+<p><strong>-Xmx20m -Xms5m -XX:+PrintCommandLineFlags</strong>可以将隐式或者显示传给虚拟机的参数输出</p>
+<p><strong>3.2、新生代参数配置</strong></p>
+<p><strong>-Xmn</strong>可以设置新生代的大小，设置一个比较大的新生代会减少老年代的大小，这个参数对系统性能以及GC行为有很大的影响，新生代大小一般会设置整个堆空间的1/3到1/4左右</p>
+<p><strong>-XX<!-- -->:SurvivorRatio</strong>用来设置新生代中eden空间和from/to空间的比例。含义：-XX<!-- -->:SurvivorRatio<!-- -->=eden/from**/**eden/to</p>
+<p>不同的堆分布情况，对系统执行会产生一定的影响，在实际工作中，应该根据系统的特点做出合理的配置，基本策略：尽可能将对象预留在新生代，减少老年代的GC次数</p>
+<p>除了可以设置新生代的绝对大小（-Xmn），还可以使用（-XX<!-- -->:NewRatio<!-- -->）设置新生代和老年代的比例：-XX：NewRatio=老年代/新生代</p>
+<p><strong>配置运行时参数：</strong></p>
+<p>-Xms20m -Xmx20m -Xmn1m -XX<!-- -->:SurvivorRatio<!-- -->=2 -XX:+PrintGCDetails -XX:+UseSerialGC</p>
+<p><strong>3.3、堆溢出参数配置</strong></p>
+<p>在Java程序在运行过程中，如果对空间不足，则会抛出内存溢出的错误（Out Of Memory）OOM，一旦这类问题发生在生产环境，则可能引起严重的业务中断，Java虚拟机提供了**-XX:+
+HeapDumpOnOutOfMemoryError**，使用该参数可以在内存溢出时导出整个堆信息，与之配合使用的还有参数**-XX<!-- -->:HeapDumpPath<!-- -->**，可以设置导出堆的存放路径</p>
+<p>内存分析工具：Memory Analyzer</p>
+<p><strong>配置运行时参数</strong>-Xms1m -Xmx1m -XX:+
+HeapDumpOnOutOfMemoryError -XX<!-- -->:HeapDumpPath<!-- -->=d:/Demo3.dump</p>
+<p><strong>3.4、栈参数配置</strong></p>
+<p>Java虚拟机提供了参数**-Xss**来指定线程的最大栈空间，整个参数也直接决定了函数可调用的最大深度。</p>
+<p><strong>配置  运行时参数：</strong>-Xss1m</p>
+<p>3.5、方法区参数配置</p>
+<p>和Java堆一样，方法区是一块所有线程共享的内存区域，它用于保存系统的类信息，方法区（永久区）可以保存多少信息可以对其进行配置，在默认情况下，<strong>-XX<!-- -->:MaxPermSize</strong>为64M，如果系统运行时生产大量的类，就需要设置一个相对合适的方法区，以免出现永久区内存溢出的问题</p>
+<p>-XX<!-- -->:PermSize<!-- -->=64M -XX<!-- -->:MaxPermSize<!-- -->=64M</p>
+<p><strong>3.6、直接内存参数配置</strong></p>
+<p>直接内存也是Java程序中非常重要的组成部分，特别是广泛用在NIO中，直接内存跳过了Java堆，使用Java程序可以直接访问原生堆空间，因此在一定程度上加快了内存空间的访问速度</p>
+<p>但是说直接内存一定就可以提高内存访问速度也不见得，具体情况具体分析</p>
+<p><strong>相关配置参数：-XX<!-- -->:MaxDirectMemorySize</strong>，如果不设置，默认值为最大堆空间，即-Xmx。直接内存使用达到上限时，就会触发垃圾回收，如果不能有效的释放空间，就会引起系统的OOM</p>
+<p><strong>3.7、对象进入老年代的参数配置</strong></p>
+<p>一般而言，对象首次创建会被放置在新生代的eden区，如果没有GC介入，则对象不会离开eden区，那么eden区的对象如何进入老年代呢？</p>
+<p>通常情况下，只要对象的年龄达到一定的大小，就会自动离开年轻代进入老年代，对象年龄是由对象经历数次GC决定的，在新生代每次GC之后如果对象没有被回收，则年龄加1</p>
+<p>虚拟机提供了一个参数来控制新生代对象的最大年龄，当超过这个年龄范围就会晋升老年代</p>
+<p><strong>-XX<!-- -->:MaxTenuringThreshold</strong>，默认情况下为15</p>
+<p><strong>配置运行时参数：</strong>-Xmx64M -Xms64M -XX:+PrintGCDetails</p>
+<p><strong>结论</strong>：对象首次创建会被放置在新生代的eden区，因此输出结果中from和to区都为0%</p>
+<p>根据设置MaxTenuringThreshold参数，可以指定新生代对象经过多少次回收后进入老年代。另外，大对象新生代eden区无法装入时，也会直接进入老年代。</p>
+<p>JVM里有个参数可以设置对象的大小超过在指定的大小之后，直接晋升老年代 <strong>-XX<!-- -->:PretenureSizeThreshold<!-- -->=15</strong></p>
+<p>参数：-Xmx1024M -Xms1024M -XX:+UseSerialGC -XX<!-- -->:MaxTenuringThreshold<!-- -->=15 -XX:+PrintGCDetails</p>
+<p>使用PretenureSizeThreshold可以进行指定进入老年代的对象大小，但是要注意TLAB区域优先分配空间。虚拟机对于体积不大的对象 会优先把数据分配到TLAB区域中，因此就失去了在老年代分配的机会</p>
+<p>参数：-Xmx30M -Xms30M -XX:+UseSerialGC -XX:+PrintGCDetails
+-XX<!-- -->:PretenureSizeThreshold<!-- -->=1000 -XX:-UseTLAB</p>
+<p><strong>3.8、TLAB参数配置</strong></p>
+<p>TLAB全称是Thread Local Allocation Buffer，即线程本地分配缓存，从名字上看是一个线程专用的内存分配区域，是为了加速对象分配对象而生的。每一个线程都会产生一个TLAB，该线程独享的工作区域，Java虚拟机使用这种TLAB区来避免多线程冲突问题，提高了对象分配的效率</p>
+<p>TLAB空间一般不会太大，当大对象无法在TLAB分配时，则会直接分配到堆上</p>
+<p><strong>-XX:+UseTLAB</strong>使用TLAB</p>
+<p><strong>-XX:+TLABSize</strong>设置TLAB大小</p>
+<p><strong>-XX<!-- -->:TLABRefillWasteFraction</strong>设置维护进入TLAB空间的单个对象大小，它是一个比例值，默认为64，即如果对象大于整个空间的1/64，则在堆创建对象</p>
+<p><strong>-XX:+PrintTLAB</strong>查看TLAB信息</p>
+<p><strong>-XX<!-- -->:ResizeTLAB</strong>自调整TLABRefillWasteFraction阈值</p>
+<p>参数：-XX:+UseTLAB -XX:+PrintTLAB -XX:+PrintGC -XX<!-- -->:TLABSize<!-- -->=102400 -XX:-ResizeTLAB
+-XX<!-- -->:TLABRefillWasteFraction<!-- -->=100 -XX:-DoEscapeAnalysis -server</p>
+<p>内存参数</p>
+<p><img loading="lazy" src="https://pics7.baidu.com/feed/bba1cd11728b47102f9e1e7af46fe7f6fd03237b.png@f_auto?token=ca9d5541411861cfb09e792849a82a06" alt="" class="img_kGBN"></p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="jvm性能调优工具">JVM性能调优工具<a href="#jvm性能调优工具" class="hash-link" aria-label="Direct link to JVM性能调优工具" title="Direct link to JVM性能调优工具">​</a></h2>
+<p>这个篇幅在这里就不过多介绍了，可以参照：</p>
+<p>深入理解JVM虚拟机——Java虚拟机的监控及诊断工具大全</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="常用调优策略">常用调优策略<a href="#常用调优策略" class="hash-link" aria-label="Direct link to 常用调优策略" title="Direct link to 常用调优策略">​</a></h2>
+<p>这里还是要提一下，及时确定要进行JVM调优，也不要陷入“知见障”，进行分析之后，发现可以通过优化程序提升性能，仍然首选优化程序。</p>
+<p><strong>5.1、选择合适的垃圾回收器</strong></p>
+<p>CPU单核，那么毫无疑问Serial 垃圾收集器是你唯一的选择。</p>
+<p>CPU多核，关注吞吐量 ，那么选择PS+PO组合。</p>
+<p>CPU多核，关注用户停顿时间，JDK版本1.6或者1.7，那么选择CMS。</p>
+<p>CPU多核，关注用户停顿时间，JDK1.8及以上，JVM可用内存6G以上，那么选择G1。</p>
+<p>参数配置：</p>
+<blockquote>
+<p>//设置Serial垃圾收集器（新生代）</p>
+<p>开启：-XX:+UseSerialGC</p>
+<p>//设置PS+PO,新生代使用功能Parallel Scavenge 老年代将会使用Parallel Old收集器</p>
+<p>开启 -XX:+UseParallelOldGC</p>
+<p>//CMS垃圾收集器（老年代）</p>
+<p>开启 -XX:+UseConcMarkSweepGC</p>
+<p>//设置G1垃圾收集器</p>
+<p>开启 -XX:+UseG1GC</p>
+</blockquote>
+<p><strong>5.2、调整内存大小</strong></p>
+<p>现象：垃圾收集频率非常频繁。</p>
+<p>原因：如果内存太小，就会导致频繁的需要进行垃圾收集才能释放出足够的空间来创建新的对象，所以增加堆内存大小的效果是非常显而易见的。</p>
+<p>注意：如果垃圾收集次数非常频繁，但是每次能回收的对象非常少，那么这个时候并非内存太小，而可能是内存泄露导致对象无法回收，从而造成频繁GC。</p>
+<p>参数配置：</p>
+<blockquote>
+<p>//设置堆初始值</p>
+<p>指令1：-Xms2g</p>
+<p>指令2：-XX<!-- -->:InitialHeapSize<!-- -->=2048m</p>
+<p>//设置堆区最大值</p>
+<p>指令1：<code>-Xmx2g</code></p>
+<p>指令2： -XX<!-- -->:MaxHeapSize<!-- -->=2048m</p>
+<p>//新生代内存配置</p>
+<p>指令1：-Xmn512m</p>
+<p>指令2：-XX<!-- -->:MaxNewSize<!-- -->=512m</p>
+</blockquote>
+<p><strong>5.3、设置符合预期的停顿时间</strong></p>
+<p><strong>现象</strong>：程序间接性的卡顿</p>
+<p><strong>原因</strong>：如果没有确切的停顿时间设定，垃圾收集器以吞吐量为主，那么垃圾收集时间就会不稳定。</p>
+<p><strong>注意</strong>：不要设置不切实际的停顿时间，单次时间越短也意味着需要更多的GC次数才能回收完原有数量的垃圾.</p>
+<p><strong>参数配置</strong>：</p>
+<blockquote>
+<p>//GC停顿时间，垃圾收集器会尝试用各种手段达到这个时间</p>
+<p>-XX<!-- -->:MaxGCPauseMillis</p>
+</blockquote>
+<p><strong>5.4、调整内存区域大小比率</strong></p>
+<p>现象：某一个区域的GC频繁，其他都正常。</p>
+<p>原因：如果对应区域空间不足，导致需要频繁GC来释放空间，在JVM堆内存无法增加的情况下，可以调整对应区域的大小比率。</p>
+<p>注意：也许并非空间不足，而是因为内存泄造成内存无法回收。从而导致GC频繁。</p>
+<p>参数配置：</p>
+<blockquote>
+<p>//survivor区和Eden区大小比率</p>
+<p>指令：-XX<!-- -->:SurvivorRatio<!-- -->=6 //S区和Eden区占新生代比率为1:6,两个S区2:6</p>
+<p>//新生代和老年代的占比</p>
+<p>-XX<!-- -->:NewRatio<!-- -->=4 //表示新生代:老年代 = 1:4 即老年代占整个堆的4/5；默认值=2</p>
+</blockquote>
+<p><strong>5.5、调整对象升老年代的年龄</strong></p>
+<p><strong>现象</strong>：老年代频繁GC，每次回收的对象很多。</p>
+<p><strong>原因</strong>：如果升代年龄小，新生代的对象很快就进入老年代了，导致老年代对象变多，而这些对象其实在随后的很短时间内就可以回收，这时候可以调整对象的升级代年龄，让对象不那么容易进入老年代解决老年代空间不足频繁GC问题。</p>
+<p><strong>注意</strong>：增加了年龄之后，这些对象在新生代的时间会变长可能导致新生代的GC频率增加，并且频繁复制这些对象新生的GC时间也可能变长。</p>
+<p>配置参数：</p>
+<blockquote>
+<p>//进入老年代最小的GC年龄,年轻代对象转换为老年代对象最小年龄值，默认值7</p>
+<p>-XX<!-- -->:InitialTenuringThreshol<!-- -->=7</p>
+</blockquote>
+<p><strong>5.6、调整大对象的标准</strong></p>
+<p><strong>现象</strong>：老年代频繁GC，每次回收的对象很多,而且单个对象的体积都比较大。</p>
+<p><strong>原因</strong>：如果大量的大对象直接分配到老年代，导致老年代容易被填满而造成频繁GC，可设置对象直接进入老年代的标准。</p>
+<p><strong>注意</strong>：这些大对象进入新生代后可能会使新生代的GC频率和时间增加。</p>
+<p>配置参数：</p>
+<blockquote>
+<p>//新生代可容纳的最大对象,大于则直接会分配到老年代，0代表没有限制。</p>
+<p>-XX<!-- -->:PretenureSizeThreshold<!-- -->=1000000</p>
+</blockquote>
+<p><strong>5.7、调整GC的触发时机</strong></p>
+<p><strong>现象</strong>：CMS，G1 经常 Full GC，程序卡顿严重。</p>
+<p><strong>原因</strong>：G1和CMS 部分GC阶段是并发进行的，业务线程和垃圾收集线程一起工作，也就说明垃圾收集的过程中业务线程会生成新的对象，所以在GC的时候需要预留一部分内存空间来容纳新产生的对象，如果这个时候内存空间不足以容纳新产生的对象，那么JVM就会停止并发收集暂停所有业务线程（STW）来保证垃圾收集的正常运行。这个时候可以调整GC触发的时机（比如在老年代占用60%就触发GC），这样就可以预留足够的空间来让业务线程创建的对象有足够的空间分配。</p>
+<p><strong>注意</strong>：提早触发GC会增加老年代GC的频率。</p>
+<p>配置参数：</p>
+<blockquote>
+<p>//使用多少比例的老年代后开始CMS收集，默认是68%，如果频繁发生SerialOld卡顿，应该调小</p>
+<p>-XX<!-- -->:CMSInitiatingOccupancyFraction</p>
+<p>//G1混合垃圾回收周期中要包括的旧区域设置占用率阈值。默认占用率为 65%</p>
+<p>-XX<!-- -->:G1MixedGCLiveThresholdPercent<!-- -->=65</p>
+</blockquote>
+<p>5.8、调整 JVM本地内存大小</p>
+<p><strong>现象</strong>：GC的次数、时间和回收的对象都正常，堆内存空间充足，但是报OOM</p>
+<p><strong>原因</strong>： JVM除了堆内存之外还有一块堆外内存，这片内存也叫本地内存，可是这块内存区域不足了并不会主动触发GC，只有在堆内存区域触发的时候顺带会把本地内存回收了，而一旦本地内存分配不足就会直接报OOM异常。</p>
+<p><strong>注意</strong>： 本地内存异常的时候除了上面的现象之外，异常信息可能是OutOfMemoryError：Direct buffer memory。 解决方式除了调整本地内存大小之外，也可以在出现此异常时进行捕获，手动触发GC（System.gc()）。</p>
+<p>配置参数：</p>
+<blockquote>
+<p>XX<!-- -->:MaxDirectMemorySize</p>
+</blockquote>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="六jvm调优实例">六、JVM调优实例<a href="#六jvm调优实例" class="hash-link" aria-label="Direct link to 六、JVM调优实例" title="Direct link to 六、JVM调优实例">​</a></h2>
+<p>整理的一些JVM调优实例：</p>
+<p><strong>6.1、网站流量浏览量暴增后，网站反应页面响很慢</strong></p>
+<blockquote>
+<p>1、问题推测：在测试环境测速度比较快，但是一到生产就变慢，所以推测可能是因为垃圾收集导致的业务线程停顿。</p>
+<p>2、定位：为了确认推测的正确性，在线上通过jstat -gc 指令 看到JVM进行GC 次数频率非常高，GC所占用的时间非常长，所以基本推断就是因为GC频率非常高，所以导致业务线程经常停顿，从而造成网页反应很慢。</p>
+<p>3、解决方案：因为网页访问量很高，所以对象创建速度非常快，导致堆内存容易填满从而频繁GC，所以这里问题在于新生代内存太小，所以这里可以增加JVM内存就行了，所以初步从原来的2G内存增加到16G内存。</p>
+<p>4、第二个问题：增加内存后的确平常的请求比较快了，但是又出现了另外一个问题，就是不定期的会间断性的卡顿，而且单次卡顿的时间要比之前要长很多。</p>
+<p>5、问题推测：练习到是之前的优化加大了内存，所以推测可能是因为内存加大了，从而导致单次GC的时间变长从而导致间接性的卡顿。</p>
+<p>6、定位：还是通过jstat -gc 指令 查看到 的确FGC次数并不是很高，但是花费在FGC上的时间是非常高的,根据GC日志 查看到单次FGC的时间有达到几十秒的。</p>
+<p>7、解决方案： 因为JVM默认使用的是PS+PO的组合，PS+PO垃圾标记和收集阶段都是STW，所以内存加大了之后，需要进行垃圾回收的时间就变长了，所以这里要想避免单次GC时间过长，所以需要更换并发类的收集器，因为当前的JDK版本为1.7，所以最后选择CMS垃圾收集器，根据之前垃圾收集情况设置了一个预期的停顿的时间，上线后网站再也没有了卡顿问题。</p>
+</blockquote>
+<p><strong>6.2、后台导出数据引发的OOM</strong></p>
+<p>**问题描述：**公司的后台系统，偶发性的引发OOM异常，堆内  存溢出。</p>
+<blockquote>
+<p>1、因为是偶发性的，所以第一次简单的认为就是堆内存不足导致，所以单方面的加大了堆内存从4G调整到8G。</p>
+<p>2、但是问题依然没有解决，只能从堆内存信息下手，通过开启了-XX:+
+HeapDumpOnOutOfMemoryError参数 获得堆内存的dump文件。</p>
+<p>3、VisualVM 对 堆dump文件进行分析，通过VisualVM查看到占用内存最大的对象是String对象，本来想跟踪着String对象找到其引用的地方，但dump文件太大，跟踪进去的时候总是卡死，而String对象占用比较多也比较正常，最开始也没有认定就是这里的问题，于是就从线程信息里面找突破点。</p>
+<p>4、通过线程进行分析，先找到了几个正在运行的业务线程，然后逐一跟进业务线程看了下代码，发现有个引起我注意的方法，导出订单信息。</p>
+<p>5、因为订单信息导出这个方法可能会有几万的数据量，首先要从数据库里面查询出来订单信息，然后把订单信息生成excel，这个过程会产生大量的String对象。</p>
+<p>6、为了验证自己的猜想，于是准备登录后台去测试下，结果在测试的过程中发现到处订单的按钮前端居然没有做点击后按钮置灰交互事件，结果按钮可以一直点，因为导出订单数据本来就非常慢，使用的人员可能发现点击后很久后页面都没反应，结果就一直点，结果就大量的请求进入到后台，堆内存产生了大量的订单对象和EXCEL对象，而且方法执行非常慢，导致这一段时间内这些对象都无法被回收，所以最终导致内存溢出。</p>
+<p>7、知道了问题就容易解决了，最终没有调整任何JVM参数，只是在前端的导出订单按钮上加上了置灰状态，等后端响应之后按钮才可以进行点击，然后减少了查询订单信息的非必要字段来减少生成对象的体积，然后问题就解决了。</p>
+</blockquote>
+<p><strong>6.3、单  个缓存数据过大导致的系统CPU飚高</strong></p>
+<blockquote>
+<p>1、系统发布后发现CPU一直飚高到600%，发现这个问题后首先要做的是定位到是哪个应用占用CPU高，通过top 找到了对应的一个java应用占用CPU资源600%。</p>
+<p>2、如果是应用的CPU飚高，那么基本上可以定位可能是锁资源竞争，或者是频繁GC造成的。</p>
+<p>3、所以准备首先从GC的情况排查，如果GC正常的话再从线程的角度排查，首先使用jstat -gc PID 指令打印出GC的信息，结果得到得到的GC 统计信息有明显的异常，应用在运行了才几分钟的情况下GC的时间就占用了482秒，那么问这很明显就是频繁GC导致的CPU飚高。</p>
+<p>4、定位到了是GC的问题，那么下一步就是找到频繁GC的原因了，所以可以从两方面定位了，可能是哪个地方频繁创建对象，或者就是有内存泄露导致内存回收不掉。</p>
+<p>5、根据这个思路决定把堆内存信息dump下来看一下，使用jmap -dump 指令把堆内存信息dump下来（堆内存空间大的慎用这个指令否则容易导致会影响应用，因为我们的堆内存空间才2G所以也就没考虑这个问题了）。</p>
+<p>6、把堆内存信息dump下来后，就使用visualVM进行离线分析了，首先从占用内存最多的对象中查找，结果排名第三看到一个业务VO占用堆内存约10%的空间，很明显这个对象是有问题的。</p>
+<p>7、通过业务对象找到了对应的业务代码，通过代码的分析找到了一个可疑之处，这个业务对象是查看新闻资讯信息生成的对象，由于想提升查询的效率，所以把新闻资讯保存到了redis缓存里面，每次调用资讯接口都是从缓存里面获取。</p>
+<p>8、把新闻保存到redis缓存里面这个方式是没有问题的，有问题的是新闻的50000多条数据都是保存在一个key里面，这样就导致每次调用查询新闻接口都会从redis里面把50000多条数据都拿出来，再做筛选分页拿出10条返回给前端。50000多条数据也就意味着会产生50000多个对象，每个对象280个字节左右，50000个对象就有13.3M，这就意味着只要查看一次新闻信息就会产生至少13.3M的对象，那么并发请求量只要到10，那么每秒钟都会产生133M的对象，而这种大对象会被直接分配到老年代，这样的话一个2G大小的老年代内存，只需要几秒就会塞满，从而触发GC。</p>
+<p>9、知道了问题所在后那么就容易解决了，问题是因为单个缓存过大造成的，那么只需要把缓存减小就行了，这里只需要把缓存以页的粒度进行缓存就行了，每个key缓存10条作为返回给前端1页的数据，这样的话每次查询新闻信息只会从缓存拿出10条数据，就避免了此问题的 产生。</p>
+</blockquote>
+<p><strong>6.4、CPU经常100% 问题定位</strong></p>
+<p>问题分析：CPU高一定是某个程序长期占用了CPU资源。</p>
+<p>1、所以先需要找出那个进行占用CPU高。</p>
+<blockquote>
+<p>top 列出系统各个进程的资源占用情况。</p>
+</blockquote>
+<p>2、然后根据找到对应进行里哪个线程占用CPU高。</p>
+<blockquote>
+<p>top -Hp 进程ID 列出对应进程里面的线程占用资源情况</p>
+</blockquote>
+<p>3、找到对应线程ID后，再打印出对应线程的堆栈信息</p>
+<blockquote>
+<p>printf &quot;%x\n&quot; PID 把线程ID转换为16进制。</p>
+<p>jstack PID 打印出进程的所有线程信息，从打印出来的线程信息中找到上一步转换为16进制的线程ID对应的线程信息。</p>
+</blockquote>
+<p>4、最后根据线程的堆栈信息定位到具体业务方法,从代码逻辑中找到问题所在。</p>
+<blockquote>
+<p>查看是否有线程长时间的watting 或blocked</p>
+<p>如果线程长期处于watting状态下， 关注watting on xxxxxx，说明线程在等待这把锁，然后根据锁的地址找到持有锁的线程。</p>
+</blockquote>
+<p><strong>6.5、内存  飚高问题定位</strong></p>
+<p>分析： 内存飚高如果是发生在java进程上，一般是因为创建了大量对象所导致，持续飚高说明垃圾回收跟不上对象创建的速度，或者内存泄露导致对象无法回收。</p>
+<p>1、先观察垃圾回收的情况</p>
+<blockquote>
+<p>jstat -gcPID 1000查看GC次数，时间等信息，每隔一秒打印一次。</p>
+<p>jmap -histo PID | head -20 查看堆内存占用空间最大的前20个对象类型,可初步查看是哪个对象占用了内存。</p>
+</blockquote>
+<p>如果每次GC次数频繁，而且每次回收的内存空间也正常，那说明是因为对象创建速度快导致内存一直占用很高；如果每次回收的内存非常少，那么很可能是因为内存泄露导致内存一直无法被回收。</p>
+<p>2、导出堆内存文件快照</p>
+<blockquote>
+<p>jmap -dump<!-- -->:live<!-- -->,format=b,file=/home/myheapdump.hprof PID dump堆内存信息到文件。</p>
+</blockquote>
+<p>3、使用visualVM对dump文件进行离线分析,找到占用内存高的对象，再找到创建该对象的业务代码位置，从代码和业务场景中定位具体问题。</p>
+<p><strong>6.6、数据分析平台系统频繁 Full GC</strong></p>
+<p>平台主要对用户在 App 中行为进行定时分析统计，并支持报表导出，使用 CMS GC 算法。</p>
+<p>数据分析师在使用中发现系统页面打开经常卡顿，通过 jstat 命令发现系统每次 Young GC 后大约有 10% 的存活对象进入老年代。</p>
+<p>原来是因为 Survivor 区空间设置过小，每次 Young GC 后存活对象在 Survivor 区域放不下，提前进入老年代。</p>
+<p>通过调大 Survivor 区，使得 Survivor 区可以容纳 Young GC 后存活对象，对象在 Survivor 区经历多次 Young GC 达到年龄阈值才进入老年代。</p>
+<p>调整之后每次 Young GC 后进入老年代的存活对象稳定运行时仅几百 Kb，Full GC 频率大大降低。</p>
+<p><strong>6.7、业务对接网关 OOM</strong></p>
+<p>网  关主要消费 Kafka 数据，进行数据处理计算然后转发到另外的 Kafka 队列，系统运行几个小时候出现 OOM，重启系统几个小时之后又 OOM。</p>
+<p>通过 jmap 导出堆内存，在 eclipse MAT 工具分析才找出原因：代码中将某个业务 Kafka 的 topic 数据进行日志异步打印，该业务数据量较大，大量对象堆积在内存中等待被打印，导致 OOM。</p>
+<p><strong>6.8、鉴权系统频繁长时间 Full GC</strong></p>
+<p>系统对外提供各种账号鉴权服务，使用时发现系统经常服务不可用，通过 Zabbix 的监控平台监控发现系统频繁发生长时间 Full GC，且触发时老年代的堆内存通常并没有占满，发现原来是业务代码中调用了</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="七一个具体的实战案例分析">七、一个具体的实战案例分析<a href="#七一个具体的实战案例分析" class="hash-link" aria-label="Direct link to 七、一个具体的实战案例分析" title="Direct link to 七、一个具体的实战案例分析">​</a></h2>
+<p><strong>7.1 典型调优参数设置</strong></p>
+<blockquote>
+<p>服务器配置： 4cpu,8GB内存 ---- jvm调优实际上是设置一个合理大小的jvm堆内存（既不能太大，也不能太小）</p>
+</blockquote>
+<blockquote>
+<p>-Xmx3550m 设置jvm堆内存最大值 (经验值设置： 根据压力测试，根据线上程序运行效果情况)</p>
+<p>-Xms3550m 设置jvm堆内存初始化大小，一般情况下必须设置此值和最大的最大的堆内存空间保持一致，防止内存抖动，消耗性能</p>
+<p>-Xmn2g 设置年轻代占用的空间大小</p>
+<p>-Xss256k 设置线程堆栈的大小；jdk5.0以后默认线程堆栈大小为1MB; 在相同的内存情况下，减小堆栈大小，可以使得操作系统创建更多的业务线程；</p>
+</blockquote>
+<p>jvm堆内存设置:</p>
+<blockquote>
+<p><code>nohup java -Xmx3550m -Xms3550m -Xmn2g -Xss256k -jar jshop-web-1.0-SNAPSHOT.jar --spring.addition-location=application.yaml &gt; jshop.log 2&gt;&amp;1 &gt;&lt;</code></p>
+</blockquote>
+<p>TPS性能曲线：</p>
+<p><img loading="lazy" src="https://pic.rmb.bdstatic.com/bjh/down/ee3949fc51c360330ece8f6729cd0560.png" alt="" class="img_kGBN"></p>
+<p><strong>7.2 分析gc日志</strong></p>
+<p>如果需要分析gc日志，就必须使得服务gc输入gc详情到log日志文件中，然后使用相应gc日志分析工具来对日志进行分析即可；</p>
+<p>把gc详情输出到一个gc.log日志文件中，便于gc分析</p>
+<blockquote>
+<p>-XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps -XX:+PrintHeapAtGC -Xloggc<!-- -->:gc<!-- -->.log</p>
+</blockquote>
+<p>Throughput: 业务线程执行时间 / (gc时间+业务线程时间)</p>
+<p><img loading="lazy" src="https://pic.rmb.bdstatic.com/bjh/down/25529b786b50b8b30067e6f721101369.png" alt="" class="img_kGBN"></p>
+<p>分析gc日志，发现，一开始就发生了3次fullgc，很明显jvm优化参数的设置是有问题的；</p>
+<p><img loading="lazy" src="https://pic.rmb.bdstatic.com/bjh/down/e70f3ffedc03bc0b387ff860cb8c948b.png" alt="" class="img_kGBN"></p>
+<p>查看fullgc发生问题原因： jstat -gcutil pid</p>
+<p><img loading="lazy" src="https://pic.rmb.bdstatic.com/bjh/down/0e135e59c1e140aaded9223edd2f0177.png" alt="" class="img_kGBN"></p>
+<p>Metaspace持久代： 初始化分配大小20m , 当metaspace被占满后，必须对持久代进行扩容，如果metaspace每进行一次扩容，fullgc就需要执行一次；（fullgc回收整个堆空间，非常占用时间）</p>
+<p>调整gc配置： 修改永久代空间初始化大小:</p>
+<blockquote>
+<p><code>nohup java -Xmx3550m -Xms3550m -Xmn2g -Xss256k -XX:MetaspaceSize=256m -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps -XX:+PrintHeapAtGC -Xloggc:gc.log -jar jshop-web-1.0-SNAPSHOT.jar --spring.addition-location=application.yaml &gt; jshop.log 2&gt;&amp;1 &gt;&lt;</code></p>
+</blockquote>
+<p>经过调优后，fullgc现象已经消失了：</p>
+<p><img loading="lazy" src="https://pic.rmb.bdstatic.com/bjh/down/0f8e8b90a8f9d810759ae43b3b0ed1b9.png" alt="" class="img_kGBN"></p>
+<p><strong>7.3 Young&amp;Old比例</strong></p>
+<p>年轻代和老年代比例：1:2 参数：-XX<!-- -->:NewRetio<!-- --> = 4 , 表示年轻代（eden,s0,s1）和老年代所占比值为1:4</p>
+<p>1） -XX<!-- -->:NewRetio<!-- --> = 4</p>
+<p><img loading="lazy" src="https://pic.rmb.bdstatic.com/bjh/down/f8353c852a2f65626b5b3a23f9616208.png" alt="" class="img_kGBN"></p>
+<p>年轻代分配的内存大小变小了，这样YGC次数变多了，虽然fullgc不发生了，但是YGC花费的时间更多了！</p>
+<p>2） -XX<!-- -->:NewRetio<!-- --> = 2 YGC发生的次数必然会减少；因为eden区域的大小变大了，因此YGC就会变少；</p>
+<p><img loading="lazy" src="https://pic.rmb.bdstatic.com/bjh/down/11ca145ee5a93f511feda69e749582cb.png" alt="" class="img_kGBN"></p>
+<p>7.4 Eden&amp;S0S1</p>
+<p>为了进一步减少YGC, 可以设置 enden ,s 区域的比值大小； 设置方式： -XX<!-- -->:SurvivorRatio<!-- -->=8</p>
+<p>1） 设置比值：8:1:1</p>
+<p><img loading="lazy" src="https://pic.rmb.bdstatic.com/bjh/down/6330cbdd9acd6a5c18e91c5bea13cca2.png" alt="" class="img_kGBN"></p>
+<p>2） Xmn2g 8:1:1</p>
+<p><code>nohup java -Xmx3550m -Xms3550m -Xmn2g -XX:SurvivorRatio=8 -Xss256k -XX:MetaspaceSize=256m -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps -XX:+PrintHeapAtGC -Xloggc:gc.log -jar jshop-web-1.0-SNAPSHOT.jar --spring.addition-location=application.yaml &gt; jshop.log 2&gt;&amp;1 &gt;&lt;</code></p>
+<p>根据gc调优，垃圾回收次数，时间，吞吐量都是一个比较优的一个配置；</p>
+<p><img loading="lazy" src="https://pic.rmb.bdstatic.com/bjh/down/68edd8bfceb7d5e85d18a53e150cad2a.png" alt="" class="img_kGBN"></p>
+<p><strong>7.5 吞吐量优先</strong></p>
+<p>使用并行的垃圾回收器，可以充分利用多核心cpu来帮助进行垃圾回收；这样的gc方式，就叫做吞吐量优先的调优方式</p>
+<p>垃圾回收器组合： ps(parallel scavenge) + po (parallel old) 此垃圾回收器是Jdk1.8 默认的垃圾回收器组合；</p>
+<blockquote>
+<p><code>nohup java -Xmx3550m -Xms3550m -Xmn2g -XX:SurvivorRatio=8 -Xss256k -XX:+UseParallelGC -XX:UseParallelOldGC -XX:MetaspaceSize=256m -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps -XX:+PrintHeapAtGC -Xloggc:gc.log -jar jshop-web-1.0-SNAPSHOT.jar --spring.addition-location=application.yaml &gt; jshop.log 2&gt;&amp;1 &gt;&lt;</code></p>
+</blockquote>
+<p><strong>7.6 响应时间优先</strong></p>
+<p>使用cms垃圾回收器，就是一个响应时间优先的组合； cms垃圾回收器（垃圾回收和业务线程交叉执行，不会让业务线程进行停顿stw）尽可能的减少stw的时间，因此使用cms垃圾回收器组合，是响应时间优先组合</p>
+<blockquote>
+<p><code>nohup java -Xmx3550m -Xms3550m -Xmn2g -XX:SurvivorRatio=8 -Xss256k -XX:+UseParNewGC -XX:UseConcMarkSweepGC -XX:MetaspaceSize=256m -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps -XX:+PrintHeapAtGC -Xloggc:gc.log -jar jshop-web-1.0-SNAPSHOT.jar --spring.addition-location=application.yaml &gt; jshop.log 2&gt;&amp;1 &gt;&lt;</code></p>
+</blockquote>
+<p>可以发现，cms垃圾回收器时间变长；</p>
+<p><strong>7.7 g1</strong></p>
+<p>配置方式如下所示：</p>
+<blockquote>
+<p><code>nohup java -Xmx3550m -Xms3550m -Xmn2g -XX:SurvivorRatio=8 -Xss256k -XX:+UseG1GC -XX:MetaspaceSize=256m -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps -XX:+PrintHeapAtGC -Xloggc:gc.log -jar jshop-web-1.0-SNAPSHOT.jar --spring.addition-location=application.yaml &gt; jshop.log 2&gt;&amp;1 &gt;&lt;</code></p>
+</blockquote>
+<p><img loading="lazy" src="https://pic.rmb.bdstatic.com/bjh/down/4146281952d45f65334e7ba97c6ba873.png" alt="" class="img_kGBN"></p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="参考资料">参考资料<a href="#参考资料" class="hash-link" aria-label="Direct link to 参考资料" title="Direct link to 参考资料">​</a></h2>
+<ul>
+<li><a href="http://docs.oracle.com/javase/8/docs/technotes/guides/vm/performance-enhancements-7.html" target="_blank" rel="noopener noreferrer">Java HotSpot™ Virtual Machine Performance Enhancements</a></li>
+<li><a href="http://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/index.html" target="_blank" rel="noopener noreferrer">Java HotSpot Virtual Machine Garbage Collection Tuning Guide</a></li>
+<li><a href="http://hllvm.group.iteye.com/group/topic/27945" target="_blank" rel="noopener noreferrer">[HotSpot VM] JVM调优的”标准参数”的各种陷阱</a></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="参考文章">参考文章<a href="#参考文章" class="hash-link" aria-label="Direct link to 参考文章" title="Direct link to 参考文章">​</a></h2>
+<p><code>https://segmentfault.com/a/1190000009707894</code></p>
+<p><code>https://www.cnblogs.com/hysum/p/7100874.html</code></p>
+<p><code>http://c.biancheng.net/view/939.html</code></p>
+<p><code>https://www.runoob.com/</code></p>
+<p><code>https://blog.csdn.net/android_hl/article/details/53228348</code></p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="theme-doc-footer-edit-meta-row row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/Java/JVM/深入理解JVM虚拟机：JVM常用参数以及调优实践.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_EYjg" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_eevz"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/code-note-blog/docs/Java/JVM/深入理解JVM虚拟机：JNDI，OSGI，Tomcat类加载器实现"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">深入理解JVM虚拟机：JNDI，OSGI，Tomcat类加载器实现</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/code-note-blog/docs/Java/JVM/深入理解JVM虚拟机：JVM监控工具与诊断实践"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">深入理解JVM虚拟机：JVM监控工具与诊断实践</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_lc2k thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#jvm优化的必要性" class="table-of-contents__link toc-highlight">JVM优化的必要性</a></li><li><a href="#jvm调优原则" class="table-of-contents__link toc-highlight">JVM调优原则</a><ul><li><a href="#jvm运行参数设置" class="table-of-contents__link toc-highlight">JVM运行参数设置</a></li></ul></li><li><a href="#jvm性能调优工具" class="table-of-contents__link toc-highlight">JVM性能调优工具</a></li><li><a href="#常用调优策略" class="table-of-contents__link toc-highlight">常用调优策略</a></li><li><a href="#六jvm调优实例" class="table-of-contents__link toc-highlight">六、JVM调优实例</a></li><li><a href="#七一个具体的实战案例分析" class="table-of-contents__link toc-highlight">七、一个具体的实战案例分析</a></li><li><a href="#参考资料" class="table-of-contents__link toc-highlight">参考资料</a></li><li><a href="#参考文章" class="table-of-contents__link toc-highlight">参考文章</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/code-note-blog/docs/intro">Tutorial</a></li></ul></div><div class="col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://stackoverflow.com/questions/tagged/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Stack Overflow<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://discordapp.com/invite/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Discord<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://twitter.com/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Twitter<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/code-note-blog/blog">Blog</a></li><li class="footer__item"><a href="https://github.com/facebook/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 My Project, Inc. Built with Docusaurus.</div></div></div></footer></div>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-cache/探索Redis设计与实现开篇：什么是Redis" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.1.0">
+<title data-rh="true">探索Redis设计与实现开篇：什么是Redis | Tommy</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://aiden-coding.github.io/code-note-blog/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://aiden-coding.github.io/code-note-blog/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://aiden-coding.github.io/code-note-blog/docs/cache/探索Redis设计与实现开篇：什么是Redis"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="探索Redis设计与实现开篇：什么是Redis | Tommy"><meta data-rh="true" name="description" content="本文转自互联网"><meta data-rh="true" property="og:description" content="本文转自互联网"><link data-rh="true" rel="icon" href="/code-note-blog/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://aiden-coding.github.io/code-note-blog/docs/cache/探索Redis设计与实现开篇：什么是Redis"><link data-rh="true" rel="alternate" href="https://aiden-coding.github.io/code-note-blog/docs/cache/探索Redis设计与实现开篇：什么是Redis" hreflang="en"><link data-rh="true" rel="alternate" href="https://aiden-coding.github.io/code-note-blog/docs/cache/探索Redis设计与实现开篇：什么是Redis" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/code-note-blog/blog/rss.xml" title="Tommy RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/code-note-blog/blog/atom.xml" title="Tommy Atom Feed"><link rel="stylesheet" href="/code-note-blog/assets/css/styles.dd5372db.css">
+<script src="/code-note-blog/assets/js/runtime~main.f999fb27.js" defer="defer"></script>
+<script src="/code-note-blog/assets/js/main.a0bfbaed.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_XYiV" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/code-note-blog/"><b class="navbar__title text--truncate">Tommy</b></a><a class="navbar__item navbar__link" href="/code-note-blog/docs/Java/basic/抽象类和接口">java</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/JavaWeb/走进JavaWeb技术世界：JavaWeb的由来和基础知识">javaweb</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/code-note-blog/docs/cache/探索Redis设计与实现：连接底层与表面的数据结构robj">cache</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/backend/后端技术杂谈：白话虚拟化技术">backend</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/cs/algorithms/剑指offer">cs</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/database/重新学习MySQL数据库：『浅入浅出』MySQL和InnoDB">database</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/distributed/basic/分布式系统理论基础 ：CAP">distributed</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/interview/BATJ-Experience/面阿里,终获offer">interview</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/mq/kafka/消息队列kafka详解：如何实现死信队列">mq</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/Spring全家桶/Spring/第一个Spring应用">spring</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/mianshi/collection">面试</a><a href="https://aiden-coding.github.io/code-note-blog/SpringCloud%E7%AC%AC3%E5%AD%A32024.html" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Blog<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></div><div class="navbar__items navbar__items--right"><div class="toggle_XbAW colorModeToggle_r5NY"><button class="clean-btn toggleButton_Jx0n toggleButtonDisabled_zYO7" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_FjAw"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_qmEt"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_wJfS"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_LABv"><div class="docsWrapper_pdvB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_Jioa" type="button"></button><div class="docRoot_qx_v"><aside class="theme-doc-sidebar-container docSidebarContainer_NHKT"><div class="sidebarViewport_uyYB"><div class="sidebar_SZG4"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_VP_k"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/cache/探索Redis设计与实现：连接底层与表面的数据结构robj">探索Redis设计与实现：连接底层与表面的数据结构robj</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/cache/探索Redis设计与实现：浅析Redis主从复制">探索Redis设计与实现：浅析Redis主从复制</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/cache/探索Redis设计与实现：使用快照和AOF将Redis数据持久化到硬盘中">探索Redis设计与实现：使用快照和AOF将Redis数据持久化到硬盘中</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/cache/探索Redis设计与实现：数据库redisDb与键过期删除策略">探索Redis设计与实现：数据库redisDb与键过期删除策略</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/cache/探索Redis设计与实现：Redis 的基础数据结构概览">探索Redis设计与实现：Redis 的基础数据结构概览</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/cache/探索Redis设计与实现：Redis的事件驱动模型与命令执行过程">探索Redis设计与实现：Redis的事件驱动模型与命令执行过程</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/cache/探索Redis设计与实现：Redis分布式锁进化史">探索Redis设计与实现：Redis分布式锁进化史</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/cache/探索Redis设计与实现：Redis集群机制及一个Redis架构演进实例">探索Redis设计与实现：Redis集群机制及一个Redis架构演进实例</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/cache/探索Redis设计与实现：Redis内部数据结构详解——dict">探索Redis设计与实现：Redis内部数据结构详解——dict</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/cache/探索Redis设计与实现：Redis内部数据结构详解——intset">探索Redis设计与实现：Redis内部数据结构详解——intset</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/cache/探索Redis设计与实现：Redis内部数据结构详解——quicklist">探索Redis设计与实现：Redis内部数据结构详解——quicklist</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/cache/探索Redis设计与实现：Redis内部数据结构详解——sds">探索Redis设计与实现：Redis内部数据结构详解——sds</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/cache/探索Redis设计与实现：Redis内部数据结构详解——skiplist">探索Redis设计与实现：Redis内部数据结构详解——skiplist</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/cache/探索Redis设计与实现：Redis内部数据结构详解——ziplist">探索Redis设计与实现：Redis内部数据结构详解——ziplist</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/cache/探索Redis设计与实现：Redis事务浅析与ACID特性介绍">探索Redis设计与实现：Redis事务浅析与ACID特性介绍</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" href="/code-note-blog/docs/cache/探索Redis设计与实现开篇：什么是Redis">探索Redis设计与实现开篇：什么是Redis</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/cache/Redis原理与实践总结">Redis原理与实践总结</a></li></ul></nav></div></div></aside><main class="docMainContainer_SejT"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_j3Yw"><div class="docItemContainer_XOSC"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_F6gm" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/code-note-blog/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YCxa"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">探索Redis设计与实现开篇：什么是Redis</span><meta itemprop="position" content="1"></li></ul></nav><div class="tocCollapsible_ToOY theme-doc-toc-mobile tocMobile_suYB"><button type="button" class="clean-btn tocCollapsibleButton_VzP_">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>探索Redis设计与实现开篇：什么是Redis</h1></header><p>本文转自互联网</p>
+<p>本系列文章将整理到我在GitHub上的《Java面试指南》仓库，更多精彩内容请到我的仓库里查看</p>
+<blockquote>
+<p><a href="https://github.com/h2pl/Java-Tutorial" target="_blank" rel="noopener noreferrer">https://github.com/h2pl/Java-Tutorial</a></p>
+</blockquote>
+<p>喜欢的话麻烦点下Star哈</p>
+<p>文章首发于我的个人博客：</p>
+<blockquote>
+<p><a href="http://www.how2playlife.com" target="_blank" rel="noopener noreferrer">www.how2playlife.com</a></p>
+</blockquote>
+<p>本文是微信公众号【Java技术江湖】的《探索Redis设计与实现》其中一篇，本文部分内容来源于网络，为了把本文主题讲得清晰透彻，也整合了很多我认为不错的技术博客内容，引用其中了一些比较好的博客文章，如有侵权，请联系作者。</p>
+<p>该系列博文会告诉你如何从入门到进阶，Redis基本的使用方法，Redis的基本数据结构，以及一些进阶的使用方法，同时也需要进一步了解Redis的底层数据结构，再接着，还会带来Redis主从复制、集群、分布式锁等方面的相关内容，以及作为缓存的一些使用方法和注意事项，以便让你更完整地了解整个Redis相关的技术体系，形成自己的知识框架。</p>
+<p>如果对本系列文章有什么建议，或者是有什么疑问的话，也可以关注公众号【Java技术江湖】联系作者，欢迎你参与本系列博文的创作和修订。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="redis-学习笔记">redis 学习笔记<a href="#redis-学习笔记" class="hash-link" aria-label="Direct link to redis 学习笔记" title="Direct link to redis 学习笔记">​</a></h2>
+<blockquote>
+<p>这篇 redis 学习笔记主要介绍 redis 的数据结构和数据类型，并讨论数据结构的选择以及应用场景的优化。</p>
+</blockquote>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="redis-是什么">redis 是什么?<a href="#redis-是什么" class="hash-link" aria-label="Direct link to redis 是什么?" title="Direct link to redis 是什么?">​</a></h3>
+<blockquote>
+<p>Redis是一种面向“键/值”对类型数据的分布式NoSQL数据库系统，特点是高性能，持久存储，适应高并发的应用场景。</p>
+</blockquote>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="redis-数据结构">Redis 数据结构<a href="#redis-数据结构" class="hash-link" aria-label="Direct link to Redis 数据结构" title="Direct link to Redis 数据结构">​</a></h3>
+<ul>
+<li>动态字符串 (Sds)</li>
+<li>双端列表 (LINKEDLIST)</li>
+<li>字典</li>
+<li>跳跃表 (SKIPLIST)</li>
+<li>整数集合 (INTSET)</li>
+<li>压缩列表 (ZIPLIST)</li>
+</ul>
+<p>HUGOMORE42</p>
+<p><a href="https://link.juejin.im/?target=http%3A%2F%2Forigin.redisbook.com%2Finternal-datastruct%2Fsds.html" target="_blank" rel="noopener noreferrer">动态字符串</a></p>
+<p>Sds (Simple Dynamic String,简单动态字符串)是 Redis 底层所使用的字符串表示,它被用 在几乎所有的 Redis 模块中</p>
+<p>Redis 是一个键值对数据库(key-value DB),数据库的值可以是字符串、集合、列表等多种类 型的对象,而数据库的键则总是字符串对象</p>
+<p>在 Redis 中, 一个字符串对象除了可以保存字符串值之外,还可以保存 long 类型的值当字符串对象保存的是字符串时,它包含的才是 sds 值,否则的话,它就 是一个 long 类型的值</p>
+<p>动态字符串主要有两个作用:</p>
+<ol>
+<li>实现字符串对象(StringObject)</li>
+<li>在 Redis 程序内部用作 char * 类型的替代品</li>
+</ol>
+<p><a href="https://link.juejin.im/?target=http%3A%2F%2Forigin.redisbook.com%2Finternal-datastruct%2Fadlist.html" target="_blank" rel="noopener noreferrer">双端列表</a></p>
+<p>双端链表还是 Redis 列表类型的底层实现之一，当对列表类型的键进行操作——比如执行 RPUSH 、LPOP 或 LLEN 等命令时,程序在底层操作的可能就是双端链表</p>
+<p>双端链表主要有两个作用:</p>
+<ul>
+<li>作为 Redis 列表类型的底层实现之一;</li>
+<li>作为通用数据结构,被其他功能模块所使用;</li>
+</ul>
+<p><a href="https://link.juejin.im/?target=http%3A%2F%2Forigin.redisbook.com%2Finternal-datastruct%2Fdict.html" target="_blank" rel="noopener noreferrer">字典</a></p>
+<p>字典(dictionary),又名映射(map)或关联数组(associative array), 它是一种抽象数据结 构,由一集键值对(key-value pairs)组成,各个键值对的键各不相同,程序可以将新的键值对 添加到字典中,或者基于键进行查找、更新或删除等操作</p>
+<p>字典的应用</p>
+<ol>
+<li>实现数据库键空间(key space);</li>
+<li>用作 Hash 类型键的其中一种底层实现;</li>
+</ol>
+<blockquote>
+<p>Redis 是一个键值对数据库,数据库中的键值对就由字典保存:每个数据库都有一个与之相对应的字典,这个字典被称之为键空间(key space)。</p>
+</blockquote>
+<p>Redis 的 Hash 类型键使用<strong>字典和压缩列表</strong>两种数据结构作为底层实现</p>
+<p><a href="https://link.juejin.im/?target=http%3A%2F%2Forigin.redisbook.com%2Finternal-datastruct%2Fskiplist.html" target="_blank" rel="noopener noreferrer">跳跃表</a></p>
+<p>跳跃表(skiplist)是一种随机化的数据,由 William Pugh 在论文《Skip lists: a probabilistic alternative to balanced trees》中提出,这种数据结构以有序的方式在层次化的链表中保存元素,它的效率可以和平衡树媲美——查找、删除、添加等操作都可以在对数期望时间下完成, 并且比起平衡树来说,跳跃表的实现要简单直观得多</p>
+<p>和字典、链表或者字符串这几种在 Redis 中大量使用的数据结构不同,跳跃表在 Redis 的唯一作用,就是实现有序集数据类型
+跳跃表将指向有序集的 score 值和 member 域的指针作为元素,并以 score 值为索引,对有序集元素进行排序。</p>
+<p><a href="https://link.juejin.im/?target=http%3A%2F%2Forigin.redisbook.com%2Fcompress-datastruct%2Fintset.html" target="_blank" rel="noopener noreferrer">整数集合</a></p>
+<p>整数集合(intset)用于有序、无重复地保存多个整数值,它会根据元素的值,自动选择该用什么长度的整数类型来保存元素</p>
+<p>Intset 是集合键的底层实现之一,如果一个集合:</p>
+<ol>
+<li>只保存着整数元素;</li>
+<li>元素的数量不多;
+那么 Redis 就会使用 intset 来保存集合元素。</li>
+</ol>
+<p><a href="https://link.juejin.im/?target=http%3A%2F%2Forigin.redisbook.com%2Fcompress-datastruct%2Fziplist.html" target="_blank" rel="noopener noreferrer">压缩列表</a></p>
+<p>Ziplist 是由一系列特殊编码的内存块构成的列表,一个 ziplist 可以包含多个节点(entry),每个节点可以保存一  个长度受限的字符数组(不以 \0 结尾的 char 数组)或者整数</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="redis-数据类型">Redis 数据类型<a href="#redis-数据类型" class="hash-link" aria-label="Direct link to Redis 数据类型" title="Direct link to Redis 数据类型">​</a></h3>
+<p><a href="https://link.juejin.im/?target=http%3A%2F%2Forigin.redisbook.com%2Fdatatype%2Fobject.html%23redisobject-redis" target="_blank" rel="noopener noreferrer">RedisObject</a></p>
+<p>redisObject 是 Redis 类型系统的核心,数据库中的每个键、值,以及 Redis 本身处理的参数,都表示为这种数据类型</p>
+<p>redisObject 的定义位于 redis.h :</p>
+<div class="codeBlockContainer_Ty55 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_zoWS"><pre tabindex="0" class="prism-code language-text codeBlock_Po6r thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_Llrq"><span class="token-line" style="color:#393A34"><span class="token plain">/** Redis 对象*/typedef struct redisObject {    // 类型    unsigned type:4;    // 对齐位    unsigned notused:2;    // 编码方式    unsigned encoding:4;    // LRU 时间(相对于 server.lruclock)    unsigned lru:22;    // 引用计数    int refcount;    // 指向对象的值    void *ptr;} robj;</span><br></span></code></pre><div class="buttonGroup_EjFN"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_RXpO" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_sabX"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_WdXf"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>type 、encoding 和 ptr 是最重  要的三个属性。</p>
+<p>type 记录了对象所保存的值的类型,它的值可能是以下常量的其中一个</p>
+<div class="codeBlockContainer_Ty55 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_zoWS"><pre tabindex="0" class="prism-code language-text codeBlock_Po6r thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_Llrq"><span class="token-line" style="color:#393A34"><span class="token plain">/** 对象类型*/#define REDIS_STRING 0 // 字符串#define REDIS_LIST 1   // 列表#define REDIS_SET 2    // 集合#define REDIS_ZSET 3   // 有序集#define REDIS_HASH 4   // 哈希表</span><br></span></code></pre><div class="buttonGroup_EjFN"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_RXpO" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_sabX"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_WdXf"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>encoding 记录了对象所保存的值的编码,它的值可能是以下常量的其中一个</p>
+<div class="codeBlockContainer_Ty55 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_zoWS"><pre tabindex="0" class="prism-code language-text codeBlock_Po6r thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_Llrq"><span class="token-line" style="color:#393A34"><span class="token plain">/** 对象编码*/#define REDIS_ENCODING_RAW 0    // 编码为字符串#define REDIS_ENCODING_INT 1    // 编码为整数#define REDIS_ENCODING_HT 2     // 编码为哈希表#define REDIS_ENCODING_ZIPMAP 3 // 编码为 zipmap(2.6 后不再使 用)#define REDIS_ENCODING_LINKEDLIST 4 // 编码为双端链表#define REDIS_ENCODING_ZIPLIST 5    // 编码为压缩列表#define REDIS_ENCODING_INTSET 6     // 编码为整数集合#define REDIS_ENCODING_SKIPLIST 7    // 编码为跳跃表</span><br></span></code></pre><div class="buttonGroup_EjFN"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_RXpO" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_sabX"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_WdXf"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>ptr 是一个指针,指向实际保存值的数据结构,这个数据结构由 type 属性和 encoding 属性决定。</p>
+<p>当执行一个处理数据类型的命令时,Redis 执行以下步骤:</p>
+<ol>
+<li>根据给定key,在数据库字典中查找和它像对应的redisObject,如果没找到,就返回 NULL 。</li>
+<li>检查redisObject的type属性和执行命令所需的类型是否相符,如果不相符,返回类 型错误。</li>
+<li>根据redisObject的encoding属性所指定的编码,选择合适的操作函数来处理底层的 数据结构。</li>
+<li>返回数据结构的操作结果作为命令的返回值。</li>
+</ol>
+<p><a href="https://link.juejin.im/?target=http%3A%2F%2Fredisdoc.com%2Fstring%2Findex.html" target="_blank" rel="noopener noreferrer">字符串</a></p>
+<p>REDIS_STRING (字符串)是 Redis 使用得最为广泛的数据类型,它除了是 SET 、GET 等命令 的操作对象之外,数据库中的所有键,以及执行命令时提供给 Redis 的参数,都是用这种类型 保存的。</p>
+<p>字符串类型分别使用 REDIS_ENCODING_INT 和 REDIS_ENCODING_RAW 两种编码</p>
+<blockquote>
+<p>只有能表示为 long 类型的值,才 会以整数的形式保存,其他类型 的整数、小数和字符串,都是用 sdshdr 结构来保存</p>
+</blockquote>
+<p><a href="https://link.juejin.im/?target=http%3A%2F%2Fredisdoc.com%2Fhash%2Findex.html" target="_blank" rel="noopener noreferrer">哈希表</a></p>
+<p>REDIS_HASH (哈希表)是HSET 、HLEN 等命令的操作对象</p>
+<p>它使用 REDIS_ENCODING_ZIPLIST和REDIS_ENCODING_HT 两种编码方式</p>
+<p>Redis 中每个hash可以存储232-1键值对（40多亿）</p>
+<p><a href="https://link.juejin.im/?target=http%3A%2F%2Fredisdoc.com%2Flist%2Findex.html" target="_blank" rel="noopener noreferrer">列表</a></p>
+<p>REDIS_LIST(列表)是LPUSH 、LRANGE等命令的操作对象</p>
+<p>它使用 REDIS_ENCODING_ZIPLIST和REDIS_ENCODING_LINKEDLIST 这两种方式编码</p>
+<p>一个列表最多可以包含232-1 个元素(4294967295, 每个列表超过40亿个元素)。</p>
+<p><a href="https://link.juejin.im/?target=http%3A%2F%2Fredisdoc.com%2Fset%2Findex.html" target="_blank" rel="noopener noreferrer">集合</a></p>
+<p>REDIS_SET (集合) 是 SADD 、 SRANDMEMBER 等命令的操作对象</p>
+<p>它使用 REDIS_ENCODING_INTSET 和 REDIS_ENCODING_HT 两种方式编码</p>
+<p>Redis 中集合是通过哈希表实现的，所以添加，删除，查找的复杂度都是O(1)。</p>
+<p>集合中最大的成员数为 232 - 1 (4294967295, 每个集合可存储40多亿个成员)</p>
+<p><a href="https://link.juejin.im/?target=http%3A%2F%2Fredisdoc.com%2Fsorted_set%2Findex.html" target="_blank" rel="noopener noreferrer">有序集</a></p>
+<p>REDIS_ZSET (有序集)是ZADD 、ZCOUNT 等命令的操作对象</p>
+<p>它使用 REDIS_ENCODING_ZIPLIST和REDIS_ENCODING_SKIPLIST 两种方式编码</p>
+<p>不同的是每个元素都会关联一个double类型的分数。redis正是通过分数来为集合中的成员进行从小到大的排序。</p>
+<p>有序集合的成员是唯一的,但分数(score)却可以重复。</p>
+<p>集合是通过哈希表实现的，所以添加，删除，查找的复杂度都是O(1)。 集合  中最大的成员数为 232 - 1 (4294967295, 每个集合可存储40多亿个成员)</p>
+<p>Redis各种数据类型_以及它们的编码方式</p>
+<p><img loading="lazy" src="https://user-gold-cdn.xitu.io/2017/9/17/2c71cff03efc96d2280d12602cc2aa92?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="Redis各种数据类型_以及它们的编码方式" class="img_kGBN">Redis各种数据类型_以及它们的编码方式</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="过期时间">过期时间<a href="#过期时间" class="hash-link" aria-label="Direct link to 过期时间" title="Direct link to 过期时间">​</a></h3>
+<p>在数据库中,所有键的过期时间都被保存在 redisDb 结构的 expires 字典里:</p>
+<div class="codeBlockContainer_Ty55 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_zoWS"><pre tabindex="0" class="prism-code language-text codeBlock_Po6r thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_Llrq"><span class="token-line" style="color:#393A34"><span class="token plain">typedef struct redisDb {    // ...    dict *expires;    // ...} redisDb;</span><br></span></code></pre><div class="buttonGroup_EjFN"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_RXpO" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_sabX"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_WdXf"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>expires 字典的键是一个指向 dict 字典(键空间)里某个键的指针,而字典的值则是键所指 向的数据库键的到期时间,这个值以 long long 类型表示</p>
+<p>过期时间设置</p>
+<p>Redis 有四个命令可以设置键的生存时间(可以存活多久)和过期时间(什么时候到期):</p>
+<ul>
+<li>EXPIRE 以秒为单位设置键的生存时间;</li>
+<li>PEXPIRE 以毫秒为单位设置键的生存时间;</li>
+<li>EXPIREAT 以秒为单位,设置键的过期 UNIX 时间戳;</li>
+<li>PEXPIREAT 以毫秒为单位,设置键的过期 UNIX 时间戳。</li>
+</ul>
+<blockquote>
+<p>虽然有那么多种不同单位和不同形式的设置方式,但是 expires 字典的值只保存“以毫秒为单位的过期 UNIX 时间戳” ,这就是说,通过进行转换,所有命令的效果最后都和 PEXPIREAT 命令的效果一样。</p>
+</blockquote>
+<p><strong>如果一个键是过期的,那它什么时候会被删除?</strong></p>
+<p>下边是参考答案</p>
+<ol>
+<li>定时删除:在设置键的过期时间时,创建一个定时事件,当过期时间到达时,由事件处理 器自动执行键的删除操作。</li>
+<li>惰性删除:放任键过期不管,但是在每次从 dict 字典中取出键值时,要检查键是否过 期,如果过期的话,就删除它,并返回空;如果没过期,就返回键值。</li>
+<li>定期删除:每隔一段时间,对expires字典进行检查,删除里面的过期键</li>
+</ol>
+<p>Redis 使用的过期键删除策略是惰性删除加上定期删除</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="应用场景">应用场景<a href="#应用场景" class="hash-link" aria-label="Direct link to 应用场景" title="Direct link to 应用场景">​</a></h3>
+<ul>
+<li>缓存</li>
+<li>队列</li>
+<li>需要精准设定过期时间的应用</li>
+</ul>
+<blockquote>
+<p>比如你可以把上面说到的sorted set的score值设置成过期时间的时间戳，那么就可以简单地通过过期时间排序，定时清除过期数据了，不仅是清除Redis中的过期数据，你完全可以把Redis里这个过期时间当成是对数据库中数据的索引，用Redis来找出哪些数据需要过期删除，然后再精准地从数据库中删除相应的记录</p>
+</blockquote>
+<ul>
+<li>
+<p>排行榜应用，取TOP N操作</p>
+<blockquote>
+<p>这个需求与上面需求的不同之处在于，前面操作以时间为权重，这个是以某个条件为权重，比如按顶的次数排序，这时候就需要我们的sorted set出马了，将你要排序的值设置成sorted set的score，将具体的数据设置成相应的value，每次只需要执行一条ZADD命令即可</p>
+</blockquote>
+</li>
+<li>
+<p>统计页面访问次数</p>
+</li>
+</ul>
+<blockquote>
+<p>使用 incr 命令 定时使用 getset 命令 读取数据 并设置新的值 0</p>
+</blockquote>
+<ul>
+<li>使用set 设置标签</li>
+</ul>
+<p>例如假设我们的话题D 1000被加了三个标签tag 1,2,5和77，就可以设置下面两个集合：</p>
+<div class="codeBlockContainer_Ty55 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_zoWS"><pre tabindex="0" class="prism-code language-text codeBlock_Po6r thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_Llrq"><span class="token-line" style="color:#393A34"><span class="token plain">$ redis-cli sadd topics:1000:tags 1(integer) 1$ redis-cli sadd topics:1000:tags 2(integer) 1$ redis-cli sadd topics:1000:tags 5(integer) 1$ redis-cli sadd topics:1000:tags 77(integer) 1$ redis-cli sadd tag:1:objects 1000(integer) 1$ redis-cli sadd tag:2:objects 1000(integer) 1$ redis-cli sadd tag:5:objects 1000(integer) 1$ redis-cli sadd tag:77:objects 1000(integer) 1</span><br></span></code></pre><div class="buttonGroup_EjFN"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_RXpO" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_sabX"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_WdXf"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>要获取一个对象的所有标签：</p>
+<div class="codeBlockContainer_Ty55 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_zoWS"><pre tabindex="0" class="prism-code language-text codeBlock_Po6r thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_Llrq"><span class="token-line" style="color:#393A34"><span class="token plain">$ redis-cli smembers topics:1000:tags1. 52. 13. 774. 2</span><br></span></code></pre><div class="buttonGroup_EjFN"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_RXpO" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_sabX"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_WdXf"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>获得一份同时拥有标签1, 2,10和27的对象列表。
+这可以用SINTER命令来做，他可以在不同集合之间取出交集</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="内存优化">内存优化<a href="#内存优化" class="hash-link" aria-label="Direct link to 内存优化" title="Direct link to 内存优化">​</a></h3>
+<p><code>问题</code>: Instagram的照片数量已经达到3亿，而在Instagram里，我们需要知道每一张照片的作者是谁，下面就是Instagram团队如何使用Redis来解决这个问题并进行内存优化的。</p>
+<p>具体方法，参考下边这篇文章：<a href="https://link.juejin.im/?target=http%3A%2F%2Fblog.nosqlfan.com%2Fhtml%2F3379.html" target="_blank" rel="noopener noreferrer">节约内存：Instagram的Redis实践</a>。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="天下无难试之redis面试刁难大全">天下无难试之Redis面试刁难大全<a href="#天下无难试之redis面试刁难大全" class="hash-link" aria-label="Direct link to 天下无难试之Redis面试刁难大全" title="Direct link to 天下无难试之Redis面试刁难大全">​</a></h2>
+<p>Redis在互联网技术存储方面使用如此广泛，几乎所有的后端技术面试官都要在Redis的使用和原理方面对小伙伴们进行各种刁难。作为一名在互联网技术行业打击过成百上千名【请允许我夸张一下】的资深技术面试官，看过了无数落寞的身影失望的离开，略感愧疚，故献上此文，希望各位读者以后面试势如破竹，永无失败！</p>
+<p>Redis有哪些数据结构？</p>
+<p>字符串String、字典Hash、列表List、集合Set、有序集合SortedSet。</p>
+<p>如果你是Redis中高级用户，还需要加上下面几种数据结构HyperLogLog、Geo、Pub/Sub。</p>
+<p>如果你说还玩过Redis Module，像BloomFilter，RedisSearch，Redis-ML，面试官得眼睛就开始发亮了。</p>
+<p>使用过Redis分布式锁么，它是什么回事？</p>
+<p>先拿setnx来争抢锁，抢到之后，再用expire给锁加一个过期时间防止锁忘记了释放。</p>
+<p>这时候对方会告诉你说你回答得不错，然后接着问如果在setnx之后执行expire之前进程意外crash或者要重启维护了，那会怎么样？</p>
+<p>这时候你要给予惊讶的反馈：唉，是喔，这个锁就永远得不到释放了。紧接着你需要抓一抓自己得脑袋，故作思考片刻，好像接下来的结果是你主动思考出来的，然后回答：我记得set指令有非常复杂的参数，这个应该是可以同时把setnx和expire合成一条指令来用的！对方这时会显露笑容，心里开始默念：摁，这小子还不错。</p>
+<p>假如Redis里面有1亿个key，其中有10w个key是以某个固定的已知的前缀开头的，如果将它们全部找出来？</p>
+<p>使用keys指令可  以扫出指定模式的key列表。</p>
+<p>对方接着追问：如果这个redis正在给线上的业务提供服务，那使用keys指令会有什么问题？</p>
+<p>这个时候你要回答redis关键的一个特性：redis的单线程的。keys指令会导致线程阻塞一段时间，线上服务会停顿，直到指令执行完毕，服务才能恢复。这个时候可以使用scan指令，scan指令可以无阻塞的提取出指定模式的key列表，但是会有一定的重复概率，在客户端做一次去重就可以了，但是整体所花费的时间会比直接用keys指令长。</p>
+<p>使用过Redis做异步队列么，你是怎么用的？</p>
+<p>一般使用list结构作为队列，rpush生产消息，lpop消费消息。当lpop没有消息的时候，要适当sleep一会再重试。</p>
+<p>如果对方追问可不可以不用sleep呢？list还有个指令叫blpop，在没有消息的时候，它会阻塞住直到消息到来。</p>
+<p>如果对方追问能不能生产一次消费多次呢？使用pub/sub主题订阅者模式，可以实现1<!-- -->:N<!-- -->的消息队列。</p>
+<p>如果对方追问pub/sub有什么缺点？在消费者下线的情况下，生产的消息会丢失，得使用专业的消息队列如rabbitmq等。</p>
+<p>如果对方追问redis如何实现延时队列？我估计现在你很想把面试官一棒打死如果你手上有一根棒球棍的话，怎么问的这么详细。但是你很克制，然后神态自若的回答道：使用sortedset，拿时间戳作为score，消息内容作为key调用zadd来生产消息，消费者用zrangebyscore指令获取N秒之前的数据轮询进行处理。</p>
+<p>到这里，面试官暗地里已经对你竖起了大拇指。但是他不知道的是此刻你却竖起了中指，在椅子背后。</p>
+<p>如果有大量的key需要设置同一时间过期，一般需要注意什么？</p>
+<p>如果大量的key过期时间设置的过于集中，到过期的那个时间点，redis可能会出现短暂的卡顿现象。一般需 要在时间上加一个随机值，使得过期时间分散一些。</p>
+<p>Redis如何做持久化的？</p>
+<p>bgsave做镜像全量持久化，aof做增量持久化。因为bgsave会耗费较长时间，不够实时，在停机的时候会导致大量丢失数据，所以需要aof来配合使用。在redis实例重启时，会使用bgsave持久化文件重新构建内存，再使用aof重放近期的操作指令来实现完整恢复重启之前的状态。</p>
+<p>对方追问那如果突然机器掉电会怎样？取决于aof日志sync属性的配置，如果不要求性能，在每条写指令时都sync一下磁盘，就不会丢失数据。但是在高性能的要求下每次都sync是不现实的，一般都使用定时sync，比如1s1次，这个时候最多就会丢失1s的数据。</p>
+<p>对方追问bgsave的原理是什么？你给出两个词汇就可以了，fork和cow。fork是指redis通过创建子进程来进行bgsave操作，cow指的是copy on write，子进程创建后，父子进程共享数据段，父进程继续提供读写服务，写脏的页面数据会逐渐和子进程分离开来。</p>
+<p>Pipeline有什么好处，为什么要用pipeline？</p>
+<p>可以将多次IO往返的时间缩减为一次，前提是pipeline执行的指令之间没有因果相关性。使用redis-benchmark进行压测的时候可以发现影响redis的QPS峰值的一个重要因素是pipeline批次指令的数目。</p>
+<p>Redis的同步机制了解么？</p>
+<p>Redis可以使用主从同步，从从同步。第一次同步时，主节点做一次bgsave，并同时将后续修改操作记录到内存buffer，待完成后将rdb文件全量同步到复制节点，复制节点接受完成后将rdb镜像加载到内存。加载完成后，再通知主节点将期间修改的操作记录同步到复制节点进行重放就完成了同步过程。</p>
+<p>是否使用过Redis集群，集群的原理是什么？</p>
+<p>Redis Sentinal着眼于高可用，在master宕机时会自动将slave提升为master，继续提  供服务。</p>
+<p>Redis Cluster着眼于扩展性，在单个redis内存不足时，使用Cluster进行分片存储。</p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="theme-doc-footer-edit-meta-row row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/cache/探索Redis设计与实现开篇：什么是Redis.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_EYjg" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_eevz"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/code-note-blog/docs/cache/探索Redis设计与实现：Redis事务浅析与ACID特性介绍"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">探索Redis设计与实现：Redis事务浅析与ACID特性介绍</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/code-note-blog/docs/cache/Redis原理与实践总结"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Redis原理与实践总结</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_lc2k thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#redis-学习笔记" class="table-of-contents__link toc-highlight">redis 学习笔记</a><ul><li><a href="#redis-是什么" class="table-of-contents__link toc-highlight">redis 是什么?</a></li><li><a href="#redis-数据结构" class="table-of-contents__link toc-highlight">Redis 数据结构</a></li><li><a href="#redis-数据类型" class="table-of-contents__link toc-highlight">Redis 数据类型</a></li><li><a href="#过期时间" class="table-of-contents__link toc-highlight">过期时间</a></li><li><a href="#应用场景" class="table-of-contents__link toc-highlight">应用场景</a></li><li><a href="#内存优化" class="table-of-contents__link toc-highlight">内存优化</a></li></ul></li><li><a href="#天下无难试之redis面试刁难大全" class="table-of-contents__link toc-highlight">天下无难试之Redis面试刁难大全</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/code-note-blog/docs/intro">Tutorial</a></li></ul></div><div class="col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://stackoverflow.com/questions/tagged/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Stack Overflow<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://discordapp.com/invite/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Discord<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://twitter.com/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Twitter<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/code-note-blog/blog">Blog</a></li><li class="footer__item"><a href="https://github.com/facebook/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 My Project, Inc. Built with Docusaurus.</div></div></div></footer></div>
+</body>
+</html>

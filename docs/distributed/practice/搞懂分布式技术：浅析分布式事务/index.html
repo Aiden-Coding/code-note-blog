@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-distributed/practice/搞懂分布式技术：浅析分布式事务" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.1.0">
+<title data-rh="true">搞懂分布式技术：浅析分布式事务 | Tommy</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://aiden-coding.github.io/code-note-blog/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://aiden-coding.github.io/code-note-blog/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://aiden-coding.github.io/code-note-blog/docs/distributed/practice/搞懂分布式技术：浅析分布式事务"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="搞懂分布式技术：浅析分布式事务 | Tommy"><meta data-rh="true" name="description" content="本文转载自 linkedkeeper.com"><meta data-rh="true" property="og:description" content="本文转载自 linkedkeeper.com"><link data-rh="true" rel="icon" href="/code-note-blog/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://aiden-coding.github.io/code-note-blog/docs/distributed/practice/搞懂分布式技术：浅析分布式事务"><link data-rh="true" rel="alternate" href="https://aiden-coding.github.io/code-note-blog/docs/distributed/practice/搞懂分布式技术：浅析分布式事务" hreflang="en"><link data-rh="true" rel="alternate" href="https://aiden-coding.github.io/code-note-blog/docs/distributed/practice/搞懂分布式技术：浅析分布式事务" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/code-note-blog/blog/rss.xml" title="Tommy RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/code-note-blog/blog/atom.xml" title="Tommy Atom Feed"><link rel="stylesheet" href="/code-note-blog/assets/css/styles.dd5372db.css">
+<script src="/code-note-blog/assets/js/runtime~main.f999fb27.js" defer="defer"></script>
+<script src="/code-note-blog/assets/js/main.a0bfbaed.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_XYiV" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/code-note-blog/"><b class="navbar__title text--truncate">Tommy</b></a><a class="navbar__item navbar__link" href="/code-note-blog/docs/Java/basic/抽象类和接口">java</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/JavaWeb/走进JavaWeb技术世界：JavaWeb的由来和基础知识">javaweb</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/cache/探索Redis设计与实现：连接底层与表面的数据结构robj">cache</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/backend/后端技术杂谈：白话虚拟化技术">backend</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/cs/algorithms/剑指offer">cs</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/database/重新学习MySQL数据库：『浅入浅出』MySQL和InnoDB">database</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/code-note-blog/docs/distributed/basic/分布式系统理论基础 ：CAP">distributed</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/interview/BATJ-Experience/面阿里,终获offer">interview</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/mq/kafka/消息队列kafka详解：如何实现死信队列">mq</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/Spring全家桶/Spring/第一个Spring应用">spring</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/mianshi/collection">面试</a><a href="https://aiden-coding.github.io/code-note-blog/SpringCloud%E7%AC%AC3%E5%AD%A32024.html" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Blog<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></div><div class="navbar__items navbar__items--right"><div class="toggle_XbAW colorModeToggle_r5NY"><button class="clean-btn toggleButton_Jx0n toggleButtonDisabled_zYO7" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_FjAw"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_qmEt"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_wJfS"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_LABv"><div class="docsWrapper_pdvB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_Jioa" type="button"></button><div class="docRoot_qx_v"><aside class="theme-doc-sidebar-container docSidebarContainer_NHKT"><div class="sidebarViewport_uyYB"><div class="sidebar_SZG4"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_VP_k"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/code-note-blog/docs/distributed/basic/分布式系统理论基础 ：CAP">基础</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" aria-expanded="true" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式session解决方案与一致性hash">案例</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式session解决方案与一致性hash">搞懂分布式技术：分布式session解决方案与一致性hash</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：初探分布式协调服务zookeeper">搞懂分布式技术：初探分布式协调服务zookeeper</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式事务常用解决方案">搞懂分布式技术：分布式事务常用解决方案</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式系统的一些基本概念">搞懂分布式技术：分布式系统的一些基本概念</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式一致性协议与Paxos，Raft算法">搞懂分布式技术：分布式一致性协议与Paxos，Raft算法</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式ID生成方案">搞懂分布式技术：分布式ID生成方案</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：缓存的那些事">搞懂分布式技术：缓存的那些事</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：缓存更新的套路">搞懂分布式技术：缓存更新的套路</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：浅谈分布式锁的几种方案">搞懂分布式技术：浅谈分布式锁的几种方案</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：浅谈分布式消息技术Kafka">搞懂分布式技术：浅谈分布式消息技术Kafka</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：浅析分布式事务">搞懂分布式技术：浅析分布式事务</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：使用RocketMQ事务消息解决分布式事务">搞懂分布式技术：使用RocketMQ事务消息解决分布式事务</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：消息队列因何而生">搞懂分布式技术：消息队列因何而生</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：LVS实现负载均衡的原理与实践">搞懂分布式技术：LVS实现负载均  衡的原理与实践</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：SpringBoot使用注解集成Redis缓存">搞懂分布式技术：SpringBoot使用注解集成Redis缓存</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：ZAB协议概述与选主流程详解">搞懂分布式技术：ZAB协议概述与选主流程详解</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：Zookeeper的配置与集群管理实战">搞懂分布式技术：Zookeeper的配置与集群管理实战</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：Zookeeper典型应用场景及实践">搞懂分布式技术：Zookeeper典型应用场景及实践</a></li></ul></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/distributed/分布式技术实践总结">分布式技术实践总结</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/distributed/分布式理论总结">分布式理论总结</a></li></ul></nav></div></div></aside><main class="docMainContainer_SejT"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_j3Yw"><div class="docItemContainer_XOSC"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_F6gm" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/code-note-blog/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YCxa"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">案例</span><meta itemprop="position" content="1"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">搞懂分布式技术：浅析分布式事务</span><meta itemprop="position" content="2"></li></ul></nav><div class="tocCollapsible_ToOY theme-doc-toc-mobile tocMobile_suYB"><button type="button" class="clean-btn tocCollapsibleButton_VzP_">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>搞懂分布式技术：浅析分布式事务</h1></header><p>本文转载自 linkedkeeper.com</p>
+<p>本文内容参考网络，侵删</p>
+<p>本系列文章将整理到我在GitHub上的《Java面试指南》仓库，更多精彩内容请到我的仓库里查看</p>
+<blockquote>
+<p><a href="https://github.com/h2pl/Java-Tutorial" target="_blank" rel="noopener noreferrer">https://github.com/h2pl/Java-Tutorial</a></p>
+</blockquote>
+<p>喜欢的话麻烦点下Star哈</p>
+<p>本文也将同步到我的个人博客：</p>
+<blockquote>
+<p><a href="http://www.how2playlife.com" target="_blank" rel="noopener noreferrer">www.how2playlife.com</a></p>
+</blockquote>
+<p>更多Java技术文章将陆续在微信公众号【Java技术江湖】更新，敬请关注。</p>
+<p>该系列博文会告诉你什么是分布式系统，这对后端工程师来说是很重要的一门学问，我们会逐步了解常见的分布式技术、以及一些较为常见的分布式系统概念，同时也需 要进一步了解zookeeper、分布式事务、分布式锁、负载均衡等技术，以便让你更完整地了解分布式技术的具体实战方法，为真正应用分布式技术做好准备。</p>
+<p>如果对本系列文章有什么建议，或者是有什么疑问的话，也可以关注公众号【Java技术江湖】联系作者，欢迎你参与本系列博文的创作和修订。</p>
+<p>众所周知，数据库能实现本地事务，也就是在同一个数据库中，你可以允许一组操作要么全都正确执行，要么全都不执行。这里特别强调了本地事务，也就是目前的数据库只能支持同一个数据库中的事务。但现在的系统往往采用微服务架构，业务系统拥有独立的数据库，因此就出现了跨多个数据库的事务需求，这种事务即为“分布式事务”。那么在目前数据库不支持跨库事务的情况下，我们应该如何实现分布式事务呢？本文首先会为大家梳理分布式事务的基本概念和理论基础，然后介绍几种目前常用的分布式事务解决方案。废话不多说，那就开始吧～</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="什么是事务">什么是事务？<a href="#什么是事务" class="hash-link" aria-label="Direct link to 什么是事务？" title="Direct link to 什么是事务？">​</a></h2>
+<p>事务由一组操作构成，我们希望这组操作能够全部正确执行，如果这一组操作中的任意一个步骤发生错误，那么就需要回滚之前已经完成的操作。也就是同一个事务中的所有操作，要么全都正确执行，要么全都不要执行。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="事务的四大特性-acid">事务的四大特性 ACID<a href="#事务的四大特性-acid" class="hash-link" aria-label="Direct link to 事务的四大特性 ACID" title="Direct link to 事务的四大特性 ACID">​</a></h2>
+<p>说到事务，就不得不提一下事务著名的四大特性。</p>
+<p>原子性原子 性要求，事务是一个不可分割的执行单元，事务中的所有操作要么全都执行，要么全都不执行。</p>
+<p>一致性一致性要求，事务在开始前和结束后，数据库的完整性约束没有被破坏。</p>
+<p>隔离性事务的执行是相互独立的，它们不会相互干扰，一个事务不会看到另一个正在运行过程中的事务的数据。</p>
+<p>持久性持久性要求，一个事务完成之后，事务的执行结果必须是持久化保存的。即使数据库发生崩溃，在数据库恢复后事务提交的结果仍然不会丢失。</p>
+<p>注意：事务只能保证数据库的高可靠性，即数据库本身发生问题后，事务提交后的数据仍然能恢复；而如果不是数据库本身的故障，如硬盘损坏了，那么事务提交的数据可能就丢失了。这属于『高可用性』的范畴。因此，事务只能保证数据库的『高可靠性』，而『高可用性』需要整个系统共同配合实现。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="事务的隔离级别">事务的隔离级别<a href="#事务的隔离级别" class="hash-link" aria-label="Direct link to 事务的隔离级别" title="Direct link to 事务的隔离级别">​</a></h2>
+<p>这里扩展一下，对事务的隔离性做一个详细的解释。</p>
+<p>在事务的四大特性ACID中，要求的隔离性是一种严格意义上的隔离，也就是多个事务是串行执行的，彼此之间不会受到任何干扰。这确实能够完全保证数据的安全性，但在实际业务系统中，这种方式性能不高。因此，数据库定义了四种隔离级别，隔离级别和数据库的性能是呈反比的，隔离级别越低，数据库性能越高，而隔离级别越高，数据库性能越差。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="事务并发执行会出现的问题">事务并发执行会出现的问题<a href="#事务并发执行会出现的问题" class="hash-link" aria-label="Direct link to 事务并 发执行会出现的问题" title="Direct link to 事务并发执行会出现的问题">​</a></h2>
+<p>我们先来看一下在不同的隔离级别下，数据库可能会出现的问题：</p>
+<p>更新丢失当有两个并发执行的事务，更新同一行数据，那么有可能一个事务会把另一个事务的更新覆盖掉。当数据库没有加任何锁操作的情况下会发生。</p>
+<p>脏读一个事务读到另一个尚未提交的事务中的数据。该数据可能会被回滚从而失效。如果第一个事务拿着失效的数据去处理那就发生错误了。</p>
+<p>不可重复读不可重复度的含义：一个事务对同一行数据读了两次，却得到了不同的结果。它具体分为如下两种情况：</p>
+<p>虚读：在事务1两次读取同一记录的过程中，事务2对该记录进行了修改，从而事务1第二次读到了不一样的记录。
+幻读：事务1在两次查询的过程中，事务2对该表进行了插入、删除操作，从而事务1第二次查询的结果发生了变化。
+不可重复读 与 脏读 的区别？脏读读到的是尚未提交的数据，而不可重复读读到的是已经提交的数据，只不过在两次读的过程中数据被另一个事务改过了。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="数据库的四种隔离级别">数据库的四种隔离级别<a href="#数据库的四种隔离级别" class="hash-link" aria-label="Direct link to 数据库的四种隔离级别" title="Direct link to 数据库的四种隔离级别">​</a></h2>
+<p>数据库一共有如下四种隔离级别：</p>
+<p>Read uncommitted 读未提交在该级别下，一个事务对一行数据修改的过程中，不允许另一个事务对该行数据进行修改，但允许另一个事务对该行数据读。因此本级别下，不会出现更新丢失，但会出现脏读、不可重复读。</p>
+<p>Read committed 读提交在该级别下，未提交的写事务不允许其他事务访问该行，因此不会出现脏读；但是读取数据的事务允许其他事务的访问该行数据，因此会出现不可重复读的情况。</p>
+<p>Repeatable read 重复读在该级别下，读事务禁止写事务，但允许读事务，因此不会出现同一事务两次读到不同的数据的情况（不可重复读），且写事务禁止其他一切事务。</p>
+<p>Serializable 序列化该级别要求所有事务都必须串行执行，因此能避免一切因并发引起的问题，但效率很低。</p>
+<p>隔离级别越高，越能保证数据的完整性和一致性，但是对并发性能的影响也越大。对于多数应用程序，可以优先考虑把数据库系统的隔离级别设为Read Committed。它能够避免脏读取，而且具有较好的并发性能。尽管它会导致不可重复读、幻读和第二类丢失更新这些并发问题，在可能出现这类问题的个别场合，可以由应用程序采用悲观锁或乐观锁来控制。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="什么是分布式事务">什么是分布式事务？<a href="#什么是分布式事务" class="hash-link" aria-label="Direct link to 什么是分布式事务？" title="Direct link to 什么是分布式事务？">​</a></h2>
+<p>到此为止，所介绍的事务都是基于单数据库的本地事务，目前的数据库仅支持单库事务，并不支持跨库事务。而随着微服务架构的普及，一个大型业务系统往往由若干个子系统构成，这些子系统又拥有各自独立的数据库。往往一个业务流程需要由多个子系统共同完成，而且这些操作可能需要在一个事务中完成。在微服务系统中，这些业务场景是普遍存在的。此时，我们就需要在数据库之上通过某种手段，实现支持跨数据库的事务支持，这也就是大家常说的“分布式事务”。</p>
+<p>这里举一个分布式事务的典型例子——用户下单过程。当我们的系统采用了微服务架构后，一个电商系统往往被拆分成如下几个子 系统：商品系统、订单系统、支付系统、积分系统等。整个下单的过程如下：</p>
+<p>用户通过商品系统浏览商品，他看中了某一项商品，便点击下单
+此时订单系统会生成一条订单
+订单创建成功后，支付系统提供支付功能
+当支付完成后，由积分系统为该用户增加积分
+上述步骤2、3、4需要在一个事务中完成。对于传统单体应用而言，实现事务非常简单，只需将这三个步骤放在一个方法A中，再用Spring的@Transactional注解标识该方法即可。Spring通过数据库的事务支持，保证这些步骤要么全都执行完成，要么全都不执行。但在这个微服务架构中，这三个步骤涉及三个系统，涉及三个数据库，此时我们必须在数据库和应用系统之间，通过某项黑科技，实现分布式事务的支持。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="cap理论">CAP理论<a href="#cap理论" class="hash-link" aria-label="Direct link to CAP理论" title="Direct link to CAP理论">​</a></h2>
+<p>CAP理论说的是：在一个分布式系统中，最多只能满足C、A、P中的两个需求。</p>
+<p>CAP的含义：</p>
+<p>C：Consistency 一致性同一数据的多个副本是否实时相同。
+A：Availability 可用性可用性：一定时间内 &amp; 系统返回一个明确的结果 则称为该系统可用。
+P：Partition tolerance 分区容错性将同一服务分布在多个系统中，从而保证某一个系统宕机，仍然有其他系统提供相同的服务。
+CAP理论告诉我们，在分布式系统中，C、A、P三个条件中我们最多只能选择两个。那么问题来了，究竟选择哪两个条件较为合适呢？</p>
+<p>对于一个业务系统来说，可用性和分区容错性是必须要满足的两个条件，并且这两者是相辅相成的。业务系统之所以使用分布式系统，主要原因有两个：</p>
+<p>提升整体性能当业务量猛增，单个服务器已经无法满足我们的业务需求的时候，就需要使用分布式系统，使用多个节点提供相同的功能，从而整体上提升系统的性能，这就是使用分布式系统的第一个原因。</p>
+<p>实现分区容错性单一节点 或 多个节点处于相同的网络环境下，那么会存在一定的风险，万一该机房断电、该地区发生自然灾害，那么业务系统就全面瘫痪了。为了防止这一问题，采用分布式系统，将多个子系统分布在不同的地域、不同的机房中，从而保证系统高可用性。</p>
+<p>这说明分区容错性是分布式系统的根本，如果分区容错性不能满足，那使用分布式系统将失去意义。</p>
+<p>此外，可用性对业务系统也尤为重要。在大谈用户体验的今天，如果业务系统时常出现“系统异常”、响应时间过长等情况，这使得用户对系统的好感度大打折扣，在互联网行业竞争激烈的今天，相同领域的竞争者不甚枚举，系统的间歇性不可用会立马导致用户流向竞争对手。因此，我们只能通过牺牲一致性来换取系统的可用性和分区容错性。这也就是下面要介绍的BASE理论。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="base理论">BASE理论<a href="#base理论" class="hash-link" aria-label="Direct link to BASE理论" title="Direct link to BASE理论">​</a></h2>
+<p>CAP理论告诉我们一个悲惨但不得不接受的事实——我们只能在C、A、P中选择两个条件。而对于业务系统而言，我们往往选择牺牲一致性来换取系统的可用性和分区容错性。不过这里要指出的是，所谓的“牺牲一致性”并不是完全放弃数据一致性，而是牺牲强一致性换取弱一致性。下面来介绍下BASE理论。</p>
+<p>BA：Basic Available 基本可用
+整个系统在某些不可抗力的情况下，仍然能够保证“可用性”，即一定时间内仍然能够返回一个明确的结果。只不过“基本可用”和“高可用”的区别 是：
+“一定时间”可以适当延长当举行大促时，响应时间可以适当延长
+给部分用户返回一个降级页面给部分用户直接返回一个降级页面，从而缓解服务器压力。但要注意，返回降级页面仍然是返回明确结果。
+S：Soft State：柔性状态同一数据的不同副本的状态，可以不需要实时一致。
+E：Eventual Consisstency：最终一致性同一数据的不同副本的状态，可以不需要实时一致，但一定要保证经过一定时间后仍然是一致的。
+酸碱平衡
+ACID能够保证事务的强一致性，即数据是实时一致的。这在本地事务中是没有问题的，在分布式事务中，强一致性会极大影响分布式系统的性能，因此分布式系统中遵循BASE理论即可。但分布式系统的不同业务场景对一致性的要求也不同。如交易场景下，就要求强一致性，此时就需要遵循ACID理论，而在注册成功后发送短信验证码等场景下，并不需要实时一致，因此遵循BASE理论即可。因此要根据具体业务场景，在ACID和BASE之间寻求平衡。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="分布式事务协议">分布式事务协议<a href="#分布式事务协议" class="hash-link" aria-label="Direct link to 分布式事务协议" title="Direct link to 分布式事务协议">​</a></h2>
+<p>下面介绍几种实现分布式事务的协议。</p>
+<p>理解2PC和3PC协议</p>
+<p>为了解决分布式一致性问题，前人在性能和数据一致性的反反复复权衡过程中总结了许多典型的协议和算法。其中比较著名的有二阶提交协议（2 Phase Commitment Protocol），三阶提交协议（3 Phase Commitment Protocol）。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="2pc">2PC<a href="#2pc" class="hash-link" aria-label="Direct link to 2PC" title="Direct link to 2PC">​</a></h3>
+<p>分布式事务最常用的解决方案就是二阶段提交。在分布式系统中，每个节点虽然可以  知晓自己的操作时成功或者失败，却无法知道其他节点的操作的成功或失败。当一个事务跨越多个节点时，为了保持事务的ACID特性，需要引入一个作为协调者的组件来统一掌控所有参与者节点的操作结果并最终指示这些节点是否要把操作结果进行真正的提交。</p>
+<p>因此，二阶段提交的算法思路可以概括为：参与者将操作成败通知协调者，再由协调者根据所有参与者的反馈情报决定各参与者是否要提交操作还是中止操作。</p>
+<p>所谓的两个阶段是指：第一阶段：准备阶段（投票阶段）和第二阶段：提交阶段（执行阶段）。</p>
+<p>第一阶段：投票阶段</p>
+<p>该阶段的主要目的在于打探数据库集群中的各个参与者是否能够正常的执行事务，具体步骤如下：</p>
+<ol>
+<li>
+<p>协调者向所有的参与者发送事务执行请求，并等待参与者反馈事务执行结果。</p>
+</li>
+<li>
+<p>事务参与者收到请求之后，执行事务，但不提交，并记录事务日志。</p>
+</li>
+<li>
+<p>参与者将自己事务执行情况反馈给协调者，同时阻塞等待协调者的后续指令。</p>
+</li>
+</ol>
+<p>第二阶段：事务提交阶段</p>
+<p>在第一阶段协调者的询盘之后，各个参与者会回复自己事务的执行情况，这时候存在三种可能：</p>
+<ol>
+<li>
+<p>所有的参与者回复能够正常执行事务。</p>
+</li>
+<li>
+<p>一个或多个参与者回复事务执行失败。</p>
+</li>
+<li>
+<p>协调者等待超时。</p>
+</li>
+</ol>
+<p>对于第一种情况，协调者将向所有的参与者发出提交事务的通知，具体步骤如下：</p>
+<ol>
+<li>
+<p>协调者向各个参与者发送commit通知，请求提交事务。</p>
+</li>
+<li>
+<p>参与者收到事务提交通知之后，执行commit操作，然后释放占有的资源。</p>
+</li>
+<li>
+<p>参与者向协调者返回事务commit结果信息。</p>
+</li>
+</ol>
+<p>对于第二、三种情况，协调者均认为参与者无法正常成功执行事务，为了整个集群数据的一致性，所以要向各个参与者发送事务回滚通知，具体步骤如下：</p>
+<ol>
+<li>
+<p>协调者向各个参与者发送事务rollback通知，请求回滚事务。</p>
+</li>
+<li>
+<p>参与者收到事务回滚通知之后，执行rollback操作，然后释放占有的资源。</p>
+</li>
+<li>
+<p>参与者向协调者返回事务rollback结果信息。</p>
+</li>
+</ol>
+<p>两阶段提交协议解决的是分布式数据库数据强一致性问题，其原理简单，易于实现，但是缺点也是显而易见的，主要缺点如下：</p>
+<p>单点问题：协调者在整个两阶段提交过程中扮演着举足轻重的作用，一旦协调者所在服务器宕机，那么就会影响整个数据库集群的正常运行，比如在第二阶段中，如果协调者因为故障不能正常发送事务提交或回滚通知，那么参与者们将一直处于阻塞状态，整个数据库集群将无法提供服务。</p>
+<p>同步阻塞：两阶段提交执行过程中，所有的参与者都需要听从协调者的统一调度，期间处于阻塞状态而不能从事其他操作，这样效率及其低下。</p>
+<p>数据不一致性：两阶段提交协议虽然为分布式数据强一致性所设计，但仍然存在数据不一致性的可能，比如在第二阶段中，假设协调者发出了事务commit的通知，但是因为网络问题该通知仅被一部分参与者所收到并执行了commit操作，其余的参与者则因为没有收到通知一直处于阻塞状态，这时候就产生了数据的不一致性。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="3pc">3PC<a href="#3pc" class="hash-link" aria-label="Direct link to 3PC" title="Direct link to 3PC">​</a></h3>
+<p>针对两阶段提交存在的问题，三阶段提交协议通过引入一个“预询盘”阶段，以及超时策略来减少整个集群的阻塞时间，提升系统性能。三阶段提交的三个阶段分别为：can_commit，pre_commit，do_commit。</p>
+<p>第一阶段：can_commit</p>
+<p>该阶段协调者会去询问各个参与者是否能够正常执行事务，参与者根据自身情况回复一个预估值，相对于真正的执行事务，这个过程是轻量的，具体步骤如下：</p>
+<ol>
+<li>
+<p>协调者向各个参与者发送事务询问通知，询问是否可以执行事务操作，并等待回复。</p>
+</li>
+<li>
+<p>各个参与者依据自身状况回复一个预估值，如果预估自己能够正常执行事务就返回确定信息，并进入预备状态，否则返回否定信息。</p>
+</li>
+</ol>
+<p>第二阶段：pre_commit</p>
+<p>本阶段协调者会根据第一阶段的询盘结果采取相应操作，询盘结果主要有三种：</p>
+<ol>
+<li>
+<p>所有的参与者都返回确定信息。</p>
+</li>
+<li>
+<p>一个或多个参与者返回否定信息。</p>
+</li>
+<li>
+<p>协调者等待超时。</p>
+</li>
+</ol>
+<p>针对第一种情况，协调者会向所有参与者发送事务执行请求，具体步骤如下：</p>
+<ol>
+<li>
+<p>协调者向所有的事务参与者发送事务执行通知。</p>
+</li>
+<li>
+<p>参与者收到通知后，执行事务，但不提交。</p>
+</li>
+<li>
+<p>参与者将事务执行情况返回给客户端。</p>
+</li>
+</ol>
+<p>在上面的步骤中，如果参与者等待超时，则会中断事务。 针对第二、三种情况，协调者认为事务无法正常执行，于是向各个参与者发出abort通知，请求退出预备状态，具体步骤如下：</p>
+<ol>
+<li>
+<p>协调者向所有事务参与者发送abort通知</p>
+</li>
+<li>
+<p>参与者收到通知后，中断事务</p>
+</li>
+</ol>
+<p>第三阶段：do_commit</p>
+<p>如果第二阶段事务未中断，那么本阶段协调者将会依据事务执行返回的结果来决定提交或回滚事务，分为三种情况：</p>
+<ol>
+<li>
+<p>所有的参与者都能正常执行事务。</p>
+</li>
+<li>
+<p>一个或多个参与者执行事务失败。</p>
+</li>
+<li>
+<p>协调者等待超时。</p>
+</li>
+</ol>
+<p>针对第一种情况，协调者向各个参与者发起事务提交请求，具体步骤如下：</p>
+<ol>
+<li>
+<p>协调者向所有参与者发送事务commit通知。</p>
+</li>
+<li>
+<p>所有参与者在收到通知之后执行commit操作，并释放占有的资源。</p>
+</li>
+<li>
+<p>参与者向协调者反馈事务提交结果。</p>
+</li>
+</ol>
+<p>针对第二、三种情况，协调者认为事务无法正常执行，于是向各个参与者发送事务回滚请求，具体步骤如下：</p>
+<ol>
+<li>
+<p>协调者向所有参与者发送事务rollback通知。</p>
+</li>
+<li>
+<p>所有参与者在收到通知之后执行rollback操作，并释放占有的资源。</p>
+</li>
+<li>
+<p>参与者向协调者反馈事务提交结果。</p>
+</li>
+</ol>
+<p>在本阶段如果因为协调者或网络问题，导致参与者迟迟不能收到来自协调者的commit或rollback请求，那么参与者将不会如两阶段提交中那样陷入阻塞，而是等待超时后继续commit。相对于两阶段提交虽然降低了同步阻塞，但仍然无法避免数据的不一致性。</p>
+<p>Reference</p>
+<p><a href="https://zhuanlan.zhihu.com/p/25933039" target="_blank" rel="noopener noreferrer">https://zhuanlan.zhihu.com/p/25933039</a></p>
+<p><a href="http://www.infoq.com/cn/articles/solution-of-distributed-system-transaction-consistency" target="_blank" rel="noopener noreferrer">http://www.infoq.com/cn/articles/solution-of-distributed-system-transaction-consistency</a></p>
+<p><a href="http://blog.csdn.net/jasonsungblog/article/details/49017955" target="_blank" rel="noopener noreferrer">http://blog.csdn.net/jasonsungblog/article/details/49017955</a></p>
+<p><a href="http://blog.csdn.net/suifeng3051/article/details/52691210" target="_blank" rel="noopener noreferrer">http://blog.csdn.net/suifeng3051/article/details/52691210</a></p>
+<p><a href="https://my.oschina.net/wangzhenchao/blog/736909" target="_blank" rel="noopener noreferrer">https://my.oschina.net/wangzhenchao/blog/736909</a></p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="theme-doc-footer-edit-meta-row row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/distributed/practice/搞懂分布式技术：浅析分布式事务.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_EYjg" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_eevz"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：浅谈分布式消息技术Kafka"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">搞懂分布式技术：浅谈分布式消息技术Kafka</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：使用RocketMQ事务消息解决分布式事务"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">搞懂分布式技术：使用RocketMQ事务消息解决分布式事务</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_lc2k thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#什么是事务" class="table-of-contents__link toc-highlight">什么是事务？</a></li><li><a href="#事务的四大特性-acid" class="table-of-contents__link toc-highlight">事务的四大特性 ACID</a></li><li><a href="#事务的隔离级别" class="table-of-contents__link toc-highlight">事务的隔离级别</a></li><li><a href="#事务并发执行会出现的问题" class="table-of-contents__link toc-highlight">事务并发执行会出现的问题</a></li><li><a href="#数据库的四种隔离级别" class="table-of-contents__link toc-highlight">数据库的四种隔离级别</a></li><li><a href="#什么是分布式事务" class="table-of-contents__link toc-highlight">什么是分布式事务？</a></li><li><a href="#cap理论" class="table-of-contents__link toc-highlight">CAP理论</a></li><li><a href="#base理论" class="table-of-contents__link toc-highlight">BASE理论</a></li><li><a href="#分布式事务协议" class="table-of-contents__link toc-highlight">分布式事务协议</a><ul><li><a href="#2pc" class="table-of-contents__link toc-highlight">2PC</a></li><li><a href="#3pc" class="table-of-contents__link toc-highlight">3PC</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/code-note-blog/docs/intro">Tutorial</a></li></ul></div><div class="col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://stackoverflow.com/questions/tagged/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Stack Overflow<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://discordapp.com/invite/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Discord<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://twitter.com/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Twitter<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/code-note-blog/blog">Blog</a></li><li class="footer__item"><a href="https://github.com/facebook/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 My Project, Inc. Built with Docusaurus.</div></div></div></footer></div>
+</body>
+</html>

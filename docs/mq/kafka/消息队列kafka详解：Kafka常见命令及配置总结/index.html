@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-mq/kafka/消息队列kafka详解：Kafka常见命令及配置总结" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.1.0">
+<title data-rh="true">消息队列kafka详解：Kafka常见命令及配置总结 | Tommy</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://aiden-coding.github.io/code-note-blog/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://aiden-coding.github.io/code-note-blog/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://aiden-coding.github.io/code-note-blog/docs/mq/kafka/消息队列kafka详解：Kafka常见命令及配置总结"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="消息队列kafka详解：Kafka常见命令及配置总结 | Tommy"><meta data-rh="true" name="description" content="启动zookeeper"><meta data-rh="true" property="og:description" content="启动zookeeper"><link data-rh="true" rel="icon" href="/code-note-blog/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://aiden-coding.github.io/code-note-blog/docs/mq/kafka/消息队列kafka详解：Kafka常见命令及配置总结"><link data-rh="true" rel="alternate" href="https://aiden-coding.github.io/code-note-blog/docs/mq/kafka/消息队列kafka详解：Kafka常见命令及配置总结" hreflang="en"><link data-rh="true" rel="alternate" href="https://aiden-coding.github.io/code-note-blog/docs/mq/kafka/消息队列kafka详解：Kafka常见命令及配置总结" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/code-note-blog/blog/rss.xml" title="Tommy RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/code-note-blog/blog/atom.xml" title="Tommy Atom Feed"><link rel="stylesheet" href="/code-note-blog/assets/css/styles.dd5372db.css">
+<script src="/code-note-blog/assets/js/runtime~main.f999fb27.js" defer="defer"></script>
+<script src="/code-note-blog/assets/js/main.a0bfbaed.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_XYiV" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/code-note-blog/"><b class="navbar__title text--truncate">Tommy</b></a><a class="navbar__item navbar__link" href="/code-note-blog/docs/Java/basic/抽象类和接口">java</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/JavaWeb/走进JavaWeb技术世界：JavaWeb的由来和基础知识">javaweb</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/cache/探索Redis设计与实现：连接底层与表面的数据结构robj">cache</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/backend/后端技术杂谈：白话虚拟化技术">backend</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/cs/algorithms/剑指offer">cs</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/database/重新学习MySQL数据库：『浅入浅出』MySQL和InnoDB">database</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/distributed/basic/分布式系统理论基础 ：CAP">distributed</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/interview/BATJ-Experience/面阿里,终获offer">interview</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/code-note-blog/docs/mq/kafka/消息队列kafka详解：如何实现死信队列">mq</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/Spring全家桶/Spring/第一个Spring应用">spring</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/mianshi/collection">面试</a><a href="https://aiden-coding.github.io/code-note-blog/SpringCloud%E7%AC%AC3%E5%AD%A32024.html" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Blog<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></div><div class="navbar__items navbar__items--right"><div class="toggle_XbAW colorModeToggle_r5NY"><button class="clean-btn toggleButton_Jx0n toggleButtonDisabled_zYO7" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_FjAw"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_qmEt"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_wJfS"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_LABv"><div class="docsWrapper_pdvB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_Jioa" type="button"></button><div class="docRoot_qx_v"><aside class="theme-doc-sidebar-container docSidebarContainer_NHKT"><div class="sidebarViewport_uyYB"><div class="sidebar_SZG4"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_VP_k"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" aria-expanded="true" href="/code-note-blog/docs/mq/kafka/消息队列kafka详解：如何实现死信队列">kafka</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/mq/kafka/消息队列kafka详解：如何实现死信队列">消息队列kafka详解：如何实现死信队列</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/mq/kafka/消息队列kafka详解：如何实现延迟队  列">消息队列kafka详解：如何实现延迟队列</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/mq/kafka/消息队列kafka详解：Kafka 快速上手（Java版）">消息队列kafka详解：Kafka 快速上手（Java版）</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/code-note-blog/docs/mq/kafka/消息队列kafka详解：Kafka常见命令及配置总结">消息队列kafka详解：Kafka常见命令及配置总结</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/mq/kafka/消息队列kafka详解：Kafka的集群工作原理">消息队列kafka详解：Kafka的集群工作原理</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/mq/kafka/消息队列kafka详解：Kafka架构介绍">消息队列kafka详解：Kafka架构介绍</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/mq/kafka/消息队列kafka详解：Kafka介绍">消息队列kafka详解：Kafka介绍</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/mq/kafka/消息队列kafka详解：Kafka一条消息存到broker的过程">消息队列kafka详解：Kafka一条消息存到broker的过程</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/mq/kafka/消息队列kafka详解：Kafka原理分析总结篇">消息队列kafka详解：Kafka原理分析总结篇</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/mq/kafka/消息队列kafka详解：Kafka重要知识点+面试题大全">消息队列kafka详解：Kafka重要知识点+面试题大全</a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/code-note-blog/docs/mq/RocketMQ/RocketMQ系列：广播与延迟消息">RocketMQ</a></div></li></ul></nav></div></div></aside><main class="docMainContainer_SejT"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_j3Yw"><div class="docItemContainer_XOSC"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_F6gm" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/code-note-blog/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YCxa"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">kafka</span><meta itemprop="position" content="1"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">消息队列kafka详解：Kafka常见命令及配置总结</span><meta itemprop="position" content="2"></li></ul></nav><div class="tocCollapsible_ToOY theme-doc-toc-mobile tocMobile_suYB"><button type="button" class="clean-btn tocCollapsibleButton_VzP_">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>消息队列kafka详解：Kafka常见命令及配置总结</h1></header><h2 class="anchor anchorWithStickyNavbar_HWLp" id="启动zookeeper"><strong>启动zookeeper</strong><a href="#启动zookeeper" class="hash-link" aria-label="Direct link to 启动zookeeper" title="Direct link to 启动zookeeper">​</a></h2>
+<p>bin/zookeeper-server-start.sh config/zookeeper.properties &amp;</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="启动kafka"><strong>启动kafka：</strong><a href="#启动kafka" class="hash-link" aria-label="Direct link to 启动kafka" title="Direct link to 启动kafka">​</a></h2>
+<p>bin/kafka-server-start.sh config/server.properties</p>
+<p>这样启动又一个坏处，就是kafka启动完毕之后，不能关闭终端，为此，我们可以运行这条命令：</p>
+<p>nohup bin/kafka-server-start.sh config/server.properties &gt; ./dev/null 2&gt;&amp;1 &amp;</p>
+<p><img loading="lazy" src="https://img2022.cnblogs.com/blog/796632/202208/796632-20220812161146385-332776455.png" alt="" class="img_kGBN"></p>
+<p>多个kafka的话，在各个虚拟机上运行kafka启动命令多次即可。</p>
+<p>当然这个是单机的命令，集群的命令后面再讲。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="查看是否启动"><strong>查看是否启动</strong><a href="#查看是否启动" class="hash-link" aria-label="Direct link to 查看是否启动" title="Direct link to 查看是否启动">​</a></h2>
+<p>jps -lm</p>
+<p><img loading="lazy" src="https://img2022.cnblogs.com/blog/796632/202208/796632-20220812161210221-836644701.png" alt="" class="img_kGBN"></p>
+<p>说明没有启动kfka</p>
+<p><img loading="lazy" src="https://img2022.cnblogs.com/blog/796632/202208/796632-20220812161224734-562363764.png" alt="" class="img_kGBN"></p>
+<p>说明启动kafka了</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="查看kafka版本">查看kafka版本<a href="#查看kafka版本" class="hash-link" aria-label="Direct link to 查看kafka版本" title="Direct link to 查看kafka版本">​</a></h2>
+<p>find ./libs/ -name *kafka_* | head -1 | grep -o &#x27;\kafka[^\n]*&#x27;</p>
+<p>kafka_2.12-2.4.1.jar</p>
+<p>结果:</p>
+<p>就可以看到kafka的具体版本了。</p>
+<p>其中，2.12为scala版本，2.4.1为kafka版本。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="停止kafka"><strong>停止kafka</strong><a href="#停止kafka" class="hash-link" aria-label="Direct link to 停止kafka" title="Direct link to 停止kafka">​</a></h2>
+<p>bin/kafka-server-stop.sh</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="停止zookeeper"><strong>停止zookeeper</strong><a href="#停止zookeeper" class="hash-link" aria-label="Direct link to 停止zookeeper" title="Direct link to 停止zookeeper">​</a></h2>
+<p>bin/zookeeper-server-stop.sh</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="创建topic"><strong>创建topic</strong><a href="#创建topic" class="hash-link" aria-label="Direct link to 创建topic" title="Direct link to 创建topic">​</a></h2>
+<p>bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test</p>
+<p>多集群创建，执行这个需要搭建多机器的kafka集群环境，zkq1/zkq2/zkq3分别代表了3台zookeeper集群的三台机器</p>
+<p>/bin/kafka-topics.sh —create —zookeeper zkq1:2181,zkq2:2181,zkq3:2181 -replication-factor 6 —partition 6 —topic test</p>
+<p>解释：</p>
+<p>--topic后面的test0是topic的名称</p>
+<p>--zookeeper应该和server.properties文件中的zookeeper.connect一样</p>
+<p>--config指定当前topic上有效的参数值</p>
+<p>--partitions指定topic的partition数量，如果不指定该数量，默认是server.properties文件中的num.partitions配置值</p>
+<p>--replication-factor指定每个partition的副本个数，默认是1个</p>
+<p>也可以向没有的topic发送消息的时候创建topic</p>
+<p>需要</p>
+<p>开启自动创建配置：auto.create.topics.enable=true</p>
+<p>使用程序直接往kafka中相应的topic发送数据，如果topic不存在就会按默认配置进行创建。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="展示topic"><strong>展示topic</strong><a href="#展示topic" class="hash-link" aria-label="Direct link to 展示topic" title="Direct link to 展示topic">​</a></h2>
+<p>bin/kafka-topics.sh --list --zookeeper localhost:2181</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="描述topic"><strong>描述topic</strong><a href="#描述topic" class="hash-link" aria-label="Direct link to 描述topic" title="Direct link to 描述topic">​</a></h2>
+<p>bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic my-replicated-topic</p>
+<p><img loading="lazy" src="https://img2022.cnblogs.com/blog/796632/202208/796632-20220812161250801-1389051022.png" alt="" class="img_kGBN"></p>
+<p>解释：</p>
+<p>要查看多个topic用逗号分割</p>
+<p><strong>leader</strong>:</p>
+<p>是该partitons所在的所有broker中担任leader的broker id，每个broker都有可能成为leader，负责处理消息的读和写，leader是从所有节点中随机选择的.</p>
+<p>-1表示此broker移除了</p>
+<p><strong>Replicas</strong>:</p>
+<p>显示该partiton所有副本所在的broker列表，包括leader，不管该broker是否是存活，不管是否和leader保持了同步。列出了所有的副本节点，不管节点是否在服务中.</p>
+<p><strong>Isr</strong>:</p>
+<p>in-sync replicas的简写，表示存活且副本都已同步的的broker集合，是replicas的子集，是正在服务中的节点.</p>
+<p>举例：</p>
+<p>比如上面结果的第一行：Topic: test0 .Partition:0 ...Leader: 0 ......Replicas: 0,2,1 Isr: 1,0,2</p>
+<p>Partition: 0[该partition编号是0]</p>
+<p>Replicas: 0,2,1[代表partition0 在broker0，broker1，broker2上保存了副本]</p>
+<p>Isr: 1,0,2 [代表broker0，broker1，broker2都存活而且目前都和leader保持同步]</p>
+<p>Leader: 0</p>
+<p>代表保存在broker0，broker1，broker2上的这三个副本中，leader是broker0</p>
+<p>leader负责读写，broker1、broker2负责从broker0同步信息，平时没他俩什么事</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="查看topic的partition及增加partition"><strong>查看topic的partition及增加partition</strong><a href="#查看topic的partition及增加partition" class="hash-link" aria-label="Direct link to 查看topic的partition及增加partition" title="Direct link to 查看topic的partition及增加partition">​</a></h2>
+<p>/kafka-topics.sh –zookeeper 10.2.1.1:2181 –topic mcc-logs –describe.</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="删除topic"><strong>删除Topic</strong><a href="#删除topic" class="hash-link" aria-label="Direct link to 删除topic" title="Direct link to 删除topic">​</a></h2>
+<p>/bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic test</p>
+<p>如果你的server.properties内没有配置相关的配置的话，会出现如下错误：</p>
+<p>Topic test is marked for deletion.</p>
+<p>Note: This will have no impact if delete.topic.enable is not set to true.</p>
+<p>这边是说，你的Topic已经被标记为待删除的Topic，但是呢，你配置文件的开关没有打开，所以只是给它添加了一个标记，实际上，这个Topic并没有被删除。只有，你打开开关之后，会自动删除被标记删除的Topic。</p>
+<p>解决办法：</p>
+<p>设置server.properties文件内的“delete.topic.enable=true”，并且重启Kafka就可以了。</p>
+<p>如果不想修改配置也可以完全删除</p>
+<p>1、删除kafka存储目录（server.propertiewenjian log.dirs配置，默认为“/tmp/kafka-logs”）下对应的topic。(不同broker下存储的topic不一定相同，所有broker都要看一下)</p>
+<p>2、进入zookeeper客户端删掉对应topic</p>
+<p>zkCli.sh .-server 127.0.0.1:42182</p>
+<p>找到topic目录:</p>
+<p>ls ../brokers/topics</p>
+<p>删掉对应topic</p>
+<p>rmr ./brokers/topic/topic-name</p>
+<p>找到目录:</p>
+<p>ls .../config/topics</p>
+<p>删掉对应topic</p>
+<p>rmr ./config/topics/topic-name .</p>
+<p>这样就完全删除  了</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="删除topic中存储的内容"><strong>删除topic中存储的内容</strong><a href="#删除topic中存储的内容" class="hash-link" aria-label="Direct link to 删除topic中存储的内容" title="Direct link to 删除topic中存储的内容">​</a></h2>
+<p>在config/server.properties中找到如下的位置</p>
+<p><img loading="lazy" src="https://img2022.cnblogs.com/blog/796632/202208/796632-20220812161312458-550425542.png" alt="" class="img_kGBN"></p>
+<p>删除log.dirs指定的文件目录，</p>
+<p>登录zookeeper client。</p>
+<p>命令：</p>
+<p>/home/ZooKeeper/bin/zkCli.sh</p>
+<p>删除zookeeper中该topic相关的目录</p>
+<p>命令：</p>
+<p>rm -r /kafka/config/topics/test0</p>
+<p>rm -r /kafka/brokers/topics/test0</p>
+<p>rm -r /kafka/admin/delete_topics/test0 （topic被标记为marked for deletion时需要这个命令）</p>
+<p>重启zookeeper和broker</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="生产者发送消息"><strong>生产者发送消息：</strong><a href="#生产者发送消息" class="hash-link" aria-label="Direct link to 生产者发送消息" title="Direct link to 生产者发送消息">​</a></h2>
+<p>bin/kafka-console-producer.sh --broker-list 130.51.23.95:9092 --topic my-replicated-topic</p>
+<p>这里的ip和端口是broker的ip及端口，根据自己kafka机器的ip和端口写就可以</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="消费者消费消息"><strong>消费者消费消息：</strong><a href="#消费者消费消息" class="hash-link" aria-label="Direct link to 消费者消费消息" title="Direct link to 消费者消费消息">​</a></h2>
+<p>bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --new-consumer --from-beginning --consumer.config config/consumer.properties</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="查看topic某分区偏移量最大小值"><strong>查看topic某分区偏移量最大（小）值</strong><a href="#查看topic某分区偏移 量最大小值" class="hash-link" aria-label="Direct link to 查看topic某分区偏移量最大小值" title="Direct link to 查看topic某分区偏移量最大小值">​</a></h2>
+<p>bin/kafka-run-class.sh kafka.tools.GetOffsetShell --topic hive-mdatabase-hostsltable .--time -1 --broker-list node86:9092 --partitions 0</p>
+<p>注： time为-1时表示最大值，time为-2时表示最小值</p>
+<p>不指定--partitions 就是指这个topic整体的情况</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="查看指定group的消费情况">查看指定group的消费情况<a href="#查看指定group的消费情况" class="hash-link" aria-label="Direct link to 查看指定group的消费情况" title="Direct link to 查看指定group的消费情况">​</a></h2>
+<p>kafka-consumer-groups.sh --bootstrap-server 172.20.72.93:9092 --describe --group mygroup</p>
+<p>运行结果：</p>
+<p><img loading="lazy" src="https://img2022.cnblogs.com/blog/796632/202208/796632-20220816164455794-344440282.png" alt="" class="img_kGBN"></p>
+<ul>
+<li>GROUP:消费者组</li>
+<li>TOPIC：topic名字</li>
+<li>PARTITION ：partition id</li>
+<li>CURRENT-OFFSET： .当前消费到的offset . . . . . . . .</li>
+<li>LOG-END-OFFSETSIZE ：最新的offset</li>
+<li>LAG:未消费的条数</li>
+<li>CONSUMER-ID:消费者组中消费者的id,为—代表没有active的消费者</li>
+<li>HOST：消费者的机器ip，为—代表没有active的消费者</li>
+<li>CLIENT-ID:消费者clientID，为—代表没有active的消费者</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="查看所有group的消费情况">.查看所有group的消费情况<a href="#查看所有group的消费情况" class="hash-link" aria-label="Direct link to .查看所有group的消费情况" title="Direct link to .查看所有group的消费情况">​</a></h2>
+<p>kafka-consumer-groups.sh --bootstrap-server 172.20.72.93:9092 --all-groups --all-topics --describe</p>
+<p><img loading="lazy" src="https://img2022.cnblogs.com/blog/796632/202208/796632-20220816172442100-1560497638.png" alt="" class="img_kGBN"></p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="修改group消费的offset">修改group消费的offset<a href="#修改group消费的offset" class="hash-link" aria-label="Direct link to 修改group消费的offset" title="Direct link to 修改group消费的offset">​</a></h2>
+<p>kafka-consumer-groups.sh --bootstrap-server 172.20.72.93:9092 --group mygroup --reset-offsets --topic mytopic --to-offset 61 --execute</p>
+<p>上面就是把mygroup在mytopic的消费offset修改到了61</p>
+<p>重设位移有几种选项:</p>
+<p>--to-earliest：. .设置到最早位移处，也就是0</p>
+<p>--to-latest：. . .设置到最新处，也就是主题分区HW的位置</p>
+<p>--to-offset NUM： 指定具体的位移位置</p>
+<p>--shift-by NUM：. 基于当前位移向前回退多少</p>
+<p>--by-duration：. .回退到多长时间</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="查看指定group中活跃的消费者">查看指定group中活跃的消费者<a href="#查看指定group中活跃的消费者" class="hash-link" aria-label="Direct link to 查看指定group中活跃的消费者" title="Direct link to 查看指定group中活跃的消费者">​</a></h2>
+<p>kafka-consumer-groups.sh --bootstrap-server 172.20.72.93:9092 --describe --group mygroup --members</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="增加topic分区数"><strong>增加topic分区数</strong><a href="#增加topic分区数" class="hash-link" aria-label="Direct link to 增加topic分区数" title="Direct link to 增加topic分区数">​</a></h2>
+<p>（只能增加不能减少）</p>
+<p>为topic t_cdr 增加10个分区</p>
+<p>bin/kafka-topics.sh --zookeeper node01:2181 .--alter --topic t_cdr --partitions 10</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="常用配置及说明"><strong>常用配置及说明</strong><a href="#常用配置及说明" class="hash-link" aria-label="Direct link to 常用配置及说明" title="Direct link to 常用配置及说明">​</a></h2>
+<p>kafka 常见重 要配置说明，分为四部分</p>
+<ul>
+<li>Broker Config：kafka 服务端的配置</li>
+<li>Producer Config：生产端的配置</li>
+<li>Consumer Config：消费端的配置</li>
+<li>Kafka Connect Config：kafka 连接相关的配置</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="broker-config"><strong>Broker Config</strong><a href="#broker-config" class="hash-link" aria-label="Direct link to broker-config" title="Direct link to broker-config">​</a></h3>
+<ol>
+<li><strong>zookeeper.connect</strong></li>
+</ol>
+<p>连接 zookeeper 集群的地址，用于将 kafka 集群相关的元数据信息存储到指定的 zookeeper 集群中</p>
+<p><strong>2. advertised.port</strong></p>
+<p>注册到 zookeeper 中的地址端口信息，在 IaaS 环境中，默认注册到 zookeeper 中的是内网地址，通过该配置指定外网访问的地址及端口，advertised.host.name 和 advertised.port 作用和 advertised.port 差不多，在 0.10.x 之后，直接配置 advertised.port 即可，前两个参数被废弃掉了。</p>
+<p><strong>3. auto.create.topics.enable</strong></p>
+<p>自动创建 topic，默认为 true。其作用是当向一个还没有创建的 topic 发送消息时，此时会自动创建一个 topic，并同时设置 -num.partition 1 (partition 个数) 和 default.replication.factor (副本个数，默认为 1) 参数。</p>
+<p>一般该参数需要手动关闭，因为自动创建会影响 topic 的管理，我们可以通过 kafka-topic.sh 脚本手动创建 topic，通常也是建议使用这种方式创建 topic。在 0.10.x 之后提供了 kafka-admin 包，可以使用其来创建 topic。</p>
+<p><strong>4. auto.leader.rebalance.enable</strong></p>
+<p>自动 rebalance，默认为 true。其作用是通过后台线程定期扫描检查，在一定条件下触发重新 leader 选举；在生产环境中，不建议开启，因为替换 leader 在性能上没有什么提升。</p>
+<p><strong>5. background.threads</strong></p>
+<p>后台线程数，默认为 10。用于后台操 作的线程，可以不用改动。</p>
+<p><strong>6. broker.id</strong></p>
+<p>Broker 的唯一标识，用于区分不同的 Broker。kafka 的检查就是基于此 id 是否在 zookeeper 中/brokers/ids 目录下是否有相应的 id 目录来判定 Broker 是否健康。</p>
+<p><strong>7. compression.type</strong></p>
+<p>压缩类型。此配置可以接受的压缩类型有 gzip、snappy、lz4。另外可以不设置，即保持和生产端相同的压缩格式。</p>
+<p><strong>8. delete.topic.enable</strong></p>
+<p>启用删除 topic。如果关闭，则无法使用 admin 工具进行 topic 的删除操作。</p>
+<p><strong>9. leader.imbalance.check.interval.seconds</strong></p>
+<p>partition 检查重新 rebalance 的周期时间</p>
+<p><strong>10. leader.imbalance.per.broker.percentage</strong></p>
+<p>标识每个 Broker 失去平衡的比率，如果超过改比率，则执行重新选举 Broker 的 leader</p>
+<p><strong>11. log.dir / log.dirs</strong></p>
+<p>保存 kafka 日志数据的位置。如果 log.dirs 没有设置，则使用 log.dir 指定的目录进行日志数据存储。</p>
+<p><strong>12. log.flush.interval.messages</strong></p>
+<p>partition 分区的数据量达到指定大小时，对数据进行一次刷盘操作。比如设置了 1024k 大小，当 partition 积累的数据量达到这个数值时则将数据写入到磁盘上。</p>
+<p><strong>13. log.flush.interval.ms</strong></p>
+<p>数据写入磁盘时间间隔，即内存中的数据保留多久就持久化一次，如果没有设置，则使用 log.flush.scheduler.interval.ms 参数指定的值。</p>
+<p><strong>14. log.retention.bytes</strong></p>
+<p>表示 topic 的容量达到指定大小时，则对其数据进行清除操作，默认为-1，永远不删除。</p>
+<p><strong>15. log.retention.hours</strong></p>
+<p>标示 topic 的数据最长保留多久，单位是小时</p>
+<p><strong>16. log.retention.minutes</strong></p>
+<p>表示 topic 的数据最长保留多久，单位是分钟，如果没有设置该参数，则  使用 log.retention.hours 参数</p>
+<p><strong>17. log.retention.ms</strong></p>
+<p>表示 topic 的数据最长保留多久，单位是毫秒，如果没有设置该参数，则使用 log.retention.minutes 参数</p>
+<p><strong>18. log.roll.hours</strong></p>
+<p>新的 segment 创建周期，单位小时。kafka 数据是以 segment 存储的，当周期时间到达时，就创建一个新的 segment 来存储数据。</p>
+<p><strong>19. log.segment.bytes</strong></p>
+<p>segment 的大小。当 segment 大小达到指定值时，就新创建一个 segment。</p>
+<p><strong>20. message.max.bytes</strong></p>
+<p>topic 能够接收的最大文件大小。需要注意的是 producer 和 consumer 端设置的大小需要一致。</p>
+<p><strong>21. min.insync.replicas</strong></p>
+<p>最小副本同步个数。当 producer 设置了 request.required.acks 为-1 时，则 topic 的副本数要同步至该参数指定的个数，如果达不到，则 producer 端会产生异常。</p>
+<p><strong>22. num.io.threads</strong></p>
+<p>指定 io 操作的线程数</p>
+<p><strong>23. num.network.threads</strong></p>
+<p>执行网络操作的线程数</p>
+<p><strong>24. num.recovery.threads.per.data.dir</strong></p>
+<p>每个数据目录用于恢复数据的线程数</p>
+<p><strong>25. num.replica.fetchers</strong></p>
+<p>从 leader 备份数据的线程数</p>
+<p><strong>26. offset.metadata.max.bytes</strong></p>
+<p>允许消费者端保存 offset 的最大个数</p>
+<p><strong>27. offsets.commit.timeout.ms</strong></p>
+<p>offset 提交的延迟时间</p>
+<p><strong>28. offsets.topic.replication.factor</strong></p>
+<p>topic 的 offset 的备份数量。该参数建议设置更高保证系统更高的可用性</p>
+<p><strong>29. port</strong></p>
+<p>端口号，Broker 对外提供访问的端口号。</p>
+<p><strong>30. request.timeout.ms</strong></p>
+<p>Broker 接收到请求后的最长等待时间，如果超过设定时间，则会给客户端发送错误信息</p>
+<p><strong>31. zookeeper.connection.timeout.ms</strong></p>
+<p>客户端和 zookeeper 建立连接的超时时间，如果没有设置该参数，则使用 zookeeper.session.timeout.ms 值</p>
+<p><strong>32. connections.max.idle.ms</strong></p>
+<p>空连接的超时时间。即空闲连接超过该时间时则自动销毁连接。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="producer-config"><strong>Producer Config</strong><a href="#producer-config" class="hash-link" aria-label="Direct link to producer-config" title="Direct link to producer-config">​</a></h3>
+<ol>
+<li><strong>bootstrap.servers</strong></li>
+</ol>
+<p>服务端列表。即接收生产消息的服务端列表</p>
+<p><strong>2. key.serializer</strong></p>
+<p>消息键的序列化方式。指定 key 的序列化类型</p>
+<p>3..<strong>value.serializer</strong></p>
+<p>消息内容的序列化方式。指定 value 的序列化类型</p>
+<p>4..<strong>acks</strong></p>
+<p>消息写入 Partition 的个数。通常可以设置为 0，1，all；当设置为 0 时，只需要将消息发送完成后就完成消息发送功能；当设置为 1 时，即 Leader Partition 接收到数据并完成落盘；当设置为 all 时，即主从 Partition 都接收到数据并落盘。</p>
+<p>5..<strong>buffer.memory</strong></p>
+<p>客户端缓存大小。即 Producer 生产的数据量缓存达到指定值时，将缓存数据一次发送的 Broker 上。</p>
+<p>6..<strong>compression.type</strong></p>
+<p>压缩类型。指定消息发送前的压缩类型，通常有 none, gzip, snappy, or, lz4 四种。不指定时消息默认不压缩。</p>
+<p>7..<strong>retries</strong></p>
+<p>消息发送失败时重试次数。当该值设置大于 0 时，消息因为网络异常等因素导致消息发送失败进行重新发送的次数。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="consumer-config"><strong>Consumer Config</strong><a href="#consumer-config" class="hash-link" aria-label="Direct link to consumer-config" title="Direct link to consumer-config">​</a></h3>
+<ol>
+<li><strong>bootstrap.servers</strong></li>
+</ol>
+<p>服务端列表。即消费端从指定的服务端列表中拉取消息进行消费。</p>
+<p>2..<strong>key.deserializer</strong></p>
+<p>消息键的反序列化方式。指定 key 的反序列化类型，与序列化时指定的类型相对应。</p>
+<p>3..<strong>value.deserializer</strong></p>
+<p>消息内容的反序列化方式。指定 value 的反序列化类型，与序列化时指定的类型相对应。</p>
+<p>4..<strong>fetch.min.bytes</strong></p>
+<p>抓取消息的最小内容。指定每次向服务端拉取的最小消息量。</p>
+<p>5..<strong>group.id</strong></p>
+<p>消费组中每个消费者的唯一表示。</p>
+<p>6..<strong>heartbeat.interval.ms</strong></p>
+<p>心跳检查周期。即在周期性的向 group coordinator 发送心跳，当服务端发生 rebalance 时，会将消息发送给各个消费者。该参数值需要小于 session.timeout.ms，通常为后者的 1/3。</p>
+<p>7..<strong>max.partition.fetch.bytes</strong></p>
+<p>Partition 每次返回的最大数据量大小。</p>
+<p><strong>8. session.timeout.ms</strong></p>
+<p>consumer 失效的时间。即 consumer 在指定的时间后，还没有响应则认为该 consumer 已经发生故障了。</p>
+<p><strong>9. auto.offset.reset</strong></p>
+<p>当 kafka 中没有初始偏移量或服务器上不存在偏移量时，指定从哪个位置开始消息消息。earliest：指定从头开始；latest：从最新的数据开始消费。</p>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="kafka-connect-config"><strong>Kafka Connect Config</strong><a href="#kafka-connect-config" class="hash-link" aria-label="Direct link to kafka-connect-config" title="Direct link to kafka-connect-config">​</a></h3>
+<ol>
+<li><strong>group.id</strong></li>
+</ol>
+<p>消费者在消费组中的唯一标识</p>
+<p><strong>2. internal.key.converter</strong></p>
+<p>内部 key 的转换类型。</p>
+<p><strong>3. internal.value.converter</strong></p>
+<p>内部 value 的转换类型。</p>
+<p><strong>4. key.converter</strong></p>
+<p>服务端接收到 key 时指定的转换类型。</p>
+<p>5..<strong>value.converter</strong></p>
+<p>服务端接收到 value 时指定的转换类型。</p>
+<p><strong>6. bootstrap.servers</strong></p>
+<p>服务端列表。</p>
+<p><strong>7. heartbeat.interval.ms</strong></p>
+<p>心跳检测，与 consumer 中指定的配置含义相同。</p>
+<p><strong>8. session.timeout.ms</strong></p>
+<p>session 有效时间，与 consumer 中指定的配置含义相同。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="总结"><strong>总结</strong><a href="#总结" class="hash-link" aria-label="Direct link to 总结" title="Direct link to 总结">​</a></h2>
+<p>本文总结了平时经常用到的一些 Kafka 配置及命令说明，方便随时查看；喜欢的朋友可以收藏以备不时之需。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="参考文章">参考文章<a href="#参考文章" class="hash-link" aria-label="Direct link to 参考文章" title="Direct link to 参考文章">​</a></h2>
+<p><a href="https://blog.csdn.net/cao131502" target="_blank" rel="noopener noreferrer">https://blog.csdn.net/cao131502</a>
+<a href="https://zhuanlan.zhihu.com/p/137811719" target="_blank" rel="noopener noreferrer">https://zhuanlan.zhihu.com/p/137811719</a></p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="theme-doc-footer-edit-meta-row row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/mq/kafka/消息队列kafka详解：Kafka常见命令及配置总结.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_EYjg" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_eevz"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/code-note-blog/docs/mq/kafka/消息队列kafka详解：Kafka 快速上手（Java版）"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">消息队列kafka详解：Kafka 快速上手（Java版）</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/code-note-blog/docs/mq/kafka/消息队列kafka详解：Kafka的集群工作原理"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">消息队列kafka详解：Kafka的集群工作原理</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_lc2k thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#启动zookeeper" class="table-of-contents__link toc-highlight"><strong>启动zookeeper</strong></a></li><li><a href="#启动kafka" class="table-of-contents__link toc-highlight"><strong>启动kafka：</strong></a></li><li><a href="#查看是否启动" class="table-of-contents__link toc-highlight"><strong>查看是否启动</strong></a></li><li><a href="#查看kafka版本" class="table-of-contents__link toc-highlight">查看kafka版本</a></li><li><a href="#停止kafka" class="table-of-contents__link toc-highlight"><strong>停止kafka</strong></a></li><li><a href="#停止zookeeper" class="table-of-contents__link toc-highlight"><strong>停止zookeeper</strong></a></li><li><a href="#创建topic" class="table-of-contents__link toc-highlight"><strong>创建topic</strong></a></li><li><a href="#展示topic" class="table-of-contents__link toc-highlight"><strong>展示topic</strong></a></li><li><a href="#描述topic" class="table-of-contents__link toc-highlight"><strong>描述topic</strong></a></li><li><a href="#查看topic的partition及增加partition" class="table-of-contents__link toc-highlight"><strong>查看topic的partition及增加partition</strong></a></li><li><a href="#删除topic" class="table-of-contents__link toc-highlight"><strong>删除Topic</strong></a></li><li><a href="#删除topic中存储的内容" class="table-of-contents__link toc-highlight"><strong>删除topic中存储的内容</strong></a></li><li><a href="#生产者发送消息" class="table-of-contents__link toc-highlight"><strong>生产者发送消息：</strong></a></li><li><a href="#消费者消费消息" class="table-of-contents__link toc-highlight"><strong>消费者消费消息：</strong></a></li><li><a href="#查看topic某分区偏移量最大小值" class="table-of-contents__link toc-highlight"><strong>查看topic某分区偏移量最大（小）值</strong></a></li><li><a href="#查看指定group的消费情况" class="table-of-contents__link toc-highlight">查看指定group的消费情况</a></li><li><a href="#查看所有group的消费情况" class="table-of-contents__link toc-highlight">.查看所有group的消费情况</a></li><li><a href="#修改group消费的offset" class="table-of-contents__link toc-highlight">修改group消费的offset</a></li><li><a href="#查看指定group中活跃的消费者" class="table-of-contents__link toc-highlight">查看指定group中活跃的消费者</a></li><li><a href="#增加topic分区数" class="table-of-contents__link toc-highlight"><strong>增加topic分区数</strong></a></li><li><a href="#常用配置及说明" class="table-of-contents__link toc-highlight"><strong>常用配置及说明</strong></a><ul><li><a href="#broker-config" class="table-of-contents__link toc-highlight"><strong>Broker Config</strong></a></li><li><a href="#producer-config" class="table-of-contents__link toc-highlight"><strong>Producer Config</strong></a></li><li><a href="#consumer-config" class="table-of-contents__link toc-highlight"><strong>Consumer Config</strong></a></li><li><a href="#kafka-connect-config" class="table-of-contents__link toc-highlight"><strong>Kafka Connect Config</strong></a></li></ul></li><li><a href="#总结" class="table-of-contents__link toc-highlight"><strong>总结</strong></a></li><li><a href="#参考文章" class="table-of-contents__link toc-highlight">参考文章</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/code-note-blog/docs/intro">Tutorial</a></li></ul></div><div class="col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://stackoverflow.com/questions/tagged/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Stack Overflow<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://discordapp.com/invite/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Discord<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://twitter.com/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Twitter<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/code-note-blog/blog">Blog</a></li><li class="footer__item"><a href="https://github.com/facebook/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 My Project, Inc. Built with Docusaurus.</div></div></div></footer></div>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-Java/design-parttern/初探Java设计模式：JDK中的设计模式" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.1.0">
+<title data-rh="true">初探Java设计模式：JDK中的设计模式 | Tommy</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://aiden-coding.github.io/code-note-blog/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://aiden-coding.github.io/code-note-blog/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://aiden-coding.github.io/code-note-blog/docs/Java/design-parttern/初探Java设计模式：JDK中的设计模式"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="初探Java设计模式：JDK中的设计模式 | Tommy"><meta data-rh="true" name="description" content="本系列文章将整理到我在GitHub上的《Java面试指南》仓库，更多精彩内容请到我的仓库里查看"><meta data-rh="true" property="og:description" content="本系列文章将整理到我在GitHub上的《Java面试指南》仓库，更多精彩内容请到我的仓库里查看"><link data-rh="true" rel="icon" href="/code-note-blog/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://aiden-coding.github.io/code-note-blog/docs/Java/design-parttern/初探Java设计模式：JDK中的设计模式"><link data-rh="true" rel="alternate" href="https://aiden-coding.github.io/code-note-blog/docs/Java/design-parttern/初探Java设计模式：JDK中的设计模式" hreflang="en"><link data-rh="true" rel="alternate" href="https://aiden-coding.github.io/code-note-blog/docs/Java/design-parttern/初探Java设计模式：JDK中的设计模式" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/code-note-blog/blog/rss.xml" title="Tommy RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/code-note-blog/blog/atom.xml" title="Tommy Atom Feed"><link rel="stylesheet" href="/code-note-blog/assets/css/styles.dd5372db.css">
+<script src="/code-note-blog/assets/js/runtime~main.f999fb27.js" defer="defer"></script>
+<script src="/code-note-blog/assets/js/main.a0bfbaed.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_XYiV" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/code-note-blog/"><b class="navbar__title text--truncate">Tommy</b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/code-note-blog/docs/Java/basic/抽象类和接口">java</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/JavaWeb/走进JavaWeb技术世界：JavaWeb的由来和基础知识">javaweb</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/cache/探索Redis设计与实现：连接底层与表面的数据结构robj">cache</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/backend/后端技术杂谈：白话虚拟化技术">backend</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/cs/algorithms/剑指offer">cs</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/database/重新学习MySQL数据库：『浅入浅出』MySQL和InnoDB">database</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/distributed/basic/分布式系统理论基础 ：CAP">distributed</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/interview/BATJ-Experience/面阿里,终获offer">interview</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/mq/kafka/消息队列kafka详解：如何实现死信队列">mq</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/Spring全家桶/Spring/第一个Spring应用">spring</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/mianshi/collection">面试</a><a href="https://aiden-coding.github.io/code-note-blog/SpringCloud%E7%AC%AC3%E5%AD%A32024.html" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Blog<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></div><div class="navbar__items navbar__items--right"><div class="toggle_XbAW colorModeToggle_r5NY"><button class="clean-btn toggleButton_Jx0n toggleButtonDisabled_zYO7" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_FjAw"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_qmEt"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_wJfS"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_LABv"><div class="docsWrapper_pdvB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_Jioa" type="button"></button><div class="docRoot_qx_v"><aside class="theme-doc-sidebar-container docSidebarContainer_NHKT"><div class="sidebarViewport_uyYB"><div class="sidebar_SZG4"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_VP_k"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/code-note-blog/docs/Java/basic/抽象类和接口">基础</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/code-note-blog/docs/Java/collection/Java集合类总结">集合</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/code-note-blog/docs/Java/concurrency/Java并发编程学习总结">并发</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" aria-expanded="true" href="/code-note-blog/docs/Java/design-parttern/初探Java设计模式：创建型模式（工厂，单例等）">设计模式</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/design-parttern/初探Java设计模式：创建型模式（工厂，单例等）">初探Java设计模式：创建型模式（工厂，单例等）</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/design-parttern/初探Java设计模式：结构型模式（代理模式，适配器模式等）">初探Java设计模式：结构型模式（代理模式，适配器模式等）</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/design-parttern/初探Java设计模式：行为型模式（策略，观察者等）">初探Java设计模式：行为型模式（策略，观察者等）</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/code-note-blog/docs/Java/design-parttern/初探Java设计模式：JDK中的设计模式">初探Java设计模式：JDK中的设计模式</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/design-parttern/初探Java设计模式：Spring涉及到的种设计模式">初探Java设计模式：Spring涉及到的种设计模式</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/Java/design-parttern/设计模式学习总结">设计模式学习总结</a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/code-note-blog/docs/Java/JVM/深入理解JVM虚拟机：垃圾回收器详解">jvm</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/code-note-blog/docs/Java/network/Java网络编程与NIO详解：基于NIO的网络编程框架Netty">网络</a></div></li></ul></nav></div></div></aside><main class="docMainContainer_SejT"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_j3Yw"><div class="docItemContainer_XOSC"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_F6gm" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/code-note-blog/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YCxa"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">设计模式</span><meta itemprop="position" content="1"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">初探Java设计模式：JDK中的设计模式</span><meta itemprop="position" content="2"></li></ul></nav><div class="tocCollapsible_ToOY theme-doc-toc-mobile tocMobile_suYB"><button type="button" class="clean-btn tocCollapsibleButton_VzP_">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>初探Java设计模式：JDK中的设计模式</h1></header><p>本系列文章将整理到我在GitHub上的《Java面试指南》仓库，更多精彩内容请到我的仓库里查看</p>
+<blockquote>
+<p><a href="https://github.com/h2pl/Java-Tutorial" target="_blank" rel="noopener noreferrer">https://github.com/h2pl/Java-Tutorial</a></p>
+</blockquote>
+<p>喜欢的话麻烦点下Star、fork哈</p>
+<p>文章也将发表在我的个人博客，阅读体验更佳：</p>
+<blockquote>
+<p><a href="http://www.how2playlife.com" target="_blank" rel="noopener noreferrer">www.how2playlife.com</a></p>
+</blockquote>
+<p>本文转自<a href="https://www.cnblogs.com/LinkinPark/p/5233075.html" target="_blank" rel="noopener noreferrer">https://www.cnblogs.com/LinkinPark/p/5233075.html</a></p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="一结构型模式"><strong>一，结构型模式</strong><a href="#一结构型模式" class="hash-link" aria-label="Direct link to 一结构型模式" title="Direct link to 一结构型模式">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="1适配器模式"><strong>1，适配器模式</strong><a href="#1适配器模式" class="hash-link" aria-label="Direct link to 1适配器模式" title="Direct link to 1适配器模式">​</a></h3>
+<p><strong>用来把一个接口转化成另一个接口</strong></p>
+<blockquote>
+<p><strong>java.util.Arrays#asList()</strong></p>
+<p><strong>javax.swing.JTable(TableModel)</strong></p>
+<p><strong>java.io.InputStreamReader(InputStream)</strong></p>
+<p><strong>java.io.OutputStreamWriter(OutputStream)</strong></p>
+<p><strong>javax.xml.bind.annotation.adapters.XmlAdapter#marshal()</strong></p>
+<p><strong>javax.xml.bind.annotation.adapters.XmlAdapter#unmarshal()</strong></p>
+</blockquote>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="2桥接模式"><strong>2，桥接模式</strong><a href="#2桥接模式" class="hash-link" aria-label="Direct link to 2桥接模式" title="Direct link to 2桥接模式">​</a></h3>
+<p><strong>这个模式将抽象和抽象操作的实现进行了解耦，这样使得抽象和实现可以独立地变化</strong></p>
+<blockquote>
+<p><strong>AWT (It provides an abstraction layer which maps onto the native OS the windowing support.)</strong></p>
+<p><strong>JDBC</strong></p>
+</blockquote>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="3组合模式"><strong>3，组合模式</strong><a href="#3组合模式" class="hash-link" aria-label="Direct link to 3组合模式" title="Direct link to 3组合模式">​</a></h3>
+<p><strong>使得客户端看来单个对象和对象的组合是同等的。换句话说，某个类型的方法同时也接受自身类型作为参数</strong></p>
+<blockquote>
+<p><strong>javax.swing.JComponent#add(Component)</strong></p>
+<p><strong>java.awt.Container#add(Component)</strong></p>
+<p><strong>java.util.Map#putAll(Map)</strong></p>
+<p><strong>java.util.List#addAll(Collection)</strong></p>
+<p><strong>java.util.Set#addAll(Collection)</strong></p>
+</blockquote>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="4装饰者模式"><strong>4，装饰者模式</strong><a href="#4装饰者模式" class="hash-link" aria-label="Direct link to 4装饰者模式" title="Direct link to 4装饰者模式">​</a></h3>
+<p><strong>动态的给一个对象附加额外的功能，这也是子类的一种替代方式。可以看到，在创建一个类型的时候，同时也传入同一类型的对象。这在JDK里随处可见，你会发现它无处不在，所以下面这个列表只是一小部分</strong></p>
+<blockquote>
+<p><strong>java.io.BufferedInputStream(InputStream)</strong></p>
+<p><strong>java.io.DataInputStream(InputStream)</strong></p>
+<p><strong>java.io.BufferedOutputStream(OutputStream)</strong></p>
+<p><strong>java.util.zip.ZipOutputStream(OutputStream)</strong></p>
+<p><strong><code>java.util.Collections#checked&lt;list |sortedmap |sortedset |set |map&gt;</code></strong></p>
+</blockquote>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="5门面模式"><strong>5，门面模式</strong><a href="#5门面模式" class="hash-link" aria-label="Direct link to 5门面模式" title="Direct link to 5门面模式">​</a></h3>
+<p><strong>给一组组件，接口，抽象，或者子系统提供一个简单的接口</strong></p>
+<blockquote>
+<p><strong>java.lang.Class</strong></p>
+<p><strong>javax.faces.webapp.FacesServlet</strong></p>
+</blockquote>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="6享元模式"><strong>6，享元模式</strong><a href="#6享元模式" class="hash-link" aria-label="Direct link to 6享元模式" title="Direct link to 6享元模式">​</a></h3>
+<p><strong>使用缓存来加速大量小对象的访问时间</strong></p>
+<blockquote>
+<p><strong>java.lang.Integer#valueOf(int)</strong></p>
+<p><strong>java.lang.Boolean#valueOf(boolean)</strong></p>
+<p><strong>java.lang.Byte#valueOf(byte)</strong></p>
+<p><strong>java.lang.Character#valueOf(char)</strong></p>
+</blockquote>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="7代理模式"><strong>7，代理模式</strong><a href="#7代理模式" class="hash-link" aria-label="Direct link to 7代理模式" title="Direct link to 7代理模式">​</a></h3>
+<p><strong>代理模式是用一个简单的对象来代替一个复杂的或者创建耗时的对象。</strong></p>
+<blockquote>
+<p><strong>java.lang.reflect.Proxy</strong></p>
+<p><strong>RMI</strong></p>
+</blockquote>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="二创建模式"><strong>二，创建模式</strong><a href="#二创建模式" class="hash-link" aria-label="Direct link to 二创建模式" title="Direct link to 二创建模式">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="1抽象工厂模式"><strong>1，抽象工厂模式</strong><a href="#1抽象工厂模式" class="hash-link" aria-label="Direct link to 1抽象工厂模式" title="Direct link to 1抽象工厂模式">​</a></h3>
+<p><strong>抽象工厂模式提供了一个协议来生成一系列的相关或者独立的对象，而不用指定具体对象的类型。它使得应用程序能够和使用的框架的具体实现进行解耦。这在JDK或者许多框架比如Spring中都随处可见。它们也很容易识别，一个创建新对象的方法，返回的却是接口或者抽象类的，就是抽象工厂模式了</strong></p>
+<blockquote>
+<p><strong>java.util.Calendar#getInstance()</strong></p>
+<p><strong>java.util.Arrays#asList()</strong></p>
+<p><strong>java.util.ResourceBundle#getBundle()</strong></p>
+<p><strong>java.sql.DriverManager#getConnection()</strong></p>
+<p><strong>java.sql.Connection#createStatement()</strong></p>
+<p><strong>java.sql.Statement#executeQuery()</strong></p>
+<p><strong>java.text.NumberFormat#getInstance()</strong></p>
+<p><strong>javax.xml.transform.TransformerFactory#newInstance()</strong></p>
+</blockquote>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="2建造模式builder"><strong>2，建造模式(Builder)</strong><a href="#2建造模式builder" class="hash-link" aria-label="Direct link to 2建造模式builder" title="Direct link to 2建造模式builder">​</a></h3>
+<p><strong>定义了一个新的类来构建另一个类的实例，以简化复杂对象的创建。建造模式通常也使用方法链接来实现</strong></p>
+<blockquote>
+<p><strong>java.lang.StringBuilder#append()</strong></p>
+<p><strong>java.lang.StringBuffer#append()</strong></p>
+<p><strong>java.sql.PreparedStatement</strong></p>
+<p><strong>javax.swing.GroupLayout.Group#addComponent()</strong></p>
+</blockquote>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="3工厂方法"><strong>3，工厂方法</strong><a href="#3工厂方法" class="hash-link" aria-label="Direct link to 3工厂方法" title="Direct link to 3工厂方法">​</a></h3>
+<p><strong>就是一个返回具体对象的方法</strong></p>
+<blockquote>
+<p><strong>java.lang.Proxy#newProxyInstance()</strong></p>
+<p><strong>java.lang.Object#toString()</strong></p>
+<p><strong>java.lang.Class#newInstance()</strong></p>
+<p><strong>java.lang.reflect.Array#newInstance()</strong></p>
+<p><strong>java.lang.reflect.Constructor#newInstance()</strong></p>
+<p><strong>java.lang.Boolean#valueOf(String)</strong></p>
+<p><strong>java.lang.Class#forName()</strong></p>
+</blockquote>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="4原型模式"><strong>4，原型模式</strong><a href="#4原型模式" class="hash-link" aria-label="Direct link to 4原型模式" title="Direct link to 4原型模式">​</a></h3>
+<p><strong>使得类的实例能够生成自身的拷贝。如果创建一个对象的实例非常复杂且耗时时，就可以使用这种模式，而不重新创建一个新的实例，你可以拷贝一个对象并直接修改它</strong></p>
+<blockquote>
+<p><strong>java.lang.Object#clone()</strong></p>
+<p><strong>java.lang.Cloneable</strong></p>
+</blockquote>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="5单例模式"><strong>5，单例模式</strong><a href="#5单例模式" class="hash-link" aria-label="Direct link to 5单例模式" title="Direct link to 5单例模式">​</a></h3>
+<p><strong>用来确保类只有一个实例。Joshua Bloch在Effetive Java中建议到，还有一种方法就是使用枚举</strong></p>
+<blockquote>
+<p><strong>java.lang.Runtime#getRuntime()</strong></p>
+<p><strong>java.awt.Toolkit#getDefaultToolkit()</strong></p>
+<p><strong>java.awt.GraphicsEnvironment#getLocalGraphicsEnvironment()</strong></p>
+<p><strong>java.awt.Desktop#getDesktop()</strong></p>
+</blockquote>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="三行为模式"><strong>三，行为模式</strong><a href="#三行为模式" class="hash-link" aria-label="Direct link to 三行为模式" title="Direct link to 三行为模式">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="1责任链模式"><strong>1，责任链模式</strong><a href="#1责任链模式" class="hash-link" aria-label="Direct link to 1责任链模式" title="Direct link to 1责任链模式">​</a></h3>
+<p><strong>通过把请求从一个对象传递到链条中下一个对象的方式，直到请求被处理完毕，以实现对象间的解耦</strong></p>
+<blockquote>
+<p><strong>java.util.logging.Logger#log()</strong></p>
+<p><strong>javax.servlet.Filter#doFilter()</strong></p>
+</blockquote>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="2命令模式"><strong>2，命令模式</strong><a href="#2命令模式" class="hash-link" aria-label="Direct link to 2命令模式" title="Direct link to 2命令模式">​</a></h3>
+<p><strong>将操作封装到对象内，以便存储，传递和返回</strong></p>
+<blockquote>
+<p><strong>java.lang.Runnable</strong></p>
+<p><strong>javax.swing.Action</strong></p>
+</blockquote>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="3解释器模式"><strong>3，解释器模式</strong><a href="#3解释器模式" class="hash-link" aria-label="Direct link to 3解释器模式" title="Direct link to 3解释器模式">​</a></h3>
+<p><strong>这个模式通常定义了一个语言的语法，然后解析相应语法的语句</strong></p>
+<blockquote>
+<p><strong>java.util.Pattern</strong></p>
+<p><strong>java.text.Normalizer</strong></p>
+<p><strong>java.text.Format</strong></p>
+</blockquote>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="4迭代器模式"><strong>4，迭代器模式</strong><a href="#4迭代器模式" class="hash-link" aria-label="Direct link to 4迭代器模式" title="Direct link to 4迭代器模式">​</a></h3>
+<p><strong>提供一个一致的方法来顺序访问集合中的对象，这个方法与底层的集合的具体实现无关</strong></p>
+<blockquote>
+<p><strong>java.util.Iterator</strong></p>
+<p><strong>java.util.Enumeration</strong></p>
+</blockquote>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="5中介者模式"><strong>5，中介者模式</strong><a href="#5中介者模式" class="hash-link" aria-label="Direct link to 5中介者模式" title="Direct link to 5中介者模式">​</a></h3>
+<p><strong>通过使用一个中间对象来进行消息分发以及减少类之间的直接依赖</strong></p>
+<blockquote>
+<p><strong>java.util.Timer</strong></p>
+<p><strong>java.util.concurrent.Executor#execute()</strong></p>
+<p><strong>java.util.concurrent.ExecutorService#submit()</strong></p>
+<p><strong>java.lang.reflect.Method#invoke()</strong></p>
+</blockquote>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="6备忘录模式"><strong>6，备忘录模式</strong><a href="#6备忘录模式" class="hash-link" aria-label="Direct link to 6备忘录模式" title="Direct link to 6备忘录模式">​</a></h3>
+<p><strong>生成对象状态的一个快照，以便对象可以恢复原始状态而不用暴露自身的内容。Date对象通过自身内部的一个long值来实现备忘录模式</strong></p>
+<blockquote>
+<p><strong>java.util.Date</strong></p>
+<p><strong>java.io.Serializable</strong></p>
+</blockquote>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="7空对象模式"><strong>7，空对象模式</strong><a href="#7空对象模式" class="hash-link" aria-label="Direct link to 7空对象模式" title="Direct link to 7空对象模式">​</a></h3>
+<p><strong>这个模式通过一个无意义的对象来代替没有对象这个状态。它使得你不用额外对空对象进行处理</strong></p>
+<blockquote>
+<p><strong>java.util.Collections#emptyList()</strong></p>
+<p><strong>java.util.Collections#emptyMap()</strong></p>
+<p><strong>java.util.Collections#emptySet()</strong></p>
+</blockquote>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="8观察者模式"><strong>8，观察者模式</strong><a href="#8观察者模式" class="hash-link" aria-label="Direct link to 8观察者模式" title="Direct link to 8观察者模式">​</a></h3>
+<p><strong>它使得一个对象可以灵活的将消息发送给感兴趣的对象</strong></p>
+<blockquote>
+<p><strong>java.util.EventListener</strong></p>
+<p><strong>javax.servlet.http.HttpSessionBindingListener</strong></p>
+<p><strong>javax.servlet.http.HttpSessionAttributeListener</strong></p>
+<p><strong>javax.faces.event.PhaseListener</strong></p>
+</blockquote>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="9状态模式"><strong>9，状态模式</strong><a href="#9状态模式" class="hash-link" aria-label="Direct link to 9状态模式" title="Direct link to 9状态模式">​</a></h3>
+<p><strong>通过改变对象内部的状态，使得你可以在运行时动态改变一个对象的行为</strong></p>
+<blockquote>
+<p><strong>java.util.Iterator</strong></p>
+<p><strong>javax.faces.lifecycle.LifeCycle#execute()</strong></p>
+</blockquote>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="10策略模式"><strong>10，策略模式</strong><a href="#10策略模式" class="hash-link" aria-label="Direct link to 10策略模式" title="Direct link to 10策略模式">​</a></h3>
+<p><strong>使用这个模式来将一组算法封装成一系列对象。通过传递这些对象可以灵活的改变程序的功能</strong></p>
+<blockquote>
+<p><strong>java.util.Comparator#compare()</strong></p>
+<p><strong>javax.servlet.http.HttpServlet</strong></p>
+<p><strong>javax.servlet.Filter#doFilter()</strong></p>
+</blockquote>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="11模板方法模式"><strong>11，模板方法模式</strong><a href="#11模板方法模式" class="hash-link" aria-label="Direct link to 11模板方法模式" title="Direct link to 11模板方法模式">​</a></h3>
+<p><strong>让子类可以重写方法的一部分，而不是整个重写，你可以控制子类需要重写那些操作</strong></p>
+<blockquote>
+<p><strong>java.util.Collections#sort()</strong></p>
+<p><strong>java.io.InputStream#skip()</strong></p>
+<p><strong>java.io.InputStream#read()</strong></p>
+<p><strong>java.util.AbstractList#indexOf()</strong></p>
+</blockquote>
+<h3 class="anchor anchorWithStickyNavbar_HWLp" id="12访问者模式"><strong>12，访问者模式</strong><a href="#12访问者模式" class="hash-link" aria-label="Direct link to 12访问者模式" title="Direct link to 12访问者模式">​</a></h3>
+<p><strong>提供一个方便的可维护的方式来操作一组对象。它使得你在不改变操作的对象前提下，可以修改或者扩展对象的行为</strong></p>
+<blockquote>
+<p><strong>javax.lang.model.element.Element and javax.lang.model.element.ElementVisitor</strong></p>
+<p><strong>javax.lang.model.type.TypeMirror and javax.lang.model.type.TypeVisitor</strong></p>
+</blockquote>
+<p><strong>译者注：很多地方可能会存在争议，是否是某种模式其实并不是特别重要，重要的是它们的设计能为改善我们的代码提供一些经验</strong></p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="theme-doc-footer-edit-meta-row row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/Java/design-parttern/初探Java设计模式：JDK中的设计模式.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_EYjg" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_eevz"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/code-note-blog/docs/Java/design-parttern/初探Java设计模式：行为型模式（策略，观察者等）"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">初探Java设计模式：行为型模式（策略，观察者等）</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/code-note-blog/docs/Java/design-parttern/初探Java设计模式：Spring涉及到的种设计模式"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">初探Java设计模式：Spring涉及到的种设计模式</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_lc2k thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#一结构型模式" class="table-of-contents__link toc-highlight"><strong>一，结构型模式</strong></a><ul><li><a href="#1适配器模式" class="table-of-contents__link toc-highlight"><strong>1，适配器模式</strong></a></li><li><a href="#2桥接模式" class="table-of-contents__link toc-highlight"><strong>2，桥接模式</strong></a></li><li><a href="#3组合模式" class="table-of-contents__link toc-highlight"><strong>3，组合模式</strong></a></li><li><a href="#4装饰者模式" class="table-of-contents__link toc-highlight"><strong>4，装饰者模式</strong></a></li><li><a href="#5门面模式" class="table-of-contents__link toc-highlight"><strong>5，门面模式</strong></a></li><li><a href="#6享元模式" class="table-of-contents__link toc-highlight"><strong>6，享元模式</strong></a></li><li><a href="#7代理模式" class="table-of-contents__link toc-highlight"><strong>7，代理模式</strong></a></li></ul></li><li><a href="#二创建模式" class="table-of-contents__link toc-highlight"><strong>二，创建模式</strong></a><ul><li><a href="#1抽象工厂模式" class="table-of-contents__link toc-highlight"><strong>1，抽象工厂模式</strong></a></li><li><a href="#2建造模式builder" class="table-of-contents__link toc-highlight"><strong>2，建造模式(Builder)</strong></a></li><li><a href="#3工厂方法" class="table-of-contents__link toc-highlight"><strong>3，工厂方法</strong></a></li><li><a href="#4原型模式" class="table-of-contents__link toc-highlight"><strong>4，原型模式</strong></a></li><li><a href="#5单例模式" class="table-of-contents__link toc-highlight"><strong>5，单例模式</strong></a></li></ul></li><li><a href="#三行为模式" class="table-of-contents__link toc-highlight"><strong>三，行为模式</strong></a><ul><li><a href="#1责任链模式" class="table-of-contents__link toc-highlight"><strong>1，责任链模式</strong></a></li><li><a href="#2命令模式" class="table-of-contents__link toc-highlight"><strong>2，命令模式</strong></a></li><li><a href="#3解释器模式" class="table-of-contents__link toc-highlight"><strong>3，解释器模式</strong></a></li><li><a href="#4迭代器模式" class="table-of-contents__link toc-highlight"><strong>4，迭代器模式</strong></a></li><li><a href="#5中介者模式" class="table-of-contents__link toc-highlight"><strong>5，中介者模式</strong></a></li><li><a href="#6备忘录模式" class="table-of-contents__link toc-highlight"><strong>6，备忘录模式</strong></a></li><li><a href="#7空对象模式" class="table-of-contents__link toc-highlight"><strong>7，空对象模式</strong></a></li><li><a href="#8观察者模式" class="table-of-contents__link toc-highlight"><strong>8，观察者模式</strong></a></li><li><a href="#9状态模式" class="table-of-contents__link toc-highlight"><strong>9，状态模式</strong></a></li><li><a href="#10策略模式" class="table-of-contents__link toc-highlight"><strong>10，策略模式</strong></a></li><li><a href="#11模板方法模式" class="table-of-contents__link toc-highlight"><strong>11，模板方法模式</strong></a></li><li><a href="#12访问者模式" class="table-of-contents__link toc-highlight"><strong>12，访问者模式</strong></a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/code-note-blog/docs/intro">Tutorial</a></li></ul></div><div class="col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://stackoverflow.com/questions/tagged/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Stack Overflow<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://discordapp.com/invite/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Discord<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://twitter.com/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Twitter<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/code-note-blog/blog">Blog</a></li><li class="footer__item"><a href="https://github.com/facebook/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 My Project, Inc. Built with Docusaurus.</div></div></div></footer></div>
+</body>
+</html>

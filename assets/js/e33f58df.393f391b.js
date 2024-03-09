@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkcode_note_blog=self.webpackChunkcode_note_blog||[]).push([[5599],{93854:e=>{e.exports=JSON.parse('{"label":"hola","permalink":"/code-note-blog/blog/tags/hola","allTagsPath":"/code-note-blog/blog/tags","count":1,"unlisted":false}')}}]);

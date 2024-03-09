@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-distributed/practice/搞懂分布式技术：分布式ID生成方案" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.1.0">
+<title data-rh="true">搞懂分布式技术：分布式ID生成方案 | Tommy</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://aiden-coding.github.io/code-note-blog/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://aiden-coding.github.io/code-note-blog/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://aiden-coding.github.io/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式ID生成方案"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="搞懂分布式技术：分布式ID生成方案 | Tommy"><meta data-rh="true" name="description" content="本文内容参考网络，侵删"><meta data-rh="true" property="og:description" content="本文内容参考网络，侵删"><link data-rh="true" rel="icon" href="/code-note-blog/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://aiden-coding.github.io/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式ID生成方案"><link data-rh="true" rel="alternate" href="https://aiden-coding.github.io/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式ID生成方案" hreflang="en"><link data-rh="true" rel="alternate" href="https://aiden-coding.github.io/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式ID生成方案" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/code-note-blog/blog/rss.xml" title="Tommy RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/code-note-blog/blog/atom.xml" title="Tommy Atom Feed"><link rel="stylesheet" href="/code-note-blog/assets/css/styles.dd5372db.css">
+<script src="/code-note-blog/assets/js/runtime~main.f999fb27.js" defer="defer"></script>
+<script src="/code-note-blog/assets/js/main.a0bfbaed.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_XYiV" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/code-note-blog/"><b class="navbar__title text--truncate">Tommy</b></a><a class="navbar__item navbar__link" href="/code-note-blog/docs/Java/basic/抽象类和接口">java</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/JavaWeb/走进JavaWeb技术世界：JavaWeb的由来和基础知识">javaweb</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/cache/探索Redis设计与实现：连接底层与表面的数据结构robj">cache</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/backend/后端技术杂谈：白话虚拟化技术">backend</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/cs/algorithms/剑指offer">cs</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/database/重新学习MySQL数据库：『浅入浅出』MySQL和InnoDB">database</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/code-note-blog/docs/distributed/basic/分布式系统理论基础 ：CAP">distributed</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/interview/BATJ-Experience/面阿里,终获offer">interview</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/mq/kafka/消息队列kafka详解：如何实现死信队列">mq</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/Spring全家桶/Spring/第一个Spring应用">spring</a><a class="navbar__item navbar__link" href="/code-note-blog/docs/mianshi/collection">面试</a><a href="https://aiden-coding.github.io/code-note-blog/SpringCloud%E7%AC%AC3%E5%AD%A32024.html" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Blog<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></div><div class="navbar__items navbar__items--right"><div class="toggle_XbAW colorModeToggle_r5NY"><button class="clean-btn toggleButton_Jx0n toggleButtonDisabled_zYO7" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_FjAw"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_qmEt"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_wJfS"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_LABv"><div class="docsWrapper_pdvB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_Jioa" type="button"></button><div class="docRoot_qx_v"><aside class="theme-doc-sidebar-container docSidebarContainer_NHKT"><div class="sidebarViewport_uyYB"><div class="sidebar_SZG4"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_VP_k"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" aria-expanded="false" href="/code-note-blog/docs/distributed/basic/分布式系统理论基础 ：CAP">基础</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" aria-expanded="true" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式session解决方案与一致性hash">案例</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式session解决方案与一致性hash">搞懂分布式技术：分布式session解决方案与一致性hash</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：初探分布式协调服务zookeeper">搞懂分布式技术：初探分布式协调服务zookeeper</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式事务常用解决方案">搞懂分布式技术：分布式事务常用解决方案</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式系统的一些基本概念">搞懂分布式技术：分布式系统的一些基本概念</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式一致性协议与Paxos，Raft算法">搞懂分布式技术：分布式一致性协议与Paxos，Raft算法</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式ID生成方案">搞懂分布式技术：分布式ID生成方案</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：缓存的那些事">搞懂分布式技术：缓存的那些事</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：缓存更新的套路">搞懂分布式技术：缓存更新的套路</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：浅谈分布式锁的几种方案">搞懂分布式技术：浅谈分布式锁的几种方案</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：浅谈分布式消息技术Kafka">搞懂分布式技术：浅谈分布式消息技术Kafka</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：浅析分布式事务">搞懂分布式技术：浅析分布式事务</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：使用RocketMQ事务消息解决分布式事务">搞懂分布式技术：使用RocketMQ事务消息解决分布式事务</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：消息队列因何而生">搞懂分布式技术：消息队列因何而生</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：LVS实现负载均衡的原理与实践">搞懂分布式技术：LVS实现负载均  衡的原理与实践</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：SpringBoot使用注解集成Redis缓存">搞懂分布式技术：SpringBoot使用注解集成Redis缓存</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：ZAB协议概述与选主流程详解">搞懂分布式技术：ZAB协议概述与选主流程详解</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：Zookeeper的配置与集群管理实战">搞懂分布式技术：Zookeeper的配置与集群管理实战</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：Zookeeper典型应用场景及实践">搞懂分布式技术：Zookeeper典型应用场景及实践</a></li></ul></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/distributed/分布式技术实践总结">分布式技术实践总结</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/code-note-blog/docs/distributed/分布式理论总结">分布式理论总结</a></li></ul></nav></div></div></aside><main class="docMainContainer_SejT"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_j3Yw"><div class="docItemContainer_XOSC"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_F6gm" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/code-note-blog/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YCxa"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">案例</span><meta itemprop="position" content="1"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">搞懂分布式技术：分布式ID生成方案</span><meta itemprop="position" content="2"></li></ul></nav><div class="tocCollapsible_ToOY theme-doc-toc-mobile tocMobile_suYB"><button type="button" class="clean-btn tocCollapsibleButton_VzP_">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>搞懂分布式技术：分布式ID生成方案</h1></header><p>本文内容参考网络，侵删</p>
+<p>本系列文章将整理到我在GitHub上的《Java面试指南》仓库，更多精彩内容请到我的仓库里查看</p>
+<blockquote>
+<p><a href="https://github.com/h2pl/Java-Tutorial" target="_blank" rel="noopener noreferrer">https://github.com/h2pl/Java-Tutorial</a></p>
+</blockquote>
+<p>喜欢的话麻烦点下Star哈</p>
+<p>本文也将同步到我的个人博客：</p>
+<blockquote>
+<p><a href="http://www.how2playlife.com" target="_blank" rel="noopener noreferrer">www.how2playlife.com</a></p>
+</blockquote>
+<p>更多Java技术文章将陆续在微信公众号【Java技术江湖】更新，敬请关注。</p>
+<p>该系列博文会告诉你什么是分布式系统，这对后端工程师来说是很重要的一门学问，我们会逐步了解常见的分布式技术、以及一些较为常见的分布式系统概念，同时也需要进一步了解zookeeper、分布 式事务、分布式锁、负载均衡等技术，以便让你更完整地了解分布式技术的具体实战方法，为真正应用分布式技术做好准备。</p>
+<p>如果对本系列文章有什么建议，或者是有什么疑问的话，也可以关注公众号【Java技术江湖】联系作者，欢迎你参与本系列博文的创作和修订。</p>
+<p>转自：58沈剑架构师之路2017-06-25</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="一需求缘起"><strong>一、需求缘起</strong><a href="#一需求缘起" class="hash-link" aria-label="Direct link to 一需求缘起" title="Direct link to 一需求缘起">​</a></h2>
+<p>几乎所有的业务系统，都有生成一个唯一记录标识的需求，例如：</p>
+<ul>
+<li>
+<p>消息标识：message-id</p>
+</li>
+<li>
+<p>订单标识：order-id</p>
+</li>
+<li>
+<p>帖子标识：tiezi-id</p>
+</li>
+</ul>
+<p>这个记录标识往往就是数据库中的<strong>主键</strong>，数据库上会建立<strong>聚集索引</strong>（cluster index），即在物理存储上以这个字段排序。</p>
+<p>这个记录标识上的查询，往往又有分页或者排序的业务需求，例如：</p>
+<ul>
+<li>
+<p>拉取最新的一页消息</p>
+<p>select message-id/ order by time/ limit 100</p>
+</li>
+<li>
+<p>拉取最新的一页订单</p>
+<p>select order-id/ order by time/ limit 100</p>
+</li>
+<li>
+<p>拉取最新的一页帖子</p>
+<p>select tiezi-id/ order by time/ limit 100</p>
+</li>
+</ul>
+<p>所以往往要有一个time字段，并且在time字段上建立<strong>普通索引</strong>（non-cluster index）。</p>
+<p>普通索引存储的是实际记录的指针，其访问效率会比聚集索引慢，如果记录标识在生成时能够基本按照时间有序，则可以省去这个time字段的索引查询：</p>
+<p>select message-id/ (order by message-id)/limit 100</p>
+<p>强调，能这么做的前提是，message-id的生成基本是<strong>趋势时间递增的</strong>。</p>
+<p>这就引出了记录标识生成（也就是上文提到的三个XXX-id）的两大核心需求：</p>
+<ul>
+<li>
+<p>全局唯一</p>
+</li>
+<li>
+<p>趋势有序</p>
+</li>
+</ul>
+<p>这也是本文要讨论的核心问题：<strong>如何高效生成趋势有序的全局唯一ID。</strong></p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="二常见方法不足与优化"><strong>二、常见方法、不足与优化</strong><a href="#二常见方法不足与优化" class="hash-link" aria-label="Direct link to 二常见方法不足与优化" title="Direct link to 二常见方法不足与优化">​</a></h2>
+<p><strong>方法一：使用数据库的auto_increment来生成全局唯一递增ID</strong></p>
+<p><strong>优点：</strong></p>
+<ul>
+<li>
+<p>简单，使用数据库已有的功能</p>
+</li>
+<li>
+<p>能够保证唯一性</p>
+</li>
+<li>
+<p>能够保证递增性</p>
+</li>
+<li>
+<p>步长固定</p>
+</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>
+<p>可用性难以保证：数据库常见架构是一主多从+读写分离，生成自增ID是写请求，主库挂了就玩不转了</p>
+</li>
+<li>
+<p>扩展性差，性能有上限：因为写入是单点，数据库主库的写性能决定ID的生成性能上限，并且难以扩展</p>
+</li>
+</ul>
+<p><strong>改进方法：</strong></p>
+<ul>
+<li>
+<p>冗余主库，避免写入单点</p>
+</li>
+<li>
+<p>数据水平切分，保证各主库生成的ID不重复</p>
+</li>
+</ul>
+<p><img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/74f8cc978f9046e38e613d4d0d30698d.jpg" alt="" class="img_kGBN"></p>
+<p>如上图所述，由1个写库变成3个写库，<strong>每个写库设置不同的auto_increment初始值，以及相同的增长步长</strong>，以保证每个数据库生成的ID是不同的（上图中库0生成0,3,6,9…，库1生成1,4,7,10，库2生成2,5,8,11…）</p>
+<p>改进后的架构保证了可用性，但<strong>缺点</strong>是：</p>
+<ul>
+<li>
+<p>丧失了ID生成的“绝对递增性”：先访问库0生成0,3，再访问库1生成1，可能导致在非常短的时 间内，ID生成不是绝对递增的（这个问题不大，目标是趋势递增，不是绝对递增）</p>
+</li>
+<li>
+<p>数据库的写压力依然很大，每次生成ID都要访问数据库</p>
+</li>
+</ul>
+<p>为了解决上述两个问题，引出了第二个常见的方案。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="方法二单点批量id生成服务"><strong>方法二：单点批量ID生成服务</strong><a href="#方法二单点批量id生成服务" class="hash-link" aria-label="Direct link to 方法二单点批量id生成服务" title="Direct link to 方法二单点批量id生成服务">​</a></h2>
+<p>分布式系统之所以难，很重要的原因之一是“没有一个全局时钟，难以保证绝对的时序”，要想保证绝对的时序，还是只能使用单点服务，用本地时钟保证“绝对时序”。</p>
+<p>数据库写压力大，是因为每次生成ID都访问了数据库，可以使用批量的方式降低数据库写压力。</p>
+<p><img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/93ae092c4e8c4d3aa92a59afa81abb53.jpg" alt="" class="img_kGBN"></p>
+<p>如上图所述，数据库使用双master保证可用性，数据库中只存储当前ID的最大值，例如0。</p>
+<p>ID生成服务假设每次批量拉取6个ID，服务访问数据库，将当前ID的最大值修改为5，这样应用访问ID生成服务索要ID，ID生成服务不需要每次访问数据库，就能依次派发0,1,2,3,4,5这些ID了。</p>
+<p>当ID发完后，再将ID的最大值修改为11，就能再次派发6,7,8,9,10,11这些ID了，于是数据库的压力就降低到原来的1/6。</p>
+<p><strong>优点</strong>：</p>
+<ul>
+<li>
+<p>保证了ID生成的绝对递增有序</p>
+</li>
+<li>
+<p>大大的降低了数据库的压力，ID生成可以做到每秒生成几万几十万个</p>
+</li>
+</ul>
+<p><strong>缺点</strong>：</p>
+<ul>
+<li>
+<p>服务仍然是单点</p>
+</li>
+<li>
+<p>如果服务挂了，服务重启起来之后，继续生成ID可能会不连 续，中间出现空洞（服务内存是保存着0,1,2,3,4,5，数据库中max-id是5，分配到3时，服务重启了，下次会从6开始分配，4和5就成了空洞，不过这个问题也不大）</p>
+</li>
+<li>
+<p>虽然每秒可以生成几万几十万个ID，但毕竟还是有性能上限，无法进行水平扩展</p>
+</li>
+</ul>
+<p><strong>改进方法</strong>：</p>
+<p>单点服务的常用高可用优化方案是“备用服务”，也叫“影子服务”，所以我们能用以下方法优化上述缺点（1）：</p>
+<p><img loading="lazy" src="https://java-tutorial.oss-cn-shanghai.aliyuncs.com/449c222f7c344209af44df830479ddde.jpg" alt="" class="img_kGBN"></p>
+<p>如上图，对外提供的服务是主服务，有一个影子服务时刻处于备用状态，当主服务挂了的时候影子服务顶上。</p>
+<p>这个切换的过程对调用方是透明的，可以自动完成，常用的技术是vip+keepalived，具体就不在这里展开。</p>
+<p>另外，ID-gen-service也可以实施水平扩展，以解决上述缺点（3），但会引发一致性问题，具体解决方案详见《》。</p>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="方法三uuidguid"><strong>方法三：uuid/guid</strong><a href="#方法三uuidguid" class="hash-link" aria-label="Direct link to 方法三uuidguid" title="Direct link to 方法三uuidguid">​</a></h2>
+<p>不管是通过数据库，还是通过服务来生成ID，业务方Application都需要进行一次远程调用，比较耗时。</p>
+<p>有没有一种本地生成ID的方法，即高性能，又时延低呢？</p>
+<p>uuid是一种常见的方案：</p>
+<p>string ID =GenUUID();</p>
+<p><strong>优点</strong>：</p>
+<ul>
+<li>
+<p>本地生成ID，不需要进行远程调用，时延低</p>
+</li>
+<li>
+<p>扩展性好，基本可以认为没有性能上限</p>
+</li>
+</ul>
+<p><strong>缺点</strong>：</p>
+<ul>
+<li>
+<p>无法保证趋势递增</p>
+</li>
+<li>
+<p>uuid过长，往往用字符串表示，作为主键建立索引查询效率低，常见优化方案为“转化为两个uint64整数存储”或者“折半存储”（折半后不能保证唯一性）</p>
+</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_HWLp" id="方法四取当前毫秒数"><strong>方法四：取当前毫秒数</strong><a href="#方法四取当前毫秒数" class="hash-link" aria-label="Direct link to 方法四取当前毫秒数" title="Direct link to 方法四取当前毫秒数">​</a></h2>
+<p>uuid是一个本地算法，生成性能高，但无法保证趋势递增，且作为字符串ID检索效率低，有没有一种能保证递增的本地算法呢？</p>
+<p>取当前毫秒数是一种常见方案：</p>
+<p>uint64 ID = GenTimeMS();</p>
+<p><strong>优点</strong>：</p>
+<ul>
+<li>
+<p>本地生成ID，不需要进行远程调用，时延低</p>
+</li>
+<li>
+<p>生成的ID趋势递增</p>
+</li>
+<li>
+<p>生成的ID是整数，建立索引后查询效率高</p>
+</li>
+</ul>
+<p><strong>缺点</strong>：</p>
+<ul>
+<li>如果并发量超过1000，会生成重复的ID</li>
+</ul>
+<p>这个缺点要了命了，不能保证ID的唯一性。当然，使用微秒可以降低冲突概率，但每秒最多只能生成1000000个ID，再多的话就一定会冲突了，所以使用微秒并不从根本上解决问题。</p>
+<p><strong>方法五：类snowflake算法</strong></p>
+<p>snowflake是twitter开源的分布式ID生成算法，其**核心思想为，**一个long型的ID：</p>
+<ul>
+<li>
+<p>41bit作为毫秒数</p>
+</li>
+<li>
+<p>10bit作为机器编号</p>
+</li>
+<li>
+<p>12bit作为毫秒内序列号</p>
+</li>
+</ul>
+<p>算法单机每秒内理论上最多可以生成1000*(2^12)，也就是400W的ID，完全能满足业务的需求。</p>
+<p>借鉴snowflake的思想，结合各公司的业务逻辑和并发量，可以实现<strong>自己的分布式ID生成算法</strong>。</p>
+<p>举例，假设某公司ID生成器服务的需求如下：</p>
+<ul>
+<li>
+<p>单机高峰并发量小于1W，预计未来5年单机高峰并发量小于10W</p>
+</li>
+<li>
+<p>有2个机房，预计未来5年机房数量小于4个</p>
+</li>
+<li>
+<p>每个机房机器数小于100台</p>
+</li>
+<li>
+<p>目前有5个业务线有ID生成需求，预计未来业务线数量小于10个</p>
+</li>
+<li>
+<p>…</p>
+</li>
+</ul>
+<p>分析过程如下：</p>
+<ul>
+<li>
+<p>高位取从2017年1月1日到现在的毫秒数（假设系统ID生成器服务在这个时间之后上线），假设系统至少运行10年，那至少需要10年<em>365天</em>24小时<em>3600秒</em>1000毫秒=320*10^9，差不多预留39bit给毫秒数</p>
+</li>
+<li>
+<p>每秒的单机高峰并发量小于10W，即平均每毫秒的单机高峰并发量小于100，差不多预留7bit给每毫秒内序列号</p>
+</li>
+<li>
+<p>5年内机房数小于4个，预留2bit给机房标识</p>
+</li>
+<li>
+<p>每个机房小于100台机器，预留7bit给每个机房内的服务器标识</p>
+</li>
+<li>
+<p>业务线小于10个，预留4bit给业务线标识</p>
+</li>
+</ul>
+<p>这样设计的64bit标识，可以保证：</p>
+<ul>
+<li>
+<p>每个业务线、每个机房、每个机器生成的ID都是不同的</p>
+</li>
+<li>
+<p>同一个机器，每个毫秒内生成的ID都是不同的</p>
+</li>
+<li>
+<p>同一个机器，同一个毫秒内，以序列号区区分保证生成的ID是不同的</p>
+</li>
+<li>
+<p>将毫秒数放在最高位，保证生成的ID是趋势递增的</p>
+</li>
+</ul>
+<p><strong>缺点</strong>：</p>
+<ul>
+<li>由于“没有一个全局时钟”，每台服务器分配的ID是绝对递增的，但从全局看，生成的ID只是趋势递增的（有些服务器的时间早，有些服务器的时间晚）</li>
+</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="theme-doc-footer-edit-meta-row row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/distributed/practice/搞懂分布式技术：分布式ID生成方案.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_EYjg" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_eevz"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：分布式一致性协议与Paxos，Raft算法"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">搞懂分布式技术：分布式一致性协议与Paxos，Raft算法</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/code-note-blog/docs/distributed/practice/搞懂分布式技术：缓存的那些事"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">搞懂分布式技术：缓存的那些事</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_lc2k thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#一需求缘起" class="table-of-contents__link toc-highlight"><strong>一、需求缘起</strong></a></li><li><a href="#二常见方法不足与优化" class="table-of-contents__link toc-highlight"><strong>二、常见方法、不足与优化</strong></a></li><li><a href="#方法二单点批量id生成服务" class="table-of-contents__link toc-highlight"><strong>方法二：单点批量ID生成服务</strong></a></li><li><a href="#方法三uuidguid" class="table-of-contents__link toc-highlight"><strong>方法三：uuid/guid</strong></a></li><li><a href="#方法四取当前毫秒数" class="table-of-contents__link toc-highlight"><strong>方法四：取当前毫秒数</strong></a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/code-note-blog/docs/intro">Tutorial</a></li></ul></div><div class="col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://stackoverflow.com/questions/tagged/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Stack Overflow<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://discordapp.com/invite/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Discord<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://twitter.com/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Twitter<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/code-note-blog/blog">Blog</a></li><li class="footer__item"><a href="https://github.com/facebook/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_B3Gq"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 My Project, Inc. Built with Docusaurus.</div></div></div></footer></div>
+</body>
+</html>
